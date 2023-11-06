@@ -19,9 +19,43 @@ export const createClient = createAsyncThunk(
 export const getAllClient = createAsyncThunk(
   "seller/getAllClient",
   async (data, thunkAPI) => {
+    console.log(data);
     try {
       const response = await axios.get(
-        `${BASE_URL}/api/v1/client`,
+        `${BASE_URL}/api/v1/client/${data.sellerId}?page=${data.page}&limit=${data.limit}`,
+
+        { withCredentials: true }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const updateClient = createAsyncThunk(
+  "seller/updateClient",
+  async (data, thunkAPI) => {
+    try {
+      console.log(data);
+      const response = await axios.put(
+        `${BASE_URL}/api/v1/client/${data.id}`,
+        data.formData,
+        { withCredentials: true }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const deleteClient = createAsyncThunk(
+  "seller/deleteClient",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/v1/client/${id}`,
 
         { withCredentials: true }
       );

@@ -3,15 +3,16 @@ import useFormHook from "../../Hooks/useFormHook";
 import FormInput from "../FormInput/FormInput";
 import FilePreview from "../../Utils/FilePreview";
 import { useDispatch, useSelector } from "react-redux";
-import { createClient } from "../../Features/Client/ClientApi";
+import { createClient, updateClient } from "../../Features/Client/ClientApi";
 import {
   getAllClientState,
   setMessageEmpty,
 } from "./../../Features/Client/ClientSlice";
 import { Toastify } from "../../Utils/Tostify";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../LoadingSpin";
 
-const Model = ({ setClient }) => {
+const Model = ({ setClient, singleData }) => {
   //============================= form hook
   const { input, setInput, handleInputChange } = useFormHook({
     clientName: "",
@@ -33,10 +34,10 @@ const Model = ({ setClient }) => {
     company: "",
   });
   //==========================file preview
-
+  const [Id, setId] = useState({});
   //==================================handle project file
   const [projectFiles, setProjectFile] = useState(null);
-  const { client, message, error } = useSelector(getAllClientState);
+  const { client, message, loader, error } = useSelector(getAllClientState);
   const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -67,49 +68,92 @@ const Model = ({ setClient }) => {
   //======================================handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    const sellerId = JSON.parse(localStorage.getItem("Seller"))._id;
-
     const formData = new FormData();
-    formData.append("clientName", input.clientName);
-    formData.append("clientPhone", input.clientPhone);
-    formData.append("clientEmail", input.clientEmail);
-    formData.append("country", input.country);
-    formData.append("state", input.state);
-    formData.append("clientAddress", input.clientAddress);
-    formData.append("projectName", input.projectName);
-    formData.append("projectType", input.projectType);
-    formData.append("projectSource", input.projectSource);
-    formData.append("budget", input.budget);
-    formData.append("amount", input.amount);
-    formData.append("projectDesc", input.projectDesc);
-    formData.append("timeFrame", input.timeFrame);
-    for (let i = 0; i < projectFiles.length; i++) {
-      formData.append("projectFile", projectFiles[i]);
+    if (Id) {
+      formData.append("clientName", input.clientName);
+      formData.append("clientPhone", input.clientPhone);
+      formData.append("clientEmail", input.clientEmail);
+      formData.append("country", input.country);
+      formData.append("state", input.state);
+      formData.append("clientAddress", input.clientAddress);
+      formData.append("projectName", input.projectName);
+      formData.append("projectType", input.projectType);
+      formData.append("projectSource", input.projectSource);
+      formData.append("budget", input.budget);
+      formData.append("amount", input.amount);
+      formData.append("projectDesc", input.projectDesc);
+      formData.append("timeFrame", input.timeFrame);
+      for (let i = 0; i < projectFiles?.length; i++) {
+        formData.append("projectFile", projectFiles[i]);
+      }
+      formData.append("date", input.date);
+      formData.append("document", input.document);
+      formData.append("clientAvatar", avatar);
+      formData.append("companyName", input.company);
+
+      dispatch(updateClient({ formData, id: Id }));
+      setInput({
+        clientName: "",
+        clientEmail: "",
+        clientPhone: "",
+        country: "",
+        state: "",
+        clientAddress: "",
+        projectName: "",
+        projectType: "",
+        budget: "",
+        amount: "",
+        projectDesc: "",
+        timeFrame: "",
+        projectSource: "",
+        date: "",
+        document: "",
+        company: "",
+      });
+      setId(null);
+    } else {
+      const sellerId = JSON.parse(localStorage.getItem("Seller"))._id;
+      formData.append("clientName", input.clientName);
+      formData.append("clientPhone", input.clientPhone);
+      formData.append("clientEmail", input.clientEmail);
+      formData.append("country", input.country);
+      formData.append("state", input.state);
+      formData.append("clientAddress", input.clientAddress);
+      formData.append("projectName", input.projectName);
+      formData.append("projectType", input.projectType);
+      formData.append("projectSource", input.projectSource);
+      formData.append("budget", input.budget);
+      formData.append("amount", input.amount);
+      formData.append("projectDesc", input.projectDesc);
+      formData.append("timeFrame", input.timeFrame);
+      for (let i = 0; i < projectFiles.length; i++) {
+        formData.append("projectFile", projectFiles[i]);
+      }
+      formData.append("date", input.date);
+      formData.append("document", input.document);
+      formData.append("clientAvatar", avatar);
+      formData.append("companyName", input.company);
+      formData.append("sellerId", sellerId);
+      dispatch(createClient(formData));
+      setInput({
+        clientName: "",
+        clientEmail: "",
+        clientPhone: "",
+        country: "",
+        state: "",
+        clientAddress: "",
+        projectName: "",
+        projectType: "",
+        budget: "",
+        amount: "",
+        projectDesc: "",
+        timeFrame: "",
+        projectSource: "",
+        date: "",
+        document: "",
+        company: "",
+      });
     }
-    formData.append("date", input.date);
-    formData.append("document", input.document);
-    formData.append("clientAvatar", avatar);
-    formData.append("companyName", input.company);
-    formData.append("sellerId", sellerId);
-    dispatch(createClient(formData));
-    setInput({
-      clientName: "",
-      clientEmail: "",
-      clientPhone: "",
-      country: "",
-      state: "",
-      clientAddress: "",
-      projectName: "",
-      projectType: "",
-      budget: "",
-      amount: "",
-      projectDesc: "",
-      timeFrame: "",
-      projectSource: "",
-      date: "",
-      document: "",
-      company: "",
-    });
   };
   useEffect(() => {
     if (error) {
@@ -125,9 +169,18 @@ const Model = ({ setClient }) => {
     if (localStorage.getItem("Seller")) {
       navigate("/");
     }
-  }, [message, error, navigate]);
+  }, [message, error, navigate, dispatch, setClient]);
+  useEffect(() => {
+    setInput({ ...singleData });
+    setId(singleData?._id);
+  }, [singleData, setInput]);
   return (
     <div className="w-screen h-auto py-[120px] pl-[66px] bg-gray-900 bg-opacity-90 absolute top-0 left-0 overflow-hidden z-[99999] flex justify-center">
+      {loader && (
+        <div className="w-full h-full absolute top-0 left-0 p-0 flex justify-center items-center bg-blue-300  z-[99999999999]">
+          <LoadingSpinner />
+        </div>
+      )}
       <button
         onClick={() => setClient(false)}
         className="absolute right-16 top-10 z-[99999]"
@@ -157,7 +210,7 @@ const Model = ({ setClient }) => {
         </p>
         <form
           onSubmit={handleSubmit}
-          className="form_content grid gap-[45px]  grid-flow-col justify-between mt-[43px] "
+          className="form_content grid gap-[45px] relative grid-flow-col justify-between mt-[43px] overflow-hidden"
         >
           <div className="right w-[490px] flex flex-col gap-[36px]">
             <div className="client_information flex flex-col items-start">

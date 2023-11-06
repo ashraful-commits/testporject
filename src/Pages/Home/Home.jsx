@@ -11,11 +11,13 @@ import {
   getAllSellerState,
   setMessageEmpty,
 } from "../../Features/Seller/SellerSlice";
+import { getAllClientState } from "../../Features/Client/ClientSlice";
 
 const Home = () => {
   const [notification, setNotification] = useState(false);
-  const [client, setClient] = useState(false);
+  const [clientModel, setClientModel] = useState(false);
   const { error, message, loginInSeller } = useSelector(getAllSellerState);
+  const { client } = useSelector(getAllClientState);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const Home = () => {
   return (
     <div className="min-w-[1340px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>
-        {client && <Model setClient={setClient} />}
+        {clientModel && <Model setClient={setClientModel} />}
         {/*=================================================== sidebar  */}
         <div className="sidebar flex flex-col items-center w-[295px]  bg-mediumBlack overflow-hidden">
           <div className="logo   w-full flex justify-center items-start ">
@@ -824,7 +826,7 @@ const Home = () => {
               </div>
               <div className="percentage flex justify-center gap-[10px] items-center">
                 <h2 className="text-[35px] text-white mb-[10px] font-['Work_Sans']">
-                  450
+                  {client?.length > 0 ? client.length : 0}
                 </h2>
                 <span className="text-[#3AAE54] border-[0.3px solid bg-[#5CCE75] text-[12px] flex justify-between px-[7px] items-center gap-[5px] w-[49px] h-[19px] bg-opacity-[.1] text-[#5CCE75] rounded-md">
                   3.9%
@@ -912,7 +914,7 @@ const Home = () => {
               </div>
               <div className="percentage flex justify-start gap-[10px] pl-[22px] items-end">
                 <h2 className="text-[30px] text-[#230B34] mb-[10px] font-[500] font-['Work_Sans'] tracking-[.2px]">
-                  $65500.56
+                  $ {client[0]?.amount ? (client[0]?.amount * 100) / 1000 : 0}
                 </h2>
               </div>
             </div>
@@ -1059,7 +1061,7 @@ const Home = () => {
                   </svg>
                 </div>
                 <button
-                  onClick={() => setClient(!client)}
+                  onClick={() => setClientModel(!clientModel)}
                   className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px]"
                 >
                   Add Client
@@ -1084,10 +1086,7 @@ const Home = () => {
             </div>
             {/* ========================== table container  */}
             <div className="table_container overflow-auto mt-[20px]">
-              <TableComponent
-                client={loginInSeller?.client}
-                sellerId={loginInSeller?._id}
-              />
+              <TableComponent sellerId={loginInSeller?._id} />
             </div>
           </div>
         </div>

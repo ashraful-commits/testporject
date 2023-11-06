@@ -1,13 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { createClient, getAllClient } from "./ClientApi";
+import {
+  createClient,
+  deleteClient,
+  getAllClient,
+  updateClient,
+} from "./ClientApi";
 
 const ClientSlice = createSlice({
   name: "client",
   initialState: {
     client: [],
     error: null,
-    loader: false,
+    loader: true,
     message: null,
   },
   reducers: {
@@ -39,6 +44,36 @@ const ClientSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(getAllClient.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(updateClient.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(updateClient.fulfilled, (state, action) => {
+        state.loader = false;
+        state.client[
+          state.client.findIndex(
+            (item) => item._id === action.payload.client._id
+          )
+        ] = action.payload.client;
+        state.message = action.payload.message;
+      })
+      .addCase(updateClient.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(deleteClient.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(deleteClient.fulfilled, (state, action) => {
+        state.loader = false;
+        state.client = state.client.filter(
+          (item) => item._id !== action.payload.client._id
+        );
+        state.message = action.payload.message;
+      })
+      .addCase(deleteClient.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });
