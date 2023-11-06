@@ -12,6 +12,7 @@ import {
   setMessageEmpty,
 } from "../../Features/Seller/SellerSlice";
 import { getAllClientState } from "../../Features/Client/ClientSlice";
+import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 
 const Home = () => {
   const [notification, setNotification] = useState(false);
@@ -914,7 +915,7 @@ const Home = () => {
               </div>
               <div className="percentage flex justify-start gap-[10px] pl-[22px] items-end">
                 <h2 className="text-[30px] text-[#230B34] mb-[10px] font-[500] font-['Work_Sans'] tracking-[.2px]">
-                  $ {client[0]?.amount ? (client[0]?.amount * 100) / 1000 : 0}
+                  $ {calculateTotalCommissionForAllClients(client)}
                 </h2>
               </div>
             </div>

@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteClient, getAllClient } from "../Features/Client/ClientApi";
 import { getAllClientState } from "../Features/Client/ClientSlice";
 import Model from "./Model/Model";
+import swal from "sweetalert";
+import LoadingSpinner from "./LoadingSpin";
 
 const TableComponent = ({ sellerId }) => {
-  const { client } = useSelector(getAllClientState);
+  const { client, loader } = useSelector(getAllClientState);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   //=========================edit model
@@ -20,7 +22,22 @@ const TableComponent = ({ sellerId }) => {
     setSingleData(client.find((item) => item._id == id));
   };
   const handleDelete = (id) => {
-    dispatch(deleteClient(id));
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        dispatch(deleteClient(id));
+        swal("Poof! Your imaginary file has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("Your imaginary file is safe!");
+      }
+    });
   };
   //===============  handle limit
   const handleLimit = (e) => {
@@ -96,6 +113,7 @@ const TableComponent = ({ sellerId }) => {
           </tr>
         </thead>
         <tbody>
+          {loader && <LoadingSpinner />}
           {client.length > 0 ? (
             client?.map((item, index) => {
               return (
@@ -107,9 +125,11 @@ const TableComponent = ({ sellerId }) => {
                     <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                       {index + 1}.
                     </span>{" "}
-                    {item.companyName}
+                    <span className="truncate w-[120px]">
+                      {item.companyName}
+                    </span>
                   </td>
-                  <td className="w-[130px]  items-center flex gap-[.3125rem] relative">
+                  <td className="w-[130px] overflow-hidden items-center flex gap-[.3125rem] relative">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="32"
@@ -134,7 +154,10 @@ const TableComponent = ({ sellerId }) => {
                       />
                     )}
 
-                    {item.clientName}
+                    <span className=" truncate w-[70px]">
+                      {" "}
+                      {item.clientName}
+                    </span>
                   </td>
                   <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                     {item?.date}

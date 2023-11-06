@@ -31,14 +31,17 @@ const Model = ({ setClient, singleData }) => {
     date: "",
     document: "",
     clientAvatar: "",
-    company: "",
+    companyName: "",
   });
+
   //==========================file preview
   const [Id, setId] = useState({});
+  console.log(singleData);
   //==================================handle project file
   const [projectFiles, setProjectFile] = useState(null);
   const { client, message, loader, error } = useSelector(getAllClientState);
   const [avatar, setAvatar] = useState(null);
+  const [photo, setPhoto] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleProjectFile = (e) => {
@@ -62,7 +65,8 @@ const Model = ({ setClient, singleData }) => {
   };
   //================================handle client avatar
   const handleClientAvatar = (e) => {
-    setAvatar(e.target.files[0]);
+    setPhoto(e.target.files[0]);
+    setAvatar(URL.createObjectURL(e.target.files[0]));
   };
 
   //======================================handle submit
@@ -88,8 +92,8 @@ const Model = ({ setClient, singleData }) => {
       }
       formData.append("date", input.date);
       formData.append("document", input.document);
-      formData.append("clientAvatar", avatar);
-      formData.append("companyName", input.company);
+      formData.append("clientAvatar", photo);
+      formData.append("companyName", input.companyName);
 
       dispatch(updateClient({ formData, id: Id }));
       setInput({
@@ -108,7 +112,7 @@ const Model = ({ setClient, singleData }) => {
         projectSource: "",
         date: "",
         document: "",
-        company: "",
+        companyName: "",
       });
       setId(null);
     } else {
@@ -131,8 +135,8 @@ const Model = ({ setClient, singleData }) => {
       }
       formData.append("date", input.date);
       formData.append("document", input.document);
-      formData.append("clientAvatar", avatar);
-      formData.append("companyName", input.company);
+      formData.append("clientAvatar", photo);
+      formData.append("companyName", input.companyName);
       formData.append("sellerId", sellerId);
       dispatch(createClient(formData));
       setInput({
@@ -151,7 +155,7 @@ const Model = ({ setClient, singleData }) => {
         projectSource: "",
         date: "",
         document: "",
-        company: "",
+        companyName: "",
       });
     }
   };
@@ -173,7 +177,10 @@ const Model = ({ setClient, singleData }) => {
   useEffect(() => {
     setInput({ ...singleData });
     setId(singleData?._id);
+    setAvatar(singleData?.clientAvatar);
+    setProjectFile(singleData?.projectFile);
   }, [singleData, setInput]);
+
   return (
     <div className="w-screen h-auto py-[120px] pl-[66px] bg-gray-900 bg-opacity-90 absolute top-0 left-0 overflow-hidden z-[99999] flex justify-center">
       {loader && (
@@ -198,7 +205,7 @@ const Model = ({ setClient, singleData }) => {
           />
         </svg>
       </button>
-      <div className="main_model z-[999999999] w-[868px] rounded-[10px] h-[1148px] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
+      <div className="main_model z-[999999999] w-[868px] rounded-[10px] h-[1230px] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
         <div className=" sticky top-0 pt-[42px] bg-white w-full">
           <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
             Please add Client & Project Details information
@@ -271,8 +278,8 @@ const Model = ({ setClient, singleData }) => {
                     placeholder="Company name"
                     label="Company Name"
                     width={"30px"}
-                    name="company"
-                    value={input.company}
+                    name="companyName"
+                    value={input.companyName}
                     handleInputChange={handleInputChange}
                   />
                   <FormInput
@@ -370,6 +377,7 @@ const Model = ({ setClient, singleData }) => {
                         onChange={handleInputChange}
                         className="w-4 h-4"
                         type="checkbox"
+                        checked={input.budget}
                       />
                       <label
                         className="text-gray-900 font-[800] text-[12px] font-['Lato'] tracking-[.2px]"
@@ -543,10 +551,7 @@ const Model = ({ setClient, singleData }) => {
           <div className="left w-[220px] flex flex-col items-start">
             <div className="avatar border flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]">
               {avatar ? (
-                <img
-                  className="w-full h-full object-cover"
-                  src={URL.createObjectURL(avatar)}
-                />
+                <img className="w-full h-full object-cover" src={avatar} />
               ) : (
                 "Select avatar"
               )}
