@@ -19,7 +19,6 @@ const Home = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(loginInSeller);
   const handleLogout = () => {
     dispatch(LogoutSeller());
     localStorage.clear("Seller");
