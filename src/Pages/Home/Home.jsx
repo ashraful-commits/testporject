@@ -1061,7 +1061,7 @@ const Home = () => {
                   </svg>
                 </div>
                 <button
-                  onClick={() => setClientModel(!clientModel)}
+                  onClick={() => setClientModel(true)}
                   className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px]"
                 >
                   Add Client

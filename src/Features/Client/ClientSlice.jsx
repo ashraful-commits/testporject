@@ -12,7 +12,7 @@ const ClientSlice = createSlice({
   initialState: {
     client: [],
     error: null,
-    loader: true,
+    loader: false,
     message: null,
   },
   reducers: {

@@ -9,7 +9,7 @@ const TableComponent = ({ sellerId }) => {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   //=========================edit model
-  const [editModel, setEditModel] = useState(1);
+  const [editModel, setEditModel] = useState(false);
   //=================== singleData
   const [singleData, setSingleData] = useState({});
   //===========================set limit
