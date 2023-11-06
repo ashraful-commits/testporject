@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+// const BASE_URL = "https://wordshpere.onrender.com";
+const BASE_URL = "http://localhost:5050";
 export const SellerRegistration = createAsyncThunk(
   "seller/SellerRegistration",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post(
-        "https://wordshpere.onrender.com/api/v1/seller",
-        data,
-        { withCredentials: true }
-      );
+      const response = await axios.post(`${BASE_URL}/api/v1/seller`, data, {
+        withCredentials: true,
+      });
       console.log(response.data);
       return response.data;
     } catch (error) {
@@ -21,7 +21,7 @@ export const SellerLogin = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(
-        "https://wordshpere.onrender.com/api/v1/seller/login",
+        `${BASE_URL}/api/v1/seller/login`,
         data,
         { withCredentials: true }
       );
@@ -37,10 +37,9 @@ export const LoggedInSeller = createAsyncThunk(
   "seller/LoggedInSeller",
   async (thunkAPI) => {
     try {
-      const response = await axios.get(
-        "https://wordshpere.onrender.com/api/v1/seller/me",
-        { withCredentials: true }
-      );
+      const response = await axios.get(`${BASE_URL}/api/v1/seller/me`, {
+        withCredentials: true,
+      });
 
       return response.data;
     } catch (error) {
@@ -52,10 +51,9 @@ export const LogoutSeller = createAsyncThunk(
   "seller/LogoutSeller",
   async (thunkAPI) => {
     try {
-      const response = await axios.get(
-        "https://wordshpere.onrender.com/api/v1/seller/logout",
-        { withCredentials: true }
-      );
+      const response = await axios.get(`${BASE_URL}/api/v1/seller/logout`, {
+        withCredentials: true,
+      });
 
       return response.data;
     } catch (error) {

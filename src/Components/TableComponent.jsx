@@ -47,7 +47,7 @@ const TableComponent = ({ client }) => {
     },
     {
       name: "Data Signed",
-      selector: (row) => row?.projects[0]?.date,
+      selector: (row) => row?.projects?.length > 0 && row?.projects[0]?.date,
       sortable: true,
     },
     {
@@ -189,7 +189,7 @@ const TableComponent = ({ client }) => {
               </g>
             </svg>
           </div>
-          <p>${row?.projects[0]?.amount}</p>
+          <p>${row?.projects?.length > 0 && row?.projects[0]?.amount}</p>
         </div>
       ),
       sortable: true,
@@ -198,7 +198,10 @@ const TableComponent = ({ client }) => {
       name: "Commission",
       selector: (row) => (
         <span className="text-[.8125rem] font-[600] text-gray-900">
-          ${(row?.projects[0]?.amount * 100) / 15 / 100}
+          $
+          {(row?.projects?.length > 0 && row?.projects[0]?.amount * 100) /
+            15 /
+            100}
         </span>
       ),
     },
@@ -207,20 +210,24 @@ const TableComponent = ({ client }) => {
       selector: (row) => (
         <button
           className={`${
+            row?.projects?.length > 0 &&
             row?.projects[0]?.projectStatus === "pending" &&
             "border-[.0187rem] border-[#F2994A] bg-[#FFF8F2] text-[#F2994A] rounded-xl"
           } ${
+            row?.projects?.length > 0 &&
             row?.projects[0]?.projectStatus === "on going" &&
             "border-[.0187rem] border-[#3AAE54] bg-[#E7FBF0] text-[#3AAE54] rounded-xl"
           } ${
+            row?.projects?.length > 0 &&
             row?.projects[0]?.projectStatus === "on hold" &&
             "border-[.0187rem] border-[#ae3333] bg-[#FEE] text-[#F95959] rounded-xl"
           } ${
+            row?.projects?.length > 0 &&
             row?.projects[0]?.projectStatus === "complete" &&
             "border-[.0187rem] border-[#3AAE54] bg-[#3AAE54] text-white rounded-xl"
           } w-[3.75rem] h-[1.125rem] text-[.625rem] font-[400] flex justify-center items-center`}
         >
-          {row?.projects[0]?.projectStatus
+          {row?.projects?.length > 0 && row?.projects[0]?.projectStatus
             ? row?.projects[0]?.projectStatus
             : "pending"}
         </button>
@@ -228,7 +235,11 @@ const TableComponent = ({ client }) => {
     },
     {
       name: "Client Source",
-      selector: (row) => <span>{row?.projects[0]?.projectSource}</span>,
+      selector: (row) => (
+        <span>
+          {row?.projects?.length > 0 && row?.projects[0]?.projectSource}
+        </span>
+      ),
     },
   ];
 

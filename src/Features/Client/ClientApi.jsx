@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+// const BASE_URL = "https://wordshpere.onrender.com";
+const BASE_URL = "http://localhost:5050";
 export const createClient = createAsyncThunk(
   "seller/createClient",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.post(
-        "https://wordshpere.onrender.com/api/v1/client",
-        data,
-        { withCredentials: true }
-      );
+      const response = await axios.post(`${BASE_URL}/api/v1/client`, data, {
+        withCredentials: true,
+      });
 
       return response.data;
     } catch (error) {
@@ -21,7 +21,7 @@ export const getAllClient = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.get(
-        "https://wordshpere.onrender.com/api/v1/client",
+        `${BASE_URL}/api/v1/client`,
 
         { withCredentials: true }
       );
