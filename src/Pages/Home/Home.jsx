@@ -38,6 +38,7 @@ const Home = () => {
       navigate("/login");
     }
   }, [error, message, dispatch, navigate]);
+
   return (
     <div className="min-w-[1340px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>

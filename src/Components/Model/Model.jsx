@@ -35,7 +35,7 @@ const Model = ({ setClient }) => {
   //==========================file preview
 
   //==================================handle project file
-  const [projectFile, setProjectFile] = useState(null);
+  const [projectFiles, setProjectFile] = useState(null);
   const { client, message, error } = useSelector(getAllClientState);
   const [avatar, setAvatar] = useState(null);
   const dispatch = useDispatch();
@@ -55,8 +55,9 @@ const Model = ({ setClient }) => {
       }
     });
   };
+
   const handleDelete = (item) => {
-    setProjectFile([...projectFile.filter((file) => file !== item)]);
+    setProjectFile([...projectFiles.filter((file) => file !== item)]);
   };
   //================================handle client avatar
   const handleClientAvatar = (e) => {
@@ -82,7 +83,9 @@ const Model = ({ setClient }) => {
     formData.append("amount", input.amount);
     formData.append("projectDesc", input.projectDesc);
     formData.append("timeFrame", input.timeFrame);
-    formData.append("projectFile", projectFile);
+    for (let i = 0; i < projectFiles.length; i++) {
+      formData.append("projectFile", projectFiles[i]);
+    }
     formData.append("date", input.date);
     formData.append("document", input.document);
     formData.append("clientAvatar", avatar);
@@ -116,6 +119,7 @@ const Model = ({ setClient }) => {
     if (message) {
       Toastify(message, "success");
       dispatch(setMessageEmpty());
+      setClient(false);
     }
 
     if (localStorage.getItem("Seller")) {
@@ -141,10 +145,12 @@ const Model = ({ setClient }) => {
           />
         </svg>
       </button>
-      <div className="main_model z-[999999999] w-[868px] rounded-[10px] h-[1148px] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 p-[42px]">
-        <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
-          Please add Client & Project Details information
-        </h1>
+      <div className="main_model z-[999999999] w-[868px] rounded-[10px] h-[1148px] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
+        <div className=" sticky top-0 pt-[42px] bg-white w-full">
+          <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
+            Please add Client & Project Details information
+          </h1>
+        </div>
         <p className="text-gray-400 capitalize mt-[4px] font-['Lato'] tracking-[.2px]">
           please provide us with a rough idea about the project you can leave
           any field empty if you don&apos;t have information about it
@@ -443,8 +449,8 @@ const Model = ({ setClient }) => {
                     className="text-gray-500 cursor-pointer transition-all ease-in-out duration-500 hover:bg-gray-300 border bg-gray-200 w-full h-[36px] rounded-md mt-[-5px] flex justify-center font-['Lato'] text-[12px] items-center tracking-[0.24px]"
                     htmlFor="uploadFile"
                   >
-                    {projectFile
-                      ? projectFile?.length + `  File Uploaded`
+                    {projectFiles?.length > 0
+                      ? projectFiles?.length + `  File Uploaded`
                       : "Upload Files"}
                   </label>
                   <input
@@ -457,7 +463,7 @@ const Model = ({ setClient }) => {
                 </div>
               </div>
             </div>
-            <div className="submit_section flex justify-between items-start">
+            <div className="submit_section sticky bottom-0 bg-white flex justify-between items-start py-[42px]">
               <div className="agree flex items-center gap-[20px]">
                 <input type="checkbox" className="w-4 h-4" />
                 <label
@@ -522,33 +528,68 @@ const Model = ({ setClient }) => {
             <h4 className="text-gray-800 text-[18px] font-[600] mt-[2px] font-['Work_Sans'] ml-[6px] tracking-[-.5px]">
               info@imageappeal.com
             </h4>
-            <div className="preview w-full h-auto overflow-hidden gap-2 grid grid-cols-2">
-              {projectFile?.map((item, index) => {
-                return (
-                  <div key={index} className="relative">
-                    <span
-                      onClick={() => handleDelete(item)}
-                      className="absolute cursor-pointer top-1 right-1"
-                    >
-                      <svg
-                        width="10"
-                        height="10"
-                        viewBox="0 0 15 15"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+            <div className="preview w-full h-auto overflow-hidden gap-2 grid grid-cols-2 mt-10">
+              <h1 className="col-span-2 border-t border-b text-[16px] font-bold uppercase py-2">
+                Document Preview
+              </h1>
+              {projectFiles?.length > 0 ? (
+                projectFiles?.map((item, index) => {
+                  return (
+                    <div key={index} className="relative group">
+                      <span
+                        onClick={() => handleDelete(item)}
+                        className="absolute cursor-pointer hidden group-hover:block bg-gray-300 rounded-full top-1 right-1 p-[5px]"
                       >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M6.7929 7.49998L1.14645 1.85353L1.85356 1.14642L7.50001 6.79287L13.1465 1.14642L13.8536 1.85353L8.20711 7.49998L13.8536 13.1464L13.1465 13.8535L7.50001 8.20708L1.85356 13.8535L1.14645 13.1464L6.7929 7.49998Z"
-                          fill="#fff"
-                        />
-                      </svg>
-                    </span>
-                    <FilePreview item={item} />
-                  </div>
-                );
-              })}
+                        <svg
+                          width="12"
+                          height="12"
+                          viewBox="0 0 15 15"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M6.7929 7.49998L1.14645 1.85353L1.85356 1.14642L7.50001 6.79287L13.1465 1.14642L13.8536 1.85353L8.20711 7.49998L13.8536 13.1464L13.1465 13.8535L7.50001 8.20708L1.85356 13.8535L1.14645 13.1464L6.7929 7.49998Z"
+                            fill="#fff"
+                          />
+                        </svg>
+                      </span>
+                      <FilePreview item={item} />
+                    </div>
+                  );
+                })
+              ) : (
+                <div className=" col-span-2 gap-[5px] grid grid-cols-2  w-full ">
+                  <img
+                    className="w-full border h-full object-cover"
+                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+                  />
+
+                  <img
+                    className="w-full border h-full object-cover"
+                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+                  />
+                  <img
+                    className="w-full border h-full object-cover"
+                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+                  />
+
+                  <img
+                    className="w-full border h-full object-cover"
+                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+                  />
+                  <img
+                    className="w-full border h-full object-cover"
+                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+                  />
+
+                  <img
+                    className="w-full border h-full object-cover"
+                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </form>

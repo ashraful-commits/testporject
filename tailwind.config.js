@@ -24,7 +24,32 @@ export default {
         lightOrange:'#F2994A',
         lightGray:'#DFDFDF',
       },
+      
     },
+    plugins:[
+      function ({ addUtilities }) {
+        const newUtilities = {
+          '.scrollbar-custom': {
+            '::-webkit-scrollbar': {
+              width: '2px', // Adjust the width as needed
+              height: '2px', // Adjust the height as needed
+            },
+            '::-webkit-scrollbar-thumb': {
+              background: '#fff', // Change the color as needed
+            },
+            '::-webkit-scrollbar-track': {
+              background: '#E5E7EB', // Change the track color as needed
+            },
+            '::-webkit-scrollbar-thumb:hover': {
+              background: '#805AD5', // Change hover color as needed
+            },
+          },
+        };
+        addUtilities(newUtilities, {
+          variants: ['responsive'],
+        });
+      },
+    ]
   },
   plugins: [],
 }

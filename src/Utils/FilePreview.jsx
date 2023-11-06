@@ -5,7 +5,7 @@ const FilePreview = ({ item }) => {
       return (
         <div>
           <img
-            className="w-full h-[80px] object-cover"
+            className="w-full border h-[80px] object-cover"
             src={URL.createObjectURL(item)}
             alt={item.name}
           />
@@ -14,7 +14,7 @@ const FilePreview = ({ item }) => {
     } else if (item.type.includes("video/")) {
       return (
         <div>
-          <video width="320" height="240" controls>
+          <video className="border" width="320" height="240" controls>
             <source src={URL.createObjectURL(item)} type={item.type} />
             Your browser does not support the video tag.
           </video>

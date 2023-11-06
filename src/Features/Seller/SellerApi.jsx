@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-// const BASE_URL = "https://wordshpere.onrender.com";
-const BASE_URL = "http://localhost:5050";
+const BASE_URL = "https://wordshpere.onrender.com";
+// const BASE_URL = "http://localhost:5050";
 export const SellerRegistration = createAsyncThunk(
   "seller/SellerRegistration",
   async (data, thunkAPI) => {
