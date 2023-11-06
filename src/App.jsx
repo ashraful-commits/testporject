@@ -10,7 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
-  console.log(localStorage.getItem("Seller"));
 
   useEffect(() => {
     if (localStorage.getItem("Seller")) {
