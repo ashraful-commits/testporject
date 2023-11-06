@@ -1,5 +1,5 @@
 import DataTable from "react-data-table-component";
-import "./TableStyle.css";
+
 const TableComponent = ({ client }) => {
   const columns = [
     {

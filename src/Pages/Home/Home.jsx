@@ -7,15 +7,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { LogoutSeller } from "../../Features/Seller/SellerApi";
 import { Toastify } from "../../Utils/Tostify";
-import { setMessageEmpty } from "../../Features/Seller/SellerSlice";
+import {
+  getAllSellerState,
+  setMessageEmpty,
+} from "../../Features/Seller/SellerSlice";
 
 const Home = () => {
   const [notification, setNotification] = useState(false);
   const [client, setClient] = useState(false);
-  const { error, message, loginInSeller } = useSelector(
-    (state) => state.Seller
-  );
-  console.log(loginInSeller);
+  const { error, message, loginInSeller } = useSelector(getAllSellerState);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   console.log(loginInSeller);
