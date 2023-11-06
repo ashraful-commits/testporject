@@ -47,7 +47,6 @@ const Home = () => {
   return (
     <div className="min-w-[1340px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>
-        {loader && <LoadingSpinner />}
         {clientModel && <Model setClient={setClientModel} />}
         {/*=================================================== sidebar  */}
         <div className="sidebar flex flex-col items-center w-[295px]  bg-mediumBlack overflow-hidden">
