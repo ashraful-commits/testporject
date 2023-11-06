@@ -5,6 +5,7 @@ import {
   deleteClient,
   getAllClient,
   permissionUpdate,
+  projectStatusUpdate,
   updateClient,
 } from "./ClientApi";
 
@@ -91,6 +92,22 @@ const ClientSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(permissionUpdate.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(projectStatusUpdate.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(projectStatusUpdate.fulfilled, (state, action) => {
+        state.loader = false;
+        state.client[
+          state.client.findIndex(
+            (item) => item._id === action.payload.client._id
+          )
+        ] = action.payload.client;
+        state.message = action.payload.message;
+      })
+      .addCase(projectStatusUpdate.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });

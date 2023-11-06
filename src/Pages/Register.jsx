@@ -10,6 +10,7 @@ import {
   getAllSellerState,
   setMessageEmpty,
 } from "../Features/Seller/SellerSlice";
+import LoadingSpinner from "../Components/LoadingSpin";
 const Register = () => {
   const { input, setInput, handleInputChange } = useFormHook({
     name: "",
@@ -19,7 +20,7 @@ const Register = () => {
     website: "",
   });
   //======================get message
-  const { message, error } = useSelector(getAllSellerState);
+  const { message, error, loader } = useSelector(getAllSellerState);
   console.log(message, error);
   //========================== preview state
   const [avatar, setAvatar] = useState(null);
@@ -63,7 +64,12 @@ const Register = () => {
     }
   }, [error, message, dispatch]);
   return (
-    <div className="min-w-full min-h-screen flex justify-center items-center overflow-hidden">
+    <div className="min-w-full relative z-0 min-h-screen flex justify-center items-center overflow-hidden">
+      {loader && (
+        <div className="absolute top-52 z-[99999] right-40">
+          <LoadingSpinner />
+        </div>
+      )}
       <div className="login w-[400px] flex justify-start items-center flex-col h-auto rounded-lg shadow-md  bg-white">
         <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
           Register
@@ -93,7 +99,7 @@ const Register = () => {
           />
           <FormInput
             label="Password"
-            type="required"
+            type="password"
             placeholder="Password"
             name="password"
             value={input.password}

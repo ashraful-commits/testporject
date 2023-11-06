@@ -184,7 +184,7 @@ const Model = ({ setClient, singleData }) => {
   return (
     <div className="w-screen h-auto py-[120px] pl-[66px] bg-gray-900 bg-opacity-90 absolute top-0 left-0 overflow-hidden z-[99999] flex justify-center">
       {loader && (
-        <div className="w-full h-full absolute top-0 left-0 p-0 flex justify-center items-center bg-blue-300  z-[99999999999]">
+        <div className="w-full h-full absolute top-0 left-0 p-0 flex justify-center items-center z-[99999999999]">
           <LoadingSpinner />
         </div>
       )}
@@ -415,6 +415,7 @@ const Model = ({ setClient, singleData }) => {
                       Graphic Design
                     </option>
                   </select>
+
                   <FormInput
                     type="text"
                     placeholder="$2504"

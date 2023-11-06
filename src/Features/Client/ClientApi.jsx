@@ -82,3 +82,19 @@ export const permissionUpdate = createAsyncThunk(
     }
   }
 );
+export const projectStatusUpdate = createAsyncThunk(
+  "seller/projectStatusUpdate",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.patch(
+        `${BASE_URL}/api/v1/client/projectStatusUpdate/${data.id}`,
+        { projectStatus: data.projectStatus },
+        { withCredentials: true }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
