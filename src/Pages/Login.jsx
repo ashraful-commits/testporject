@@ -10,7 +10,6 @@ import {
   setMessageEmpty,
 } from "../Features/Seller/SellerSlice";
 import { Toastify } from "../Utils/Tostify";
-import { LoggedInSeller } from "./../Features/Seller/SellerApi";
 
 const Login = () => {
   const { input, setInput, handleInputChange } = useFormHook({
@@ -43,7 +42,7 @@ const Login = () => {
     if (localStorage.getItem("Seller")) {
       navigate("/");
     }
-  }, [message, error, navigate]);
+  }, [message, error, navigate, dispatch]);
   return (
     <div className="min-w-full min-h-screen flex justify-center items-center overflow-hidden">
       <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">

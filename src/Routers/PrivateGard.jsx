@@ -1,6 +1,5 @@
-import React from "react";
 import { useSelector } from "react-redux";
-import { getAllSellerState } from "../Features/Seller/SellerSlice";
+
 import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateGard = () => {
