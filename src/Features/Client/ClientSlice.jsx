@@ -4,6 +4,7 @@ import {
   createClient,
   deleteClient,
   getAllClient,
+  permissionUpdate,
   updateClient,
 } from "./ClientApi";
 
@@ -74,6 +75,22 @@ const ClientSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(deleteClient.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(permissionUpdate.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(permissionUpdate.fulfilled, (state, action) => {
+        state.loader = false;
+        state.client[
+          state.client.findIndex(
+            (item) => item._id === action.payload.client._id
+          )
+        ] = action.payload.client;
+        state.message = action.payload.message;
+      })
+      .addCase(permissionUpdate.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });

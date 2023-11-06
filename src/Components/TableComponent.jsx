@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteClient, getAllClient } from "../Features/Client/ClientApi";
+import {
+  deleteClient,
+  getAllClient,
+  permissionUpdate,
+} from "../Features/Client/ClientApi";
 import { getAllClientState } from "../Features/Client/ClientSlice";
 import Model from "./Model/Model";
 import swal from "sweetalert";
 import LoadingSpinner from "./LoadingSpin";
+import { getAllSellerState } from "../Features/Seller/SellerSlice";
 
 const TableComponent = ({ sellerId }) => {
   const { client, loader } = useSelector(getAllClientState);
+  const { loginInSeller } = useSelector(getAllSellerState);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   //=========================edit model
@@ -43,7 +49,10 @@ const TableComponent = ({ sellerId }) => {
   const handleLimit = (e) => {
     setLimit(e.target.value);
   };
-
+  //===============handle prmmision
+  const handlePermission = (id, status) => {
+    dispatch(permissionUpdate({ id, status }));
+  };
   //=================get user client
   useEffect(() => {
     dispatch(getAllClient({ sellerId, page: currentPage, limit }));
@@ -62,25 +71,30 @@ const TableComponent = ({ sellerId }) => {
       <table className="w-full">
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
-            <th className="text-[.8125rem] w-[130px] font-['work_sans'] text-start font-[400]">
+            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
               Company Name
             </th>
 
-            <th className="text-[.8125rem] font-['work_sans'] w-[130px]  text-start font-[400]">
+            <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
               Client Name
             </th>
             <th className="text-[.8125rem] w-[100px] font-['work_sans'] text-start font-[400]">
               Data Signed
             </th>
-            <th className="text-[.8125rem] font-['work_sans'] w-[130px]  text-start font-[400]">
+            <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
               Contact Amount
             </th>
             <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
               Commission
             </th>
-            <th className="text-[.8125rem] font-['work_sans'] w-[130px]  text-start font-[400]">
+            <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
               Project status
             </th>
+            {loginInSeller?.role === "admin" && (
+              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
+                Permission status
+              </th>
+            )}
             <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
               Client source
             </th>
@@ -121,7 +135,7 @@ const TableComponent = ({ sellerId }) => {
                   key={index}
                   className="w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
                 >
-                  <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[130px]  text-[#267596]">
+                  <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                     <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                       {index + 1}.
                     </span>{" "}
@@ -129,7 +143,7 @@ const TableComponent = ({ sellerId }) => {
                       {item.companyName}
                     </span>
                   </td>
-                  <td className="w-[130px] overflow-hidden items-center flex gap-[.3125rem] relative">
+                  <td className="w-[120px] overflow-hidden items-center flex gap-[.3125rem] relative">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="32"
@@ -162,7 +176,7 @@ const TableComponent = ({ sellerId }) => {
                   <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                     {item?.date}
                   </td>
-                  <td className="w-[130px]  items-center flex text-[.8125rem] text-start font-[400] text-[#3A3A49] gap-[.3125rem]">
+                  <td className="w-[120px]  items-center flex text-[.8125rem] text-start font-[400] text-[#3A3A49] gap-[.3125rem]">
                     <div
                       className="bg-gray-200 h-[.375rem] w-[50%] "
                       role="progressbar"
@@ -187,7 +201,7 @@ const TableComponent = ({ sellerId }) => {
                       ((item?.amount * 100) / 15 / 100).toFixed(2)}
                   </td>
                   <td
-                    className={`text-[.8125rem] w-[130px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                    className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
                   >
                     <button
                       className={`${
@@ -207,6 +221,16 @@ const TableComponent = ({ sellerId }) => {
                       {item?.projectStatus && item?.projectStatus}
                     </button>
                   </td>
+                  {loginInSeller?.role == "admin" && (
+                    <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                      <input
+                        onChange={() => handlePermission(item._id, item.status)}
+                        type="checkbox"
+                        checked={item?.status}
+                      />
+                    </td>
+                  )}
+
                   <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                     {item?.projectSource}
                   </td>
@@ -281,7 +305,7 @@ const TableComponent = ({ sellerId }) => {
             </span>
           )}
         </tbody>
-        {client.length > 0 && (
+        {client.length > 7 && (
           <tfoot>
             <div className="flex justify-center items-center gap-5 py-5">
               <button

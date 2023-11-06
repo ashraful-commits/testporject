@@ -13,11 +13,13 @@ import {
 } from "../../Features/Seller/SellerSlice";
 import { getAllClientState } from "../../Features/Client/ClientSlice";
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
+import LoadingSpinner from "../../Components/LoadingSpin";
 
 const Home = () => {
   const [notification, setNotification] = useState(false);
   const [clientModel, setClientModel] = useState(false);
-  const { error, message, loginInSeller } = useSelector(getAllSellerState);
+  const { error, message, loader, loginInSeller } =
+    useSelector(getAllSellerState);
   const { client } = useSelector(getAllClientState);
 
   const dispatch = useDispatch();
@@ -45,6 +47,7 @@ const Home = () => {
   return (
     <div className="min-w-[1340px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>
+        {loader && <LoadingSpinner />}
         {clientModel && <Model setClient={setClientModel} />}
         {/*=================================================== sidebar  */}
         <div className="sidebar flex flex-col items-center w-[295px]  bg-mediumBlack overflow-hidden">

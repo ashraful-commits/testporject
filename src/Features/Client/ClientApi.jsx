@@ -66,3 +66,19 @@ export const deleteClient = createAsyncThunk(
     }
   }
 );
+export const permissionUpdate = createAsyncThunk(
+  "seller/permissionUpdate",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.patch(
+        `${BASE_URL}/api/v1/client/${data.id}`,
+        { status: !data.status },
+        { withCredentials: true }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
