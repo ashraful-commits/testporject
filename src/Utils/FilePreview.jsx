@@ -1,5 +1,3 @@
-import React from "react";
-
 const FilePreview = ({ item }) => {
   // Check if item exists and has 'type' and 'name' properties
   if (item && item.type && item.name) {
