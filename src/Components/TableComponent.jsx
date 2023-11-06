@@ -246,36 +246,6 @@ const TableComponent = ({ client }) => {
   return (
     <div className="w-full h-full">
       <DataTable
-        sortIcon={
-          <>
-            {" "}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="6"
-              height="3.5"
-              viewBox="0 0 6 4"
-              fill="none"
-            >
-              <path
-                d="M1.08711 4L4.91289 4C5.34007 4 5.57052 3.49894 5.29252 3.1746L3.37963 0.942899C3.18008 0.710094 2.81992 0.710094 2.62037 0.942899L0.707482 3.1746C0.429479 3.49894 0.659934 4 1.08711 4Z"
-                fill="#256682"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="6"
-              height="3.5"
-              viewBox="0 0 6 4"
-              fill="none"
-            >
-              <path
-                opacity="0.5"
-                d="M4.91289 0H1.08711C0.659934 0 0.429479 0.501059 0.707482 0.825396L2.62037 3.0571C2.81992 3.28991 3.18008 3.28991 3.37963 3.0571L5.29252 0.825396C5.57052 0.501059 5.34007 0 4.91289 0Z"
-                fill="#256682"
-              />
-            </svg>
-          </>
-        }
         columns={columns}
         data={client}
         pagination
