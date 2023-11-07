@@ -45,7 +45,7 @@ const Home = () => {
   }, [error, message, dispatch, navigate]);
 
   return (
-    <div className="min-w-[1340px] min-h-[909px] grid grid-flow-col overflow-hidden">
+    <div className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>
         {clientModel && <Model setClient={setClientModel} />}
         {/*=================================================== sidebar  */}

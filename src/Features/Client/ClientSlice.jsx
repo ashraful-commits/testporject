@@ -4,6 +4,7 @@ import {
   createClient,
   deleteClient,
   getAllClient,
+  getSingleClient,
   permissionUpdate,
   projectStatusUpdate,
   updateClient,
@@ -16,6 +17,7 @@ const ClientSlice = createSlice({
     error: null,
     loader: false,
     message: null,
+    singleClient: null,
   },
   reducers: {
     setMessageEmpty: (state, action) => {
@@ -108,6 +110,19 @@ const ClientSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(projectStatusUpdate.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(getSingleClient.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(getSingleClient.fulfilled, (state, action) => {
+        state.loader = false;
+        state.singleClient = action.payload.client;
+
+        state.message = action.payload.message;
+      })
+      .addCase(getSingleClient.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });

@@ -54,8 +54,24 @@ export const deleteClient = createAsyncThunk(
   "seller/deleteClient",
   async (id, thunkAPI) => {
     try {
-      const response = await axios.delete(
+      const response = await axios.get(
         `${BASE_URL}/api/v1/client/${id}`,
+
+        { withCredentials: true }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const getSingleClient = createAsyncThunk(
+  "seller/getSingleClient",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/v1/client/clientId/${id}`,
 
         { withCredentials: true }
       );

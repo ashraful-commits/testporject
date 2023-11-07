@@ -12,6 +12,7 @@ import swal from "sweetalert";
 import LoadingSpinner from "./LoadingSpin";
 import { getAllSellerState } from "../Features/Seller/SellerSlice";
 import { LoggedInSeller } from "../Features/Seller/SellerApi";
+import { Link } from "react-router-dom";
 
 const TableComponent = ({ sellerId }) => {
   const { client, loader } = useSelector(getAllClientState);
@@ -131,18 +132,21 @@ const TableComponent = ({ sellerId }) => {
                     </span>
                   </td>
                   <td className="w-[120px] overflow-hidden items-center flex gap-[.3125rem] relative">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="26"
-                      viewBox="0 0 32 26"
-                      fill="none"
-                    >
-                      <path
-                        d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
-                        fill="#78B3CC"
-                      />
-                    </svg>
+                    <Link to={`/${item._id}`}>
+                      {" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="32"
+                        height="26"
+                        viewBox="0 0 32 26"
+                        fill="none"
+                      >
+                        <path
+                          d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
+                          fill="#78B3CC"
+                        />
+                      </svg>
+                    </Link>
                     {item?.clientAvatar ? (
                       <img
                         className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
