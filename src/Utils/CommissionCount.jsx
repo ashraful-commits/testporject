@@ -1,10 +1,15 @@
-// Utility function to calculate total commission for all clients in an array
 export function calculateTotalCommissionForAllClients(clients) {
   let totalCommission = 0;
 
-  const commision = ((clients?.amount * 100) / 15 / 100).toFixed(2);
+  clients.forEach((client) => {
+    const commission = ((client?.amount * 100) / 15 / 100).toFixed(2);
 
-  totalCommission = +commision;
+    totalCommission += +commission; // Increment the total commission with the calculated commission
+  });
 
-  return totalCommission;
+  if (isNaN(totalCommission)) {
+    return 0;
+  } else {
+    return totalCommission;
+  }
 }

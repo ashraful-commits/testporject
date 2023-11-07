@@ -36,7 +36,7 @@ const Model = ({ setClient, singleData }) => {
 
   //==========================file preview
   const [Id, setId] = useState({});
-  console.log(singleData);
+
   //==================================handle project file
   const [projectFiles, setProjectFile] = useState(null);
   const { client, message, loader, error } = useSelector(getAllClientState);
@@ -116,47 +116,54 @@ const Model = ({ setClient, singleData }) => {
       });
       setId(null);
     } else {
-      const sellerId = JSON.parse(localStorage.getItem("Seller"))._id;
-      formData.append("clientName", input.clientName);
-      formData.append("clientPhone", input.clientPhone);
-      formData.append("clientEmail", input.clientEmail);
-      formData.append("country", input.country);
-      formData.append("state", input.state);
-      formData.append("clientAddress", input.clientAddress);
-      formData.append("projectName", input.projectName);
-      formData.append("projectType", input.projectType);
-      formData.append("projectSource", input.projectSource);
-      formData.append("budget", input.budget);
-      formData.append("amount", input.amount);
-      formData.append("projectDesc", input.projectDesc);
-      formData.append("timeFrame", input.timeFrame);
-      for (let i = 0; i < projectFiles.length; i++) {
-        formData.append("projectFile", projectFiles[i]);
+      if (photo) {
+        const sellerId = JSON.parse(localStorage.getItem("Seller"))._id;
+        formData.append("clientName", input.clientName);
+        formData.append("clientPhone", input.clientPhone);
+        formData.append("clientEmail", input.clientEmail);
+        formData.append("country", input.country);
+        formData.append("state", input.state);
+        formData.append("clientAddress", input.clientAddress);
+        formData.append("projectName", input.projectName);
+        formData.append("projectType", input.projectType);
+        formData.append("projectSource", input.projectSource);
+        formData.append("budget", input.budget);
+        formData.append("amount", input.amount);
+        formData.append("projectDesc", input.projectDesc);
+        formData.append("timeFrame", input.timeFrame);
+        for (let i = 0; i < projectFiles.length; i++) {
+          formData.append("projectFile", projectFiles[i]);
+        }
+        formData.append("date", input.date);
+        formData.append("document", input.document);
+        formData.append("clientAvatar", photo);
+        formData.append("companyName", input.companyName);
+        formData.append("sellerId", sellerId);
+        dispatch(createClient(formData));
+        setInput({
+          clientName: "",
+          clientEmail: "",
+          clientPhone: "",
+          country: "",
+          state: "",
+          clientAddress: "",
+          projectName: "",
+          projectType: "",
+          budget: "",
+          amount: "",
+          projectDesc: "",
+          timeFrame: "",
+          projectSource: "",
+          date: "",
+          document: "",
+          companyName: "",
+        });
+        setPhoto(null);
+        setProjectFile(null);
+      } else {
+        Toastify("Select Client Avatar", "error");
+        dispatch(setMessageEmpty());
       }
-      formData.append("date", input.date);
-      formData.append("document", input.document);
-      formData.append("clientAvatar", photo);
-      formData.append("companyName", input.companyName);
-      formData.append("sellerId", sellerId);
-      dispatch(createClient(formData));
-      setInput({
-        clientName: "",
-        clientEmail: "",
-        clientPhone: "",
-        country: "",
-        state: "",
-        clientAddress: "",
-        projectName: "",
-        projectType: "",
-        budget: "",
-        amount: "",
-        projectDesc: "",
-        timeFrame: "",
-        projectSource: "",
-        date: "",
-        document: "",
-        companyName: "",
-      });
     }
   };
   useEffect(() => {

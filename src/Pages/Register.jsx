@@ -35,22 +35,28 @@ const Register = () => {
 
   const handleSubmitRegister = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", input.name);
-    formData.append("email", input.email);
-    formData.append("password", input.password);
-    formData.append("website", input.website);
-    formData.append("employment", input.employment);
-    formData.append("sellerAvatar", avatar);
-    dispatch(SellerRegistration(formData));
+    if (avatar) {
+      const formData = new FormData();
+      formData.append("name", input.name);
+      formData.append("email", input.email);
+      formData.append("password", input.password);
+      formData.append("website", input.website);
+      formData.append("employment", input.employment);
+      formData.append("sellerAvatar", avatar);
+      dispatch(SellerRegistration(formData));
 
-    setInput({
-      name: "",
-      email: "",
-      password: "",
-      employment: "",
-      website: "",
-    });
+      setInput({
+        name: "",
+        email: "",
+        password: "",
+        employment: "",
+        website: "",
+      });
+      setAvatar(null);
+    } else {
+      Toastify("Select an avatar", "error");
+      dispatch(setMessageEmpty());
+    }
   };
   useEffect(() => {
     if (error) {

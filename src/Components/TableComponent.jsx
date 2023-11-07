@@ -62,7 +62,14 @@ const TableComponent = ({ sellerId }) => {
   };
   //=================get user client
   useEffect(() => {
-    dispatch(getAllClient({ sellerId, page: currentPage, limit }));
+    dispatch(
+      getAllClient({
+        sellerId,
+        page: currentPage,
+        limit,
+        role: loginInSeller?.role,
+      })
+    );
   }, [dispatch, sellerId, currentPage, limit]);
   //==========================next page
   const nextPage = () => {
@@ -91,7 +98,7 @@ const TableComponent = ({ sellerId }) => {
             <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
               Contact Amount
             </th>
-            {loginInSeller?.role == "user" && (
+            {loginInSeller?.role === "user" && (
               <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
                 Commission
               </th>
@@ -186,7 +193,7 @@ const TableComponent = ({ sellerId }) => {
                     </div>
                     ${item?.amount && item?.amount}
                   </td>
-                  {LoggedInSeller?.role == "user" && (
+                  {loginInSeller?.role === "user" && (
                     <td className="w-[100px]  items-center text-[.8125rem] truncate text-start font-[600] text-[#3A3A49]">
                       $
                       {item?.amount &&
