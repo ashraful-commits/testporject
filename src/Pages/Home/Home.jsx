@@ -5,7 +5,7 @@ import TableComponent from "../../Components/TableComponent";
 import Model from "../../Components/Model/Model";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { LogoutSeller } from "../../Features/Seller/SellerApi";
+import { LoggedInSeller, LogoutSeller } from "../../Features/Seller/SellerApi";
 import { Toastify } from "../../Utils/Tostify";
 import {
   getAllSellerState,
@@ -43,7 +43,9 @@ const Home = () => {
       navigate("/login");
     }
   }, [error, message, dispatch, navigate]);
-
+  useEffect(() => {
+    dispatch(LoggedInSeller());
+  }, [dispatch]);
   return (
     <div className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>

@@ -12,9 +12,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem("Seller")) {
-      dispatch(LoggedInSeller());
-    }
+    dispatch(LoggedInSeller());
   }, [dispatch]);
   return (
     <>

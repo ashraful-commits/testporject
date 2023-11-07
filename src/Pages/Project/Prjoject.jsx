@@ -522,8 +522,8 @@ const Project = () => {
                 Download PDF
               </button>
             </div>
-            <div className=" overflow-y-scroll">
-              <p className="text-['work_sans'] font-[14px] mt-[20px] leading-[18px]">
+            <div className=" overflow-y-scroll h-full">
+              <p className="text-['work_sans'] font-[14px] mt-[20px] pb-10 leading-[18px]">
                 {singleClient?.projectDesc}
               </p>
             </div>
@@ -570,7 +570,7 @@ const Project = () => {
                 Manage Tools
               </button>
             </div>
-            <div className="flex flex-wrap  h-full overflow-y-auto gap-[15px] mt-5 ">
+            <div className="flex flex-wrap  h-full overflow-y-auto gap-[15px] mt-5 pb-10">
               <SoftWere
                 svg={
                   <svg
@@ -1029,7 +1029,7 @@ const Project = () => {
                 Manage Files
               </button>
             </div>
-            <div className="grid gap-[15px] h-full overflow-y-auto grid-cols-4 mt-5">
+            <div className="grid gap-[15px] h-full overflow-y-auto grid-cols-4 mt-5 pb-10">
               {singleClient?.projectFile?.length > 0 ? (
                 singleClient?.projectFile?.map((item, index) => {
                   return (
