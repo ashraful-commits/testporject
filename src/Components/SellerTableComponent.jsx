@@ -119,7 +119,7 @@ const SellerTableComponent = () => {
                 Seller Role
               </th>
             )}
-            {loginInSeller.role === "admin" && (
+            {loginInSeller?.role === "admin" && (
               <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
                 Permission status
               </th>
@@ -182,7 +182,7 @@ const SellerTableComponent = () => {
                       <span>0</span>
                     )}
                   </td>
-                  {loginInSeller.role === "admin" && (
+                  {loginInSeller?.role === "admin" && (
                     <td
                       className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
                     >
@@ -197,7 +197,7 @@ const SellerTableComponent = () => {
                           }  `}
                           name="projectType"
                           id=""
-                          value={item.role}
+                          value={item?.role}
                           onChange={(e) =>
                             handleRoleUpdate(item._id, e.target.value)
                           }
@@ -213,7 +213,7 @@ const SellerTableComponent = () => {
                     </td>
                   )}
 
-                  {loginInSeller.role === "admin" && (
+                  {loginInSeller?.role === "admin" && (
                     <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                       <input
                         onChange={() => handlePermission(item._id, item.status)}
