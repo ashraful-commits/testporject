@@ -5,7 +5,11 @@ import TableComponent from "../../Components/TableComponent";
 import Model from "../../Components/Model/Model";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { LoggedInSeller, LogoutSeller } from "../../Features/Seller/SellerApi";
+import {
+  LoggedInSeller,
+  LogoutSeller,
+  getAllSeller,
+} from "../../Features/Seller/SellerApi";
 import { Toastify } from "../../Utils/Tostify";
 import {
   getAllSellerState,
@@ -14,12 +18,15 @@ import {
 import { getAllClientState } from "../../Features/Client/ClientSlice";
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 import LoadingSpinner from "../../Components/LoadingSpin";
+import SellerTableComponent from "../../Components/SellerTableComponent";
 
 const Home = () => {
   const [notification, setNotification] = useState(false);
   const [clientModel, setClientModel] = useState(false);
-  const { error, message, loader, loginInSeller } =
+  const [sellerTable, setSellerTable] = useState(false);
+  const { error, message, loader, loginInSeller, seller } =
     useSelector(getAllSellerState);
+
   const { client } = useSelector(getAllClientState);
 
   const dispatch = useDispatch();
@@ -256,7 +263,7 @@ const Home = () => {
         </div>
         {/**======================================================dashboard */}
         <div className="dashboard px-[35px] w-[1045px] h-full">
-          {/* ==================================header  */}
+          {/* ===========================================header  */}
           <div className="header items-center mt-[30px] w-full h-[37px]  flex justify-between">
             <h5 className="text-[14px] font-['Lato']  font-[400] leading-[18px] tracking-[.2px] text-[#05222E]">
               Sales / Dashboard
@@ -692,14 +699,14 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* =================================welcome  */}
+          {/* =============================================welcome  */}
           <div className="welcome mt-[11px] ml-[2px] flex justify-between items-center">
             <h1 className="text-[26px] font-[400] tracking-[-.52px]">
               Welcome Back <span className="font-[600]">,Julian</span>
             </h1>
             <p className="text-[14px] tracking-[1px] mt-[10px]">Mon, 14Aug</p>
           </div>
-          {/*=================================== message  */}
+          {/*================================================ message  */}
           <div className="message rounded-[4px] flex items-center overflow-hidden justify-between mt-[15px] w-[974px] h-[43px] bg-darkBlue">
             <div className="text flex items-center justify-center">
               <div className="icon border-r ml-[4px] h-[20px] w-[40px] flex items-center justify-center">
@@ -787,7 +794,7 @@ const Home = () => {
               </button>
             </div>
           </div>
-          {/*================================== calculation  */}
+          {/*================================================ calculation  */}
           <div className="calculation mt-[20px] flex justify-between">
             <div className="total_customer w-[236px] h-[136px] rounded-[8px] bg-darkBlue  grid grid-rows-2 ">
               <div className="customer flex justify-start items-start mt-[10px] ml-[15px] gap-[9px]">
@@ -953,9 +960,9 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* ==================================table  */}
+          {/* =================================================table  */}
           <div className="table w-full h-full   mt-[20px]">
-            {/*=========================== search  */}
+            {/*============================================= search  */}
             <div className="search  flex justify-between items-center w-full h-[40px]">
               <div className="flex w-full h-full">
                 <div className="text_search w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px]">
@@ -1036,6 +1043,13 @@ const Home = () => {
                 </div>
               </div>
               <div className="addClient gap-[10px] flex items-center justify-self-end right-0">
+                <button
+                  onClick={() => setSellerTable(!sellerTable)}
+                  className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px]"
+                >
+                  {sellerTable ? "Client" : "Seller"}
+                </button>
+
                 <div className="help w-[40px] h-[38px] flex justify-center items-center bg-[#A4A4A61A]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1091,7 +1105,11 @@ const Home = () => {
             </div>
             {/* ========================== table container  */}
             <div className="table_container overflow-auto mt-[20px]">
-              <TableComponent sellerId={loginInSeller?._id} />
+              {sellerTable ? (
+                <SellerTableComponent />
+              ) : (
+                <TableComponent sellerId={loginInSeller?._id} />
+              )}
             </div>
           </div>
         </div>

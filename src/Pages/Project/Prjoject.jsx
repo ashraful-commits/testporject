@@ -22,7 +22,7 @@ const Project = () => {
     dispatch(getSingleClient(id));
   }, [dispatch, id]);
   return (
-    <div className="min-w-[1340px] rounded-[15px] pl-[48px]  pt-[30px] bg-[#FFF] min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden">
+    <div className="min-w-[1340px] rounded-[15px] pl-[48px]  pt-[30px] bg-[#FFF] min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px]">
       <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
         <div className="w-[640px] h-full flex items-center gap-[20px] ">
           <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />{" "}
@@ -199,10 +199,10 @@ const Project = () => {
               />
             )}
             <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
-              <p className="text-[#3A3A49] truncate w-[50px] text-[13px] font-[700] font-['work_sans']">
+              <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
                 {singleClient?.sellerId?.name}
               </p>
-              <span className="text-[#3A3A49] truncate w-[50px] text-[13px] font-[400] font-['work_sans']">
+              <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
                 {singleClient?.sellerId?.email}
               </span>
             </div>
@@ -554,7 +554,7 @@ const Project = () => {
                 <div className="w-[42px] h-[42px] border rounded-full flex justify-center items-center bg-gray-100">
                   +
                 </div>
-                <h1 className="text-[18px] font-bold font-['work_sans']">
+                <h1 className="text-[16px] font-[500] font-['work_sans']">
                   Add Member
                 </h1>
               </div>
@@ -1191,7 +1191,7 @@ const Project = () => {
                 </button>
               </div>
             </div>
-            <div className="invoice overflow-hidden w-full mt-4 px-[21px] text-[14px] font-[500] font-['work_sans'] text-[#230B34]">
+            <div className="invoice overflow-hidden w-full h-[335px] mt-4 px-[21px] text-[14px] font-[500] font-['work_sans'] text-[#230B34]">
               <label
                 className="text-[14px] font-[500] font-['work_sans']"
                 htmlFor=""

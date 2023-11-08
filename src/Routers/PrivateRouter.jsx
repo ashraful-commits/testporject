@@ -1,6 +1,7 @@
 import Layout from "../Components/Layout";
 import Home from "../Pages/Home/Home";
 import Project from "../Pages/Project/Prjoject";
+import Seller from "../Pages/Seller/Seller";
 import PrivateGard from "./PrivateGard";
 
 const PrivateRouter = [
@@ -17,6 +18,10 @@ const PrivateRouter = [
           {
             path: "/:id",
             element: <Project />,
+          },
+          {
+            path: "/seller/:id",
+            element: <Seller />,
           },
         ],
       },

@@ -4,6 +4,9 @@ import {
   LogoutSeller,
   SellerLogin,
   SellerRegistration,
+  getAllSeller,
+  getSingleSeller,
+  updateSellerRole,
 } from "./SellerApi";
 
 const SellerSlice = createSlice({
@@ -13,6 +16,7 @@ const SellerSlice = createSlice({
     error: null,
     loader: false,
     message: null,
+    singleSeller: null,
     loginInSeller: localStorage.getItem("Seller")
       ? JSON.parse(localStorage.getItem("Seller"))
       : null,
@@ -68,6 +72,43 @@ const SellerSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(LogoutSeller.rejected, (state, action) => {
+        state.loader = false;
+      })
+      .addCase(getAllSeller.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(getAllSeller.fulfilled, (state, action) => {
+        state.loader = false;
+        state.seller = action.payload.seller;
+        state.message = action.payload.message;
+      })
+      .addCase(getAllSeller.rejected, (state, action) => {
+        state.loader = false;
+      })
+      .addCase(updateSellerRole.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(updateSellerRole.fulfilled, (state, action) => {
+        state.loader = false;
+        state.seller[
+          state.seller.findIndex(
+            (item) => item._id === action.payload?.seller?._id
+          )
+        ] = action.payload.seller;
+        state.message = action.payload.message;
+      })
+      .addCase(updateSellerRole.rejected, (state, action) => {
+        state.loader = false;
+      })
+      .addCase(getSingleSeller.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(getSingleSeller.fulfilled, (state, action) => {
+        state.loader = false;
+        state.singleSeller = action.payload.seller;
+        state.message = action.payload.message;
+      })
+      .addCase(getSingleSeller.rejected, (state, action) => {
         state.loader = false;
       });
   },

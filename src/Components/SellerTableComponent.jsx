@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteClient,
-  getAllClient,
-  permissionUpdate,
-  projectStatusUpdate,
-  updateCommissionRate,
-} from "../Features/Client/ClientApi";
+import { deleteClient, permissionUpdate } from "../Features/Client/ClientApi";
 import {
   getAllClientState,
   setMessageEmpty,
 } from "../Features/Client/ClientSlice";
-import Model from "./Model/Model";
+
 import swal from "sweetalert";
 import LoadingSpinner from "./LoadingSpin";
 import { getAllSellerState } from "../Features/Seller/SellerSlice";
-import { LoggedInSeller } from "../Features/Seller/SellerApi";
+import { getAllSeller, updateSellerRole } from "../Features/Seller/SellerApi";
 import { Link } from "react-router-dom";
 import { Toastify } from "../Utils/Tostify";
+import SalesModel from "./Model/SalesModel";
 
-const TableComponent = ({ sellerId }) => {
+const SellerTableComponent = () => {
   const { client, loader, error, message } = useSelector(getAllClientState);
-  const { loginInSeller } = useSelector(getAllSellerState);
+  const {
+    loginInSeller,
+    seller,
+    loader: sellerLoader,
+  } = useSelector(getAllSellerState);
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   //=========================edit model
   const [editModel, setEditModel] = useState(false);
   //=================== singleData
   const [singleData, setSingleData] = useState({});
+
   //===========================set limit
   const [limit, setLimit] = useState(7);
   //========================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
-    setSingleData(client.find((item) => item._id == id));
+    setSingleData(seller.find((item) => item._id == id));
   };
   const handleDelete = (id) => {
     swal({
@@ -62,24 +62,10 @@ const TableComponent = ({ sellerId }) => {
     dispatch(permissionUpdate({ id, status }));
   };
   //===============handle prmmision
-  const handleProjectStatus = (id, projectStatus) => {
-    dispatch(projectStatusUpdate({ id, projectStatus }));
+  const handleRoleUpdate = (id, role) => {
+    dispatch(updateSellerRole({ id, role }));
   };
-  const handleCommission = (id, commissionRate) => {
-    console.log(commissionRate, id);
-    dispatch(updateCommissionRate({ id, commissionRate }));
-  };
-  //=================get user client
-  useEffect(() => {
-    dispatch(
-      getAllClient({
-        sellerId,
-        page: currentPage,
-        limit,
-        role: loginInSeller?.role,
-      })
-    );
-  }, [dispatch, sellerId, currentPage, limit]);
+
   //==========================next page
   const nextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -99,57 +85,55 @@ const TableComponent = ({ sellerId }) => {
       dispatch(setMessageEmpty());
     }
   }, [message, error, dispatch]);
+  useEffect(() => {
+    dispatch(
+      getAllSeller({ role: loginInSeller?.role, page: currentPage, limit })
+    );
+  }, [dispatch, limit, currentPage]);
   return (
     <div>
-      {editModel && <Model setClient={setEditModel} singleData={singleData} />}
+      {editModel && (
+        <SalesModel setClient={setEditModel} singleData={singleData} />
+      )}
       <table className="w-full">
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
             <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
-              Company Name
+              Seller Name
+            </th>
+            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+              Avatar
+            </th>
+            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+              Total Client
+            </th>
+            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+              Total Projects
+            </th>
+            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+              Total Sales Guy
             </th>
 
-            <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
-              Client Name
-            </th>
-            <th className="text-[.8125rem] w-[100px] font-['work_sans'] text-start font-[400]">
-              Data Signed
-            </th>
-            <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
-              Contact Amount
-            </th>
-            {loginInSeller?.role === "user" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
-                Commission
-              </th>
-            )}
-            {loginInSeller?.role === "user" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
-                Project status
-              </th>
-            )}
             {loginInSeller?.role === "admin" && (
               <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
-                Commission Rate
+                Seller Role
               </th>
             )}
-            {loginInSeller?.role === "admin" && (
+            {loginInSeller.role === "admin" && (
               <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
                 Permission status
               </th>
             )}
-            <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
-              Client source
-            </th>
+
             <th className="text-[.8125rem] w-[80px] font-['work_sans'] text-start font-[400]">
               Action
             </th>
           </tr>
         </thead>
         <tbody>
-          {loader && <LoadingSpinner />}
-          {client.length > 0 ? (
-            client?.map((item, index) => {
+          {sellerLoader && <LoadingSpinner />}
+          {seller?.length > 0 ? (
+            seller?.map((item, index) => {
               return (
                 <tr
                   key={index}
@@ -160,147 +144,76 @@ const TableComponent = ({ sellerId }) => {
                       {index + 1}.
                     </span>{" "}
                     <span className="truncate text-[13px] font-[500] text-[#267596] w-[120px]">
-                      {item.companyName}
+                      {item.name}
                     </span>
                   </td>
-                  <td className="w-[120px] overflow-hidden items-center flex gap-[.3125rem] relative">
-                    <Link to={`/${item._id}`}>
-                      {" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="32"
-                        height="26"
-                        viewBox="0 0 32 26"
-                        fill="none"
-                      >
-                        <path
-                          d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
-                          fill="#78B3CC"
-                        />
-                      </svg>
-                    </Link>
-                    {item?.clientAvatar ? (
+                  <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    {item.avatar ? (
                       <img
-                        className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
-                        src={item?.clientAvatar}
+                        className="w-[35px] h-[35px] rounded-full"
+                        src={item.avatar}
+                        alt={item.name}
                       />
                     ) : (
                       <img
-                        className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
-                        src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+                        className="w-[35px] h-[35px] rounded-full"
+                        src="https://cdn-icons-png.flaticon.com/512/147/147142.png"
                       />
                     )}
-
-                    <span className=" truncate text-[13px] font-[500] text-[#267596] w-[70px]">
-                      {" "}
-                      {item.clientName}
-                    </span>
                   </td>
-                  <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
-                    {item?.date}
+                  <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    {item?.client?.length > 0 ? (
+                      <span>{item?.client?.length}</span>
+                    ) : (
+                      <span>0</span>
+                    )}
                   </td>
-                  <td className="w-[120px]  items-center flex text-[.8125rem] text-start font-[400] text-[#3A3A49] gap-[.3125rem]">
-                    <div
-                      className="bg-gray-200 h-[.375rem] w-[50%] "
-                      role="progressbar"
-                      aria-label="progressbar"
-                      aria-valuemin="0"
-                      aria-valuemax="10000"
-                    >
-                      <div
-                        className="bg-[#267596] h-full "
-                        style={{
-                          width: `${((100 * item?.amount) / 100000).toFixed(
-                            2
-                          )}%`,
-                        }}
-                      />
-                    </div>
-                    ${item?.amount && item?.amount}
+                  <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    {item?.projects?.length > 0 ? (
+                      <span>{item?.projects?.length}</span>
+                    ) : (
+                      <span>0</span>
+                    )}
                   </td>
-                  {loginInSeller?.role === "user" && (
-                    <td className="w-[100px]  items-center text-[.8125rem] truncate text-start font-[600] text-[#3A3A49]">
-                      $
-                      {item?.amount &&
-                        ((item?.amount * 100) / 15 / 100).toFixed(2)}
-                    </td>
-                  )}
-                  {loginInSeller?.role === "user" && (
+                  <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    {item?.salesPerson?.length > 0 ? (
+                      <span>{item?.salesPerson?.length}</span>
+                    ) : (
+                      <span>0</span>
+                    )}
+                  </td>
+                  {loginInSeller.role === "admin" && (
                     <td
                       className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
                     >
                       <button>
                         <select
-                          className={` focus:outline-none ${
-                            item?.projectStatus == "pending" &&
+                          className={` focus:outline-none  ${
+                            item?.role == "admin" &&
                             "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
                           } ${
-                            item?.projectStatus == "complete" &&
-                            "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                          }  ${
-                            item?.projectStatus == "on Hold" &&
-                            "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                          }   ${
-                            item?.projectStatus == "on going" &&
-                            "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                          }`}
+                            item?.role == "user" &&
+                            "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
+                          }  `}
                           name="projectType"
                           id=""
-                          value={item.projectStatus}
+                          value={item.role}
                           onChange={(e) =>
-                            handleProjectStatus(item._id, e.target.value)
+                            handleRoleUpdate(item._id, e.target.value)
                           }
                         >
-                          <option className="text-gray-500 " value="pending">
-                            pending
+                          <option className="text-gray-500 " value="user">
+                            User
                           </option>
-                          <option className="text-gray-500 " value="on going">
-                            on going
-                          </option>
-                          <option className="text-gray-500 " value="on Hold">
-                            on Hold
-                          </option>
-                          <option className="text-gray-500 " value="complete">
-                            complete
+                          <option className="text-gray-500 " value="admin">
+                            Admin
                           </option>
                         </select>
                       </button>
                     </td>
                   )}
-                  {loginInSeller?.role === "admin" && (
-                    <td
-                      className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
-                    >
-                      <button>
-                        <select
-                          className={` focus:outline-none border rounded-full`}
-                          name="commissionRate"
-                          id=""
-                          value={item?.commissionRate}
-                          onChange={(e) =>
-                            handleCommission(item._id, e.target.value)
-                          }
-                        >
-                          <option className="text-gray-500 " value="5%">
-                            5%
-                          </option>
-                          <option className="text-gray-500 " value="10%">
-                            10%
-                          </option>
-                          <option className="text-gray-500 " value="15%">
-                            15%
-                          </option>
-                          <option className="text-gray-500 " value="20%">
-                            20%
-                          </option>
-                          <option className="text-gray-500 " value="25%">
-                            25%
-                          </option>
-                        </select>
-                      </button>
-                    </td>
-                  )}
-                  {loginInSeller?.role == "admin" && (
+
+                  {loginInSeller.role === "admin" && (
                     <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                       <input
                         onChange={() => handlePermission(item._id, item.status)}
@@ -310,10 +223,24 @@ const TableComponent = ({ sellerId }) => {
                     </td>
                   )}
 
-                  <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
-                    {item?.projectSource}
-                  </td>
-                  <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[80px] h-full text-[#3A3A49]">
+                  <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[120px] h-full text-[#3A3A49]">
+                    <Link to={`/seller/${item?._id}`}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#000000"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
+                        <path d="M12 13a1 1 0 100-2 1 1 0 000 2z" />
+                        <path d="M21 8V5a2 2 0 00-2-2H5a2 2 0 00-2 2v3m18 8v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3" />
+                      </svg>
+                    </Link>
                     <button onClick={() => handleEdit(item._id)}>
                       <svg
                         width="20"
@@ -380,11 +307,11 @@ const TableComponent = ({ sellerId }) => {
             })
           ) : (
             <span className="text-[12px] font-[600] text-center w-full inline-block py-5">
-              No Client!
+              No Seller!
             </span>
           )}
         </tbody>
-        {client.length > 7 && (
+        {seller?.length > 7 && (
           <tfoot>
             <div className="flex justify-center items-center gap-5 py-5">
               <button
@@ -416,4 +343,4 @@ const TableComponent = ({ sellerId }) => {
   );
 };
 
-export default TableComponent;
+export default SellerTableComponent;

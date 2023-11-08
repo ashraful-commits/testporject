@@ -7,7 +7,6 @@ const FormInput = ({
   value,
   name,
   handleInputChange,
-  required,
 }) => {
   return (
     <div className="w-full flex flex-col items-start">

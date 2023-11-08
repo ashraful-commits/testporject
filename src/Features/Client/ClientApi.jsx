@@ -114,3 +114,19 @@ export const projectStatusUpdate = createAsyncThunk(
     }
   }
 );
+export const updateCommissionRate = createAsyncThunk(
+  "seller/updateCommissionRate",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.patch(
+        `${BASE_URL}/api/v1/client/commissionRate/${data.id}`,
+        { commissionRate: data.commissionRate },
+        { withCredentials: true }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);

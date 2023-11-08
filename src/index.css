@@ -16,7 +16,26 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* Scrollbar for Webkit browsers */
+*::-webkit-scrollbar {
+  display: none;
+  width: 2px; /* Set the width of the scrollbar */
+}
 
+/* Track */
+*::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color for the track */
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+  background: #fff3f3; /* Color for the scrollbar handle */
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background: #ffefef; /* Color for the scrollbar handle on hover */
+}
 /* =========================Styles for the body */
 body {
   background: #f2f5ff;

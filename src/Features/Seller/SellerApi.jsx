@@ -62,3 +62,59 @@ export const LogoutSeller = createAsyncThunk(
     }
   }
 );
+export const getAllSeller = createAsyncThunk(
+  "seller/getAllSeller",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/v1/seller?page=${data.page}&limit=${data.limit}&role=${data.role}`,
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const updateSellerRole = createAsyncThunk(
+  "seller/updateSellerRole",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        `${BASE_URL}/api/v1/seller/${data.id}`,
+        { role: data.role },
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const getSingleSeller = createAsyncThunk(
+  "seller/getSingleSeller",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/v1/seller/${id}`,
+
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);

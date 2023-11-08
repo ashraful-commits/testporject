@@ -3,7 +3,7 @@ import "./App.css";
 import PageRouter from "./Routers/PageRouter";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LoggedInSeller } from "./Features/Seller/SellerApi";
+import { LoggedInSeller, getAllSeller } from "./Features/Seller/SellerApi";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

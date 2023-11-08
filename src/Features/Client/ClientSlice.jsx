@@ -8,6 +8,7 @@ import {
   permissionUpdate,
   projectStatusUpdate,
   updateClient,
+  updateCommissionRate,
 } from "./ClientApi";
 
 const ClientSlice = createSlice({
@@ -86,11 +87,9 @@ const ClientSlice = createSlice({
       })
       .addCase(permissionUpdate.fulfilled, (state, action) => {
         state.loader = false;
-        state.client[
-          state.client.findIndex(
-            (item) => item._id === action.payload.client._id
-          )
-        ] = action.payload.client;
+        state.client = state.client.filter(
+          (item) => item._id !== action.payload.client._id
+        );
         state.message = action.payload.message;
       })
       .addCase(permissionUpdate.rejected, (state, action) => {
@@ -123,6 +122,23 @@ const ClientSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(getSingleClient.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(updateCommissionRate.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(updateCommissionRate.fulfilled, (state, action) => {
+        state.loader = false;
+        state.client[
+          state.client.findIndex(
+            (item) => item._id === action.payload.client._id
+          )
+        ] = action.payload.client;
+
+        state.message = action.payload.message;
+      })
+      .addCase(updateCommissionRate.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });

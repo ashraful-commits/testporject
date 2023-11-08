@@ -1,5 +1,3 @@
-import React from "react";
-
 const Team = ({ avatar, title, name }) => {
   return (
     <div className="flex gap-[10px] h-[48px] mb-[20px]">
@@ -11,10 +9,10 @@ const Team = ({ avatar, title, name }) => {
         />
       </div>
       <div className="flex flex-col">
-        <span className="text-[18px] font-bold font-['work_sans'] leading-[22px]">
+        <span className="text-[16px] font-[500] font-['work_sans'] leading-[22px]">
           {name}
         </span>
-        <span className="text-[12px] font-bold font-['work_sans']">
+        <span className="text-[12px] text-[#878790] font-[400] font-['work_sans']">
           {title}
         </span>
       </div>

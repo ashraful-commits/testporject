@@ -1,5 +1,3 @@
-import React from "react";
-
 const SoftWere = ({ svg, name }) => {
   return (
     <div className=" flex h-[30px]">
