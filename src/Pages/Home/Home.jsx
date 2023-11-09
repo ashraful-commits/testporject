@@ -1106,7 +1106,7 @@ const Home = () => {
             {/* ========================== table container  */}
             <div className="table_container overflow-auto mt-[20px]">
               {sellerTable ? (
-                <SellerTableComponent />
+                <SellerTableComponent sellerId={loginInSeller?._id} />
               ) : (
                 <TableComponent sellerId={loginInSeller?._id} />
               )}

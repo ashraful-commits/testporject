@@ -15,8 +15,12 @@ const SalesPeople = ({
   return (
     <div className="border p-[22px] flex-col rounded-md w-[304px] h-[340px] flex items-center ">
       <div className="people w-full gap-[18px] flex items-center">
-        <div className="avtar w-[51px] h-51px] rounded">
-          <img src={avatar} className="w-full h-full" alt="" />
+        <div className="avatar w-[51px] h-[51px] rounded-full overflow-hidden">
+          {avatar ? (
+            <img src={avatar} className="w-full h-full" alt="" />
+          ) : (
+            <img src={avatar} className="w-full h-full" alt="" />
+          )}
         </div>
         <div className="detials">
           <h5 className="text-[18px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">

@@ -9,7 +9,25 @@ export const SellerRegistration = createAsyncThunk(
       const response = await axios.post(`${BASE_URL}/api/v1/seller`, data, {
         withCredentials: true,
       });
-      console.log(response.data);
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const updateSeller = createAsyncThunk(
+  "seller/updateSeller",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        `${BASE_URL}/api/v1/seller/sellerUpdate/${data.id}`,
+        data.formData,
+        {
+          withCredentials: true,
+        }
+      );
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -92,6 +110,43 @@ export const updateSellerRole = createAsyncThunk(
         }
       );
 
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const updateSellerStatus = createAsyncThunk(
+  "seller/updateSellerStatus",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.patch(
+        `${BASE_URL}/api/v1/seller/${data.id}`,
+        { status: !data.status },
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const deleteSeller = createAsyncThunk(
+  "seller/deleteSeller",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/v1/seller/${data.id}/${data.sellerId}`,
+
+        {
+          withCredentials: true,
+        }
+      );
       return response.data;
     } catch (error) {
       console.log(error.response);

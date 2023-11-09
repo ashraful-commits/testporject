@@ -9,6 +9,7 @@ const Total = ({
   title,
   svg,
 }) => {
+  console.log(totalClients, totalSalesGuy);
   return (
     <div className="border w-[304px] h-[150px] rounded-md">
       <div className="border-b h-[55px] flex items-center gap-2">
@@ -23,7 +24,7 @@ const Total = ({
       </div>
       <div className="flex justify-between items-center h-[95px] px-[20px]">
         <h1 className="text-[35px] font-[500] text-['work_sans'] flex">
-          {title === "Total Earnings" ? "$" : ""} {number ? number : "0000"}
+          {title === "Total Earnings" ? "$" : ""} {number ? number : "0"}
         </h1>
         {title === "Total Projects" && (
           <button className="border flex items-center gap-1 px-1 border-green-500 rounded-md bg-green-200">
@@ -49,24 +50,64 @@ const Total = ({
         )}
         {title === "Total Earnings" || title === "Total Projects" ? (
           ""
-        ) : (
+        ) : title === "Total Sales Guy" ? (
           <div className="avaters flex gap-[-10px]">
-            <div className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-5px] rounded-full border-[2px]">
-              <img className="w-full h-full" src={user} alt="" />
-            </div>
-            <div className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-5px] rounded-full border-[2px]">
-              <img className="w-full h-full" src={user} alt="" />
-            </div>
-            <div className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-5px] rounded-full border-[2px]">
-              <img className="w-full h-full" src={user} alt="" />
-            </div>
-            <div className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-5px] rounded-full border-[2px]">
-              <img className="w-full h-full" src={user} alt="" />
-            </div>
-            <div className="guy w-[29px] h-[29px] flex justify-center items-center border-white bg-gray-200 font-[600] mr-[-5px] rounded-full text-[8.815px] leading-[15.60px] border-[2px]">
-              More
-            </div>
+            {totalSalesGuy?.length > 0 ? (
+              totalSalesGuy.slice(0, 4).map((item, index) => (
+                <div
+                  key={index}
+                  className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-10px] rounded-full border-[2px]"
+                >
+                  <img
+                    className="w-full h-full"
+                    src={user}
+                    alt={`User ${index + 1}`}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-10px] rounded-full border-[2px]">
+                <img className="w-full h-full" src={user} alt="User" />
+              </div>
+            )}
+            {totalSalesGuy?.length > 4 ? (
+              <div className="guy w-[29px] h-[29px] flex bg-gray-200 justify-center items-center border-white bg-gr10y-200 font-[600] mr-[-5px] rounded-full text-[8.815px] leading-[15.60px] border-[2px]">
+                More
+              </div>
+            ) : (
+              ""
+            )}
           </div>
+        ) : title === "Total Clients" ? (
+          <div className="avaters flex gap-[-10px]">
+            {totalClients?.length > 0 ? (
+              totalClients.slice(0, 4).map((item, index) => (
+                <div
+                  key={index}
+                  className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-10px] rounded-full border-[2px]"
+                >
+                  <img
+                    className="w-full h-full"
+                    src={user}
+                    alt={`User ${index + 1}`}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-10px] rounded-full border-[2px]">
+                <img className="w-full h-full" src={user} alt="User" />
+              </div>
+            )}
+            {totalClients?.length > 4 ? (
+              <div className="guy w-[29px] h-[29px] flex bg-gray-200 justify-center items-center border-white bg-gr10y-200 font-[600] mr-[-5px] rounded-full text-[8.815px] leading-[15.60px] border-[2px]">
+                More
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        ) : (
+          ""
         )}
       </div>
     </div>

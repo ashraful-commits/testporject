@@ -19,7 +19,6 @@ export const createClient = createAsyncThunk(
 export const getAllClient = createAsyncThunk(
   "seller/getAllClient",
   async (data, thunkAPI) => {
-    console.log(data);
     try {
       const response = await axios.get(
         `${BASE_URL}/api/v1/client/${data.sellerId}?page=${data.page}&limit=${data.limit}&role=${data.role}`,

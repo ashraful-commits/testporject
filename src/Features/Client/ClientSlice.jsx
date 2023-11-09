@@ -87,9 +87,11 @@ const ClientSlice = createSlice({
       })
       .addCase(permissionUpdate.fulfilled, (state, action) => {
         state.loader = false;
-        state.client = state.client.filter(
-          (item) => item._id !== action.payload.client._id
-        );
+        state.client[
+          state.client.findIndex(
+            (item) => item._id === action.payload.client._id
+          )
+        ] = action.payload.client;
         state.message = action.payload.message;
       })
       .addCase(permissionUpdate.rejected, (state, action) => {

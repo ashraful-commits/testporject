@@ -3,11 +3,14 @@ import LoadingSpinner from "../LoadingSpin";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import FormInput from "../FormInput/FormInput";
-import { SellerRegistration } from "../../Features/Seller/SellerApi";
+import {
+  SellerRegistration,
+  updateSeller,
+} from "../../Features/Seller/SellerApi";
 import { Toastify } from "../../Utils/Tostify";
 import { setMessageEmpty } from "../../Features/Client/ClientSlice";
 
-const SalesModel = ({ setModel }) => {
+const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   const { loader, message, error, loginInSeller } =
     useSelector(getAllSellerState);
   const [input, setInput] = useState({
@@ -42,19 +45,22 @@ const SalesModel = ({ setModel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("name", input.name);
-    formData.append("email", input.email);
-    formData.append("password", input.password);
-    if (input.role) {
-      formData.append("role", input.role);
-    }
-    formData.append("website", input.website);
-    formData.append("employment", input.employment);
-    formData.append("sellerAvatar", photo);
-    formData.append("sellerId", loginInSeller?._id);
-    if (photo) {
-      dispatch(SellerRegistration(formData)).then(() => {
+    if (singleData?._id) {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("name", input.name);
+      formData.append("email", input.email);
+      formData.append("password", input.password);
+      if (input.role) {
+        formData.append("role", input.role);
+      }
+      formData.append("website", input.website);
+      formData.append("employment", input.employment);
+      if (photo) {
+        formData.append("sellerAvatar", photo);
+      }
+
+      dispatch(updateSeller({ id: singleData?._id, formData })).then(() => {
         setModel(false);
         setInput({
           name: "",
@@ -66,6 +72,32 @@ const SalesModel = ({ setModel }) => {
           website: "",
         });
       });
+    } else {
+      const formData = new FormData();
+      formData.append("name", input.name);
+      formData.append("email", input.email);
+      formData.append("password", input.password);
+      if (input.role) {
+        formData.append("role", input.role);
+      }
+      formData.append("website", input.website);
+      formData.append("employment", input.employment);
+      formData.append("sellerAvatar", photo);
+      formData.append("sellerId", sellerId);
+      if (photo) {
+        dispatch(SellerRegistration(formData)).then(() => {
+          setModel(false);
+          setInput({
+            name: "",
+            role: "",
+            email: "",
+            password: "",
+            avatar: "",
+            employment: "",
+            website: "",
+          });
+        });
+      }
     }
   };
   useEffect(() => {
@@ -78,6 +110,10 @@ const SalesModel = ({ setModel }) => {
       dispatch(setMessageEmpty());
     }
   }, [error, message, dispatch]);
+  useEffect(() => {
+    setInput({ ...singleData });
+    setAvatar(singleData?.avatar);
+  }, [singleData]);
   return (
     <>
       <div className="w-screen min-h-[1240px] h-screen pt-[80px] pl-[66px] bg-gray-900 bg-opacity-90 absolute bottom-0  top-0 left-0  z-[99999] flex justify-center">
@@ -106,16 +142,16 @@ const SalesModel = ({ setModel }) => {
           )}
           <div className="pt-[42px] bg-white w-full">
             <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
-              Add New Sales person
+              {title === "Edit" ? "Edit" : "Add New"} Sales person
             </h1>
           </div>
           {/* //=========================form  */}
           <form
             onSubmit={handleSubmit}
-            className="form_content grid gap-[45px] relative justify-between mt-[43px] overflow-hidden"
+            className="form_content grid relative justify-between mt-[43px] overflow-hidden"
           >
-            <div className="right   flex flex-col">
-              <div className="  flex gap-y-4 flex-col items-center">
+            <div className="right  flex flex-col">
+              <div className="  flex gap-y-2 flex-col items-center">
                 <FormInput
                   placeholder="Name"
                   label={"Name"}
@@ -132,14 +168,19 @@ const SalesModel = ({ setModel }) => {
                   value={input.email}
                   handleInputChange={handleInputChange}
                 />
-                <FormInput
-                  placeholder="Password"
-                  label={"Password"}
-                  name="password"
-                  value={input.password}
-                  type="password"
-                  handleInputChange={handleInputChange}
-                />
+                {title === "Edit" ? (
+                  ""
+                ) : (
+                  <FormInput
+                    placeholder="Password"
+                    label={"Password"}
+                    name="password"
+                    value={input.password}
+                    type="password"
+                    handleInputChange={handleInputChange}
+                  />
+                )}
+
                 <FormInput
                   placeholder="Website"
                   label={"Website"}
@@ -157,15 +198,21 @@ const SalesModel = ({ setModel }) => {
                       Role
                     </label>
                     <select
-                      className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] my-2 font-['Lato'] rounded-md mt-[-10px]"
+                      className="border w-full focus:outline-none  text-gray-500 px-[12px] tracking-[.5px] h-[37px] my-2 font-['work_sans'] rounded-md mt-[-10px]"
                       name="role"
                       value={input.role}
                       onChange={handleInputChange}
                     >
-                      <option className="text-gray-500" value="user">
+                      <option
+                        className="text-gray-500 border-none"
+                        value="user"
+                      >
                         User
                       </option>
-                      <option className="text-gray-500" value="admin">
+                      <option
+                        className="text-gray-500 border-none"
+                        value="admin"
+                      >
                         Admin
                       </option>
                     </select>

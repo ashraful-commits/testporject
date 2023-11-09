@@ -11,10 +11,11 @@ import SalesModel from "../../Components/Model/SalesModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import { getSingleSeller } from "../../Features/Seller/SellerApi";
+import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 const Seller = () => {
   const [model, setModel] = useState(false);
   const { singleSeller } = useSelector(getAllSellerState);
-  console.log(singleSeller);
+
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch(getSingleSeller());
@@ -23,9 +24,10 @@ const Seller = () => {
       dispatch(getSingleSeller(id));
     }
   }, [dispatch, id]);
+  console.log(singleSeller);
   return (
     <>
-      {model && <SalesModel setModel={setModel} />}
+      {model && <SalesModel setModel={setModel} sellerId={id} />}
       <div className="min-w-[1340px] rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] ">
@@ -216,8 +218,11 @@ const Seller = () => {
         <div className="main-container pr-[36px] flex min-w-full flex-col  w-[1300px] mt-[30px]  tracking-[-.52px] h-[1072px] ">
           <div className="total flex justify-between gap-4">
             <Total
-              number={450}
-              salesGuy=""
+              number={
+                singleSeller?.projects?.length > 0
+                  ? singleSeller?.projects.length
+                  : 0
+              }
               totalProjects=""
               totalClients=""
               TotalEarnings=""
@@ -259,8 +264,14 @@ const Seller = () => {
               }
             />
             <Total
-              number={560}
-              salesGuy=""
+              number={
+                singleSeller?.salesPerson.length > 0
+                  ? singleSeller?.salesPerson.length
+                  : 0
+              }
+              totalSalesGuy={
+                singleSeller?.salesPerson ? singleSeller?.salesPerson : []
+              }
               totalProjects=""
               totalClients=""
               TotalEarnings=""
@@ -289,11 +300,13 @@ const Seller = () => {
               }
             />
             <Total
-              number={505}
-              salesGuy=""
-              totalProjects=""
-              totalClients=""
-              TotalEarnings=""
+              number={
+                singleSeller?.client?.length > 0
+                  ? singleSeller?.client?.length
+                  : []
+              }
+              totalSalesGuy
+              totalClients={singleSeller?.client ? singleSeller?.client : []}
               styles={`bg-blue-200 border border-blue-500`}
               title="Total Clients"
               svg={
@@ -339,8 +352,10 @@ const Seller = () => {
               }
             />
             <Total
-              number={49500.35}
-              salesGuy=""
+              number={calculateTotalCommissionForAllClients(
+                singleSeller?.client
+              )}
+              totalSalesGuy=""
               totalProjects=""
               totalClients=""
               TotalEarnings=""
@@ -590,139 +605,28 @@ const Seller = () => {
           <h1 className="mt-[25px] text-[22px] font-['work_sans'] tracking-[-.9px]">
             Manage Sales People
           </h1>
-          <div className=" mt-[27px] w-full h-full overflow-y-auto grid grid-cols-4 justify-between gap-y-[18px]">
-            <SalesPeople
-              avatar={user}
-              name="Mark Glixman"
-              title="Sales Executive"
-              project={34}
-              clients={50}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="Mark Glixman"
-              title="Sales Executive"
-              project={34}
-              clients={50}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="Mark Glixman"
-              title="Sales Executive"
-              project={34}
-              clients={50}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="Mark Glixman"
-              title="Sales Executive"
-              project={34}
-              clients={50}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="Mark Glixman"
-              title="Sales Executive"
-              project={34}
-              clients={50}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="John Doe"
-              title="Developer"
-              project="Project X"
-              earning={400}
-              clients={""}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="John Doe"
-              title="Developer"
-              project="Project X"
-              clients={""}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="John Doe"
-              title="Developer"
-              project="Project X"
-              clients={""}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="John Doe"
-              title="Developer"
-              project="Project X"
-              clients={""}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="John Doe"
-              title="Developer"
-              project="Project X"
-              clients={""}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
-            <SalesPeople
-              avatar={user}
-              name="John Doe"
-              title="Developer"
-              project="Project X"
-              clients={""}
-              earning={400}
-              companyName="ABC Inc."
-              ActiveClient={true}
-              companyLogo={user}
-              styles=""
-            />
+          <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[18px]">
+            {singleSeller?.salesPerson?.length > 0 ? (
+              singleSeller?.salesPerson?.map((item, index) => {
+                return (
+                  <SalesPeople
+                    key={index}
+                    avatar={item.avatar}
+                    name={item.name}
+                    title="Sales Executive"
+                    project={34}
+                    clients={50}
+                    earning={400}
+                    companyName="ABC Inc."
+                    ActiveClient={true}
+                    companyLogo={user}
+                    styles=""
+                  />
+                );
+              })
+            ) : (
+              <span>No sales Guy</span>
+            )}
           </div>
         </div>
       </div>

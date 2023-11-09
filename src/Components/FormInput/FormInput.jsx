@@ -17,7 +17,7 @@ const FormInput = ({
         {label}
       </label>
       <input
-        className="border focus:outline-darkBlue transition-all duration-500 ease-in-out mt-[10px] w-[235px] h-[36px] rounded-[5px] pl-[20px] font-['Lato']"
+        className="border focus:outline-darkBlue transition-all duration-500 ease-in-out mt-[10px] w-[235px] h-[36px] rounded-[5px] pl-[20px] font-['Lato'] placeholder:font-['work_sans'] placeholder:text-[10px]"
         type={type}
         placeholder={placeholder}
         value={value}

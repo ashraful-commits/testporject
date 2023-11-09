@@ -4,15 +4,18 @@ import {
   LogoutSeller,
   SellerLogin,
   SellerRegistration,
+  deleteSeller,
   getAllSeller,
   getSingleSeller,
+  updateSeller,
   updateSellerRole,
+  updateSellerStatus,
 } from "./SellerApi";
 
 const SellerSlice = createSlice({
   name: "seller",
   initialState: {
-    seller: null,
+    seller: [],
     error: null,
     loader: false,
     message: null,
@@ -110,10 +113,65 @@ const SellerSlice = createSlice({
       })
       .addCase(getSingleSeller.rejected, (state, action) => {
         state.loader = false;
+      })
+      .addCase(updateSellerStatus.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(updateSellerStatus.fulfilled, (state, action) => {
+        state.loader = false;
+        state.seller[
+          state.seller.findIndex(
+            (item) => item._id === action.payload?.seller?._id
+          )
+        ] = action.payload.seller;
+        state.message = action.payload.message;
+      })
+      .addCase(updateSellerStatus.rejected, (state, action) => {
+        state.loader = false;
+      })
+      .addCase(deleteSeller.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(deleteSeller.fulfilled, (state, action) => {
+        state.loader = false;
+        state.seller = state.seller.filter(
+          (item) => item._id !== action?.payload?.seller._id
+        );
+        state.loginInSeller = {
+          ...state.loginInSeller,
+          salesPerson: state.loginInSeller.salesPerson.filter(
+            (item) => item._id !== action.payload.seller._id
+          ),
+        };
+        state.message = action.payload.message;
+      })
+      .addCase(deleteSeller.rejected, (state, action) => {
+        state.loader = false;
+      })
+      .addCase(updateSeller.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(updateSeller.fulfilled, (state, action) => {
+        state.loader = false;
+        state.seller[
+          state.seller.findIndex(
+            (item) => item._id === action.payload?.seller?._id
+          )
+        ] = action.payload.seller;
+        state.message = action.payload.message;
+        state.loginInSeller.salesPerson[
+          state.loginInSeller.salesPerson.findIndex(
+            (item) => item._id === action.payload?.seller?._id
+          )
+        ] = action.payload.seller;
+      })
+      .addCase(updateSeller.rejected, (state, action) => {
+        state.loader = false;
       });
   },
 });
 
+export const loginInSeller = (state) => state.loginInSeller;
 export const getAllSellerState = (state) => state.Seller;
 export const { setMessageEmpty } = SellerSlice.actions;
 export default SellerSlice.reducer;

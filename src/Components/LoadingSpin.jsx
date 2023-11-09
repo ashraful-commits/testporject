@@ -13,6 +13,7 @@ const LoadingSpinner = () => {
         viewBox="0 0 97.541 97.54"
         style={{ enableBackground: "new 0 0 97.541 97.54" }}
         xmlSpace="preserve"
+        className=" animate-spin absolute top-5"
       >
         <g>
           <g>
