@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteClient,
@@ -15,7 +15,7 @@ import Model from "./Model/Model";
 import swal from "sweetalert";
 import LoadingSpinner from "./LoadingSpin";
 import { getAllSellerState } from "../Features/Seller/SellerSlice";
-import { LoggedInSeller } from "../Features/Seller/SellerApi";
+
 import { Link } from "react-router-dom";
 import { Toastify } from "../Utils/Tostify";
 
@@ -26,13 +26,13 @@ const TableComponent = ({ sellerId, input }) => {
   const dispatch = useDispatch();
   console.log(input);
   const [currentPage, setCurrentPage] = useState(1);
-  //=========================edit model
+  //=================================================================================================edit model
   const [editModel, setEditModel] = useState(false);
-  //=================== singleData
+  //========================================================================================== singleData
   const [singleData, setSingleData] = useState({});
-  //===========================set limit
+  //==================================================================================================set limit
   const [limit, setLimit] = useState(7);
-  //========================handle edit
+  //================================================================================================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
     setSingleData(client.find((item) => item._id == id));
@@ -55,15 +55,15 @@ const TableComponent = ({ sellerId, input }) => {
       }
     });
   };
-  //===============  handle limit
+  //=============================================================================================  handle limit
   const handleLimit = (e) => {
     setLimit(e.target.value);
   };
-  //===============handle permission
+  //=======================================================================================handle permission
   const handlePermission = (id, status) => {
     dispatch(permissionUpdate({ id, status }));
   };
-  //===============handle permission
+  //========================================================================================handle permission
   const handleProjectStatus = (id, projectStatus) => {
     dispatch(projectStatusUpdate({ id, projectStatus }));
   };
@@ -71,7 +71,7 @@ const TableComponent = ({ sellerId, input }) => {
     console.log(commissionRate, id);
     dispatch(updateCommissionRate({ id, commissionRate }));
   };
-  //=================get user client
+  //========================================================================================get user client
   useEffect(() => {
     dispatch(
       getAllClient({
@@ -82,15 +82,15 @@ const TableComponent = ({ sellerId, input }) => {
       })
     );
   }, [dispatch, sellerId, currentPage, limit, loginInSeller]);
-  //==========================next page
+  //===========================================================================================next page
   const nextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
-  //============prev page
+  //==============================================================================================prev page
   const prevPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
-  //========================================= toastify
+  //================================================================================================= toastify
   useEffect(() => {
     if (error) {
       Toastify(error, "error");
@@ -101,7 +101,7 @@ const TableComponent = ({ sellerId, input }) => {
       dispatch(setMessageEmpty());
     }
   }, [message, error, dispatch]);
-  //============================================filter
+  //==========================================================================================================filter
 
   return (
     <div>
@@ -145,7 +145,7 @@ const TableComponent = ({ sellerId, input }) => {
             <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
               Client source
             </th>
-            <th className="text-[.8125rem] w-[80px] font-['work_sans'] text-start font-[400]">
+            <th className="text-[.8125rem] w-[100px] font-['work_sans'] flex justify-end items-center text-start font-[400]">
               Action
             </th>
           </tr>
@@ -183,13 +183,12 @@ const TableComponent = ({ sellerId, input }) => {
                         <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                           {index + 1}.
                         </span>{" "}
-                        <span className="truncate text-[13px] font-[500] text-[#267596] w-[120px]">
+                        <span className=" capitalize truncate text-[13px] font-[500] text-[#267596] w-[120px]">
                           {item.companyName}
                         </span>
                       </td>
                       <td className="w-[120px] overflow-hidden items-center flex gap-[.3125rem] relative">
                         <Link to={`/${item._id}`}>
-                          {" "}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="32"
@@ -215,8 +214,7 @@ const TableComponent = ({ sellerId, input }) => {
                           />
                         )}
 
-                        <span className=" truncate text-[13px] font-[500] text-[#267596] w-[70px]">
-                          {" "}
+                        <span className="  capitalize truncate text-[13px] font-[500] text-[#267596] w-[70px]">
                           {item.clientName}
                         </span>
                       </td>
@@ -275,6 +273,9 @@ const TableComponent = ({ sellerId, input }) => {
                                 handleProjectStatus(item._id, e.target.value)
                               }
                             >
+                              <option className="text-gray-500 " value="....">
+                                ...select...
+                              </option>
                               <option
                                 className="text-gray-500 "
                                 value="pending"
@@ -309,7 +310,7 @@ const TableComponent = ({ sellerId, input }) => {
                         >
                           <button>
                             <select
-                              className={` focus:outline-none border rounded-full`}
+                              className={` focus:outline-none border rounded-full w-full px-2`}
                               name="commissionRate"
                               id=""
                               value={item?.commissionRate}
@@ -317,6 +318,9 @@ const TableComponent = ({ sellerId, input }) => {
                                 handleCommission(item._id, e.target.value)
                               }
                             >
+                              <option className="text-gray-500 " value="">
+                                ...
+                              </option>
                               <option className="text-gray-500 " value="5">
                                 5%
                               </option>
@@ -351,7 +355,24 @@ const TableComponent = ({ sellerId, input }) => {
                       <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                         {item?.projectSource}
                       </td>
-                      <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[80px] h-full text-[#3A3A49]">
+                      <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[100px] h-full text-[#3A3A49]">
+                        <Link to={`/${item?._id}`}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#000000"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
+                            <path d="M12 13a1 1 0 100-2 1 1 0 000 2z" />
+                            <path d="M21 8V5a2 2 0 00-2-2H5a2 2 0 00-2 2v3m18 8v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3" />
+                          </svg>
+                        </Link>
                         <button onClick={() => handleEdit(item._id)}>
                           <svg
                             width="20"
@@ -438,7 +459,8 @@ const TableComponent = ({ sellerId, input }) => {
                     : true) &&
                   (input?.status
                     ? client?.projectStatus === input?.status
-                    : true)
+                    : true) &&
+                  client?.status === true
                 );
               })
               .map((item, index) => {
@@ -451,13 +473,12 @@ const TableComponent = ({ sellerId, input }) => {
                       <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                         {index + 1}.
                       </span>{" "}
-                      <span className="truncate text-[13px] font-[500] text-[#267596] w-[120px]">
+                      <span className=" capitalize truncate text-[13px] font-[500] text-[#267596] w-[120px]">
                         {item.companyName}
                       </span>
                     </td>
                     <td className="w-[120px] overflow-hidden items-center flex gap-[.3125rem] relative">
                       <Link to={`/${item._id}`}>
-                        {" "}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="32"
@@ -483,8 +504,7 @@ const TableComponent = ({ sellerId, input }) => {
                         />
                       )}
 
-                      <span className=" truncate text-[13px] font-[500] text-[#267596] w-[70px]">
-                        {" "}
+                      <span className="  capitalize truncate text-[13px] font-[500] text-[#267596] w-[70px]">
                         {item.clientName}
                       </span>
                     </td>
@@ -543,6 +563,9 @@ const TableComponent = ({ sellerId, input }) => {
                               handleProjectStatus(item._id, e.target.value)
                             }
                           >
+                            <option className="text-gray-500 " value="">
+                              .....
+                            </option>
                             <option className="text-gray-500 " value="pending">
                               pending
                             </option>
@@ -610,27 +633,13 @@ const TableComponent = ({ sellerId, input }) => {
                     <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[80px] h-full text-[#3A3A49]">
                       <button onClick={() => handleEdit(item._id)}>
                         <svg
+                          fill="#000000"
                           width="20"
                           height="20"
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path
-                            d="M20.4445 6.88859C18.7779 7.4441 16.5559 5.22205 17.1114 3.55551"
-                            stroke="#0095FF"
-                            strokeWidth="1.5"
-                          />
-                          <path
-                            d="M16.9766 3.6903L13.3862 7.28073C11.8253 8.84163 10.718 10.7974 10.1826 12.9389L10.0091 13.6329C9.95503 13.8491 10.1509 14.045 10.3671 13.9909L11.0611 13.8174C13.2026 13.282 15.1584 12.1747 16.7193 10.6138L20.3097 7.02338C20.7517 6.58139 21 5.98192 21 5.35684C21 4.05519 19.9448 3 18.6432 3C18.0181 3 17.4186 3.24831 16.9766 3.6903Z"
-                            stroke="#0095FF"
-                            strokeWidth="1.5"
-                          />
-                          <path
-                            d="M12 3C10.9767 3 9.95334 3.11763 8.95043 3.35288C6.17301 4.00437 4.00437 6.17301 3.35288 8.95043C2.88237 10.9563 2.88237 13.0437 3.35288 15.0496C4.00437 17.827 6.17301 19.9956 8.95044 20.6471C10.9563 21.1176 13.0437 21.1176 15.0496 20.6471C17.827 19.9956 19.9956 17.827 20.6471 15.0496C20.8824 14.0466 21 13.0233 21 12"
-                            stroke="#363853"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
+                          <path d="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z" />
                         </svg>
                       </button>
                       <button onClick={() => handleDelete(item._id)}>
@@ -678,18 +687,60 @@ const TableComponent = ({ sellerId, input }) => {
             </span>
           )}
         </tbody>
-        {(client.length || loginInSeller?.client?.length) > 7 && (
+        {(client.length >= 1 || loginInSeller?.client?.length >= 1) && (
           <tfoot>
-            <div className="flex justify-center items-center gap-5 py-5">
+            <div className="flex justify-center items-center gap-2 py-5">
               <button
-                className="text-[14px] font-[400] text-[#A6A8B1] border px-2 capitalize hover:bg-blue-500 hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={prevPage}
               >
-                prev
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <mask
+                    id="mask0_1410_2"
+                    style={{ maskType: "alpha" }}
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
+                    width="20"
+                    height="20"
+                  >
+                    <rect width="20" height="20" fill="#D9D9D9" />
+                  </mask>
+                  <g mask="url(#mask0_1410_2)">
+                    <path
+                      d="M12 15L7 10L12 5L13.062 6.062L9.125 10L13.062 13.938L12 15Z"
+                      fill="#293050"
+                    />
+                  </g>
+                </svg>
               </button>
+              {Array.from({ length: Math.ceil(client.length / limit) }).map(
+                (_, index) => {
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentPage(index + 1)}
+                      className={`${
+                        currentPage === index + 1
+                          ? "bg-darkBlue text-white"
+                          : ""
+                      } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                    >
+                      {index + 1}
+                    </button>
+                  );
+                }
+              )}
+
               <select
                 onChange={handleLimit}
-                className="w-[70px] text-[14px] font-[400] text-[#A6A8B1] focus:outline-none border"
+                className="w-[50px] rounded-md text-[14px] font-[400] text-[#A6A8B1] focus:outline-none border"
               >
                 <option value="1">1</option>
                 <option value="3">3</option>
@@ -697,10 +748,39 @@ const TableComponent = ({ sellerId, input }) => {
                 <option value="7">7</option>
               </select>
               <button
-                className="text-[14px] font-[400] text-[#A6A8B1] border px-2 capitalize hover:bg-blue-500 hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={nextPage}
               >
-                next
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <mask
+                    id="mask0_1410_40"
+                    style={{ maskType: "alpha" }}
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
+                    width="20"
+                    height="20"
+                  >
+                    <rect
+                      width="20"
+                      height="20"
+                      transform="matrix(-1 0 0 1 20 0)"
+                      fill="#D9D9D9"
+                    />
+                  </mask>
+                  <g mask="url(#mask0_1410_40)">
+                    <path
+                      d="M8 15L13 10L8 5L6.938 6.062L10.875 10L6.938 13.938L8 15Z"
+                      fill="#293050"
+                    />
+                  </g>
+                </svg>
               </button>
             </div>
           </tfoot>

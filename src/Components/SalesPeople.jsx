@@ -75,39 +75,37 @@ const SalesPeople = ({
       </h5>
       <div className="flex w-full mt-3">
         <div className="clients flex w-full">
-          <div className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px]">
-            <img
-              className="w-full h-full rounded-full  border-[2px] border-white"
-              src={avatar}
-              alt=""
-            />
-          </div>
-          <div className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px]">
-            <img
-              className="w-full h-full rounded-full  border-[2px] border-white"
-              src={avatar}
-              alt=""
-            />
-          </div>
-          <div className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px]">
-            <img
-              className="w-full h-full rounded-full  border-[2px] border-white"
-              src={avatar}
-              alt=""
-            />
-          </div>
-          <div className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px]">
-            <img
-              className="w-full h-full rounded-full  border-[2px] border-white"
-              src={avatar}
-              alt=""
-            />
-          </div>
+          {ActiveClient.length > 0
+            ? ActiveClient.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px]"
+                  >
+                    item?.clientAvatar?
+                    <img
+                      className="w-full h-full rounded-full  border-[2px] border-white"
+                      src={item?.clientAvatar}
+                      alt=""
+                    />
+                    :
+                    <img
+                      className="w-full h-full rounded-full  border-[2px] border-white"
+                      src={avatar}
+                      alt=""
+                    />
+                  </div>
+                );
+              })
+            : ""}
+
           <button className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
-            18+
+            {ActiveClient > 0
+              ? ActiveClient?.slice(3, ActiveClient?.length)
+              : 0}
           </button>
         </div>
-        <button className="w-[117px] h-[40px] flex justify-center items-center bg-purple-100 text-purple-600 hover:text-white rounded-md hover:bg-purple-700 transition-all">
+        <button className="w-[117px] h-[40px] flex justify-center items-center bg-cyan-100 text-cyan-600 hover:text-white rounded-md hover:bg-cyan-700 transition-all">
           Manage
         </button>
       </div>

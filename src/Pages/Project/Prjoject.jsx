@@ -11,23 +11,29 @@ import { getAllClientState } from "../../Features/Client/ClientSlice";
 import { useEffect } from "react";
 import { getSingleClient } from "../../Features/Client/ClientApi";
 import { Link, useParams } from "react-router-dom";
-import DateFormate from "../../Utils/DateFormate";
+import dateFormat from "../../Utils/DateFormate";
+import LoadingSpinner from "../../Components/LoadingSpin";
 
 const Project = () => {
-  const { singleClient } = useSelector(getAllClientState);
+  const { singleClient, loader } = useSelector(getAllClientState);
   const dispatch = useDispatch();
   const { id } = useParams();
-  console.log(singleClient);
+
   useEffect(() => {
     dispatch(getSingleClient(id));
   }, [dispatch, id]);
   return (
     <div className="min-w-[1340px] rounded-[15px] pl-[48px]  pt-[30px] bg-[#FFF] min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px]">
+      {loader && (
+        <div className="w-screen h-screen bg-gray-200 flex justify-center items-center  absolute top-0 left-0">
+          <LoadingSpinner />
+        </div>
+      )}
       <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
         <div className="w-[640px] h-full flex items-center gap-[20px] ">
           <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />{" "}
           <h1 className="text-[26px] capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
-            Sales Portal / Julian
+            Sales Portal / {singleClient?.clientName}
           </h1>
         </div>
         <div className="w-[600px] h-[46px] flex justify-between items-center">
@@ -187,13 +193,13 @@ const Project = () => {
           >
             {singleClient?.sellerId?.avatar ? (
               <img
-                className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-[#6E28D4]"
+                className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
                 src={singleClient?.sellerId?.avatar}
                 alt=""
               />
             ) : (
               <img
-                className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-[#6E28D4]"
+                className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
                 src={user}
                 alt=""
               />
@@ -319,7 +325,7 @@ const Project = () => {
               }
             />
             <DetialsSections
-              name={() => DateFormate(getSingleClient?.date)}
+              name={singleClient?.date}
               title="Assigned Date"
               svg={
                 <svg
@@ -482,7 +488,7 @@ const Project = () => {
               </button>
             </div>
             <div className="button h-full flex justify-center items-center">
-              <button className="bg-[#6E28D4] text-[14px] font-[500] text-white hover:bg-purple-900 transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px]">
+              <button className="bg-cyan-600 text-[14px] font-[500] text-white hover:bg-cyan-900 transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px]">
                 Manage Project
               </button>
             </div>

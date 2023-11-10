@@ -5,7 +5,7 @@ export function calculateTotalCommissionForAllClients(clients) {
     const commission = (
       (client?.amount * parseInt(client?.commissionRate)) /
       100
-    ).toFixed(2);
+    ).toFixed(0);
 
     totalCommission += parseFloat(commission); // Increment the total commission with the calculated commission
   });

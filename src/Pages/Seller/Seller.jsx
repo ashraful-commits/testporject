@@ -12,12 +12,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import { getSingleSeller } from "../../Features/Seller/SellerApi";
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
+import LoadingSpinner from "../../Components/LoadingSpin";
 const Seller = () => {
   const [model, setModel] = useState(false);
-  const { singleSeller } = useSelector(getAllSellerState);
-
+  const { singleSeller, loader } = useSelector(getAllSellerState);
+  console.log(singleSeller);
+  const { loginInSeller } = useSelector(getAllSellerState);
   const { id } = useParams();
-
+  console.log(loginInSeller);
   const dispatch = useDispatch(getSingleSeller());
   useEffect(() => {
     if (id) {
@@ -29,6 +31,11 @@ const Seller = () => {
     <>
       {model && <SalesModel setModel={setModel} sellerId={id} />}
       <div className="min-w-[1340px] rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
+        {loader && (
+          <div className="w-screen h-screen bg-gray-200 flex justify-center items-center absolute top-0 left-0">
+            <LoadingSpinner />
+          </div>
+        )}
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] ">
             <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />{" "}
@@ -193,13 +200,13 @@ const Seller = () => {
             >
               {singleSeller?.avatar ? (
                 <img
-                  className=" w-[46px] h-[46px] shrink-0 mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-[#6E28D4]"
+                  className=" w-[46px] h-[46px] shrink-0 mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-[rgb(14 116 144)]"
                   src={singleSeller?.avatar}
                   alt=""
                 />
               ) : (
                 <img
-                  className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-[#6E28D4]"
+                  className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-[rgb(14 116 144)]"
                   src={user}
                   alt=""
                 />
@@ -216,7 +223,7 @@ const Seller = () => {
           </div>
         </div>
         <div className="main-container pr-[36px] flex min-w-full flex-col  w-[1300px] mt-[30px]  tracking-[-.52px] h-[1072px] ">
-          <div className="total flex justify-between gap-4">
+          <div className="total flex justify-start gap-4">
             <Total
               number={
                 singleSeller?.salesPerson.length > 0
@@ -229,7 +236,7 @@ const Seller = () => {
               totalProjects=""
               totalClients=""
               TotalEarnings=""
-              styles={`bg-purple-200 border border-purple-500`}
+              styles={`bg-cyan-200 border border-cyan-500`}
               title="Total Sales Guy"
               svg={
                 <svg
@@ -242,7 +249,7 @@ const Seller = () => {
                   <g clipPath="url(#clip0_684_1773)">
                     <path
                       d="M10.0002 0.666504H2.66683C1.9335 0.666504 1.3335 1.2665 1.3335 1.99984V10.6665C1.3335 11.0332 1.6335 11.3332 2.00016 11.3332C2.36683 11.3332 2.66683 11.0332 2.66683 10.6665V2.6665C2.66683 2.29984 2.96683 1.99984 3.3335 1.99984H10.0002C10.3668 1.99984 10.6668 1.69984 10.6668 1.33317C10.6668 0.966504 10.3668 0.666504 10.0002 0.666504ZM10.3935 3.7265L13.6135 6.9465C13.8602 7.19317 14.0002 7.53317 14.0002 7.8865V13.9998C14.0002 14.7332 13.4002 15.3332 12.6668 15.3332H5.32683C4.5935 15.3332 4.00016 14.7332 4.00016 13.9998L4.00683 4.6665C4.00683 3.93317 4.60016 3.33317 5.3335 3.33317H9.44683C9.80016 3.33317 10.1402 3.47317 10.3935 3.7265ZM10.0002 7.99984H13.0002L9.3335 4.33317V7.33317C9.3335 7.69984 9.6335 7.99984 10.0002 7.99984Z"
-                      fill="#6E28D4"
+                      fill="rgb(14 116 144)"
                     />
                   </g>
                   <defs>
@@ -303,7 +310,7 @@ const Seller = () => {
               number={
                 singleSeller?.client?.length > 0
                   ? singleSeller?.client?.length
-                  : []
+                  : 0
               }
               totalProjects=""
               TotalEarnings=""
@@ -455,8 +462,11 @@ const Seller = () => {
                 Support
               </button>
               <button
+                disabled={
+                  loginInSeller?._id !== id && loginInSeller?.role !== "admin"
+                }
                 onClick={() => setModel(!model)}
-                className="w-[170px] rounded-md h-[38px] bg-purple-500 flex justify-center items-center gap-2 text-white hover:bg-purple-600 transition-all duration-500 ease-in-out"
+                className={`w-[170px]   rounded-md h-[38px] bg-cyan-500 flex justify-center items-center gap-2 text-white hover:bg-cyan-600 transition-all duration-500 ease-in-out`}
               >
                 Add Sales Person
                 <svg
@@ -490,20 +500,22 @@ const Seller = () => {
                 >
                   <path
                     d="M7.50008 3.3335C5.65913 3.3335 4.16675 4.82588 4.16675 6.66683C4.16675 8.50775 5.65913 10.0002 7.50008 10.0002C9.341 10.0002 10.8334 8.50775 10.8334 6.66683C10.8334 4.82588 9.341 3.3335 7.50008 3.3335Z"
-                    fill="#6E28D4"
+                    fill="rgb(14 116 144)"
                   />
                   <path
                     d="M15.8334 5.83333C15.8334 5.3731 15.4603 5 15.0001 5C14.5398 5 14.1667 5.3731 14.1667 5.83333V7.5H12.5001C12.0398 7.5 11.6667 7.8731 11.6667 8.33333C11.6667 8.79358 12.0398 9.16667 12.5001 9.16667H14.1667V10.8333C14.1667 11.2936 14.5398 11.6667 15.0001 11.6667C15.4603 11.6667 15.8334 11.2936 15.8334 10.8333V9.16667H17.5001C17.9603 9.16667 18.3334 8.79358 18.3334 8.33333C18.3334 7.8731 17.9603 7.5 17.5001 7.5H15.8334V5.83333Z"
-                    fill="#6E28D4"
+                    fill="rgb(14 116 144)"
                   />
                   <path
                     d="M5.62508 10.8335C3.43896 10.8335 1.66675 12.6057 1.66675 14.7918C1.66675 15.8273 2.50621 16.6668 3.54175 16.6668H11.4584C12.4939 16.6668 13.3334 15.8273 13.3334 14.7918C13.3334 12.6057 11.5612 10.8335 9.37508 10.8335H5.62508Z"
-                    fill="#6E28D4"
+                    fill="rgb(14 116 144)"
                   />
                 </svg>
               }
               title="New Client Request"
-              number={19}
+              number={
+                singleSeller?.projects ? singleSeller?.projects?.length : 0
+              }
             />
             <ProjectDetails
               svg={
@@ -515,10 +527,10 @@ const Seller = () => {
                   fill="none"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M3.125 1.25C2.09 1.25 1.25 2.09 1.25 3.125V10.625C1.25 11.66 2.09 12.5 3.125 12.5H6.25C6.595 12.5 6.875 12.22 6.875 11.875C6.875 11.53 6.595 11.25 6.25 11.25H3.125C2.78 11.25 2.5 10.97 2.5 10.625V5.625H15V6.25C15 6.595 15.28 6.875 15.625 6.875C15.97 6.875 16.25 6.595 16.25 6.25V3.125C16.25 2.09 15.41 1.25 14.375 1.25H3.125ZM3.125 2.5H14.375C14.72 2.5 15 2.78 15 3.125V4.375H2.5V3.125C2.5 2.78 2.78 2.5 3.125 2.5ZM13.125 7.5C10.0394 7.5 7.5 10.0394 7.5 13.125C7.5 16.2106 10.0394 18.75 13.125 18.75C16.2106 18.75 18.75 16.2106 18.75 13.125C18.75 10.0394 16.2106 7.5 13.125 7.5ZM4.375 8.75C4.03 8.75 3.75 9.03 3.75 9.375C3.75 9.72 4.03 10 4.375 10H5.625C5.97 10 6.25 9.72 6.25 9.375C6.25 9.03 5.97 8.75 5.625 8.75H4.375ZM13.125 9.375C13.47 9.375 13.75 9.655 13.75 10V10.4163H14.1663C14.5113 10.4163 14.7913 10.6962 14.7913 11.0413C14.7913 11.3863 14.5113 11.6663 14.1663 11.6663H12.7087V12.5H14.1663C14.5119 12.5 14.7913 12.7794 14.7913 13.125V15.2087C14.7913 15.5538 14.5119 15.8337 14.1663 15.8337H13.75V16.25C13.75 16.595 13.47 16.875 13.125 16.875C12.78 16.875 12.5 16.595 12.5 16.25V15.8337H12.0837C11.7387 15.8337 11.4587 15.5538 11.4587 15.2087C11.4587 14.8637 11.7387 14.5837 12.0837 14.5837H13.0931C13.1037 14.5831 13.1144 14.5825 13.125 14.5825C13.1356 14.5825 13.1463 14.5831 13.1569 14.5837H13.5413V13.75H12.0837C11.7381 13.75 11.4587 13.4706 11.4587 13.125V11.0413C11.4587 10.6962 11.7381 10.4163 12.0837 10.4163H12.5V10C12.5 9.655 12.78 9.375 13.125 9.375Z"
-                    fill="#6E28D4"
+                    fill="rgb(14 116 144)"
                   />
                 </svg>
               }
@@ -537,15 +549,15 @@ const Seller = () => {
                 >
                   <path
                     d="M7.50008 3.3335C5.65913 3.3335 4.16675 4.82588 4.16675 6.66683C4.16675 8.50775 5.65913 10.0002 7.50008 10.0002C9.341 10.0002 10.8334 8.50775 10.8334 6.66683C10.8334 4.82588 9.341 3.3335 7.50008 3.3335Z"
-                    fill="#6E28D4"
+                    fill="rgb(14 116 144)"
                   />
                   <path
                     d="M15.8334 5.83333C15.8334 5.3731 15.4603 5 15.0001 5C14.5398 5 14.1667 5.3731 14.1667 5.83333V7.5H12.5001C12.0398 7.5 11.6667 7.8731 11.6667 8.33333C11.6667 8.79358 12.0398 9.16667 12.5001 9.16667H14.1667V10.8333C14.1667 11.2936 14.5398 11.6667 15.0001 11.6667C15.4603 11.6667 15.8334 11.2936 15.8334 10.8333V9.16667H17.5001C17.9603 9.16667 18.3334 8.79358 18.3334 8.33333C18.3334 7.8731 17.9603 7.5 17.5001 7.5H15.8334V5.83333Z"
-                    fill="#6E28D4"
+                    fill="rgb(14 116 144)"
                   />
                   <path
                     d="M5.62508 10.8335C3.43896 10.8335 1.66675 12.6057 1.66675 14.7918C1.66675 15.8273 2.50621 16.6668 3.54175 16.6668H11.4584C12.4939 16.6668 13.3334 15.8273 13.3334 14.7918C13.3334 12.6057 11.5612 10.8335 9.37508 10.8335H5.62508Z"
-                    fill="#6E28D4"
+                    fill="rgb(14 116 144)"
                   />
                 </svg>
               }
@@ -564,7 +576,7 @@ const Seller = () => {
                   <g clipPath="url(#clip0_684_1767)">
                     <path
                       d="M12.5001 0.833496H3.33341C2.41675 0.833496 1.66675 1.5835 1.66675 2.50016V13.3335C1.66675 13.7918 2.04175 14.1668 2.50008 14.1668C2.95841 14.1668 3.33341 13.7918 3.33341 13.3335V3.3335C3.33341 2.87516 3.70841 2.50016 4.16675 2.50016H12.5001C12.9584 2.50016 13.3334 2.12516 13.3334 1.66683C13.3334 1.2085 12.9584 0.833496 12.5001 0.833496ZM12.9917 4.6585L17.0167 8.6835C17.3251 8.99183 17.5001 9.41683 17.5001 9.8585V17.5002C17.5001 18.4168 16.7501 19.1668 15.8334 19.1668H6.65841C5.74175 19.1668 5.00008 18.4168 5.00008 17.5002L5.00841 5.8335C5.00841 4.91683 5.75008 4.16683 6.66675 4.16683H11.8084C12.2501 4.16683 12.6751 4.34183 12.9917 4.6585ZM12.5001 10.0002H16.2501L11.6667 5.41683V9.16683C11.6667 9.62516 12.0417 10.0002 12.5001 10.0002Z"
-                      fill="#6E28D4"
+                      fill="rgb(14 116 144)"
                     />
                   </g>
                   <defs>
@@ -575,7 +587,13 @@ const Seller = () => {
                 </svg>
               }
               title="Project Due"
-              number={19}
+              number={
+                singleSeller?.projects?.length > 0
+                  ? singleSeller?.projects?.filter(
+                      (item) => item?.projectStatus !== "complete"
+                    ).length
+                  : 0
+              }
               styles={`text-red-500`}
             />
             <ProjectDetails
@@ -590,7 +608,7 @@ const Seller = () => {
                   <g clipPath="url(#clip0_684_1767)">
                     <path
                       d="M12.5001 0.833496H3.33341C2.41675 0.833496 1.66675 1.5835 1.66675 2.50016V13.3335C1.66675 13.7918 2.04175 14.1668 2.50008 14.1668C2.95841 14.1668 3.33341 13.7918 3.33341 13.3335V3.3335C3.33341 2.87516 3.70841 2.50016 4.16675 2.50016H12.5001C12.9584 2.50016 13.3334 2.12516 13.3334 1.66683C13.3334 1.2085 12.9584 0.833496 12.5001 0.833496ZM12.9917 4.6585L17.0167 8.6835C17.3251 8.99183 17.5001 9.41683 17.5001 9.8585V17.5002C17.5001 18.4168 16.7501 19.1668 15.8334 19.1668H6.65841C5.74175 19.1668 5.00008 18.4168 5.00008 17.5002L5.00841 5.8335C5.00841 4.91683 5.75008 4.16683 6.66675 4.16683H11.8084C12.2501 4.16683 12.6751 4.34183 12.9917 4.6585ZM12.5001 10.0002H16.2501L11.6667 5.41683V9.16683C11.6667 9.62516 12.0417 10.0002 12.5001 10.0002Z"
-                      fill="#6E28D4"
+                      fill="rgb(14 116 144)"
                     />
                   </g>
                   <defs>
@@ -601,7 +619,13 @@ const Seller = () => {
                 </svg>
               }
               title="Project Completed"
-              number={19}
+              number={
+                singleSeller?.projects?.length > 0
+                  ? singleSeller?.projects?.filter(
+                      (item) => item.projectStatus === "complete"
+                    ).length
+                  : 0
+              }
             />
           </div>
           <h1 className="mt-[25px] text-[22px] font-['work_sans'] tracking-[-.9px]">
@@ -616,11 +640,19 @@ const Seller = () => {
                     avatar={item.avatar}
                     name={item.name}
                     title="Sales Executive"
-                    project={34}
-                    clients={50}
-                    earning={400}
-                    companyName="ABC Inc."
-                    ActiveClient={true}
+                    project={
+                      item?.projects?.length > 0 ? item?.projects?.length : 0
+                    }
+                    clients={
+                      item?.client?.length > 0 ? item?.client?.length : 0
+                    }
+                    earning={
+                      item?.client?.length > 0
+                        ? calculateTotalCommissionForAllClients(item?.client)
+                        : 0
+                    }
+                    companyName={item.companyName}
+                    ActiveClient={item?.client?.length > 0 ? item?.client : []}
                     companyLogo={user}
                     styles=""
                   />

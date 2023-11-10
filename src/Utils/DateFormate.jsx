@@ -1,8 +1,8 @@
 const dateFormat = (time) => {
   const date = new Date(time);
-  console.log(time);
+
   if (isNaN(date)) {
-    return "Invalid Date"; // Handle invalid date input
+    return "Invalid Date";
   }
 
   const options = { day: "numeric", month: "long", year: "numeric" };

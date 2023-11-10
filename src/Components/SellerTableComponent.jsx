@@ -125,19 +125,19 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
       <table className="w-full">
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
-            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-[.8125rem] flex items-center justify-start w-[120px] font-['work_sans'] text-start font-[400]">
               Seller Name
             </th>
-            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-[.8125rem] flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
               Avatar
             </th>
-            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-[.8125rem] flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
               Total Client
             </th>
-            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-[.8125rem] flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
               Total Projects
             </th>
-            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-[.8125rem] flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
               Total Sales Guy
             </th>
 
@@ -152,7 +152,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
               </th>
             )}
 
-            <th className="text-[.8125rem] w-[80px] font-['work_sans'] text-start font-[400]">
+            <th className="text-[.8125rem] w-[80px] font-['work_sans'] flex items-center justify-end text-start font-[400]">
               Action
             </th>
           </tr>
@@ -172,7 +172,8 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       ? seller?.email
                           ?.toLowerCase()
                           .includes(input?.email?.toLowerCase())
-                      : true)
+                      : true) &&
+                    (input?.role ? seller?.role?.includes(input?.role) : true)
                   );
                 })
                 ?.map((item, index) => {
@@ -181,11 +182,11 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       key={index}
                       className="w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
                     >
-                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                         <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                           {index + 1}.
                         </span>{" "}
-                        <span className="truncate text-[13px] font-[500] text-[#267596] w-[120px]">
+                        <span className="truncate text-[13px] capitalize font-[500] text-[#267596] w-[120px]">
                           {item.name}
                         </span>
                       </td>
@@ -193,7 +194,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         className=" cursor-pointer"
                         to={`/seller/${item._id}`}
                       >
-                        <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                        <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                           {item.avatar ? (
                             <img
                               className="w-[35px] h-[35px] rounded-full"
@@ -208,21 +209,21 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                           )}
                         </td>
                       </Link>
-                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                         {item?.client?.length > 0 ? (
                           <span>{item?.client?.length}</span>
                         ) : (
                           <span>0</span>
                         )}
                       </td>
-                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                         {item?.projects?.length > 0 ? (
                           <span>{item?.projects?.length}</span>
                         ) : (
                           <span>0</span>
                         )}
                       </td>
-                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                         {item?.salesPerson?.length > 0 ? (
                           <span>{item?.salesPerson?.length}</span>
                         ) : (
@@ -261,7 +262,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       )}
 
                       {loginInSeller?.role === "admin" && (
-                        <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                        <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                           <input
                             onChange={() =>
                               handleStatusUpdate(item._id, item.status)
@@ -273,7 +274,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         </td>
                       )}
 
-                      <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[120px] h-full text-[#3A3A49]">
+                      <td className="  relative z-0 text-[.8125rem] flex items-center justify-end gap-2 truncate text-center pr-4 font-[400] w-[120px] h-full text-[#3A3A49]">
                         <Link to={`/seller/${item?._id}`}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -374,7 +375,9 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                     ? seller?.email
                         ?.toLowerCase()
                         .includes(input?.email?.toLowerCase())
-                    : true)
+                    : true) &&
+                  (input?.role ? seller?.role?.includes(input?.role) : true) &&
+                  seller?.status === true
                 );
               })
               ?.map((item, index) => {
@@ -383,11 +386,11 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                     key={index}
                     className="w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
                   >
-                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                       <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                         {index + 1}.
                       </span>
-                      <span className="truncate text-[13px] font-[500] text-[#267596] w-[120px]">
+                      <span className="truncate text-[13px] capitalize font-[500] text-[#267596] w-[120px]">
                         {item.name}
                       </span>
                     </td>
@@ -395,7 +398,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       className=" cursor-pointer"
                       to={`/seller/${item._id}`}
                     >
-                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                         {item.avatar ? (
                           <img
                             className="w-[35px] h-[35px] rounded-full"
@@ -410,21 +413,21 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         )}
                       </td>
                     </Link>
-                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                       {item?.client?.length > 0 ? (
                         <span>{item?.client?.length}</span>
                       ) : (
                         <span>0</span>
                       )}
                     </td>
-                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                       {item?.projects?.length > 0 ? (
                         <span>{item?.projects?.length}</span>
                       ) : (
                         <span>0</span>
                       )}
                     </td>
-                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                       {item?.salesPerson?.length > 0 ? (
                         <span>{item?.salesPerson?.length}</span>
                       ) : (
@@ -452,6 +455,9 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                             }
                           >
                             <option className="text-gray-500 " value="user">
+                              ...select...
+                            </option>
+                            <option className="text-gray-500 " value="user">
                               User
                             </option>
                             <option className="text-gray-500 " value="admin">
@@ -463,7 +469,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                     )}
 
                     {loginInSeller?.role === "admin" && (
-                      <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                         <input
                           onChange={() =>
                             handleStatusUpdate(item._id, item.status)
@@ -495,27 +501,13 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       </Link>
                       <button onClick={() => handleEdit(item._id)}>
                         <svg
+                          fill="#000000"
                           width="20"
                           height="20"
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
                         >
-                          <path
-                            d="M20.4445 6.88859C18.7779 7.4441 16.5559 5.22205 17.1114 3.55551"
-                            stroke="#0095FF"
-                            strokeWidth="1.5"
-                          />
-                          <path
-                            d="M16.9766 3.6903L13.3862 7.28073C11.8253 8.84163 10.718 10.7974 10.1826 12.9389L10.0091 13.6329C9.95503 13.8491 10.1509 14.045 10.3671 13.9909L11.0611 13.8174C13.2026 13.282 15.1584 12.1747 16.7193 10.6138L20.3097 7.02338C20.7517 6.58139 21 5.98192 21 5.35684C21 4.05519 19.9448 3 18.6432 3C18.0181 3 17.4186 3.24831 16.9766 3.6903Z"
-                            stroke="#0095FF"
-                            strokeWidth="1.5"
-                          />
-                          <path
-                            d="M12 3C10.9767 3 9.95334 3.11763 8.95043 3.35288C6.17301 4.00437 4.00437 6.17301 3.35288 8.95043C2.88237 10.9563 2.88237 13.0437 3.35288 15.0496C4.00437 17.827 6.17301 19.9956 8.95044 20.6471C10.9563 21.1176 13.0437 21.1176 15.0496 20.6471C17.827 19.9956 19.9956 17.827 20.6471 15.0496C20.8824 14.0466 21 13.0233 21 12"
-                            stroke="#363853"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
+                          <path d="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z" />
                         </svg>
                       </button>
                       <button onClick={() => handleDelete(item._id)}>
@@ -563,18 +555,57 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
             </span>
           )}
         </tbody>
-        {(seller?.length || loginInSeller?.salesPerson?.length) > 7 && (
+        {(seller?.length >= 1 || loginInSeller?.salesPerson?.length >= 1) && (
           <tfoot>
-            <div className="flex justify-center items-center gap-5 py-5">
+            <div className="flex justify-center items-center gap-2 py-5">
               <button
-                className="text-[14px] font-[400] text-[#A6A8B1] border px-2 capitalize hover:bg-blue-500 hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={prevPage}
               >
-                prev
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <mask
+                    id="mask0_1410_2"
+                    style={{ maskType: "alpha" }}
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
+                    width="20"
+                    height="20"
+                  >
+                    <rect width="20" height="20" fill="#D9D9D9" />
+                  </mask>
+                  <g mask="url(#mask0_1410_2)">
+                    <path
+                      d="M12 15L7 10L12 5L13.062 6.062L9.125 10L13.062 13.938L12 15Z"
+                      fill="#293050"
+                    />
+                  </g>
+                </svg>
               </button>
+              {Array.from({
+                length: Math.ceil(loginInSeller?.salesPerson?.length / limit),
+              }).map((_, index) => {
+                return (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentPage(index + 1)}
+                    className={`${
+                      currentPage === index + 1 ? "bg-darkBlue text-white" : ""
+                    } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  >
+                    {index + 1}
+                  </button>
+                );
+              })}
               <select
                 onChange={handleLimit}
-                className="w-[70px] text-[14px] font-[400] text-[#A6A8B1] focus:outline-none border"
+                className="w-[50px] text-[14px] rounded-md font-[400] text-[#A6A8B1] focus:outline-none border"
               >
                 <option value="1">1</option>
                 <option value="3">3</option>
@@ -582,10 +613,39 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 <option value="7">7</option>
               </select>
               <button
-                className="text-[14px] font-[400] text-[#A6A8B1] border px-2 capitalize hover:bg-blue-500 hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={nextPage}
               >
-                next
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <mask
+                    id="mask0_1410_40"
+                    style={{ maskType: "alpha" }}
+                    maskUnits="userSpaceOnUse"
+                    x="0"
+                    y="0"
+                    width="20"
+                    height="20"
+                  >
+                    <rect
+                      width="20"
+                      height="20"
+                      transform="matrix(-1 0 0 1 20 0)"
+                      fill="#D9D9D9"
+                    />
+                  </mask>
+                  <g mask="url(#mask0_1410_40)">
+                    <path
+                      d="M8 15L13 10L8 5L6.938 6.062L10.875 10L6.938 13.938L8 15Z"
+                      fill="#293050"
+                    />
+                  </g>
+                </svg>
               </button>
             </div>
           </tfoot>

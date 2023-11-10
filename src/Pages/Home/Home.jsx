@@ -25,12 +25,14 @@ const Home = () => {
   const [notification, setNotification] = useState(false);
   const [clientModel, setClientModel] = useState(false);
   const [sellerTable, setSellerTable] = useState(false);
-  const { input, handleInputChange } = useFormHook({
+  const [currentTime, setCurrentTime] = useState(false);
+  const { input, setInput, handleInputChange } = useFormHook({
     text: "",
     endDate: "",
     startDate: "",
     status: "",
     email: "",
+    rol: "",
   });
   const { error, message, loader, loginInSeller, seller } =
     useSelector(getAllSellerState);
@@ -59,6 +61,16 @@ const Home = () => {
   useEffect(() => {
     dispatch(LoggedInSeller());
   }, [dispatch]);
+  useEffect(() => {
+    const currentDate = new Date();
+    setCurrentTime(
+      currentDate.toLocaleDateString("en-US", {
+        month: "short", // 'm'
+        day: "numeric", // 'd'
+        year: "numeric", // 'y'
+      })
+    );
+  }, []);
   return (
     <div className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>
@@ -103,7 +115,7 @@ const Home = () => {
             </h2>
           </div>
           <div className="salesToolkit mt-[25px]  gap-[13px] flex flex-col w-[192px] items-center h-[256px] justify-center rounded-[8px] bg-darkBlack">
-            <p className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[16px] tracking-[-1px] mr-[1px]">
+            <p className=" transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[16px] tracking-[-1px] mr-[1px]">
               Sales Toolkit
             </p>
             <button className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] mt-[8px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
@@ -708,9 +720,14 @@ const Home = () => {
           {/* =============================================welcome  */}
           <div className="welcome mt-[11px] ml-[2px] flex justify-between items-center">
             <h1 className="text-[26px] font-[400] tracking-[-.52px]">
-              Welcome Back <span className="font-[600]">,Julian</span>
+              Welcome Back{" "}
+              <span className="font-[600] capitalize">
+                , {loginInSeller?.name}
+              </span>
             </h1>
-            <p className="text-[14px] tracking-[1px] mt-[10px]">Mon, 14Aug</p>
+            <p className="text-[14px] tracking-[1px] mt-[10px]">
+              {currentTime}
+            </p>
           </div>
           {/*================================================ message  */}
           <div className="message rounded-[4px] flex items-center overflow-hidden justify-between mt-[15px] w-[974px] h-[43px] bg-darkBlue">
@@ -844,7 +861,9 @@ const Home = () => {
               </div>
               <div className="percentage flex justify-center gap-[10px] items-center">
                 <h2 className="text-[35px] text-white mb-[10px] font-['Work_Sans']">
-                  {client?.length > 0 ? client.length : 0}
+                  {loginInSeller?.client?.length > 0
+                    ? loginInSeller?.client.length
+                    : 0}
                 </h2>
                 <span className="text-[#3AAE54] border-[0.3px solid bg-[#5CCE75] text-[12px] flex justify-between px-[7px] items-center gap-[5px] w-[49px] h-[19px] bg-opacity-[.1] text-[#5CCE75] rounded-md">
                   3.9%
@@ -898,7 +917,10 @@ const Home = () => {
               </div>
               <div className="rate mt-[12px]  px-[20px] flex justify-between gap-[5px] items-center">
                 <h2 className="text-[30px] font-[500] text-[#230B34] mb-[10px] tracking-[.2px] font-['Work_Sans']">
-                  15%
+                  {loginInSeller?.client?.reduce((acc, item) => {
+                    const commission = parseFloat(item.commissionRate) || 0;
+                    return acc + commission;
+                  }, 0) / loginInSeller?.client?.length}%
                 </h2>
 
                 <button className="text-gray-500 font-[400] w-[98px] h-[19px] tracking-[0.7px]  text-[13px] border bg-[#F5F5F5] rounded-[4px] mr-[22px] mb-[10px] flex justify-center items-center">
@@ -970,8 +992,8 @@ const Home = () => {
           <div className="table w-full h-full   mt-[20px]">
             {/*============================================= search  */}
             <div className="search  flex justify-between items-center w-full h-[40px]">
-              <div className="flex w-full h-full">
-                <div className="text_search w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px]">
+              <div className="flex w-full h-[40px] items-center">
+                <div className="text_search w-[222px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -994,7 +1016,7 @@ const Home = () => {
                   />
                 </div>
                 {sellerTable && (
-                  <div className="text_search w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px]">
+                  <div className="text_search h-[40px]  w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -1013,20 +1035,41 @@ const Home = () => {
                       name="email"
                       className="text-[12px] focus:outline-none text-[#878790] pl-[8px]"
                       type="text"
-                      placeholder="Search"
+                      placeholder="email"
                     />
+                  </div>
+                )}
+                {sellerTable && (
+                  <div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500]">
+                    <select
+                      className="w-full focus:outline-none h-full"
+                      name="role"
+                      onChange={handleInputChange}
+                      value={input.role}
+                      id=""
+                    >
+                      <option className="text-[#256682]" value="">
+                        ....
+                      </option>
+                      <option className="text-[#256682]" value="admin">
+                        admin
+                      </option>
+                      <option className="text-[#256682]" value="user">
+                        user
+                      </option>
+                    </select>
                   </div>
                 )}
                 {!sellerTable && (
                   <>
-                    <div className="date_search w-[224px] border rounded-[8px] flex h-full items-center justify-between gap-[5px]  px-[15px] mr-[10px]">
+                    <div className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]">
                       <input
                         onChange={handleInputChange}
                         value={input.endDate}
                         name="endDate"
                         type="text"
                         className="text-[12px] focus:outline-none font-['Roboto'] w-[60px]  capitalize placeholder:text-[12px] placeholder:font-[400] "
-                        placeholder="Mar 4,2023"
+                        placeholder="End Time"
                       />
                       -
                       <input
@@ -1035,7 +1078,7 @@ const Home = () => {
                         name="startDate"
                         value={input.startDate}
                         className="text-[12px] font-['Roboto'] placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
-                        placeholder="Mar 5, 2023"
+                        placeholder="Start Time"
                       />
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1062,7 +1105,7 @@ const Home = () => {
                         </defs>
                       </svg>
                     </div>
-                    <div className="selete_search w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500]">
+                    <div className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500]">
                       <select
                         className="w-full focus:outline-none h-full"
                         name="status"
@@ -1070,14 +1113,17 @@ const Home = () => {
                         value={input.status}
                         id=""
                       >
+                        <option className="text-[#256682]" value="">
+                          ...
+                        </option>
                         <option className="text-[#256682]" value="pending">
-                          pending
+                          Pending
                         </option>
                         <option className="text-[#256682]" value="on going">
                           On going
                         </option>
                         <option className="text-[#256682]" value="on hold">
-                          on Hold
+                          On hold
                         </option>
                         <option className="text-[#256682]" value="completed">
                           Completed
@@ -1086,6 +1132,32 @@ const Home = () => {
                     </div>
                   </>
                 )}
+                <button
+                  onClick={() =>
+                    setInput({
+                      text: "",
+                      endDate: "",
+                      startDate: "",
+                      status: "",
+                      email: "",
+                      rol: "",
+                    })
+                  }
+                  className="w-[40px] rounded-md h-[40px] flex justify-center items-center border ml-4 border-gray-300 hover:bg-gray-200 transition-all duration-500 ease-in-out"
+                >
+                  <svg
+                    fill="#7b7a7a"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 1920 1920"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M960 0v213.333c411.627 0 746.667 334.934 746.667 746.667S1371.627 1706.667 960 1706.667 213.333 1371.733 213.333 960c0-197.013 78.4-382.507 213.334-520.747v254.08H640V106.667H53.333V320h191.04C88.64 494.08 0 720.96 0 960c0 529.28 430.613 960 960 960s960-430.72 960-960S1489.387 0 960 0"
+                      fillRule="evenodd"
+                    />
+                  </svg>
+                </button>
               </div>
               <div className="addClient gap-[10px] flex items-center justify-self-end right-0">
                 <button

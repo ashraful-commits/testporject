@@ -10,7 +10,7 @@ const DetialsSections = ({ svg, title, name }) => {
         <span className="text-[12px] leading-[15px] font-[400] text-[#878790] text-['work_sans']">
           {title}
         </span>
-        <span className="text-[18px] leading-[16px] font-[500] text-[#230B34] font-['work_sans']">
+        <span className="text-[18px] leading-[16px] font-[600] text-[#230B34] font-['work_sans']">
           {name}
         </span>
       </div>

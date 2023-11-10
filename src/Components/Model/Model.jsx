@@ -265,6 +265,9 @@ const Model = ({ setClient, singleData }) => {
                     value={input.country}
                     onChange={handleInputChange}
                   >
+                    <option className="text-gray-500" value="">
+                      ....
+                    </option>
                     <option className="text-gray-500" value="United State">
                       United State
                     </option>
@@ -309,6 +312,9 @@ const Model = ({ setClient, singleData }) => {
                     value={input.state}
                     onChange={handleInputChange}
                   >
+                    <option className="text-gray-500 " value="">
+                      ....
+                    </option>
                     <option className="text-gray-500 " value="Texas">
                       Texas
                     </option>
@@ -410,6 +416,9 @@ const Model = ({ setClient, singleData }) => {
                     value={input.projectType}
                     onChange={handleInputChange}
                   >
+                    <option className="text-gray-500 " value="">
+                      ....
+                    </option>
                     <option
                       className="text-gray-500 "
                       value="Web Site Redesign"
@@ -470,6 +479,9 @@ const Model = ({ setClient, singleData }) => {
                     onChange={handleInputChange}
                     id=""
                   >
+                    <option className="text-gray-500" value="">
+                      ....
+                    </option>
                     <option className="text-gray-500" value="Fiverr">
                       Fiverr
                     </option>
@@ -490,6 +502,9 @@ const Model = ({ setClient, singleData }) => {
                     id=""
                     onChange={handleInputChange}
                   >
+                    <option className="text-gray-500" value="">
+                      ....
+                    </option>
                     <option className="text-gray-500" value="1 Month">
                       1 Month
                     </option>
