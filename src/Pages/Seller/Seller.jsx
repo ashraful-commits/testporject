@@ -193,7 +193,7 @@ const Seller = () => {
             >
               {singleSeller?.avatar ? (
                 <img
-                  className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-[#6E28D4]"
+                  className=" w-[46px] h-[46px] shrink-0 mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-[#6E28D4]"
                   src={singleSeller?.avatar}
                   alt=""
                 />
@@ -219,15 +219,51 @@ const Seller = () => {
           <div className="total flex justify-between gap-4">
             <Total
               number={
-                singleSeller?.projects?.length > 0
-                  ? singleSeller?.projects.length
+                singleSeller?.salesPerson.length > 0
+                  ? singleSeller?.salesPerson.length
                   : 0
+              }
+              totalSalesGuy={
+                singleSeller?.salesPerson ? singleSeller?.salesPerson : []
               }
               totalProjects=""
               totalClients=""
               TotalEarnings=""
-              styles={`bg-green-200 border border-green-500`}
+              styles={`bg-purple-200 border border-purple-500`}
               title="Total Sales Guy"
+              svg={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <g clipPath="url(#clip0_684_1773)">
+                    <path
+                      d="M10.0002 0.666504H2.66683C1.9335 0.666504 1.3335 1.2665 1.3335 1.99984V10.6665C1.3335 11.0332 1.6335 11.3332 2.00016 11.3332C2.36683 11.3332 2.66683 11.0332 2.66683 10.6665V2.6665C2.66683 2.29984 2.96683 1.99984 3.3335 1.99984H10.0002C10.3668 1.99984 10.6668 1.69984 10.6668 1.33317C10.6668 0.966504 10.3668 0.666504 10.0002 0.666504ZM10.3935 3.7265L13.6135 6.9465C13.8602 7.19317 14.0002 7.53317 14.0002 7.8865V13.9998C14.0002 14.7332 13.4002 15.3332 12.6668 15.3332H5.32683C4.5935 15.3332 4.00016 14.7332 4.00016 13.9998L4.00683 4.6665C4.00683 3.93317 4.60016 3.33317 5.3335 3.33317H9.44683C9.80016 3.33317 10.1402 3.47317 10.3935 3.7265ZM10.0002 7.99984H13.0002L9.3335 4.33317V7.33317C9.3335 7.69984 9.6335 7.99984 10.0002 7.99984Z"
+                      fill="#6E28D4"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_684_1773">
+                      <rect width="16" height="16" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              }
+            />
+            <Total
+              number={
+                singleSeller?.projects?.length > 0
+                  ? singleSeller?.projects.length
+                  : 0
+              }
+              totalProjects={singleSeller?.Projects}
+              totalClients=""
+              TotalEarnings=""
+              styles={`bg-green-200 border border-green-500`}
+              title="Total Projects"
               svg={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -265,47 +301,13 @@ const Seller = () => {
             />
             <Total
               number={
-                singleSeller?.salesPerson.length > 0
-                  ? singleSeller?.salesPerson.length
-                  : 0
-              }
-              totalSalesGuy={
-                singleSeller?.salesPerson ? singleSeller?.salesPerson : []
-              }
-              totalProjects=""
-              totalClients=""
-              TotalEarnings=""
-              styles={`bg-purple-200 border border-purple-500`}
-              title="Total Projects"
-              svg={
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                >
-                  <g clipPath="url(#clip0_684_1773)">
-                    <path
-                      d="M10.0002 0.666504H2.66683C1.9335 0.666504 1.3335 1.2665 1.3335 1.99984V10.6665C1.3335 11.0332 1.6335 11.3332 2.00016 11.3332C2.36683 11.3332 2.66683 11.0332 2.66683 10.6665V2.6665C2.66683 2.29984 2.96683 1.99984 3.3335 1.99984H10.0002C10.3668 1.99984 10.6668 1.69984 10.6668 1.33317C10.6668 0.966504 10.3668 0.666504 10.0002 0.666504ZM10.3935 3.7265L13.6135 6.9465C13.8602 7.19317 14.0002 7.53317 14.0002 7.8865V13.9998C14.0002 14.7332 13.4002 15.3332 12.6668 15.3332H5.32683C4.5935 15.3332 4.00016 14.7332 4.00016 13.9998L4.00683 4.6665C4.00683 3.93317 4.60016 3.33317 5.3335 3.33317H9.44683C9.80016 3.33317 10.1402 3.47317 10.3935 3.7265ZM10.0002 7.99984H13.0002L9.3335 4.33317V7.33317C9.3335 7.69984 9.6335 7.99984 10.0002 7.99984Z"
-                      fill="#6E28D4"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_684_1773">
-                      <rect width="16" height="16" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              }
-            />
-            <Total
-              number={
                 singleSeller?.client?.length > 0
                   ? singleSeller?.client?.length
                   : []
               }
-              totalSalesGuy
+              totalProjects=""
+              TotalEarnings=""
+              totalSalesGuy=""
               totalClients={singleSeller?.client ? singleSeller?.client : []}
               styles={`bg-blue-200 border border-blue-500`}
               title="Total Clients"
