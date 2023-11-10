@@ -23,7 +23,7 @@ const Project = () => {
     dispatch(getSingleClient(id));
   }, [dispatch, id]);
   return (
-    <div className="min-w-[1340px] rounded-[15px] z-[9999999999999] pl-[48px]  pt-[30px] bg-[#FFF] min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px]">
+    <div className="min-w-[1340px] relative rounded-[15px] z-[9999999999999] pl-[48px]  pt-[30px] bg-[#FFF] min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px]">
       {loader && (
         <div className="w-screen h-screen bg-gray-200 flex justify-center items-center  absolute top-0 left-0">
           <LoadingSpinner />
