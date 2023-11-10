@@ -530,7 +530,7 @@ const TableComponent = ({ sellerId, input }) => {
                               item?.projectStatus == "complete" &&
                               "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
                             }  ${
-                              item?.projectStatus == "on Hold" &&
+                              item?.projectStatus == "on hold" &&
                               "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
                             }   ${
                               item?.projectStatus == "on going" &&
@@ -549,8 +549,8 @@ const TableComponent = ({ sellerId, input }) => {
                             <option className="text-gray-500 " value="on going">
                               on going
                             </option>
-                            <option className="text-gray-500 " value="on Hold">
-                              on Hold
+                            <option className="text-gray-500 " value="on hold">
+                              on hold
                             </option>
                             <option className="text-gray-500 " value="complete">
                               complete
