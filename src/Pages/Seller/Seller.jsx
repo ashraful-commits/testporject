@@ -32,7 +32,7 @@ const Seller = () => {
       {model && <SalesModel setModel={setModel} sellerId={id} />}
       <div className="min-w-[1340px] rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
         {loader && (
-          <div className="w-screen h-screen bg-gray-200 flex justify-center items-center absolute top-0 left-0">
+          <div className="w-screen h-screen z-[999999999999999999] bg-gray-200 flex justify-center items-center absolute top-0 left-0">
             <LoadingSpinner />
           </div>
         )}
