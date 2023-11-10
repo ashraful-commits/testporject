@@ -11,8 +11,12 @@ import { Toastify } from "../../Utils/Tostify";
 import { setMessageEmpty } from "../../Features/Client/ClientSlice";
 
 const SalesModel = ({ setModel, sellerId, singleData, title }) => {
-  const { loader, message, error, loginInSeller } =
-    useSelector(getAllSellerState);
+  const {
+    loader: salesLoader,
+    message,
+    error,
+    loginInSeller,
+  } = useSelector(getAllSellerState);
   const [input, setInput] = useState({
     name: "",
     role: "",
@@ -135,7 +139,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           </svg>
         </button>
         <div className="main_model z-[999999999] w-[380px] rounded-[10px] h-[80vh]  flex justify-start items-center flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
-          {loader && (
+          {salesLoader && (
             <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]">
               <div className="absolute top-[45%]">
                 <LoadingSpinner />
