@@ -157,7 +157,14 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="relative">
+          {(loader || sellerLoader) && (
+            <div className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top left-0">
+              <div className="w-full absolute h-full top-[45%]">
+                <LoadingSpinner />
+              </div>
+            </div>
+          )}
           {loginInSeller.role === "admin" ? (
             seller?.length > 0 ? (
               seller

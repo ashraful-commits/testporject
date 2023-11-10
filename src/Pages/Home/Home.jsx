@@ -920,7 +920,8 @@ const Home = () => {
                   {loginInSeller?.client?.reduce((acc, item) => {
                     const commission = parseFloat(item.commissionRate) || 0;
                     return acc + commission;
-                  }, 0) / loginInSeller?.client?.length}%
+                  }, 0) / loginInSeller?.client?.length}
+                  %
                 </h2>
 
                 <button className="text-gray-500 font-[400] w-[98px] h-[19px] tracking-[0.7px]  text-[13px] border bg-[#F5F5F5] rounded-[4px] mr-[22px] mb-[10px] flex justify-center items-center">

@@ -29,13 +29,15 @@ const Seller = () => {
 
   return (
     <>
-      {model && <SalesModel setModel={setModel} sellerId={id} />}
-      <div className="min-w-[1340px] relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
-        {loader && (
-          <div className="w-screen h-screen z-[999999999999999999] bg-gray-200 flex justify-center items-center absolute top-0 left-0">
+      {loader && (
+        <div className="w-screen bg-opacity-20  h-screen z-[9999999999999] bg-cyan-200 flex justify-center items-center absolute top-0 left-0">
+          <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>
-        )}
+        </div>
+      )}
+      {model && <SalesModel setModel={setModel} sellerId={id} />}
+      <div className="min-w-[1340px] relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] ">
             <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />{" "}

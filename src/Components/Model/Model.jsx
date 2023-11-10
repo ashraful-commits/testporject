@@ -209,8 +209,10 @@ const Model = ({ setClient, singleData }) => {
       </button>
       <div className="main_model z-[999999999] w-[868px] rounded-[10px] relative h-[1230px] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
         {loader && (
-          <div className="w-full h-full absolute top-0 left-0 p-0 flex justify-center items-center bg-blue-300 z-[999999999999]">
-            <LoadingSpinner />
+          <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-600 z-[99999999999999999]">
+            <div className="w-full h-full absolute top-[45%]">
+              <LoadingSpinner />
+            </div>
           </div>
         )}
         <div className=" sticky top-0 pt-[42px] bg-white w-full">
