@@ -17,14 +17,14 @@ const Seller = () => {
   const { singleSeller } = useSelector(getAllSellerState);
 
   const { id } = useParams();
-  console.log(id);
+
   const dispatch = useDispatch(getSingleSeller());
   useEffect(() => {
     if (id) {
       dispatch(getSingleSeller(id));
     }
   }, [dispatch, id]);
-  console.log(singleSeller);
+
   return (
     <>
       {model && <SalesModel setModel={setModel} sellerId={id} />}

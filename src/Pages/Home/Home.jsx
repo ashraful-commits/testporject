@@ -19,16 +19,22 @@ import { getAllClientState } from "../../Features/Client/ClientSlice";
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 import LoadingSpinner from "../../Components/LoadingSpin";
 import SellerTableComponent from "../../Components/SellerTableComponent";
+import useFormHook from "../../Hooks/useFormHook";
 
 const Home = () => {
   const [notification, setNotification] = useState(false);
   const [clientModel, setClientModel] = useState(false);
   const [sellerTable, setSellerTable] = useState(false);
+  const { input, handleInputChange } = useFormHook({
+    text: "",
+    endDate: "",
+    startDate: "",
+    status: "",
+    email: "",
+  });
   const { error, message, loader, loginInSeller, seller } =
     useSelector(getAllSellerState);
-
   const { client } = useSelector(getAllClientState);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -979,68 +985,107 @@ const Home = () => {
                     />
                   </svg>
                   <input
+                    onChange={handleInputChange}
+                    value={input.text}
+                    name="text"
                     className="text-[12px] focus:outline-none text-[#878790] pl-[8px]"
                     type="text"
                     placeholder="Search"
                   />
                 </div>
-                <div className="date_search w-[224px] border rounded-[8px] flex h-full items-center justify-between gap-[5px]  px-[15px] mr-[10px]">
-                  <input
-                    type="text"
-                    className="text-[12px] focus:outline-none font-['Roboto'] w-[60px]  capitalize placeholder:text-[12px] placeholder:font-[400] "
-                    placeholder="Mar 4,2023"
-                  />
-                  -
-                  <input
-                    type="text"
-                    className="text-[12px] font-['Roboto'] placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
-                    placeholder="Mar 5, 2023"
-                  />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="15"
-                    viewBox="0 0 14 15"
-                    fill="none"
-                  >
-                    <g clipPath="url(#clip0_657_266)">
+                {sellerTable && (
+                  <div className="text_search w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px]">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                    >
                       <path
-                        d="M12.7502 2.37695H10.1252V1.37695C10.1252 1.3082 10.069 1.25195 10.0002 1.25195H9.12523C9.05648 1.25195 9.00023 1.3082 9.00023 1.37695V2.37695H5.00024V1.37695C5.00024 1.3082 4.94399 1.25195 4.87524 1.25195H4.00024C3.93149 1.25195 3.87524 1.3082 3.87524 1.37695V2.37695H1.25024C0.973681 2.37695 0.750244 2.60039 0.750244 2.87695V13.252C0.750244 13.5285 0.973681 13.752 1.25024 13.752H12.7502C13.0268 13.752 13.2502 13.5285 13.2502 13.252V2.87695C13.2502 2.60039 13.0268 2.37695 12.7502 2.37695ZM12.1252 12.627H1.87524V6.68945H12.1252V12.627ZM1.87524 5.62695V3.50195H3.87524V4.25195C3.87524 4.3207 3.93149 4.37695 4.00024 4.37695H4.87524C4.94399 4.37695 5.00024 4.3207 5.00024 4.25195V3.50195H9.00023V4.25195C9.00023 4.3207 9.05648 4.37695 9.12523 4.37695H10.0002C10.069 4.37695 10.1252 4.3207 10.1252 4.25195V3.50195H12.1252V5.62695H1.87524Z"
-                        fill="#757575"
+                        d="M15.5325 14.4675L12.9825 11.925C13.8052 10.8768 14.2517 9.58249 14.25 8.25C14.25 7.06332 13.8981 5.90328 13.2388 4.91658C12.5795 3.92989 11.6425 3.16085 10.5461 2.70673C9.44975 2.2526 8.24335 2.13378 7.07946 2.36529C5.91558 2.5968 4.84648 3.16825 4.00736 4.00736C3.16825 4.84648 2.5968 5.91558 2.36529 7.07946C2.13378 8.24335 2.2526 9.44975 2.70673 10.5461C3.16085 11.6425 3.92989 12.5795 4.91658 13.2388C5.90328 13.8981 7.06332 14.25 8.25 14.25C9.58249 14.2517 10.8768 13.8052 11.925 12.9825L14.4675 15.5325C14.5372 15.6028 14.6202 15.6586 14.7116 15.6967C14.803 15.7347 14.901 15.7544 15 15.7544C15.099 15.7544 15.197 15.7347 15.2884 15.6967C15.3798 15.6586 15.4628 15.6028 15.5325 15.5325C15.6028 15.4628 15.6586 15.3798 15.6967 15.2884C15.7347 15.197 15.7544 15.099 15.7544 15C15.7544 14.901 15.7347 14.803 15.6967 14.7116C15.6586 14.6202 15.6028 14.5372 15.5325 14.4675ZM3.75 8.25C3.75 7.35999 4.01392 6.48996 4.50839 5.74994C5.00286 5.00992 5.70566 4.43314 6.52793 4.09254C7.3502 3.75195 8.255 3.66284 9.12791 3.83647C10.0008 4.0101 10.8026 4.43869 11.432 5.06802C12.0613 5.69736 12.4899 6.49918 12.6635 7.3721C12.8372 8.24501 12.7481 9.14981 12.4075 9.97208C12.0669 10.7943 11.4901 11.4972 10.7501 11.9916C10.01 12.4861 9.14002 12.75 8.25 12.75C7.05653 12.75 5.91194 12.2759 5.06802 11.432C4.22411 10.5881 3.75 9.44348 3.75 8.25Z"
+                        fill="#878790"
                       />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_657_266">
-                        <rect
-                          width="14"
-                          height="14"
-                          fill="white"
-                          transform="translate(0 0.5)"
-                        />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-                <div className="selete_search w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500]">
-                  <select
-                    className="w-full focus:outline-none h-full"
-                    name=""
-                    id=""
-                  >
-                    <option className="text-[#256682]" value="">
-                      Status
-                    </option>
-                    <option className="text-[#256682]" value="">
-                      On going
-                    </option>
-                    <option className="text-[#256682]" value="">
-                      on Hold
-                    </option>
-                    <option className="text-[#256682]" value="">
-                      Completed
-                    </option>
-                  </select>
-                </div>
+                    </svg>
+                    <input
+                      onChange={handleInputChange}
+                      value={input.email}
+                      name="email"
+                      className="text-[12px] focus:outline-none text-[#878790] pl-[8px]"
+                      type="text"
+                      placeholder="Search"
+                    />
+                  </div>
+                )}
+                {!sellerTable && (
+                  <>
+                    <div className="date_search w-[224px] border rounded-[8px] flex h-full items-center justify-between gap-[5px]  px-[15px] mr-[10px]">
+                      <input
+                        onChange={handleInputChange}
+                        value={input.endDate}
+                        name="endDate"
+                        type="text"
+                        className="text-[12px] focus:outline-none font-['Roboto'] w-[60px]  capitalize placeholder:text-[12px] placeholder:font-[400] "
+                        placeholder="Mar 4,2023"
+                      />
+                      -
+                      <input
+                        type="text"
+                        onChange={handleInputChange}
+                        name="startDate"
+                        value={input.startDate}
+                        className="text-[12px] font-['Roboto'] placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
+                        placeholder="Mar 5, 2023"
+                      />
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="15"
+                        viewBox="0 0 14 15"
+                        fill="none"
+                      >
+                        <g clipPath="url(#clip0_657_266)">
+                          <path
+                            d="M12.7502 2.37695H10.1252V1.37695C10.1252 1.3082 10.069 1.25195 10.0002 1.25195H9.12523C9.05648 1.25195 9.00023 1.3082 9.00023 1.37695V2.37695H5.00024V1.37695C5.00024 1.3082 4.94399 1.25195 4.87524 1.25195H4.00024C3.93149 1.25195 3.87524 1.3082 3.87524 1.37695V2.37695H1.25024C0.973681 2.37695 0.750244 2.60039 0.750244 2.87695V13.252C0.750244 13.5285 0.973681 13.752 1.25024 13.752H12.7502C13.0268 13.752 13.2502 13.5285 13.2502 13.252V2.87695C13.2502 2.60039 13.0268 2.37695 12.7502 2.37695ZM12.1252 12.627H1.87524V6.68945H12.1252V12.627ZM1.87524 5.62695V3.50195H3.87524V4.25195C3.87524 4.3207 3.93149 4.37695 4.00024 4.37695H4.87524C4.94399 4.37695 5.00024 4.3207 5.00024 4.25195V3.50195H9.00023V4.25195C9.00023 4.3207 9.05648 4.37695 9.12523 4.37695H10.0002C10.069 4.37695 10.1252 4.3207 10.1252 4.25195V3.50195H12.1252V5.62695H1.87524Z"
+                            fill="#757575"
+                          />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_657_266">
+                            <rect
+                              width="14"
+                              height="14"
+                              fill="white"
+                              transform="translate(0 0.5)"
+                            />
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                    <div className="selete_search w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500]">
+                      <select
+                        className="w-full focus:outline-none h-full"
+                        name="status"
+                        onChange={handleInputChange}
+                        value={input.status}
+                        id=""
+                      >
+                        <option className="text-[#256682]" value="pending">
+                          pending
+                        </option>
+                        <option className="text-[#256682]" value="on going">
+                          On going
+                        </option>
+                        <option className="text-[#256682]" value="on hold">
+                          on Hold
+                        </option>
+                        <option className="text-[#256682]" value="completed">
+                          Completed
+                        </option>
+                      </select>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="addClient gap-[10px] flex items-center justify-self-end right-0">
                 <button
@@ -1106,9 +1151,12 @@ const Home = () => {
             {/* ========================== table container  */}
             <div className="table_container overflow-auto mt-[20px]">
               {sellerTable ? (
-                <SellerTableComponent sellerId={loginInSeller?._id} />
+                <SellerTableComponent
+                  sellerId={loginInSeller?._id}
+                  input={input}
+                />
               ) : (
-                <TableComponent sellerId={loginInSeller?._id} />
+                <TableComponent sellerId={loginInSeller?._id} input={input} />
               )}
             </div>
           </div>

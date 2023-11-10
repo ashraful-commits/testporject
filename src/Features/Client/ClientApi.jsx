@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const BASE_URL = "https://wordshpere.onrender.com";
-// const BASE_URL = "http://localhost:5050";
+// const BASE_URL = "https://wordshpere.onrender.com";
+const BASE_URL = "http://localhost:5050";
 export const createClient = createAsyncThunk(
   "seller/createClient",
   async (data, thunkAPI) => {
@@ -53,7 +53,7 @@ export const deleteClient = createAsyncThunk(
   "seller/deleteClient",
   async (id, thunkAPI) => {
     try {
-      const response = await axios.get(
+      const response = await axios.delete(
         `${BASE_URL}/api/v1/client/${id}`,
 
         { withCredentials: true }

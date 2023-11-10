@@ -190,11 +190,6 @@ const Model = ({ setClient, singleData }) => {
 
   return (
     <div className="w-screen h-auto py-[120px] pl-[66px] bg-gray-900 bg-opacity-90 absolute top-0 left-0 overflow-hidden z-[99999] flex justify-center">
-      {loader && (
-        <div className="w-full h-full absolute top-0 left-0 p-0 flex justify-center items-center z-[99999999999]">
-          <LoadingSpinner />
-        </div>
-      )}
       <button
         onClick={() => setClient(false)}
         className="absolute right-16 top-10 z-[99999]"
@@ -212,7 +207,12 @@ const Model = ({ setClient, singleData }) => {
           />
         </svg>
       </button>
-      <div className="main_model z-[999999999] w-[868px] rounded-[10px] h-[1230px] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
+      <div className="main_model z-[999999999] w-[868px] rounded-[10px] relative h-[1230px] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
+        {loader && (
+          <div className="w-full h-full absolute top-0 left-0 p-0 flex justify-center items-center bg-blue-300 z-[999999999999]">
+            <LoadingSpinner />
+          </div>
+        )}
         <div className=" sticky top-0 pt-[42px] bg-white w-full">
           <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
             Please add Client & Project Details information
@@ -367,6 +367,7 @@ const Model = ({ setClient, singleData }) => {
                         name="budget"
                         value="Fixed Budget"
                         onChange={handleInputChange}
+                        checked={input.budget === "Fixed Budget"}
                         className="w-4 h-4"
                         type="checkbox"
                       />
@@ -382,9 +383,9 @@ const Model = ({ setClient, singleData }) => {
                         name="budget"
                         value="Hourly Rate"
                         onChange={handleInputChange}
+                        checked={input.budget === "Hourly Rate"}
                         className="w-4 h-4"
                         type="checkbox"
-                        checked={input.budget}
                       />
                       <label
                         className="text-gray-900 font-[800] text-[12px] font-['Lato'] tracking-[.2px]"
