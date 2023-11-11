@@ -919,11 +919,12 @@ const Home = () => {
                 <h2 className="text-[30px] font-[500] text-[#230B34] mb-[10px] tracking-[.2px] font-['Work_Sans']">
                   {loginInSeller &&
                   loginInSeller?.client &&
-                  loginInSeller?.client.length > 0
-                    ? loginInSeller?.client.reduce((acc, item) => {
-                        const commission = parseFloat(item.commissionRate) || 0;
+                  loginInSeller?.client?.length > 0
+                    ? loginInSeller?.client?.reduce((acc, item) => {
+                        const commission =
+                          parseFloat(item?.commissionRate) || 0;
                         return acc + commission;
-                      }, 0) / loginInSeller?.client.length
+                      }, 0) / loginInSeller?.client?.length
                     : 0}
                   %
                 </h2>
@@ -934,7 +935,7 @@ const Home = () => {
               </div>
             </div>
             <div className="total_commission w-[236px] border h-[136px] rounded-[8px] bg-white  grid grid-rows-2 ">
-              <div className="total_earnd flex justify-start items-start mt-[10px]  border-b pl-[12px] gap-[10px]">
+              <div className="total_earned flex justify-start items-start mt-[10px]  border-b pl-[12px] gap-[10px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-opacity-[.1] mt-[4px] bg-[#267596]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
