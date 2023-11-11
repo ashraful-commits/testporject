@@ -9,7 +9,7 @@ import Invoices from "../../Components/Invoices";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllClientState } from "../../Features/Client/ClientSlice";
 import { useEffect } from "react";
-import { getSingleClient } from "../../Features/Client/ClientApi";
+import { getSingleClient, updateClient } from "../../Features/Client/ClientApi";
 import { Link, useParams } from "react-router-dom";
 import dateFormat from "../../Utils/DateFormate";
 import LoadingSpinner from "../../Components/LoadingSpin";
@@ -22,6 +22,15 @@ const Project = () => {
   useEffect(() => {
     dispatch(getSingleClient(id));
   }, [dispatch, id]);
+
+  const handleFileUpload = (e) => {
+    const formData = new FormData();
+
+    [...e.target.files].forEach((item) => {
+      formData.append("projectFile", item);
+    });
+    dispatch(updateClient({ id, formData }));
+  };
   return (
     <>
       {loader && (
@@ -757,46 +766,106 @@ const Project = () => {
                       <ProjectFile
                         key={index}
                         svg={
-                          <svg
-                            width="23"
-                            height="23"
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M16 16C16 13.7909 17.7909 12 20 12C22.2091 12 24 13.7909 24 16C24 18.2091 22.2091 20 20 20C17.7909 20 16 18.2091 16 16Z"
-                              fill="#1ABCFE"
-                            />
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M8 24C8 21.7909 9.79086 20 12 20H16V24C16 26.2091 14.2091 28 12 28C9.79086 28 8 26.2091 8 24Z"
-                              fill="#0ACF83"
-                            />
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M16 4V12H20C22.2091 12 24 10.2091 24 8C24 5.79086 22.2091 4 20 4H16Z"
-                              fill="#FF7262"
-                            />
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M8 8C8 10.2091 9.79086 12 12 12H16V4H12C9.79086 4 8 5.79086 8 8Z"
-                              fill="#F24E1E"
-                            />
-                            <path
-                              fillRule="evenodd"
-                              clipRule="evenodd"
-                              d="M8 16C8 18.2091 9.79086 20 12 20H16V12H12C9.79086 12 8 13.7909 8 16Z"
-                              fill="#A259FF"
-                            />
-                          </svg>
+                          (item.split(".").pop() === "psd" && (
+                            <svg
+                              width="22"
+                              height="22"
+                              viewBox="0 0 32 32"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M3.167,3.517H28.833V28.483H3.167Z"
+                                style={{ fill: "#0c0824" }}
+                              />
+                              <path
+                                d="M3.167,3.517H28.833V28.483H3.167ZM2,29.65H30V2.35H2Zm18.877-16.1c-.922,0-1.237.467-1.237.852,0,.42.21.712,1.447,1.353,1.832.887,2.4,1.738,2.4,2.987,0,1.867-1.423,2.87-3.348,2.87a5.076,5.076,0,0,1-2.392-.5c-.082-.035-.093-.093-.093-.187V19.208c0-.117.058-.152.14-.093a4.33,4.33,0,0,0,2.345.688c.922,0,1.307-.385,1.307-.91,0-.42-.268-.793-1.447-1.4-1.657-.793-2.345-1.6-2.345-2.94,0-1.505,1.178-2.753,3.22-2.753a5.365,5.365,0,0,1,2.088.327.258.258,0,0,1,.117.233v1.6c0,.093-.058.152-.175.117a3.941,3.941,0,0,0-2.03-.525ZM10.843,14.938c.268.023.478.023.945.023,1.365,0,2.648-.478,2.648-2.333,0-1.482-.922-2.228-2.473-2.228-.467,0-.91.023-1.12.035Zm-2.077-6.2c0-.082.163-.14.257-.14.747-.035,1.855-.058,3.01-.058,3.232,0,4.492,1.773,4.492,4.037,0,2.963-2.147,4.235-4.783,4.235-.443,0-.595-.023-.91-.023v4.48c0,.093-.035.14-.14.14H8.907c-.093,0-.14-.035-.14-.14V8.743Z"
+                                style={{ fill: "#31c5f0" }}
+                              />
+                            </svg>
+                          )) ||
+                          (item.split(".").pop() === "ai" && (
+                            <svg
+                              width="22"
+                              height="22"
+                              viewBox="0 0 32 32"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <title>file_type_ai</title>
+                              <path
+                                d="M3.169,3.517H28.835V28.483H3.169Z"
+                                style={{ fill: "#1c0a00" }}
+                              />
+                              <path
+                                d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Zm18.34-17.57c0-.093.035-.14.14-.14h1.832c.093,0,.14.035.14.14v9.205c0,.093-.023.14-.14.14H20.505c-.117,0-.152-.058-.152-.152V12.08h-.012Zm-.128-2.648a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,20.214,9.432Zm-5.25,6.487c-.327-1.3-1.1-4.118-1.388-5.483h-.023c-.245,1.365-.863,3.675-1.353,5.483Zm-3.243,1.89-.922,3.5c-.023.093-.058.117-.175.117H8.909c-.117,0-.14-.035-.117-.175l3.313-11.6a3.779,3.779,0,0,0,.117-.968c0-.082.035-.117.093-.117h2.45c.082,0,.117.023.14.117l3.71,12.588c.023.093,0,.152-.093.152H16.585c-.093,0-.152-.023-.175-.1l-.957-3.512H11.72Z"
+                                style={{ fill: "#ff7f18" }}
+                              />
+                            </svg>
+                          )) ||
+                          (item.split(".").pop() === "jpg" && (
+                            <svg
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <mask
+                                id="mask0_1358_2896"
+                                style={{ maskType: "alpha" }}
+                                maskUnits="userSpaceOnUse"
+                                x="3"
+                                y="3"
+                                width="18"
+                                height="18"
+                              >
+                                <path
+                                  d="M3 11C3 7.22876 3 5.34315 4.17157 4.17157C5.34315 3 7.22876 3 11 3H13C16.7712 3 18.6569 3 19.8284 4.17157C21 5.34315 21 7.22876 21 11V13C21 16.7712 21 18.6569 19.8284 19.8284C18.6569 21 16.7712 21 13 21H11C7.22876 21 5.34315 21 4.17157 19.8284C3 18.6569 3 16.7712 3 13V11Z"
+                                  fill="#273B4A"
+                                />
+                              </mask>
+                              <g mask="url(#mask0_1358_2896)">
+                                <path
+                                  d="M5.40989 12.5901L5.25713 12.7429C4.27646 13.7235 3.78613 14.2139 3.49264 14.8158C3.39066 15.025 3.30712 15.2427 3.24299 15.4664C3.05843 16.1102 3.09488 16.8027 3.16777 18.1877L3.5 24.5H21V19.7573C21 18.3059 21 17.5802 20.7614 16.9207C20.6962 16.7404 20.6181 16.565 20.5277 16.3959C20.1971 15.7774 19.6577 15.2919 18.5789 14.321L18.3643 14.1279C17.4682 13.3214 17.0202 12.9182 16.5078 12.8039C16.1864 12.7322 15.8523 12.741 15.5352 12.8295C15.0295 12.9705 14.6033 13.3967 13.7508 14.2492C13.1184 14.8816 12.8023 15.1977 12.4625 15.2406C12.2519 15.2672 12.0383 15.226 11.8526 15.1231C11.5531 14.9572 11.3742 14.5399 11.0166 13.7053C10.2559 11.9304 9.87554 11.0429 9.22167 10.7151C8.89249 10.5501 8.52413 10.4792 8.1572 10.5101C7.42836 10.5716 6.75554 11.2445 5.40989 12.5901L5.40989 12.5901Z"
+                                  fill="#2A4157"
+                                  fillOpacity="0.24"
+                                  stroke="#222222"
+                                />
+                              </g>
+                              <path
+                                d="M3 11C3 7.22876 3 5.34315 4.17157 4.17157C5.34315 3 7.22876 3 11 3H13C16.7712 3 18.6569 3 19.8284 4.17157C21 5.34315 21 7.22876 21 11V13C21 16.7712 21 18.6569 19.8284 19.8284C18.6569 21 16.7712 21 13 21H11C7.22876 21 5.34315 21 4.17157 19.8284C3 18.6569 3 16.7712 3 13V11Z"
+                                stroke="#222222"
+                                strokeWidth="1.2"
+                              />
+                              <circle
+                                cx="16.5"
+                                cy="7.5"
+                                r="1.5"
+                                fill="#222222"
+                              />
+                            </svg>
+                          ))
                         }
-                        name="Figma Archive"
+                        name={
+                          (item.split(".").pop() === "psd" && "Photoshop") ||
+                          (item.split(".").pop() === "ai" && "Illustrator") ||
+                          (item.split(".").pop() === "fig " && "Figma") ||
+                          (item.split(".").pop() === "jpg" && "JPEG Image") ||
+                          (item.split(".").pop() === "png" && "PNG Image") ||
+                          (item.split(".").pop() === "doc" && "Word") ||
+                          (item.split(".").pop() === "xls" && "Excel") ||
+                          (item.split(".").pop() === "pdf" && "PDF Document") ||
+                          (item.split(".").pop() === "txt" && "Text") ||
+                          (item.split(".").pop() === "mp4" && "MP4 Video") ||
+                          (item.split(".").pop() === "mp3" && "MP3 Audio") ||
+                          (item.split(".").pop() === "zip" && "ZIP Archive") ||
+                          (item.split(".").pop() === "html" && "HTML") ||
+                          (item.split(".").pop() === "css" && "CSS") ||
+                          (item.split(".").pop() === "js" && "JavaScript") ||
+                          (item.split(".").pop() === "xlsx" &&
+                            "Excel Spreadsheet") ||
+                          (item.split(".").pop() === "pptx" && "PowerPoint") ||
+                          "Unknown"
+                        }
                         title="Figma Link"
                         file={item}
                       />
@@ -808,7 +877,7 @@ const Project = () => {
 
                 <div className="flex  items-center  rounded-2xl w-[150px] h-[57px] overflow-hidden gap-[10px]">
                   <label
-                    htmlFor=""
+                    htmlFor="ProjectFillUpload"
                     className="rounded-2xl cursor-pointer border  text-[14px]  w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']  flex justify-center items-center gap-2 border-dotted"
                   >
                     <svg
@@ -836,6 +905,13 @@ const Project = () => {
                     </svg>
                     Upload File
                   </label>
+                  <input
+                    id="ProjectFillUpload"
+                    className="hidden"
+                    type="file"
+                    multiple
+                    onChange={handleFileUpload}
+                  />
                 </div>
               </div>
             </div>

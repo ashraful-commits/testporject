@@ -129,7 +129,7 @@ export const updateCommissionRate = createAsyncThunk(
     }
   }
 );
-export const fileDownload = createAsyncThunk(
+export const fileDownloadFunc = createAsyncThunk(
   "client/fileDownload",
   async (data, thunkAPI) => {
     try {

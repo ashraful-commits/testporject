@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   createClient,
   deleteClient,
-  fileDownload,
+  fileDownloadFunc,
   getAllClient,
   getSingleClient,
   permissionUpdate,
@@ -146,16 +146,16 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
-      .addCase(fileDownload.pending, (state, action) => {
+      .addCase(fileDownloadFunc.pending, (state, action) => {
         state.loader = true;
       })
-      .addCase(fileDownload.fulfilled, (state, action) => {
+      .addCase(fileDownloadFunc.fulfilled, (state, action) => {
         state.loader = false;
         state.downloadLink = action.payload.downloadUrl;
 
         state.message = action.payload.message;
       })
-      .addCase(fileDownload.rejected, (state, action) => {
+      .addCase(fileDownloadFunc.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });

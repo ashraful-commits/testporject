@@ -38,6 +38,7 @@ const SellerSlice = createSlice({
       .addCase(SellerRegistration.fulfilled, (state, action) => {
         state.loader = false;
         state.message = action.payload.message;
+        state.singleSeller.salesPerson.push(action.payload.seller);
       })
       .addCase(SellerRegistration.rejected, (state, action) => {
         state.loader = false;
