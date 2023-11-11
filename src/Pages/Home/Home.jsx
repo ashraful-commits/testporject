@@ -917,10 +917,14 @@ const Home = () => {
               </div>
               <div className="rate mt-[12px]  px-[20px] flex justify-between gap-[5px] items-center">
                 <h2 className="text-[30px] font-[500] text-[#230B34] mb-[10px] tracking-[.2px] font-['Work_Sans']">
-                  {loginInSeller?.client?.reduce((acc, item) => {
-                    const commission = parseFloat(item.commissionRate) || 0;
-                    return acc + commission;
-                  }, 0) / loginInSeller?.client?.length}
+                  {loginInSeller &&
+                  loginInSeller?.client &&
+                  loginInSeller?.client.length > 0
+                    ? loginInSeller?.client.reduce((acc, item) => {
+                        const commission = parseFloat(item.commissionRate) || 0;
+                        return acc + commission;
+                      }, 0) / loginInSeller?.client.length
+                    : 0}
                   %
                 </h2>
 
@@ -955,7 +959,12 @@ const Home = () => {
               </div>
               <div className="percentage flex justify-start gap-[10px] pl-[22px] items-end">
                 <h2 className="text-[30px] text-[#230B34] mb-[10px] font-[500] font-['Work_Sans'] tracking-[.2px]">
-                  $ {calculateTotalCommissionForAllClients(client)}
+                  ${" "}
+                  {calculateTotalCommissionForAllClients(loginInSeller?.client)
+                    ? calculateTotalCommissionForAllClients(
+                        loginInSeller?.client
+                      )
+                    : 0}
                 </h2>
               </div>
             </div>

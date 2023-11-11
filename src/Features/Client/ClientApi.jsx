@@ -3,7 +3,7 @@ import axios from "axios";
 const BASE_URL = "https://wordshpere.onrender.com";
 // const BASE_URL = "http://localhost:5050";
 export const createClient = createAsyncThunk(
-  "seller/createClient",
+  "client/createClient",
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(`${BASE_URL}/api/v1/client`, data, {
@@ -17,7 +17,7 @@ export const createClient = createAsyncThunk(
   }
 );
 export const getAllClient = createAsyncThunk(
-  "seller/getAllClient",
+  "client/getAllClient",
   async (data, thunkAPI) => {
     try {
       const response = await axios.get(
@@ -33,7 +33,7 @@ export const getAllClient = createAsyncThunk(
   }
 );
 export const updateClient = createAsyncThunk(
-  "seller/updateClient",
+  "client/updateClient",
   async (data, thunkAPI) => {
     try {
       console.log(data);
@@ -50,7 +50,7 @@ export const updateClient = createAsyncThunk(
   }
 );
 export const deleteClient = createAsyncThunk(
-  "seller/deleteClient",
+  "client/deleteClient",
   async (id, thunkAPI) => {
     try {
       const response = await axios.delete(
@@ -66,7 +66,7 @@ export const deleteClient = createAsyncThunk(
   }
 );
 export const getSingleClient = createAsyncThunk(
-  "seller/getSingleClient",
+  "client/getSingleClient",
   async (id, thunkAPI) => {
     try {
       const response = await axios.get(
@@ -82,7 +82,7 @@ export const getSingleClient = createAsyncThunk(
   }
 );
 export const permissionUpdate = createAsyncThunk(
-  "seller/permissionUpdate",
+  "client/permissionUpdate",
   async (data, thunkAPI) => {
     try {
       const response = await axios.patch(
@@ -98,7 +98,7 @@ export const permissionUpdate = createAsyncThunk(
   }
 );
 export const projectStatusUpdate = createAsyncThunk(
-  "seller/projectStatusUpdate",
+  "client/projectStatusUpdate",
   async (data, thunkAPI) => {
     try {
       const response = await axios.patch(
@@ -114,7 +114,7 @@ export const projectStatusUpdate = createAsyncThunk(
   }
 );
 export const updateCommissionRate = createAsyncThunk(
-  "seller/updateCommissionRate",
+  "client/updateCommissionRate",
   async (data, thunkAPI) => {
     try {
       const response = await axios.patch(
@@ -123,6 +123,21 @@ export const updateCommissionRate = createAsyncThunk(
         { withCredentials: true }
       );
 
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const fileDownload = createAsyncThunk(
+  "client/fileDownload",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/v1/client/file/${data.file}/${data.fileFormat}`,
+        { withCredentials: true }
+      );
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);

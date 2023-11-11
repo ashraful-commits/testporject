@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   createClient,
   deleteClient,
+  fileDownload,
   getAllClient,
   getSingleClient,
   permissionUpdate,
@@ -19,6 +20,7 @@ const ClientSlice = createSlice({
     loader: false,
     message: null,
     singleClient: null,
+    downloadLink: null,
   },
   reducers: {
     setMessageEmpty: (state, action) => {
@@ -141,6 +143,19 @@ const ClientSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(updateCommissionRate.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(fileDownload.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(fileDownload.fulfilled, (state, action) => {
+        state.loader = false;
+        state.downloadLink = action.payload.downloadUrl;
+
+        state.message = action.payload.message;
+      })
+      .addCase(fileDownload.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });

@@ -1,7 +1,6 @@
 export function calculateTotalCommissionForAllClients(clients) {
   let totalCommission = 0;
   clients?.forEach((client) => {
-    console.log(client.amount);
     const commission = (
       (client?.amount * parseInt(client?.commissionRate)) /
       100

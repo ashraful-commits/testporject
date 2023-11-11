@@ -540,7 +540,10 @@ const TableComponent = ({ sellerId, input }) => {
                       <td className="w-[100px]  items-center text-[.8125rem] truncate text-start font-[600] text-[#3A3A49]">
                         $
                         {item?.amount &&
-                          ((item?.amount * 100) / 15 / 100).toFixed(2)}
+                          (
+                            (item?.amount * parseInt(item.commissionRate)) /
+                            100
+                          ).toFixed(2)}
                       </td>
                     )}
                     {loginInSeller?.role === "user" && (
@@ -693,7 +696,7 @@ const TableComponent = ({ sellerId, input }) => {
             </span>
           )}
         </tbody>
-        {(client.length >= 1 || loginInSeller?.client?.length >= 1) && (
+        {(client.length > 7 || loginInSeller?.client?.length > 7) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button

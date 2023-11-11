@@ -562,7 +562,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
             </span>
           )}
         </tbody>
-        {(seller?.length >= 1 || loginInSeller?.salesPerson?.length >= 1) && (
+        {(seller?.length > 7 || loginInSeller?.salesPerson?.length > 7) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button

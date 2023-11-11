@@ -537,7 +537,17 @@ const Seller = () => {
                 </svg>
               }
               title="Commission Due"
-              number={19}
+              number={
+                calculateTotalCommissionForAllClients(singleSeller?.client) -
+                (singleSeller &&
+                singleSeller.payment &&
+                singleSeller.payment.length > 0
+                  ? singleSeller.payment.reduce((acc, item) => {
+                      const amount = parseFloat(item.amount) || 0;
+                      return acc + amount;
+                    }, 0)
+                  : 0)
+              }
               styles={`text-red-500`}
             />
             <ProjectDetails
@@ -564,7 +574,14 @@ const Seller = () => {
                 </svg>
               }
               title="Payment Received"
-              number={19}
+              number={
+                singleSeller?.payment && singleSeller?.payment.length > 0
+                  ? singleSeller?.payment.reduce((acc, item) => {
+                      const commission = parseFloat(item.amount) || 0;
+                      return acc + commission;
+                    }, 0)
+                  : 0
+              }
             />
             <ProjectDetails
               svg={
