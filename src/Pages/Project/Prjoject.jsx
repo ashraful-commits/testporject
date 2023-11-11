@@ -25,7 +25,7 @@ const Project = () => {
   return (
     <>
       {loader && (
-        <div className="w-screen bg-opacity-20  h-screen z-[9999999999999] bg-cyan-600 flex justify-center items-center absolute top-0 left-0">
+        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-cyan-600 flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>

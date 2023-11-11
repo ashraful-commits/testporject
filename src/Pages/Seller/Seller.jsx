@@ -30,7 +30,7 @@ const Seller = () => {
   return (
     <>
       {loader && (
-        <div className="w-screen bg-opacity-20  h-screen z-[9999999999999] bg-cyan-200 flex justify-center items-center absolute top-0 left-0">
+        <div className="w-screen bg-opacity-20 min-h-[1240px] h-screen z-[9999999999999] bg-cyan-200 flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>
