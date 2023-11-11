@@ -36,7 +36,7 @@ const Project = () => {
           <div className="w-[640px] h-full flex items-center gap-[20px] ">
             <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />{" "}
             <h1 className="text-[26px] capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
-              Sales Portal / {singleClient?.clientName}
+              Sales Portal / {singleClient?.sellerId?.name}
             </h1>
           </div>
           <div className="w-[600px] h-[46px] flex justify-between items-center">
@@ -73,6 +73,7 @@ const Project = () => {
                     pricing
                   </button>
                   <Link
+                    target="blank"
                     to={singleClient?.website}
                     className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]"
                   >

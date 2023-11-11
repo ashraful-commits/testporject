@@ -46,57 +46,61 @@ const Login = () => {
     }
   }, [message, error, navigate, dispatch]);
   return (
-    <div className="min-w-full relative z-0 min-h-screen flex justify-center items-center overflow-hidden">
+    <>
       {loader && (
-        <div className="absolute top-52 right-40 z-[99999]">
-          <LoadingSpinner />
+        <div className="absolute w-screen h-screen z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
+          <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
+            <LoadingSpinner />
+          </div>
         </div>
       )}
-      <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
-        <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
-          Login
-        </h1>
-        <form
-          onSubmit={handleLoginSubmit}
-          action=""
-          className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
-        >
-          <FormInput
-            label="Email"
-            type="email"
-            required="required"
-            placeholder="Email"
-            name="email"
-            value={input.email}
-            handleInputChange={handleInputChange}
-          />
-          <FormInput
-            label="Password"
-            placeholder="Password"
-            name="password"
-            type="password"
-            value={input.password}
-            required="required"
-            handleInputChange={handleInputChange}
-          />
-          <button
-            type="submit"
-            className="text-[18px] uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
-          >
+      <div className="min-w-full relative z-0 min-h-screen flex justify-center items-center overflow-hidden">
+        <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
+          <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
             Login
-          </button>
-          <p className="text-[12px] text-center text-gray-500">
-            Don&apos;t have an account{" "}
-            <Link
-              className="text-purple-500 font-[600] hover:text-purple-700 transition-all duration-500 ease-out"
-              to="/register"
+          </h1>
+          <form
+            onSubmit={handleLoginSubmit}
+            action=""
+            className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
+          >
+            <FormInput
+              label="Email"
+              type="email"
+              required="required"
+              placeholder="Email"
+              name="email"
+              value={input.email}
+              handleInputChange={handleInputChange}
+            />
+            <FormInput
+              label="Password"
+              placeholder="Password"
+              name="password"
+              type="password"
+              value={input.password}
+              required="required"
+              handleInputChange={handleInputChange}
+            />
+            <button
+              type="submit"
+              className="text-[18px] uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
             >
-              Register
-            </Link>
-          </p>
-        </form>
+              Login
+            </button>
+            <p className="text-[12px] text-center text-gray-500">
+              Don&apos;t have an account{" "}
+              <Link
+                className="text-purple-500 font-[600] hover:text-purple-700 transition-all duration-500 ease-out"
+                to="/register"
+              >
+                Register
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
