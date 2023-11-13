@@ -48,7 +48,6 @@ const ClientSlice = createSlice({
       .addCase(getAllClient.fulfilled, (state, action) => {
         state.loader = false;
         state.client = action.payload.client;
-        state.message = action.payload.message;
       })
       .addCase(getAllClient.rejected, (state, action) => {
         state.loader = false;

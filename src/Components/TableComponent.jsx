@@ -25,7 +25,8 @@ const TableComponent = ({ sellerId, input }) => {
   const { loginInSeller, loader: sellerLoader } =
     useSelector(getAllSellerState);
   const dispatch = useDispatch();
-
+  console.log(message);
+  console.log(error);
   const [currentPage, setCurrentPage] = useState(1);
   //=================================================================================================edit model
   const [editModel, setEditModel] = useState(false);

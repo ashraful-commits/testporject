@@ -22,6 +22,8 @@ import SalesModel from "./Model/SalesModel";
 
 const SellerTableComponent = ({ setModel, sellerId, input }) => {
   const { client, loader, error, message } = useSelector(getAllClientState);
+  console.log(message);
+  console.log(error);
   const {
     loginInSeller,
     seller,
