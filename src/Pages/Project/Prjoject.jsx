@@ -30,7 +30,9 @@ const Project = () => {
     [...e.target.files].forEach((item) => {
       formData.append("projectFile", item);
     });
-    dispatch(updateClient({ id, formData }));
+    dispatch(updateClient({ id, formData })).then(() => {
+      dispatch(getSingleClient(id));
+    });
   };
   return (
     <>
