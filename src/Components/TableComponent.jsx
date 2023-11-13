@@ -270,7 +270,7 @@ const TableComponent = ({ sellerId, input }) => {
                         >
                           <button>
                             <select
-                              className={` focus:outline-none ${
+                              className={` focus:outline-none w-[120px] ${
                                 item?.projectStatus == "pending" &&
                                 "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
                               } ${
@@ -290,29 +290,29 @@ const TableComponent = ({ sellerId, input }) => {
                                 handleProjectStatus(item._id, e.target.value)
                               }
                             >
-                              <option className="text-gray-500 " value="....">
+                              <option className="text-gray-500  " value="....">
                                 ...select...
                               </option>
                               <option
-                                className="text-gray-500 "
+                                className="text-gray-500  "
                                 value="pending"
                               >
                                 pending
                               </option>
                               <option
-                                className="text-gray-500 "
+                                className="text-gray-500  "
                                 value="on going"
                               >
                                 on going
                               </option>
                               <option
-                                className="text-gray-500 "
+                                className="text-gray-500  "
                                 value="on hold"
                               >
                                 on hold
                               </option>
                               <option
-                                className="text-gray-500 "
+                                className="text-gray-500  "
                                 value="complete"
                               >
                                 complete
@@ -335,10 +335,10 @@ const TableComponent = ({ sellerId, input }) => {
                                 handleCommission(item._id, e.target.value)
                               }
                             >
-                              <option className="text-gray-500 " value="">
+                              <option className="text-gray-500  " value="">
                                 ...
                               </option>
-                              <option className="text-gray-500 " value="5">
+                              <option className="text-gray-500  " value="5">
                                 5%
                               </option>
                               <option className="text-gray-500 " value="10">
@@ -563,18 +563,18 @@ const TableComponent = ({ sellerId, input }) => {
                       >
                         <button>
                           <select
-                            className={` focus:outline-none px-2 ${
+                            className={` focus:outline-none w-full px-2 ${
                               item?.projectStatus == "pending" &&
-                              "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                              "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem]  "
                             } ${
                               item?.projectStatus == "complete" &&
-                              "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                              "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem]  "
                             }  ${
                               item?.projectStatus == "on hold" &&
-                              "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                              "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem]  "
                             }   ${
                               item?.projectStatus == "on going" &&
-                              "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                              "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem]  "
                             }`}
                             name="projectType"
                             id=""

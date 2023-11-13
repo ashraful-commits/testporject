@@ -16,6 +16,7 @@ import LoadingSpinner from "../../Components/LoadingSpin";
 
 const Project = () => {
   const { singleClient, loader } = useSelector(getAllClientState);
+
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -43,7 +44,15 @@ const Project = () => {
       <div className="min-w-[1340px] relative rounded-[15px]  pl-[48px]  pt-[30px] bg-[#FFF] min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px]">
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] ">
-            <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />{" "}
+            {singleClient?.sellerId?.companyAvatar ? (
+              <img
+                className="w-[86px] h-[70px]"
+                src={singleClient?.sellerId?.companyAvatar}
+                alt=""
+              />
+            ) : (
+              <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />
+            )}
             <h1 className="text-[26px] capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
               Sales Portal / {singleClient?.sellerId?.name}
             </h1>
