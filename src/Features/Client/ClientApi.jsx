@@ -36,7 +36,6 @@ export const updateClient = createAsyncThunk(
   "client/updateClient",
   async (data, thunkAPI) => {
     try {
-      console.log(data);
       const response = await axios.put(
         `${BASE_URL}/api/v1/client/${data.id}`,
         data.formData,

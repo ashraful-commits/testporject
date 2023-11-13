@@ -18,13 +18,14 @@ import { getAllSellerState } from "../Features/Seller/SellerSlice";
 
 import { Link } from "react-router-dom";
 import { Toastify } from "../Utils/Tostify";
+import { LoggedInSeller } from "../Features/Seller/SellerApi";
 
 const TableComponent = ({ sellerId, input }) => {
   const { client, loader, error, message } = useSelector(getAllClientState);
   const { loginInSeller, loader: sellerLoader } =
     useSelector(getAllSellerState);
   const dispatch = useDispatch();
-  console.log(input);
+
   const [currentPage, setCurrentPage] = useState(1);
   //=================================================================================================edit model
   const [editModel, setEditModel] = useState(false);
@@ -36,6 +37,11 @@ const TableComponent = ({ sellerId, input }) => {
   const handleEdit = (id) => {
     setEditModel(true);
     setSingleData(client.find((item) => item._id == id));
+  };
+  //================================================================================================handle edit
+  const handleSellerEdit = (id) => {
+    setEditModel(true);
+    setSingleData(loginInSeller?.client?.find((item) => item._id == id));
   };
   const handleDelete = (id) => {
     swal({
@@ -61,15 +67,20 @@ const TableComponent = ({ sellerId, input }) => {
   };
   //=======================================================================================handle permission
   const handlePermission = (id, status) => {
-    dispatch(permissionUpdate({ id, status }));
+    dispatch(permissionUpdate({ id, status })).then(() => {
+      dispatch(LoggedInSeller());
+    });
   };
   //========================================================================================handle permission
   const handleProjectStatus = (id, projectStatus) => {
-    dispatch(projectStatusUpdate({ id, projectStatus }));
+    dispatch(projectStatusUpdate({ id, projectStatus })).then(() => {
+      dispatch(LoggedInSeller());
+    });
   };
   const handleCommission = (id, commissionRate) => {
-    console.log(commissionRate, id);
-    dispatch(updateCommissionRate({ id, commissionRate }));
+    dispatch(updateCommissionRate({ id, commissionRate })).then(() => {
+      dispatch(LoggedInSeller());
+    });
   };
   //========================================================================================get user client
   useEffect(() => {
@@ -548,11 +559,11 @@ const TableComponent = ({ sellerId, input }) => {
                     )}
                     {loginInSeller?.role === "user" && (
                       <td
-                        className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                        className={`text-[.8125rem] w-[120px]  flex justify-start items-center font-[400] text-[#3A3A49] `}
                       >
                         <button>
                           <select
-                            className={` focus:outline-none ${
+                            className={` focus:outline-none px-2 ${
                               item?.projectStatus == "pending" &&
                               "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
                             } ${
@@ -635,12 +646,28 @@ const TableComponent = ({ sellerId, input }) => {
                         />
                       </td>
                     )}
-
                     <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                       {item?.projectSource}
                     </td>
-                    <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[80px] h-full text-[#3A3A49]">
-                      <button onClick={() => handleEdit(item._id)}>
+                    <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[100px] h-full text-[#3A3A49]">
+                      <Link to={`/${item._id}`}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#000000"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
+                          <path d="M12 13a1 1 0 100-2 1 1 0 000 2z" />
+                          <path d="M21 8V5a2 2 0 00-2-2H5a2 2 0 00-2 2v3m18 8v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3" />
+                        </svg>
+                      </Link>
+                      <button onClick={() => handleSellerEdit(item._id)}>
                         <svg
                           fill="#000000"
                           width="20"
@@ -696,7 +723,7 @@ const TableComponent = ({ sellerId, input }) => {
             </span>
           )}
         </tbody>
-        {(client.length > 7 || loginInSeller?.client?.length > 7) && (
+        {(client.length >= 7 || loginInSeller?.client?.length >= 7) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button

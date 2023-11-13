@@ -26,6 +26,7 @@ const Home = () => {
   const [clientModel, setClientModel] = useState(false);
   const [sellerTable, setSellerTable] = useState(false);
   const [currentTime, setCurrentTime] = useState(false);
+
   const { input, setInput, handleInputChange } = useFormHook({
     text: "",
     endDate: "",
@@ -39,11 +40,13 @@ const Home = () => {
   const { client } = useSelector(getAllClientState);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogout = () => {
     dispatch(LogoutSeller());
     localStorage.clear("Seller");
     navigate("/login");
   };
+
   useEffect(() => {
     if (error) {
       Toastify(error, "error");
@@ -58,19 +61,22 @@ const Home = () => {
       navigate("/login");
     }
   }, [error, message, dispatch, navigate]);
+
   useEffect(() => {
     dispatch(LoggedInSeller());
   }, [dispatch]);
+
   useEffect(() => {
     const currentDate = new Date();
     setCurrentTime(
       currentDate.toLocaleDateString("en-US", {
-        month: "short", // 'm'
-        day: "numeric", // 'd'
-        year: "numeric", // 'y'
+        month: "short",
+        day: "numeric",
+        year: "numeric",
       })
     );
   }, []);
+
   return (
     <div className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>

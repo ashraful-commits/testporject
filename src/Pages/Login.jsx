@@ -48,7 +48,7 @@ const Login = () => {
   return (
     <>
       {loader && (
-        <div className="absolute w-screen h-screen z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
+        <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
           <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
             <LoadingSpinner />
           </div>

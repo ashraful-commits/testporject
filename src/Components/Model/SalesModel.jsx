@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import FormInput from "../FormInput/FormInput";
 import {
+  AddSalePerson,
+  LoggedInSeller,
   SellerRegistration,
   updateSeller,
 } from "../../Features/Seller/SellerApi";
@@ -25,10 +27,13 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     avatar: "",
     employment: "",
     website: "",
+    companyName: "",
   });
   //================================state
   const [avatar, setAvatar] = useState(null);
+  const [componyAvatar, setComponyAvatar] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [companyPhoto, setCompanyPhoto] = useState(null);
   const dispatch = useDispatch();
 
   //========================handle Avatar
@@ -36,6 +41,10 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   const handleSellerAvatar = (e) => {
     setAvatar(URL.createObjectURL(e.target.files[0]));
     setPhoto(e.target.files[0]);
+  };
+  const handleCompanyAvatar = (e) => {
+    setComponyAvatar(URL.createObjectURL(e.target.files[0]));
+    setCompanyPhoto(e.target.files[0]);
   };
   //===========================handle inputChange
   const handleInputChange = (e) => {
@@ -55,6 +64,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
       formData.append("name", input.name);
       formData.append("email", input.email);
       formData.append("password", input.password);
+      formData.append("companyName", input.companyName);
       if (input.role) {
         formData.append("role", input.role);
       }
@@ -63,8 +73,12 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
       if (photo) {
         formData.append("sellerAvatar", photo);
       }
+      if (companyPhoto) {
+        formData.append("companyAvatar", companyPhoto);
+      }
 
       dispatch(updateSeller({ id: singleData?._id, formData })).then(() => {
+        dispatch(LoggedInSeller());
         setModel(false);
         setInput({
           name: "",
@@ -81,16 +95,19 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
       formData.append("name", input.name);
       formData.append("email", input.email);
       formData.append("password", input.password);
+      formData.append("companyName", input.companyName);
       if (input.role) {
         formData.append("role", input.role);
       }
       formData.append("website", input.website);
       formData.append("employment", input.employment);
       formData.append("sellerAvatar", photo);
+      if (companyPhoto) {
+        formData.append("companyAvatar", companyPhoto);
+      }
       formData.append("sellerId", sellerId);
       if (photo) {
         dispatch(SellerRegistration(formData)).then(() => {
-          setModel(false);
           setInput({
             name: "",
             role: "",
@@ -101,6 +118,10 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
             website: "",
           });
         });
+      }
+      if (photo && sellerId) {
+        setModel(false);
+        AddSalePerson(formData);
       }
     }
   };
@@ -117,10 +138,11 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   useEffect(() => {
     setInput({ ...singleData });
     setAvatar(singleData?.avatar);
+    setComponyAvatar(singleData?.componyAvatar);
   }, [singleData]);
   return (
     <>
-      <div className="w-screen min-h-[1240px] h-screen pt-[80px] pl-[66px] bg-gray-900 bg-opacity-90 absolute bottom-0  top-0 left-0  z-[99999] flex justify-center">
+      <div className="w-screen min-h-[1240px] h-screen pt-[80px] pl-[66px] bg-gray-900 bg-opacity-90 absolute bottom-0  top-0 left-0  z-[99999] flex justify-center items-center">
         <button
           onClick={() => setModel(false)}
           className="absolute right-16 top-10 z-[99999]"
@@ -138,7 +160,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
             />
           </svg>
         </button>
-        <div className="main_model z-[999999999] w-[380px] rounded-[10px] h-[80vh]  flex justify-start items-center flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
+        <div className="main_model z-[999999999] w-[380px] rounded-[10px] h-[80vh]  flex justify-center items-center flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
           {salesLoader && (
             <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]">
               <div className="absolute top-[45%]">
@@ -146,7 +168,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
               </div>
             </div>
           )}
-          <div className="pt-[42px] bg-white w-full">
+          <div className="pt-[10px] bg-white w-full">
             <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
               {title === "Edit" ? "Edit" : "Add New"} Sales person
             </h1>
@@ -154,10 +176,10 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           {/* //=========================form  */}
           <form
             onSubmit={handleSubmit}
-            className="form_content grid relative justify-between mt-[43px] overflow-hidden"
+            className="form_content grid relative justify-between mt-[10px] overflow-hidden items-center"
           >
-            <div className="right  flex flex-col">
-              <div className="  flex gap-y-2 flex-col items-center">
+            <div className="right w-full flex flex-col justify-center">
+              <div className="  flex gap-y-2 flex-col  justify-center">
                 <FormInput
                   placeholder="Name"
                   label={"Name"}
@@ -195,6 +217,14 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   type="text"
                   handleInputChange={handleInputChange}
                 />
+                <FormInput
+                  placeholder="Company Name"
+                  label={"Company Name"}
+                  name="companyName"
+                  value={input.companyName}
+                  type="text"
+                  handleInputChange={handleInputChange}
+                />
                 {loginInSeller?.role === "admin" && (
                   <>
                     <label
@@ -225,22 +255,46 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   </>
                 )}
 
-                <label
-                  htmlFor="uploadAvatar"
-                  className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
-                >
-                  {avatar ? (
-                    <img className="w-full h-full object-cover" src={avatar} />
-                  ) : (
-                    "Select avatar"
-                  )}
-                </label>
+                <div className="flex">
+                  <label
+                    htmlFor="uploadAvatar"
+                    className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
+                  >
+                    {avatar ? (
+                      <img
+                        className="w-full h-full object-cover"
+                        src={avatar}
+                      />
+                    ) : (
+                      "Select avatar"
+                    )}
+                  </label>
+                  <label
+                    htmlFor="uploadCompanyAvatar"
+                    className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
+                  >
+                    {avatar ? (
+                      <img
+                        className="w-full h-full object-cover"
+                        src={componyAvatar}
+                      />
+                    ) : (
+                      "company avatar"
+                    )}
+                  </label>
+                </div>
 
                 <input
                   type="file"
                   onChange={handleSellerAvatar}
                   className="hidden"
                   id="uploadAvatar"
+                />
+                <input
+                  type="file"
+                  onChange={handleCompanyAvatar}
+                  className="hidden"
+                  id="uploadCompanyAvatar"
                 />
               </div>
               <div className="submit_section  flex justify-center flex-col items-center mt-5 bg-white ">

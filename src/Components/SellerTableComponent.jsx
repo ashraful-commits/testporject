@@ -10,6 +10,7 @@ import swal from "sweetalert";
 import LoadingSpinner from "./LoadingSpin";
 import { getAllSellerState } from "../Features/Seller/SellerSlice";
 import {
+  LoggedInSeller,
   deleteSeller,
   getAllSeller,
   updateSellerRole,
@@ -39,10 +40,11 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
   //========================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
-    console.log(id, sellerId);
-    const existingSeller = [loginInSeller, ...loginInSeller?.salesPerson]?.find(
-      (item) => item._id === id
-    );
+    const existingSeller =
+      loginInSeller?.salesPerson &&
+      [...loginInSeller.salesPerson, loginInSeller].find(
+        (item) => item._id === id
+      );
 
     if (loginInSeller.role === "user") {
       setSingleData(existingSeller);
@@ -63,9 +65,9 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        console.log(id, sellerId);
-        console.log(id, sellerId);
-        dispatch(deleteSeller({ id, sellerId }));
+        dispatch(deleteSeller({ id, sellerId })).then(() => {
+          dispatch(LoggedInSeller());
+        });
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
@@ -368,9 +370,8 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 No Seller!
               </span>
             )
-          ) : [loginInSeller && loginInSeller, ...loginInSeller?.salesPerson]
-              ?.length > 0 ? (
-            [loginInSeller && loginInSeller, ...loginInSeller?.salesPerson]
+          ) : [loginInSeller, ...loginInSeller?.salesPerson]?.length > 0 ? (
+            [loginInSeller, ...loginInSeller?.salesPerson]
               .filter((seller) => {
                 return (
                   (input?.text
@@ -562,7 +563,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
             </span>
           )}
         </tbody>
-        {(seller?.length > 7 || loginInSeller?.salesPerson?.length > 7) && (
+        {(seller?.length >= 7 || loginInSeller?.salesPerson?.length >= 7) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button

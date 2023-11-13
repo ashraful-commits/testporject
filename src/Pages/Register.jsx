@@ -18,12 +18,14 @@ const Register = () => {
     password: "",
     employment: "",
     website: "",
+    companyName: "",
   });
   //======================get message
   const { message, error, loader } = useSelector(getAllSellerState);
   console.log(message, error);
   //========================== preview state
   const [avatar, setAvatar] = useState(null);
+  const [companyAvatar, setCompanyAvatar] = useState(null);
   //========================dispatch
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,6 +33,9 @@ const Register = () => {
   //========================== preview img
   const handleAvatar = (e) => {
     setAvatar(e.target.files[0]);
+  };
+  const handleCompanyAvatar = (e) => {
+    setCompanyAvatar(e.target.files[0]);
   };
 
   const handleSubmitRegister = (e) => {
@@ -42,7 +47,11 @@ const Register = () => {
       formData.append("password", input.password);
       formData.append("website", input.website);
       formData.append("employment", input.employment);
+      formData.append("companyName", input.companyName);
       formData.append("sellerAvatar", avatar);
+      if (companyAvatar) {
+        formData.append("companyAvatar", companyAvatar);
+      }
       dispatch(SellerRegistration(formData));
 
       setInput({
@@ -51,6 +60,7 @@ const Register = () => {
         password: "",
         employment: "",
         website: "",
+        companyName: "",
       });
       setAvatar(null);
     } else {
@@ -72,7 +82,7 @@ const Register = () => {
   return (
     <>
       {loader && (
-        <div className="absolute w-screen h-screen z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
+        <div className="absolute w-screen h-screen min-h-[1240px] z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
           <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
             <LoadingSpinner />
           </div>
@@ -133,6 +143,15 @@ const Register = () => {
               value={input.website}
               handleInputChange={handleInputChange}
             />
+            <FormInput
+              label="Company Name"
+              type="text"
+              placeholder="Company Name"
+              name="companyName"
+              required="required"
+              value={input.companyName}
+              handleInputChange={handleInputChange}
+            />
             <div className="imgPrev w-[235px] grid grid-cols-2">
               <label
                 htmlFor="sellerAvatar"
@@ -153,12 +172,37 @@ const Register = () => {
                   />
                 )}
               </label>
+              <label
+                htmlFor="companyAvatar"
+                className="w-[100px] h-[100px] border rounded-full overflow-hidden p-[5px]"
+              >
+                {" "}
+                {companyAvatar ? (
+                  <img
+                    className="w-full h-full object-cover rounded-full"
+                    src={URL.createObjectURL(companyAvatar)}
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    className="w-full h-full object-cover rounded-full"
+                    src="https://storage.jobmarket.com.cy/static/default-company-avatar.jpg"
+                    alt=""
+                  />
+                )}
+              </label>
             </div>
             <input
               type="file"
               onChange={handleAvatar}
               className="hidden"
               id="sellerAvatar"
+            />
+            <input
+              type="file"
+              onChange={handleCompanyAvatar}
+              className="hidden"
+              id="companyAvatar"
             />
             <button
               type="submit"

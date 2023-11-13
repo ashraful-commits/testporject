@@ -6,7 +6,6 @@ import Total from "../../Components/Total";
 import ProjectDetails from "../../Components/ProjectDetails";
 import SalesPeople from "../../Components/SalesPeople";
 import { useEffect, useState } from "react";
-
 import SalesModel from "../../Components/Model/SalesModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
@@ -16,10 +15,8 @@ import LoadingSpinner from "../../Components/LoadingSpin";
 const Seller = () => {
   const [model, setModel] = useState(false);
   const { singleSeller, loader } = useSelector(getAllSellerState);
-  console.log(singleSeller);
   const { loginInSeller } = useSelector(getAllSellerState);
   const { id } = useParams();
-  console.log(loginInSeller);
   const dispatch = useDispatch(getSingleSeller());
   useEffect(() => {
     if (id) {
@@ -516,7 +513,11 @@ const Seller = () => {
               }
               title="New Client Request"
               number={
-                singleSeller?.projects ? singleSeller?.projects?.length : 0
+                singleSeller?.projects
+                  ? singleSeller?.projects.filter(
+                      (item) => item.projectStatus === "pending"
+                    )?.length
+                  : 0
               }
             />
             <ProjectDetails
@@ -650,7 +651,7 @@ const Seller = () => {
           <h1 className="mt-[25px] text-[22px] font-['work_sans'] tracking-[-.9px]">
             Manage Sales People
           </h1>
-          <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[18px]">
+          <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
             {singleSeller?.salesPerson?.length > 0 ? (
               singleSeller?.salesPerson?.map((item, index) => {
                 return (
@@ -672,7 +673,7 @@ const Seller = () => {
                     }
                     companyName={item.companyName}
                     ActiveClient={item?.client?.length > 0 ? item?.client : []}
-                    companyLogo={user}
+                    companyLogo={item.companyAvatar}
                     styles=""
                   />
                 );

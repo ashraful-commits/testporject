@@ -11,6 +11,8 @@ import {
 import { Toastify } from "../../Utils/Tostify";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpin";
+import { getAllSellerState } from "../../Features/Seller/SellerSlice";
+import { LoggedInSeller } from "../../Features/Seller/SellerApi";
 
 const Model = ({ setClient, singleData }) => {
   //============================= form hook
@@ -40,6 +42,7 @@ const Model = ({ setClient, singleData }) => {
   //==================================handle project file
   const [projectFiles, setProjectFile] = useState(null);
   const { client, message, loader, error } = useSelector(getAllClientState);
+  const { loginInSeller } = useSelector(getAllSellerState);
   const [avatar, setAvatar] = useState(null);
   const [photo, setPhoto] = useState(null);
   const dispatch = useDispatch();
@@ -95,7 +98,13 @@ const Model = ({ setClient, singleData }) => {
       formData.append("clientAvatar", photo);
       formData.append("companyName", input.companyName);
 
-      dispatch(updateClient({ formData, id: Id }));
+      dispatch(updateClient({ formData, id: Id }))
+        .then((res) => {
+          dispatch(LoggedInSeller());
+        })
+        .catch((error) => {
+          console.error("Error updating client:", error);
+        });
       setInput({
         clientName: "",
         clientEmail: "",

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  AddSalePerson,
   LoggedInSeller,
   LogoutSeller,
   SellerLogin,
@@ -41,6 +42,18 @@ const SellerSlice = createSlice({
         state.singleSeller.salesPerson.push(action.payload.seller);
       })
       .addCase(SellerRegistration.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(AddSalePerson.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(AddSalePerson.fulfilled, (state, action) => {
+        state.loader = false;
+        state.message = action.payload.message;
+        state.singleSeller.salesPerson.push(action.payload.seller);
+      })
+      .addCase(AddSalePerson.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       })

@@ -16,6 +16,20 @@ export const SellerRegistration = createAsyncThunk(
     }
   }
 );
+export const AddSalePerson = createAsyncThunk(
+  "seller/AddSalePerson",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/api/v1/seller`, data, {
+        withCredentials: true,
+      });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 export const updateSeller = createAsyncThunk(
   "seller/updateSeller",
   async (data, thunkAPI) => {

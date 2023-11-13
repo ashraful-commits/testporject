@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import user from "../../public/user.png";
 const Total = ({
   number,
@@ -81,7 +82,14 @@ const Total = ({
                   />
                 </div>
               ))}
-              {totalSalesGuy?.length > 4 && <button>more</button>}
+              {totalSalesGuy?.length > 4 && (
+                <Link
+                  to={"/"}
+                  className="bg-gray-200 w-[29px] h-[29px] text-[10px] rounded-full border-[2px] border-white hover:bg-gray-300"
+                >
+                  more
+                </Link>
+              )}
             </div>
           )}
 

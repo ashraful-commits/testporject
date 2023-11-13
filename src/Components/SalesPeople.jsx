@@ -58,8 +58,22 @@ const SalesPeople = ({
         </div>
       </div>
       <div className="company flex w-full gap-2 mt-5 ">
-        <div className="companyLogo w-[41px] h-[41px] rounded-md">
-          <img src={companyLogo} alt="" />
+        <div className="companyLogo w-[41px] h-[41px] overflow-hidden rounded-md">
+          {companyLogo ? (
+            <img
+              className="w-full h-full object-cover"
+              src={companyLogo}
+              alt=""
+            />
+          ) : (
+            <img
+              className="w-full h-full object-cover"
+              src={
+                "https://storage.jobmarket.com.cy/static/default-company-avatar.jpg"
+              }
+              alt=""
+            />
+          )}
         </div>
         <div className="compney_detials">
           <h6 className="text-[#878790] text-[13px] font-['work_sans']">
