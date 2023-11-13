@@ -136,9 +136,10 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     }
   }, [error, message, dispatch]);
   useEffect(() => {
+    console.log(singleData);
     setInput({ ...singleData });
     setAvatar(singleData?.avatar);
-    setComponyAvatar(singleData?.componyAvatar);
+    setComponyAvatar(singleData?.companyAvatar);
   }, [singleData]);
   return (
     <>
@@ -273,7 +274,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                     htmlFor="uploadCompanyAvatar"
                     className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
                   >
-                    {avatar ? (
+                    {componyAvatar ? (
                       <img
                         className="w-full h-full object-cover"
                         src={componyAvatar}
