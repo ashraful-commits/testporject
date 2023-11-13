@@ -370,8 +370,8 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 No Seller!
               </span>
             )
-          ) : [loginInSeller, ...loginInSeller?.salesPerson]?.length > 0 ? (
-            [loginInSeller, ...loginInSeller?.salesPerson]
+          ) : [loginInSeller, ...loginInSeller.salesPerson]?.length > 0 ? (
+            [loginInSeller, ...loginInSeller.salesPerson]
               .filter((seller) => {
                 return (
                   (input?.text
