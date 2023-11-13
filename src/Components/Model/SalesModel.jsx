@@ -142,7 +142,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   }, [singleData]);
   return (
     <>
-      <div className="w-screen min-h-[1240px] h-screen pt-[80px] pl-[66px] bg-gray-900 bg-opacity-90 absolute bottom-0  top-0 left-0  z-[99999] flex justify-center items-center">
+      <div className="w-screen min-h-[1240px] h-screen pt-[80px] pl-[66px] bg-gray-900 bg-opacity-90 fixed bottom-0  top-0 left-0  z-[99999] flex justify-center ">
         <button
           onClick={() => setModel(false)}
           className="absolute right-16 top-10 z-[99999]"

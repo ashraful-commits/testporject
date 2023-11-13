@@ -198,7 +198,7 @@ const Model = ({ setClient, singleData }) => {
   }, [singleData, setInput]);
 
   return (
-    <div className="w-screen h-auto py-[120px] pl-[66px] bg-gray-900 bg-opacity-90 absolute top-0 left-0 overflow-hidden z-[99999] flex justify-center">
+    <div className="w-screen h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed top-0 left-0 overflow-y-auto z-[99999] flex justify-center">
       <button
         onClick={() => setClient(false)}
         className="absolute right-16 top-10 z-[99999]"
@@ -216,7 +216,7 @@ const Model = ({ setClient, singleData }) => {
           />
         </svg>
       </button>
-      <div className="main_model z-[999999999] w-[868px] rounded-[10px] relative h-[1230px] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
+      <div className="main_model z-[999999999] w-[868px] rounded-[10px] relative h-[90vh] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
         {loader && (
           <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-600 z-[99999999999999999]">
             <div className="w-full h-full absolute top-[45%]">
@@ -235,7 +235,7 @@ const Model = ({ setClient, singleData }) => {
         </p>
         <form
           onSubmit={handleSubmit}
-          className="form_content grid gap-[45px] relative grid-flow-col justify-between mt-[43px] overflow-hidden"
+          className="form_content grid gap-[45px] relative grid-flow-col justify-between mt-[43px] overflow-y-auto"
         >
           <div className="right w-[490px] flex flex-col gap-[36px]">
             <div className="client_information flex flex-col items-start">

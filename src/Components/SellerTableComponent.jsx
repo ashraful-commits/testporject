@@ -37,6 +37,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
 
   //===========================set limit
   const [limit, setLimit] = useState(7);
+  console.log([...loginInSeller.salesPerson, loginInSeller]);
   //========================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
