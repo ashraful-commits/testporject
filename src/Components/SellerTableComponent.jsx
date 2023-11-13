@@ -170,7 +170,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
           {loginInSeller?.role === "admin" ? (
             seller?.length > 0 ? (
               seller
-                .filter((seller) => {
+                ?.filter((seller) => {
                   return (
                     (input?.text
                       ? seller?.name
