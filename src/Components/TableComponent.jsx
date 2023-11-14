@@ -742,7 +742,7 @@ const TableComponent = ({ sellerId, input }) => {
           )}
         </tbody>
         {/* //=======================================table footer  */}
-        {(client.length >= 7 || loginInSeller?.client?.length >= 7) && (
+        {(client.length >= 1 || loginInSeller?.client?.length >= 1) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button

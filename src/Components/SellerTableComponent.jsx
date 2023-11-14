@@ -21,7 +21,7 @@ import { Toastify } from "../Utils/Tostify";
 import SalesModel from "./Model/SalesModel";
 
 const SellerTableComponent = ({ setModel, sellerId, input }) => {
-  const { client, loader, error, message } = useSelector(getAllClientState);
+  const { loader, error, message } = useSelector(getAllClientState);
   console.log(message);
   console.log(error);
   const {
@@ -573,7 +573,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
           )}
         </tbody>
         {/* //=================================================== footer  */}
-        {(seller?.length >= 7 || loginInSeller?.salesPerson?.length >= 7) && (
+        {(seller?.length >= 1 || loginInSeller?.salesPerson?.length >= 1) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button
