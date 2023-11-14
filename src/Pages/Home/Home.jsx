@@ -35,9 +35,9 @@ const Home = () => {
     email: "",
     rol: "",
   });
-  const { error, message, loader, loginInSeller, seller } =
+  const { error, message, loginInSeller, seller } =
     useSelector(getAllSellerState);
-  const { client } = useSelector(getAllClientState);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -87,7 +87,10 @@ const Home = () => {
             <img className="w-[205px] mt-[52px] h-auto" src={logo} alt="" />
           </div>
           <div className="user mt-[85px] flex flex-col  items-center">
-            <div className="avatar border-[1px] rounded-full overflow-hidden p-[9px] border-[#267596]">
+            <Link
+              to={"/"}
+              className="avatar border-[1px] rounded-full overflow-hidden p-[9px] border-[#267596]"
+            >
               {loginInSeller?.avatar ? (
                 <img
                   className="w-[84px] h-[84px] rounded-full"
@@ -101,7 +104,7 @@ const Home = () => {
                   alt=""
                 />
               )}
-            </div>
+            </Link>
             <h4 className="text-gray-100 text-[24px] font-[500] tracking-[-.2px]  mt-[10px] font-['Lato'] capitalize">
               {loginInSeller?.name}
             </h4>

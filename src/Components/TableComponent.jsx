@@ -220,16 +220,21 @@ const TableComponent = ({ sellerId, input }) => {
                             />
                           </svg>
                         </Link>
+
                         {item?.clientAvatar ? (
-                          <img
-                            className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
-                            src={item?.clientAvatar}
-                          />
+                          <Link to={`/${item?._id}`}>
+                            <img
+                              className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
+                              src={item?.clientAvatar}
+                            />
+                          </Link>
                         ) : (
-                          <img
-                            className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
-                            src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
-                          />
+                          <Link to={`/${item?._id}`}>
+                            <img
+                              className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
+                              src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+                            />
+                          </Link>
                         )}
 
                         <span className="  capitalize truncate text-[13px] font-[500] text-[#267596] w-[70px]">
@@ -511,15 +516,19 @@ const TableComponent = ({ sellerId, input }) => {
                         </svg>
                       </Link>
                       {item?.clientAvatar ? (
-                        <img
-                          className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
-                          src={item?.clientAvatar}
-                        />
+                        <Link to={`/${item?._id}`}>
+                          <img
+                            className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
+                            src={item?.clientAvatar}
+                          />
+                        </Link>
                       ) : (
-                        <img
-                          className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
-                          src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
-                        />
+                        <Link to={`/${item?._id}`}>
+                          <img
+                            className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
+                            src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+                          />
+                        </Link>
                       )}
 
                       <span className="  capitalize truncate text-[13px] font-[500] text-[#267596] w-[70px]">

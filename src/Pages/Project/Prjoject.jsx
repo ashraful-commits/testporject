@@ -8,25 +8,26 @@ import ProjectFile from "../../Components/ProjectFile";
 import Invoices from "../../Components/Invoices";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllClientState } from "../../Features/Client/ClientSlice";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getSingleClient, updateClient } from "../../Features/Client/ClientApi";
 import { Link, useParams } from "react-router-dom";
-
+import { jsPDF } from "jspdf";
 import LoadingSpinner from "../../Components/LoadingSpin";
-
+import html2canvas from "html2canvas";
 const Project = () => {
   const { singleClient, loader } = useSelector(getAllClientState);
-
+  console.log(singleClient);
   const dispatch = useDispatch();
   const { id } = useParams();
-
+  const [team, setTeam] = useState(false);
+  const [pdf, setPdf] = useState(false);
+  const pdfRef = useRef();
   useEffect(() => {
     dispatch(getSingleClient(id));
   }, [dispatch, id]);
 
   const handleFileUpload = (e) => {
     const formData = new FormData();
-
     [...e.target.files].forEach((item) => {
       formData.append("projectFile", item);
     });
@@ -34,6 +35,52 @@ const Project = () => {
       dispatch(getSingleClient(id));
     });
   };
+  //=====================================download pdf
+  const handlePdf = () => {
+    setPdf(true);
+    const capture = pdfRef.current;
+    html2canvas(capture).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png"); // Fix the MIME type here
+      const doc = new jsPDF("p", "mm", "a4");
+      const componentWidth = doc.internal.pageSize.getWidth(); // Fix the method name here
+      const componentHeight = doc.internal.pageSize.getHeight(); // Fix the method name here
+      doc.addImage(imgData, "PNG", 0, 0, componentWidth, componentHeight);
+      doc.save();
+      setPdf(false);
+    });
+  };
+  //=====================================team member
+
+  const [selectedSalespersons, setSelectedSalespersons] = useState([]);
+
+  const handleInputChange = (e) => {
+    const selectedValue = String(e.target.value);
+
+    if (selectedSalespersons.includes(selectedValue)) {
+      setSelectedSalespersons(
+        selectedSalespersons.filter((item) => item !== selectedValue)
+      );
+    } else {
+      setSelectedSalespersons((prev) => [...prev, selectedValue]);
+    }
+  };
+  const handleTeamUpdate = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      updateClient({ id, formData: { team: selectedSalespersons } })
+    ).then(() => {
+      dispatch(getSingleClient(id));
+      setTeam(false);
+    });
+  };
+  useEffect(() => {
+    let allTeam = [];
+    singleClient?.team?.forEach((item) => {
+      allTeam?.push(item._id);
+    });
+    setSelectedSalespersons(allTeam);
+  }, [singleClient]);
   return (
     <>
       {loader && (
@@ -43,7 +90,78 @@ const Project = () => {
           </div>
         </div>
       )}
-      <div className="min-w-[1340px] relative rounded-[15px]  pl-[48px]  pt-[30px] bg-[#FFF] min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px]">
+      {pdf && (
+        <div
+          ref={pdfRef}
+          className="w-[50%] h-[60vh] absolute top-[10%] left-[25%] bg-white p-5"
+          size="a4"
+        >
+          {singleClient?.projectDesc}
+        </div>
+      )}
+      {team && (
+        <div className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5">
+          <button
+            className="group-hover:opacity-100 opacity-0 w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center hover:bg-gray-400 transition-all duration-500 ease-in-out "
+            onClick={() => setTeam(false)}
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 8 8"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" />
+            </svg>
+          </button>
+          <form
+            onSubmit={handleTeamUpdate}
+            className="w-[50vw]  rounded-md h-auto border gap-3 bg-gray-50 grid grid-cols-4 grid-flow-row overflow-y-scroll p-2"
+          >
+            {singleClient?.sellerId?.salesPerson?.length > 0 ? (
+              singleClient?.sellerId?.salesPerson?.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="h-[100px] p-3 shrink-0 border bg-white w-full flex flex-col items-center relative justify-center"
+                  >
+                    <input
+                      type="checkbox"
+                      className="absolute top-3 left-3"
+                      checked={selectedSalespersons?.includes(item?._id)}
+                      value={item?._id}
+                      onChange={handleInputChange}
+                    />
+                    <div className="w-full h-full flex-col flex justify-start items-center">
+                      <img
+                        className="w-[50px] h-[50px] rounded-full"
+                        src={item?.avatar}
+                        alt=""
+                      />
+                      <span className="text-[10px] font-['work_sans']">
+                        {item.name}
+                      </span>
+                      <span className="text-[8px] font-['work_sans']">
+                        {item.email}
+                      </span>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <span>No Team member</span>
+            )}
+
+            <button
+              type="submit"
+              className="h-[30px] justify-end col-span-4 bg-darkBlue text-white"
+            >
+              Add Team Member
+            </button>
+          </form>
+        </div>
+      )}
+      <div className="min-w-[1340px] relative rounded-[15px]  pl-[48px]  pt-[30px]   min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px] bg-white">
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] ">
             {singleClient?.sellerId?.companyAvatar ? (
@@ -519,11 +637,13 @@ const Project = () => {
             </div>
             <div className="projectDatials overflow-hidden rounded-[8px] border w-full mt-[18px] h-[150px] px-[20px] py-[15px]">
               <div className="flex justify-between">
-                {" "}
                 <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
                   Project Details
                 </h1>
-                <button className="w-[120px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400] gap-[5px] hover:bg-gray-300 transition-all duration-500 ease-in-out">
+                <button
+                  onClick={handlePdf}
+                  className="w-[120px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400] gap-[5px] hover:bg-gray-300 transition-all duration-500 ease-in-out"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="11"
@@ -560,7 +680,6 @@ const Project = () => {
             </div>
             <div className="teamMember overflow-hidden rounded-[8px] border w-full mt-[18px] h-[217px] px-[16px] py-[15px]">
               <div className="flex justify-between">
-                {" "}
                 <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
                   Team
                 </h1>
@@ -576,26 +695,28 @@ const Project = () => {
                         key={index}
                         avatar={item?.avatar}
                         name={item?.name}
-                        title={item?.title}
+                        title={item?.employment}
                       />
                     );
                   })
                 ) : (
                   <span>No team member</span>
                 )}
-                <div className="flex p-[4px] items-center h-[42px] gap-[10px]">
+                <button
+                  onClick={() => setTeam(!team)}
+                  className="flex p-[4px] items-center h-[42px] gap-[10px]"
+                >
                   <div className="w-[42px] h-[42px] border rounded-full flex justify-center items-center bg-gray-100">
                     +
                   </div>
-                  <h1 className="text-[16px] font-[500] font-['work_sans']">
+                  <div className="text-[16px] font-[500] font-['work_sans']">
                     Add Member
-                  </h1>
-                </div>
+                  </div>
+                </button>
               </div>
             </div>
             <div className="softwareTools overflow-hidden rounded-[8px] border w-full mt-[18px] h-[117px] px-[20px] py-[18px]">
               <div className="flex justify-between">
-                {" "}
                 <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
                   Software & Tools
                 </h1>
@@ -762,7 +883,6 @@ const Project = () => {
             </div>
             <div className="ProjectFiles overflow-hidden rounded-[8px] border w-full mt-[18px] h-[230px] px-[22px] py-[11px]">
               <div className="flex justify-between">
-                {" "}
                 <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px]  mt-[10px]font-['work_sans'] ">
                   Project Files
                 </h1>

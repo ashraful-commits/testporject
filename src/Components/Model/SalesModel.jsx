@@ -161,7 +161,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
             />
           </svg>
         </button>
-        <div className="main_model z-[999999999] w-[380px] rounded-[10px] h-[80vh]  flex justify-center items-center flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
+        <div className="main_model z-[999999999] w-[380px] rounded-[10px] h-[90vh]  flex justify-center items-center flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
           {salesLoader && (
             <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]">
               <div className="absolute top-[45%]">
@@ -171,7 +171,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           )}
           <div className="pt-[10px] bg-white w-full">
             <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
-              {title === "Edit" ? "Edit" : "Add New"} Sales person
+              {title ? title : "Add New"} person
             </h1>
           </div>
           {/* //=========================form  */}
@@ -223,6 +223,14 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   label={"Company Name"}
                   name="companyName"
                   value={input.companyName}
+                  type="text"
+                  handleInputChange={handleInputChange}
+                />
+                <FormInput
+                  placeholder="employment"
+                  label={"Employment"}
+                  name="employment"
+                  value={input.employment}
                   type="text"
                   handleInputChange={handleInputChange}
                 />
