@@ -1,9 +1,12 @@
+//======================================project details component
+
 const ProjectDetails = ({ svg, title, number, styles }) => {
   return (
     <div className="border rounded-md gap-[10px] h-[97px] w-[240px] flex items-center justify-center">
       <div className="w-[42px] h-[42px] rounded-full bg-gray-200 shrink-0 flex justify-center items-center ml-4">
         {svg}
       </div>
+      {/* //================================================datails  */}
       <div className="w-full h-full flex gap-2 flex-col justify-center">
         <p className={` leading-[5px]  text-[#878790]  font-[400]`}>{title}</p>
         <p

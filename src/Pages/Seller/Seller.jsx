@@ -13,19 +13,25 @@ import { getSingleSeller } from "../../Features/Seller/SellerApi";
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 import LoadingSpinner from "../../Components/LoadingSpin";
 const Seller = () => {
+  //===========================================all state
   const [model, setModel] = useState(false);
+  //==================================================get all seller state
   const { singleSeller, loader } = useSelector(getAllSellerState);
+  //==================================================login seller
   const { loginInSeller } = useSelector(getAllSellerState);
+  //================================================= use params
   const { id } = useParams();
-  const dispatch = useDispatch(getSingleSeller());
+  const dispatch = useDispatch();
+  //================================================get single seller
   useEffect(() => {
     if (id) {
       dispatch(getSingleSeller(id));
     }
   }, [dispatch, id]);
-
+  //=====================================================return
   return (
     <>
+      {/* //========================================loader  */}
       {loader && (
         <div className="w-screen bg-opacity-20 min-h-[1240px] h-screen z-[9999999999999] bg-cyan-200 flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
@@ -33,6 +39,7 @@ const Seller = () => {
           </div>
         </div>
       )}
+      {/*=========================================== sales model  */}
       {model && <SalesModel setModel={setModel} sellerId={id} />}
       <div className="min-w-[1340px] relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
@@ -222,6 +229,7 @@ const Seller = () => {
           </div>
         </div>
         <div className="main-container pr-[36px] flex min-w-full flex-col  w-[1300px] mt-[30px]  tracking-[-.52px] h-[1072px] ">
+          {/* //=================================================total  */}
           <div className="total flex justify-start gap-4">
             <Total
               number={
@@ -385,6 +393,7 @@ const Seller = () => {
               }
             />
           </div>
+          {/* //===================================================== search field */}
           <div className="search mt-[20px] w-full h-[38px] flex items-center justify-between">
             <div className="flex">
               <div className="sales_client_project_statistics border  w-[375px] h-[38px] flex justify-between items-center rounded-md">
@@ -487,6 +496,7 @@ const Seller = () => {
               </button>
             </div>
           </div>
+          {/* //================================================ project datiels  */}
           <div className=" mt-[20px]  flex items-center justify-between">
             <ProjectDetails
               svg={
@@ -651,6 +661,7 @@ const Seller = () => {
           <h1 className="mt-[25px] text-[22px] font-['work_sans'] tracking-[-.9px]">
             Manage Sales People
           </h1>
+          {/* //=================================================== all sales person  */}
           <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
             {singleSeller?.salesPerson?.length > 0 ? (
               singleSeller?.salesPerson?.map((item, index) => {

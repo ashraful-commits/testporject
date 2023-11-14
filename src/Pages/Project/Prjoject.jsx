@@ -15,17 +15,20 @@ import { jsPDF } from "jspdf";
 import LoadingSpinner from "../../Components/LoadingSpin";
 import html2canvas from "html2canvas";
 const Project = () => {
+  //===================================== get all client state
   const { singleClient, loader } = useSelector(getAllClientState);
-  console.log(singleClient);
+  //====================================================dispatch and all state
   const dispatch = useDispatch();
   const { id } = useParams();
   const [team, setTeam] = useState(false);
   const [pdf, setPdf] = useState(false);
   const pdfRef = useRef();
+  const [selectedSalespersons, setSelectedSalespersons] = useState([]);
+  //========================================================get all singleClient
   useEffect(() => {
     dispatch(getSingleClient(id));
   }, [dispatch, id]);
-
+  //===========================================================handle file upload
   const handleFileUpload = (e) => {
     const formData = new FormData();
     [...e.target.files].forEach((item) => {
@@ -49,10 +52,7 @@ const Project = () => {
       setPdf(false);
     });
   };
-  //=====================================team member
-
-  const [selectedSalespersons, setSelectedSalespersons] = useState([]);
-
+  //=====================================team member checkbox
   const handleInputChange = (e) => {
     const selectedValue = String(e.target.value);
 
@@ -64,6 +64,7 @@ const Project = () => {
       setSelectedSalespersons((prev) => [...prev, selectedValue]);
     }
   };
+  //================================= handle team update
   const handleTeamUpdate = (e) => {
     e.preventDefault();
 
@@ -74,6 +75,7 @@ const Project = () => {
       setTeam(false);
     });
   };
+  //============================================ edit team member data
   useEffect(() => {
     let allTeam = [];
     singleClient?.team?.forEach((item) => {
@@ -81,8 +83,10 @@ const Project = () => {
     });
     setSelectedSalespersons(allTeam);
   }, [singleClient]);
+  //===================================================return
   return (
     <>
+      {/* //================================================== loader  */}
       {loader && (
         <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-cyan-600 flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
@@ -90,6 +94,7 @@ const Project = () => {
           </div>
         </div>
       )}
+      {/* //===================================================pdf download  */}
       {pdf && (
         <div
           ref={pdfRef}
@@ -99,6 +104,7 @@ const Project = () => {
           {singleClient?.projectDesc}
         </div>
       )}
+      {/* //================================================ team  */}
       {team && (
         <div className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5">
           <button
@@ -114,6 +120,7 @@ const Project = () => {
               <path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" />
             </svg>
           </button>
+          {/* //======================================================form  */}
           <form
             onSubmit={handleTeamUpdate}
             className="w-[50vw]  rounded-md h-auto border gap-3 bg-gray-50 grid grid-cols-4 grid-flow-row overflow-y-scroll p-2"
@@ -162,6 +169,7 @@ const Project = () => {
         </div>
       )}
       <div className="min-w-[1340px] relative rounded-[15px]  pl-[48px]  pt-[30px]   min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px] bg-white">
+        {/* //============================================================ header  */}
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] ">
             {singleClient?.sellerId?.companyAvatar ? (
@@ -357,7 +365,9 @@ const Project = () => {
             </Link>
           </div>
         </div>
+        {/* //==========================================================main container  */}
         <div className="main-container flex min-w-full gap-[43px] w-[1300px] mt-[52px] tracking-[-.52px] h-[1072px] ">
+          {/* //========================================================left section  */}
           <div className="left w-[938px] h-full">
             <h1 className="text-[26px] font-[600] text-[#3a3a49] font-['work_sans']">
               Real-Time Video Processing using Chromakey (Greenscreen) Effect{" "}
@@ -365,6 +375,8 @@ const Project = () => {
             <p className="text-[12px] font-[400px] font-['work_sans'] text-[#878790] mt-[4px]">
               Visual UI / UX Design & Branding
             </p>
+
+            {/* //===================================== client datiels section  */}
             <div className="flex gap-[px] mt-[16px]">
               <DetialsSections
                 name={singleClient?.clientName}
@@ -617,6 +629,7 @@ const Project = () => {
                 }
               />
             </div>
+            {/* //========================================== manage project  */}
             <div className="manageProject flex justify-between items-center ">
               <div className="comment w-[375px] mt-[42px] rounded-[7px] h-[38px] border-[1px] border-[#DFDFDF] grid grid-cols-3">
                 <button className="active:bg-white active:shadow-lg text-[12px] font-[500] font-['work_sans']  rounded-[7px]  text-[#878790]">
@@ -635,6 +648,7 @@ const Project = () => {
                 </button>
               </div>
             </div>
+            {/* //====================================================== project datiels  */}
             <div className="projectDatials overflow-hidden rounded-[8px] border w-full mt-[18px] h-[150px] px-[20px] py-[15px]">
               <div className="flex justify-between">
                 <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
@@ -678,6 +692,7 @@ const Project = () => {
                 </p>
               </div>
             </div>
+            {/* //============================================== team member  */}
             <div className="teamMember overflow-hidden rounded-[8px] border w-full mt-[18px] h-[217px] px-[16px] py-[15px]">
               <div className="flex justify-between">
                 <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
@@ -715,6 +730,7 @@ const Project = () => {
                 </button>
               </div>
             </div>
+            {/* //================================================== softwere tools  */}
             <div className="softwareTools overflow-hidden rounded-[8px] border w-full mt-[18px] h-[117px] px-[20px] py-[18px]">
               <div className="flex justify-between">
                 <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
@@ -881,6 +897,7 @@ const Project = () => {
                 </div>
               </div>
             </div>
+            {/* //==================================================== project files  */}
             <div className="ProjectFiles overflow-hidden rounded-[8px] border w-full mt-[18px] h-[230px] px-[22px] py-[11px]">
               <div className="flex justify-between">
                 <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px]  mt-[10px]font-['work_sans'] ">
@@ -1047,6 +1064,7 @@ const Project = () => {
               </div>
             </div>
           </div>
+          {/* //====================================================== right section  */}
           <div className="right border w-[315px] overflow-hidden rounded-[8px] mt-1 flex justify-center">
             <div className=" w-full h-full flex flex-col items-center">
               <div className="payment mt-3 flex justify-center items-center gap-2">

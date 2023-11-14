@@ -5,28 +5,25 @@ import TableComponent from "../../Components/TableComponent";
 import Model from "../../Components/Model/Model";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  LoggedInSeller,
-  LogoutSeller,
-  getAllSeller,
-} from "../../Features/Seller/SellerApi";
+import { LoggedInSeller, LogoutSeller } from "../../Features/Seller/SellerApi";
 import { Toastify } from "../../Utils/Tostify";
 import {
   getAllSellerState,
   setMessageEmpty,
 } from "../../Features/Seller/SellerSlice";
-import { getAllClientState } from "../../Features/Client/ClientSlice";
+
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
-import LoadingSpinner from "../../Components/LoadingSpin";
+
 import SellerTableComponent from "../../Components/SellerTableComponent";
 import useFormHook from "../../Hooks/useFormHook";
 
 const Home = () => {
+  //==============================================all state
   const [notification, setNotification] = useState(false);
   const [clientModel, setClientModel] = useState(false);
   const [sellerTable, setSellerTable] = useState(false);
   const [currentTime, setCurrentTime] = useState(false);
-
+  //====================================================use form hook
   const { input, setInput, handleInputChange } = useFormHook({
     text: "",
     endDate: "",
@@ -35,18 +32,19 @@ const Home = () => {
     email: "",
     rol: "",
   });
+  //=========================================== redux data
   const { error, message, loginInSeller, seller } =
     useSelector(getAllSellerState);
-
+  //===================================================== dispatch/navigate
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  //===========================================================handle logout
   const handleLogout = () => {
     dispatch(LogoutSeller());
     localStorage.clear("Seller");
     navigate("/login");
   };
-
+  //============================================================ toastify
   useEffect(() => {
     if (error) {
       Toastify(error, "error");
@@ -61,11 +59,11 @@ const Home = () => {
       navigate("/login");
     }
   }, [error, message, dispatch, navigate]);
-
+  //=============================================================== logged in seller data
   useEffect(() => {
     dispatch(LoggedInSeller());
   }, [dispatch]);
-
+  //================================================================== date format
   useEffect(() => {
     const currentDate = new Date();
     setCurrentTime(
@@ -76,10 +74,11 @@ const Home = () => {
       })
     );
   }, []);
-
+  //======================================================== return
   return (
     <div className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden">
       <>
+        {/* //================================================ model  */}
         {clientModel && <Model setClient={setClientModel} />}
         {/*=================================================== sidebar  */}
         <div className="sidebar flex flex-col items-center w-[295px]  bg-mediumBlack overflow-hidden">

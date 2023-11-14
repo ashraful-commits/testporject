@@ -28,22 +28,23 @@ const TableComponent = ({ sellerId, input }) => {
   console.log(message);
   console.log(error);
   const [currentPage, setCurrentPage] = useState(1);
-  //=================================================================================================edit model
+  //======================================================================================edit model
   const [editModel, setEditModel] = useState(false);
   //========================================================================================== singleData
   const [singleData, setSingleData] = useState({});
-  //==================================================================================================set limit
+  //========================================================================================set limit
   const [limit, setLimit] = useState(7);
-  //================================================================================================handle edit
+  //===================================================================================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
     setSingleData(client.find((item) => item._id == id));
   };
-  //================================================================================================handle edit
+  //===============================================================================handle edit
   const handleSellerEdit = (id) => {
     setEditModel(true);
     setSingleData(loginInSeller?.client?.find((item) => item._id == id));
   };
+  //===============================================================================handle delete
   const handleDelete = (id) => {
     swal({
       title: "Are you sure?",
@@ -62,28 +63,29 @@ const TableComponent = ({ sellerId, input }) => {
       }
     });
   };
-  //=============================================================================================  handle limit
+  //======================================================================================  handle limit
   const handleLimit = (e) => {
     setLimit(e.target.value);
   };
-  //=======================================================================================handle permission
+  //===============================================================================handle permission
   const handlePermission = (id, status) => {
     dispatch(permissionUpdate({ id, status })).then(() => {
       dispatch(LoggedInSeller());
     });
   };
-  //========================================================================================handle permission
+  //===============================================================================handle permission
   const handleProjectStatus = (id, projectStatus) => {
     dispatch(projectStatusUpdate({ id, projectStatus })).then(() => {
       dispatch(LoggedInSeller());
     });
   };
+  //============================================================================== handle commission
   const handleCommission = (id, commissionRate) => {
     dispatch(updateCommissionRate({ id, commissionRate })).then(() => {
       dispatch(LoggedInSeller());
     });
   };
-  //========================================================================================get user client
+  //===================================================================================get user client
   useEffect(() => {
     dispatch(
       getAllClient({
@@ -94,15 +96,15 @@ const TableComponent = ({ sellerId, input }) => {
       })
     );
   }, [dispatch, sellerId, currentPage, limit, loginInSeller]);
-  //===========================================================================================next page
+  //====================================================================================next page
   const nextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
-  //==============================================================================================prev page
+  //===================================================================================prev page
   const prevPage = () => {
     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
   };
-  //================================================================================================= toastify
+  //====================================================================================== toastify
   useEffect(() => {
     if (error) {
       Toastify(error, "error");
@@ -113,12 +115,13 @@ const TableComponent = ({ sellerId, input }) => {
       dispatch(setMessageEmpty());
     }
   }, [message, error, dispatch]);
-  //==========================================================================================================filter
-
+  //=========================================================================return
   return (
     <div>
+      {/* //=============================================edit modle  */}
       {editModel && <Model setClient={setEditModel} singleData={singleData} />}
       <table className="w-full">
+        {/* //======================================table header  */}
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
             <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
@@ -162,6 +165,7 @@ const TableComponent = ({ sellerId, input }) => {
             </th>
           </tr>
         </thead>
+        {/* //==========================================table body  */}
         <tbody className="relative">
           {(loader || sellerLoader) && (
             <div className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top left-0">
@@ -195,7 +199,11 @@ const TableComponent = ({ sellerId, input }) => {
                   return (
                     <tr
                       key={index}
-                      className="w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
+                      className={`${
+                        loginInSeller?._id === item?.sellerId?._id
+                          ? "bg-green-100"
+                          : ""
+                      } w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center`}
                     >
                       <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                         <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
@@ -733,6 +741,7 @@ const TableComponent = ({ sellerId, input }) => {
             </span>
           )}
         </tbody>
+        {/* //=======================================table footer  */}
         {(client.length >= 7 || loginInSeller?.client?.length >= 7) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">

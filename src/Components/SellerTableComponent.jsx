@@ -120,6 +120,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
   console.log(input);
   return (
     <div>
+      {/* //===================================edit model  */}
       {editModel && (
         <SalesModel
           setModel={setEditModel}
@@ -127,7 +128,9 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
           title="Edit"
         />
       )}
+      {/* //=============================================table  */}
       <table className="w-full">
+        {/* //============================================table header  */}
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
             <th className="text-[.8125rem] flex items-center justify-start w-[120px] font-['work_sans'] text-start font-[400]">
@@ -162,6 +165,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
             </th>
           </tr>
         </thead>
+        {/* //================================================table body  */}
         <tbody className="relative">
           {(loader || sellerLoader) && (
             <div className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top left-0">
@@ -192,7 +196,9 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                   return (
                     <tr
                       key={index}
-                      className="w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
+                      className={`${
+                        loginInSeller?._id === item?._id ? "bg-green-100" : ""
+                      } w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center`}
                     >
                       <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                         <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
@@ -566,6 +572,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
             </span>
           )}
         </tbody>
+        {/* //=================================================== footer  */}
         {(seller?.length >= 7 || loginInSeller?.salesPerson?.length >= 7) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">

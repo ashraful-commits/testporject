@@ -29,6 +29,7 @@ const ClientSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    //=========================================create Client
     builder
       .addCase(createClient.pending, (state, action) => {
         state.loader = true;
@@ -42,6 +43,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //==================================================get all client
       .addCase(getAllClient.pending, (state, action) => {
         state.loader = true;
       })
@@ -53,6 +55,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //===================================================== update client
       .addCase(updateClient.pending, (state, action) => {
         state.loader = true;
       })
@@ -69,6 +72,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //=======================================================delete client
       .addCase(deleteClient.pending, (state, action) => {
         state.loader = true;
       })
@@ -83,6 +87,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //===================================================== permission update
       .addCase(permissionUpdate.pending, (state, action) => {
         state.loader = true;
       })
@@ -99,6 +104,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //====================================================== project status
       .addCase(projectStatusUpdate.pending, (state, action) => {
         state.loader = true;
       })
@@ -115,6 +121,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //===========================================================get single client
       .addCase(getSingleClient.pending, (state, action) => {
         state.loader = true;
       })
@@ -128,6 +135,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //=========================================================update commission rate
       .addCase(updateCommissionRate.pending, (state, action) => {
         state.loader = true;
       })
@@ -145,6 +153,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //===========================================================file download
       .addCase(fileDownloadFunc.pending, (state, action) => {
         state.loader = true;
       })
@@ -160,7 +169,7 @@ const ClientSlice = createSlice({
       });
   },
 });
-
+//===============================================================export
 export const getAllClientState = (state) => state.Client;
 export const { setMessageEmpty } = ClientSlice.actions;
 export default ClientSlice.reducer;

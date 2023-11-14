@@ -1,7 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+//=========================================================base url
 const BASE_URL = "https://wordshpere.onrender.com";
 // const BASE_URL = "http://localhost:5050";
+//=======================================================sellerRegistration
 export const SellerRegistration = createAsyncThunk(
   "seller/SellerRegistration",
   async (data, thunkAPI) => {
@@ -16,6 +18,7 @@ export const SellerRegistration = createAsyncThunk(
     }
   }
 );
+//========================================================add sales Person
 export const AddSalePerson = createAsyncThunk(
   "seller/AddSalePerson",
   async (data, thunkAPI) => {
@@ -30,6 +33,7 @@ export const AddSalePerson = createAsyncThunk(
     }
   }
 );
+//======================================================== update seller
 export const updateSeller = createAsyncThunk(
   "seller/updateSeller",
   async (data, thunkAPI) => {
@@ -48,6 +52,7 @@ export const updateSeller = createAsyncThunk(
     }
   }
 );
+//========================================================= seller Login
 export const SellerLogin = createAsyncThunk(
   "seller/SellerLogin",
   async (data, thunkAPI) => {
@@ -65,6 +70,7 @@ export const SellerLogin = createAsyncThunk(
     }
   }
 );
+//============================================================ loggedIn seller data
 export const LoggedInSeller = createAsyncThunk(
   "seller/LoggedInSeller",
   async (thunkAPI) => {
@@ -79,6 +85,7 @@ export const LoggedInSeller = createAsyncThunk(
     }
   }
 );
+//=============================================================logout seller
 export const LogoutSeller = createAsyncThunk(
   "seller/LogoutSeller",
   async (thunkAPI) => {
@@ -94,6 +101,7 @@ export const LogoutSeller = createAsyncThunk(
     }
   }
 );
+//===========================================================get all seller
 export const getAllSeller = createAsyncThunk(
   "seller/getAllSeller",
   async (data, thunkAPI) => {
@@ -112,6 +120,7 @@ export const getAllSeller = createAsyncThunk(
     }
   }
 );
+//========================================================= update seller Role
 export const updateSellerRole = createAsyncThunk(
   "seller/updateSellerRole",
   async (data, thunkAPI) => {
@@ -131,6 +140,7 @@ export const updateSellerRole = createAsyncThunk(
     }
   }
 );
+//======================================================== update sellerStatus
 export const updateSellerStatus = createAsyncThunk(
   "seller/updateSellerStatus",
   async (data, thunkAPI) => {
@@ -150,6 +160,7 @@ export const updateSellerStatus = createAsyncThunk(
     }
   }
 );
+//========================================================== delete seller
 export const deleteSeller = createAsyncThunk(
   "seller/deleteSeller",
   async (data, thunkAPI) => {
@@ -168,6 +179,7 @@ export const deleteSeller = createAsyncThunk(
     }
   }
 );
+//========================================================get single seller
 export const getSingleSeller = createAsyncThunk(
   "seller/getSingleSeller",
   async (id, thunkAPI) => {

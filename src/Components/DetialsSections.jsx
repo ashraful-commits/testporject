@@ -1,5 +1,5 @@
 import React from "react";
-
+//=========================================detials section
 const DetialsSections = ({ svg, title, name }) => {
   return (
     <div className="w-full h-[30px] flex justify-start items-center gap-[15px]">

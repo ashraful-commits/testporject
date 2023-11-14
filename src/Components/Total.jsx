@@ -53,6 +53,7 @@ const Total = ({
               </span>
             </div>
           )}
+          {/* //=====================================total projects  */}
           {title === "Total Projects" &&
             totalProjects?.slice(0, 4)?.map((item, index) => {
               return (
@@ -68,6 +69,7 @@ const Total = ({
                 </div>
               );
             })}
+          {/* //==================================== total sales guy  */}
           {title === "Total Sales Guy" && (
             <div className="flex space-x-[-10px]">
               {totalSalesGuy?.slice(0, 4)?.map((item, index) => (
@@ -92,7 +94,7 @@ const Total = ({
               )}
             </div>
           )}
-
+          {/* //========================================total client  */}
           {title === "Total Clients" && (
             <div className="flex space-x-[-10px]">
               {totalClients?.slice(0, 4)?.map((item, index) => (

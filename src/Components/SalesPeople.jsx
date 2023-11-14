@@ -1,5 +1,5 @@
 import React from "react";
-
+//=======================================salesPeople function
 const SalesPeople = ({
   avatar,
   name,
@@ -15,6 +15,7 @@ const SalesPeople = ({
   return (
     <div className="border p-[22px] flex-col rounded-md w-[304px] h-[340px] flex items-center ">
       <div className="people w-full gap-[18px] flex items-center">
+        {/* //============================================avatar  */}
         <div className="avatar w-[51px] h-[51px] rounded-full overflow-hidden">
           {avatar ? (
             <img src={avatar} className="w-full h-full" alt="" />
@@ -22,6 +23,7 @@ const SalesPeople = ({
             <img src={avatar} className="w-full h-full" alt="" />
           )}
         </div>
+        {/* //=============================================== datials  */}
         <div className="detials">
           <h5 className="text-[18px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">
             {name}
@@ -31,6 +33,7 @@ const SalesPeople = ({
           </h6>
         </div>
       </div>
+      {/* //===================================================== work datials  */}
       <div className="work_detials mt-5 flex justify-between w-full">
         <div className="flex justify-center items-center flex-col">
           <h4 className="text-[24px] text-[#230B34] font-['work_sans'] font-[600]">
@@ -57,6 +60,7 @@ const SalesPeople = ({
           </h6>
         </div>
       </div>
+      {/* //========================================================= company  */}
       <div className="company flex w-full gap-2 mt-5 ">
         <div className="companyLogo w-[41px] h-[41px] overflow-hidden rounded-md">
           {companyLogo ? (
@@ -84,6 +88,7 @@ const SalesPeople = ({
           </h6>
         </div>
       </div>
+      {/* //========================================================== active client  */}
       <h5 className="w-full mt-10 font-['work_sans'] font-[500]">
         Active Clients
       </h5>

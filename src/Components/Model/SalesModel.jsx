@@ -144,6 +144,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   return (
     <>
       <div className="w-screen min-h-[1240px] h-screen pt-[80px] pl-[66px] bg-gray-900 bg-opacity-90 fixed bottom-0  top-0 left-0  z-[99999] flex justify-center ">
+        {/* //==================================================close button  */}
         <button
           onClick={() => setModel(false)}
           className="absolute right-16 top-10 z-[99999]"
@@ -161,6 +162,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
             />
           </svg>
         </button>
+        {/* //========================================== main model  */}
         <div className="main_model z-[999999999] w-[380px] rounded-[10px] h-[90vh]  flex justify-center items-center flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
           {salesLoader && (
             <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]">

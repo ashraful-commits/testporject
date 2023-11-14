@@ -47,6 +47,7 @@ const Model = ({ setClient, singleData }) => {
   const [photo, setPhoto] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  //=======================================handle project file
   const handleProjectFile = (e) => {
     const allFiles = [...e.target.files];
 
@@ -62,7 +63,7 @@ const Model = ({ setClient, singleData }) => {
       }
     });
   };
-
+  //======================================== handle delete
   const handleDelete = (item) => {
     setProjectFile([...projectFiles.filter((file) => file !== item)]);
   };
@@ -175,6 +176,8 @@ const Model = ({ setClient, singleData }) => {
       }
     }
   };
+
+  //===================================== alert toastify
   useEffect(() => {
     if (error) {
       Toastify(error, "error");
@@ -190,15 +193,17 @@ const Model = ({ setClient, singleData }) => {
       navigate("/");
     }
   }, [message, error, navigate, dispatch, setClient]);
+  //=========================================single edit data
   useEffect(() => {
     setInput({ ...singleData });
     setId(singleData?._id);
     setAvatar(singleData?.clientAvatar);
     setProjectFile(singleData?.projectFile);
   }, [singleData, setInput]);
-
+  //=================================================return
   return (
     <div className="w-screen h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed top-0 left-0 overflow-y-auto z-[99999] flex justify-center">
+      {/* //====================================================close button  */}
       <button
         onClick={() => setClient(false)}
         className="absolute right-16 top-10 z-[99999]"
@@ -216,7 +221,9 @@ const Model = ({ setClient, singleData }) => {
           />
         </svg>
       </button>
+      {/* //====================================================main model  */}
       <div className="main_model z-[999999999] w-[868px] rounded-[10px] relative h-[90vh] overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
+        {/* //========================================================= loader  */}
         {loader && (
           <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-600 z-[99999999999999999]">
             <div className="w-full h-full absolute top-[45%]">
@@ -233,10 +240,12 @@ const Model = ({ setClient, singleData }) => {
           please provide us with a rough idea about the project you can leave
           any field empty if you don&apos;t have information about it
         </p>
+        {/* //=============================================================== form  */}
         <form
           onSubmit={handleSubmit}
           className="form_content grid gap-[45px] relative grid-flow-col justify-between mt-[43px] overflow-y-auto"
         >
+          {/* //=========================================================right section  */}
           <div className="right w-[490px] flex flex-col gap-[36px]">
             <div className="client_information flex flex-col items-start">
               <h5 className="text-gray-900 tracking-[.6px] text-[16px] font-['Lato'] font-[600]">
@@ -583,6 +592,7 @@ const Model = ({ setClient, singleData }) => {
               </button>
             </div>
           </div>
+          {/* //=============================================================== left section  */}
           <div className="left w-[220px] flex flex-col items-start">
             <div className="avatar border flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]">
               {avatar ? (

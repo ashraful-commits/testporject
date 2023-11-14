@@ -10,5 +10,5 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: true,
 });
-
+//===================================store export
 export default store;

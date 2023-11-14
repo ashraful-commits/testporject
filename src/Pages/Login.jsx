@@ -21,16 +21,18 @@ const Login = () => {
   const { message, error, loginInSeller, loader } =
     useSelector(getAllSellerState);
 
-  //================== dispatch
+  //=================================== dispatch
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //========================= handle login submit
+  //====================================== handle login submit
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     dispatch(SellerLogin(input));
     setInput({ email: "", password: "" });
   };
+
+  //====================================== all alert toastify
   useEffect(() => {
     if (error) {
       Toastify(error, "error");
@@ -47,6 +49,7 @@ const Login = () => {
   }, [message, error, navigate, dispatch]);
   return (
     <>
+      {/* //=================================================loader  */}
       {loader && (
         <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
           <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
@@ -59,6 +62,7 @@ const Login = () => {
           <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
             Login
           </h1>
+          {/* //================================================form  */}
           <form
             onSubmit={handleLoginSubmit}
             action=""

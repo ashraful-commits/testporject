@@ -32,6 +32,7 @@ const SellerSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    //===================================seller registration
     builder
       .addCase(SellerRegistration.pending, (state, action) => {
         state.loader = true;
@@ -44,6 +45,7 @@ const SellerSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //=====================================================add salesperson
       .addCase(AddSalePerson.pending, (state, action) => {
         state.loader = true;
       })
@@ -56,6 +58,7 @@ const SellerSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
+      //=======================================================seller login
       .addCase(SellerLogin.pending, (state, action) => {
         state.loader = true;
       })
@@ -69,6 +72,7 @@ const SellerSlice = createSlice({
         state.error = action.payload.message;
         console.log(action);
       })
+      //=======================================================logged In Seller
       .addCase(LoggedInSeller.pending, (state, action) => {
         state.loader = true;
       })
@@ -80,6 +84,7 @@ const SellerSlice = createSlice({
       .addCase(LoggedInSeller.rejected, (state, action) => {
         state.loader = false;
       })
+      //======================================================= logout seller
       .addCase(LogoutSeller.pending, (state, action) => {
         state.loader = true;
       })
@@ -90,6 +95,7 @@ const SellerSlice = createSlice({
       .addCase(LogoutSeller.rejected, (state, action) => {
         state.loader = false;
       })
+      //=========================================================get all seller
       .addCase(getAllSeller.pending, (state, action) => {
         state.loader = true;
       })
@@ -101,6 +107,7 @@ const SellerSlice = createSlice({
       .addCase(getAllSeller.rejected, (state, action) => {
         state.loader = false;
       })
+      //======================================================= update seller role
       .addCase(updateSellerRole.pending, (state, action) => {
         state.loader = true;
       })
@@ -116,6 +123,7 @@ const SellerSlice = createSlice({
       .addCase(updateSellerRole.rejected, (state, action) => {
         state.loader = false;
       })
+      //==========================================================get single seller
       .addCase(getSingleSeller.pending, (state, action) => {
         state.loader = true;
       })
@@ -127,6 +135,7 @@ const SellerSlice = createSlice({
       .addCase(getSingleSeller.rejected, (state, action) => {
         state.loader = false;
       })
+      //========================================================= update seller status
       .addCase(updateSellerStatus.pending, (state, action) => {
         state.loader = true;
       })
@@ -142,6 +151,7 @@ const SellerSlice = createSlice({
       .addCase(updateSellerStatus.rejected, (state, action) => {
         state.loader = false;
       })
+      //=========================================================delete seller
       .addCase(deleteSeller.pending, (state, action) => {
         state.loader = true;
       })
@@ -161,6 +171,7 @@ const SellerSlice = createSlice({
       .addCase(deleteSeller.rejected, (state, action) => {
         state.loader = false;
       })
+      //==================================================== update seller
       .addCase(updateSeller.pending, (state, action) => {
         state.loader = true;
       })
@@ -183,7 +194,7 @@ const SellerSlice = createSlice({
       });
   },
 });
-
+//=============================================================export
 export const loginInSeller = (state) => state.loginInSeller;
 export const getAllSellerState = (state) => state.Seller;
 export const { setMessageEmpty } = SellerSlice.actions;

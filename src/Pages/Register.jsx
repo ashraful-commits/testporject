@@ -12,6 +12,7 @@ import {
 } from "../Features/Seller/SellerSlice";
 import LoadingSpinner from "../Components/LoadingSpin";
 const Register = () => {
+  //================================================= use form hook
   const { input, setInput, handleInputChange } = useFormHook({
     name: "",
     email: "",
@@ -20,26 +21,27 @@ const Register = () => {
     website: "",
     companyName: "",
   });
-  //======================get message
+  //================================================get message
   const { message, error, loader } = useSelector(getAllSellerState);
   console.log(message, error);
-  //========================== preview state
+  //================================================ preview state
   const [avatar, setAvatar] = useState(null);
   const [companyAvatar, setCompanyAvatar] = useState(null);
-  //========================dispatch
+  //===============================================dispatch
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //======================== handle submit
-  //========================== preview img
+  //==================================================== handle seller avatar
   const handleAvatar = (e) => {
     setAvatar(e.target.files[0]);
   };
+  //======================================================= handle company avatar
   const handleCompanyAvatar = (e) => {
     setCompanyAvatar(e.target.files[0]);
   };
-
+  //=============================================== handle submit
   const handleSubmitRegister = (e) => {
     e.preventDefault();
+    //===========================================
     if (avatar) {
       const formData = new FormData();
       formData.append("name", input.name);
@@ -53,7 +55,8 @@ const Register = () => {
         formData.append("companyAvatar", companyAvatar);
       }
       dispatch(SellerRegistration(formData));
-
+      setAvatar(null);
+      setCompanyAvatar(null);
       setInput({
         name: "",
         email: "",
@@ -68,6 +71,7 @@ const Register = () => {
       dispatch(setMessageEmpty());
     }
   };
+  //==================================================== all message and alert toastify
   useEffect(() => {
     if (error) {
       Toastify(error, "error");
@@ -81,6 +85,7 @@ const Register = () => {
   }, [error, message, dispatch]);
   return (
     <>
+      {/* //========================================loader  */}
       {loader && (
         <div className="absolute w-screen h-screen min-h-[1240px] z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
           <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
@@ -88,11 +93,13 @@ const Register = () => {
           </div>
         </div>
       )}
+      {/* //=============================================main container  */}
       <div className="min-w-full relative z-0 min-h-screen flex justify-center items-center overflow-hidden">
         <div className="login w-[400px] flex justify-start items-center flex-col h-auto rounded-lg shadow-md  bg-white">
           <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
             Register
           </h1>
+          {/* //================================================form  */}
           <form
             onSubmit={handleSubmitRegister}
             action=""

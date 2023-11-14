@@ -1,7 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+//======================================================== base url
 const BASE_URL = "https://wordshpere.onrender.com";
 // const BASE_URL = "http://localhost:5050";
+
+//=========================================================createClient
 export const createClient = createAsyncThunk(
   "client/createClient",
   async (data, thunkAPI) => {
@@ -16,6 +19,7 @@ export const createClient = createAsyncThunk(
     }
   }
 );
+//=============================================================get all client
 export const getAllClient = createAsyncThunk(
   "client/getAllClient",
   async (data, thunkAPI) => {
@@ -32,6 +36,7 @@ export const getAllClient = createAsyncThunk(
     }
   }
 );
+//============================================================== update client
 export const updateClient = createAsyncThunk(
   "client/updateClient",
   async (data, thunkAPI) => {
@@ -48,6 +53,7 @@ export const updateClient = createAsyncThunk(
     }
   }
 );
+//==============================================================delete client
 export const deleteClient = createAsyncThunk(
   "client/deleteClient",
   async (id, thunkAPI) => {
@@ -64,6 +70,7 @@ export const deleteClient = createAsyncThunk(
     }
   }
 );
+//============================================================get single client
 export const getSingleClient = createAsyncThunk(
   "client/getSingleClient",
   async (id, thunkAPI) => {
@@ -80,6 +87,7 @@ export const getSingleClient = createAsyncThunk(
     }
   }
 );
+//============================================================= client permission update
 export const permissionUpdate = createAsyncThunk(
   "client/permissionUpdate",
   async (data, thunkAPI) => {
@@ -96,6 +104,7 @@ export const permissionUpdate = createAsyncThunk(
     }
   }
 );
+//===============================================================project status update
 export const projectStatusUpdate = createAsyncThunk(
   "client/projectStatusUpdate",
   async (data, thunkAPI) => {
@@ -112,6 +121,7 @@ export const projectStatusUpdate = createAsyncThunk(
     }
   }
 );
+//=============================================================== client commission update
 export const updateCommissionRate = createAsyncThunk(
   "client/updateCommissionRate",
   async (data, thunkAPI) => {
@@ -128,6 +138,7 @@ export const updateCommissionRate = createAsyncThunk(
     }
   }
 );
+//==================================================================file download
 export const fileDownloadFunc = createAsyncThunk(
   "client/fileDownload",
   async (data, thunkAPI) => {
