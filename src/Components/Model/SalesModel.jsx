@@ -163,7 +163,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           </svg>
         </button>
         {/* //========================================== main model  */}
-        <div className="main_model z-[999999999] w-[500px] rounded-[10px] h-[60vh]   justify-center items-center flex flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
+        <div className="main_model z-[999999999] w-[500px] rounded-[10px] h-[63vh]   justify-center items-center flex flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
           {salesLoader && (
             <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]">
               <div className="absolute top-[45%]">
@@ -237,9 +237,9 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   handleInputChange={handleInputChange}
                 />
                 {loginInSeller?.role === "admin" && (
-                  <>
+                  <div className="flex flex-col gap-y-1">
                     <label
-                      className="text-gray-900 text-start w-full my-3 font-[800] text-[12px] font-['Lato']"
+                      className="text-gray-900 text-start w-full my-2 font-[800] text-[12px] font-['Lato']"
                       htmlFor=""
                     >
                       Role
@@ -263,10 +263,10 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                         Admin
                       </option>
                     </select>
-                  </>
+                  </div>
                 )}
 
-                <div className="flex col-span-2">
+                <div className="flex gap-5 col-span-2 justify-center">
                   <label
                     htmlFor="uploadAvatar"
                     className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
@@ -308,7 +308,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   id="uploadCompanyAvatar"
                 />
               </div>
-              <div className="submit_section  flex justify-center flex-col items-center mt-5 bg-white ">
+              <div className="submit_section  flex justify-center flex-col items-center mt-5 bg-white col-span-2 ">
                 <div className="agree flex w-full align-middle items-center gap-[20px]">
                   <input type="checkbox" className="w-4 h-4" />
                   <label
