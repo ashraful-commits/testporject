@@ -163,7 +163,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           </svg>
         </button>
         {/* //========================================== main model  */}
-        <div className="main_model z-[999999999] w-[380px] rounded-[10px] h-[90vh]  flex justify-center items-center flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
+        <div className="main_model z-[999999999] w-[500px] rounded-[10px] h-[60vh]   justify-center items-center flex flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative">
           {salesLoader && (
             <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]">
               <div className="absolute top-[45%]">
@@ -171,7 +171,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
               </div>
             </div>
           )}
-          <div className="pt-[10px] bg-white w-full">
+          <div className="pt-[10px] bg-white w-full col-span-2">
             <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
               {title ? title : "Add New"} person
             </h1>
@@ -179,10 +179,10 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           {/* //=========================form  */}
           <form
             onSubmit={handleSubmit}
-            className="form_content grid relative justify-between mt-[10px] overflow-hidden items-center"
+            className="form_content col-span-2 grid relative justify-between mt-[10px] overflow-hidden items-center"
           >
             <div className="right w-full flex flex-col justify-center">
-              <div className="  flex gap-y-2 flex-col  justify-center">
+              <div className="  grid grid-cols-2 gap-y-2 gap-2  justify-center">
                 <FormInput
                   placeholder="Name"
                   label={"Name"}
@@ -266,7 +266,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   </>
                 )}
 
-                <div className="flex">
+                <div className="flex col-span-2">
                   <label
                     htmlFor="uploadAvatar"
                     className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
