@@ -95,7 +95,7 @@ const Register = () => {
       )}
       {/* //=============================================main container  */}
       <div className="min-w-full relative z-0 min-h-screen flex justify-center items-center overflow-hidden">
-        <div className="login w-[400px] flex justify-start items-center flex-col h-auto rounded-lg shadow-md  bg-white">
+        <div className="login w-[500px] flex justify-start items-center flex-col h-auto rounded-lg shadow-md  bg-white px-4">
           <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
             Register
           </h1>
@@ -103,7 +103,7 @@ const Register = () => {
           <form
             onSubmit={handleSubmitRegister}
             action=""
-            className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
+            className="mt-4 grid grid-cols-2 gap-5 py-5 border-t-[2px]"
           >
             <FormInput
               label="Name"
@@ -159,7 +159,7 @@ const Register = () => {
               value={input.companyName}
               handleInputChange={handleInputChange}
             />
-            <div className="imgPrev w-[235px] grid grid-cols-2">
+            <div className="imgPrev flex gap-5 col-span-2 w-full items-center justify-center">
               <label
                 htmlFor="sellerAvatar"
                 className="w-[100px] h-[100px] border rounded-full overflow-hidden p-[5px]"
@@ -213,11 +213,11 @@ const Register = () => {
             />
             <button
               type="submit"
-              className="text-[18px] uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
+              className="text-[18px] col-span-2 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-full mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
             >
               Register
             </button>
-            <p className="text-[12px] text-center text-gray-500">
+            <p className="text-[12px] col-span-2 w-full text-center text-gray-500">
               Already have an account
               <Link
                 className="text-purple-500 px-[5px] font-[600] hover:text-purple-700 transition-all duration-500 ease-out"
