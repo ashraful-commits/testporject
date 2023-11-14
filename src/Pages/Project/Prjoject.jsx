@@ -21,9 +21,12 @@ const Project = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [team, setTeam] = useState(false);
+  const [tools, setTools] = useState(false);
   const [pdf, setPdf] = useState(false);
   const pdfRef = useRef();
   const [selectedSalespersons, setSelectedSalespersons] = useState([]);
+  const [selectTools, setSelectTools] = useState([]);
+
   //========================================================get all singleClient
   useEffect(() => {
     dispatch(getSingleClient(id));
@@ -64,6 +67,16 @@ const Project = () => {
       setSelectedSalespersons((prev) => [...prev, selectedValue]);
     }
   };
+  //=====================================tools  checkbox
+  const handleToolsInputChange = (e) => {
+    const selectedValue = String(e.target.value);
+
+    if (selectTools.includes(selectedValue)) {
+      setSelectTools(selectTools.filter((item) => item !== selectedValue));
+    } else {
+      setSelectTools((prev) => [...prev, selectedValue]);
+    }
+  };
   //================================= handle team update
   const handleTeamUpdate = (e) => {
     e.preventDefault();
@@ -75,13 +88,29 @@ const Project = () => {
       setTeam(false);
     });
   };
+  //================================= handle tools update
+  const handleToolsSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(updateClient({ id, formData: { tools: selectTools } })).then(
+      () => {
+        dispatch(getSingleClient(id));
+        setTools(false);
+      }
+    );
+  };
   //============================================ edit team member data
   useEffect(() => {
     let allTeam = [];
+    let allTools = [];
     singleClient?.team?.forEach((item) => {
       allTeam?.push(item._id);
     });
+    singleClient?.tools?.forEach((item) => {
+      allTools?.push(item);
+    });
     setSelectedSalespersons(allTeam);
+    setSelectTools(allTools);
   }, [singleClient]);
   //===================================================return
   return (
@@ -105,6 +134,76 @@ const Project = () => {
         </div>
       )}
       {/* //================================================ team  */}
+      {tools && (
+        <div className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5">
+          <button
+            className="group-hover:opacity-100 opacity-0 w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center hover:bg-gray-400 transition-all duration-500 ease-in-out "
+            onClick={() => setTools(false)}
+          >
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 8 8"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1.41 0l-1.41 1.41.72.72 1.78 1.81-1.78 1.78-.72.69 1.41 1.44.72-.72 1.81-1.81 1.78 1.81.69.72 1.44-1.44-.72-.69-1.81-1.78 1.81-1.81.72-.72-1.44-1.41-.69.72-1.78 1.78-1.81-1.78-.72-.72z" />
+            </svg>
+          </button>
+          {/* //======================================================form  */}
+          <form
+            onSubmit={handleToolsSubmit}
+            className="w-[50vw]  rounded-md h-auto border gap-3 bg-gray-50 grid grid-cols-4 grid-flow-row overflow-y-scroll p-2"
+          >
+            <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
+              <input
+                type="checkbox"
+                className="absolute top-3 left-3"
+                checked={selectTools && selectTools.includes("Photoshop")}
+                value={"Photoshop"}
+                onChange={handleToolsInputChange}
+              />
+              <label htmlFor="">Photoshop</label>
+            </div>
+            <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
+              <input
+                type="checkbox"
+                className="absolute top-3 left-3"
+                checked={selectTools && selectTools.includes("Illustrator")}
+                value={"Illustrator"}
+                onChange={handleToolsInputChange}
+              />
+              <label htmlFor="">Illustrator</label>
+            </div>
+            <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
+              <input
+                type="checkbox"
+                className="absolute top-3 left-3"
+                checked={selectTools && selectTools.includes("Figma")}
+                value={"Figma"}
+                onChange={handleToolsInputChange}
+              />
+              <label htmlFor="">Figma</label>
+            </div>
+            <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
+              <input
+                type="checkbox"
+                className="absolute top-3 left-3"
+                checked={selectTools && selectTools.includes("Word")}
+                value={"Word"}
+                onChange={handleToolsInputChange}
+              />
+              <label htmlFor="">Word</label>
+            </div>
+
+            <button
+              type="submit"
+              className="h-[30px] justify-end col-span-4 bg-darkBlue text-white"
+            >
+              Add Tools
+            </button>
+          </form>
+        </div>
+      )}
       {team && (
         <div className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5">
           <button
@@ -745,9 +844,8 @@ const Project = () => {
                   return (
                     <SoftWere
                       key={index}
-                      svg={item?.slice(
-                        ((filename.lastIndexOf(".") - 1) >>> 0) + 2 ==
-                          "psd" && (
+                      svg={
+                        (item == "Photoshop" && (
                           <svg
                             width="19"
                             height="19"
@@ -768,130 +866,143 @@ const Project = () => {
                               fill="#31A8FF"
                             />
                           </svg>
-                        )
-                      )}
-                      name="Photoshop"
+                        )) ||
+                        (item == "Illustrator" && (
+                          <svg
+                            width="19"
+                            height="19"
+                            viewBox="0 0 32 32"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <title>file_type_ai</title>
+                            <path
+                              d="M3.169,3.517H28.835V28.483H3.169Z"
+                              style={{ fill: "#1c0a00" }}
+                            />
+                            <path
+                              d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Z"
+                              style={{ fill: "#1c0a00" }}
+                            />
+                            <path
+                              d="M18.34,9.43c0-.093,.035-.14,.14-.14h1.832c.093,0,.14,.035,.14,.14v9.205c0,.093,-.023,.14,-.14,.14H20.505c-.117,0,-.152,-.058,-.152,-.152V12.08h-.012Z"
+                              style={{ fill: "#ff7f18" }}
+                            />
+                            <path
+                              d="M18.212,6.782a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,18.212,6.782Z"
+                              style={{ fill: "#ff7f18" }}
+                            />
+                            <path
+                              d="M13.962,13.269c-.327,-1.3,-1.1,-4.118,-1.388,-5.483h-.023c-.245,1.365,-.863,3.675,-1.353,5.483Z"
+                              style={{ fill: "#ff7f18" }}
+                            />
+                            <path
+                              d="M10.719,15.159l-.922,3.5c-.023,.093,-.058,.117,-.175,.117H8.909c-.117,0,-.14,-.035,-.117,-.175l3.313,-11.6a3.779,3.779,0,0,0,.117,-.968c0,-.082,.035,-.117,.093,-.117h2.45c,.082,0,.117,.023,.14,.117l3.71,12.588c.023,.093,0,.152,-.093,.152H16.585c-.093,0,-.152,-.023,-.175,-.1l-.957,-3.512H11.72Z"
+                              style={{ fill: "#ff7f18" }}
+                            />
+                          </svg>
+                        )) ||
+                        (item == "Illustrator" && (
+                          <svg
+                            width="19"
+                            height="19"
+                            viewBox="0 0 32 32"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <title>file_type_ai</title>
+                            <path
+                              d="M3.169,3.517H28.835V28.483H3.169Z"
+                              style={{ fill: "#1c0a00" }}
+                            />
+                            <path
+                              d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Z"
+                              style={{ fill: "#1c0a00" }}
+                            />
+                            <path
+                              d="M18.34,9.43c0-.093,.035-.14,.14-.14h1.832c.093,0,.14,.035,.14,.14v9.205c0,.093,-.023,.14,-.14,.14H20.505c-.117,0,-.152,-.058,-.152,-.152V12.08h-.012Z"
+                              style={{ fill: "#ff7f18" }}
+                            />
+                            <path
+                              d="M18.212,6.782a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,18.212,6.782Z"
+                              style={{ fill: "#ff7f18" }}
+                            />
+                            <path
+                              d="M13.962,13.269c-.327,-1.3,-1.1,-4.118,-1.388,-5.483h-.023c-.245,1.365,-.863,3.675,-1.353,5.483Z"
+                              style={{ fill: "#ff7f18" }}
+                            />
+                            <path
+                              d="M10.719,15.159l-.922,3.5c-.023,.093,-.058,.117,-.175,.117H8.909c-.117,0,-.14,-.035,-.117,-.175l3.313,-11.6a3.779,3.779,0,0,0,.117,-.968c0,-.082,.035,-.117,.093,-.117h2.45c,.082,0,.117,.023,.14,.117l3.71,12.588c.023,.093,0,.152,-.093,.152H16.585c-.093,0,-.152,-.023,-.175,-.1l-.957,-3.512H11.72Z"
+                              style={{ fill: "#ff7f18" }}
+                            />
+                          </svg>
+                        )) ||
+                        (item == "Figma" && (
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 16 16"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                          >
+                            <path
+                              fill="#1ABCFE"
+                              d="M8.55 8c0-1.289 1.019-2.333 2.275-2.333C12.082 5.667 13.1 6.71 13.1 8c0 1.289-1.018 2.333-2.275 2.333C9.57 10.333 8.55 9.29 8.55 8z"
+                            />
+                            <path
+                              fill="#0ACF83"
+                              d="M4 12.667c0-1.289 1.019-2.334 2.275-2.334H8.55v2.334C8.55 13.955 7.531 15 6.275 15S4 13.955 4 12.667z"
+                            />
+                            <path
+                              fill="#FF7262"
+                              d="M8.55 1v4.667h2.275c1.257 0 2.275-1.045 2.275-2.334C13.1 2.045 12.082 1 10.825 1H8.55z"
+                            />
+                            <path
+                              fill="#F24E1E"
+                              d="M4 3.333c0 1.289 1.019 2.334 2.275 2.334H8.55V1H6.275C5.019 1 4 2.045 4 3.333z"
+                            />
+                            <path
+                              fill="#A259FF"
+                              d="M4 8c0 1.289 1.019 2.333 2.275 2.333H8.55V5.667H6.275C5.019 5.667 4 6.71 4 8z"
+                            />
+                          </svg>
+                        )) ||
+                        (item == "Word" && (
+                          <svg
+                            width="22"
+                            height="22"
+                            viewBox="0 0 48 48"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <rect
+                              x="6"
+                              y="6"
+                              width="36"
+                              height="36"
+                              rx="3"
+                              fill="#2F88FF"
+                              stroke="#000000"
+                              strokeWidth="4"
+                            />
+                            <path
+                              d="M14 16L18 32L24 19L30 32L34 16"
+                              stroke="white"
+                              strokeWidth="4"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        ))
+                      }
+                      name={item}
                     />
                   );
                 })}
-                <SoftWere
-                  svg={
-                    <svg
-                      width="19"
-                      height="19"
-                      viewBox="0 0 32 32"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M2 12.1333C2 8.58633 2 6.81283 2.69029 5.45806C3.29749 4.26637 4.26637 3.29749 5.45806 2.69029C6.81283 2 8.58633 2 12.1333 2H19.8667C23.4137 2 25.1872 2 26.5419 2.69029C27.7336 3.29749 28.7025 4.26637 29.3097 5.45806C30 6.81283 30 8.58633 30 12.1333V19.8667C30 23.4137 30 25.1872 29.3097 26.5419C28.7025 27.7336 27.7336 28.7025 26.5419 29.3097C25.1872 30 23.4137 30 19.8667 30H12.1333C8.58633 30 6.81283 30 5.45806 29.3097C4.26637 28.7025 3.29749 27.7336 2.69029 26.5419C2 25.1872 2 23.4137 2 19.8667V12.1333Z"
-                        fill="#001E36"
-                      />
-                      <path
-                        d="M8 22.5162V10.2034C8 10.1197 8.035 10.0718 8.11667 10.0718C9.3223 10.0718 10.5274 10 11.7333 10C13.6902 10 15.809 10.6691 16.5517 12.7162C16.7267 13.2188 16.82 13.7333 16.82 14.2718C16.82 15.3009 16.5867 16.1504 16.12 16.8205C14.8164 18.6923 12.557 18.6632 10.5317 18.6632V22.5043C10.5475 22.618 10.4506 22.6718 10.3567 22.6718H8.14C8.04667 22.6718 8 22.6239 8 22.5162ZM10.5433 12.3812V16.4017C11.3464 16.4605 12.1867 16.4669 12.9583 16.2103C13.8102 15.9645 14.2767 15.2272 14.2767 14.3436C14.3003 13.5907 13.8901 12.8683 13.1917 12.5966C12.4294 12.2796 11.3662 12.2606 10.5433 12.3812Z"
-                        fill="#31A8FF"
-                      />
-                      <path
-                        d="M24.0967 15.6074C23.7437 15.4213 23.3677 15.2852 22.979 15.2028C22.4796 15.0853 20.5098 14.6737 20.509 15.7037C20.5265 16.2787 21.4393 16.5604 21.8426 16.7247C23.2585 17.2108 24.8607 18.0797 24.8292 19.8264C24.8725 22.0008 22.7657 22.8701 20.9598 22.8703C20.0197 22.88 19.0403 22.7344 18.1799 22.3308C18.0977 22.2873 18.0449 22.1944 18.0484 22.0996V20.019C18.0391 19.9356 18.1287 19.8627 18.1987 19.9227C19.0417 20.4325 20.0409 20.6801 21.0162 20.6933C21.4467 20.6933 22.2999 20.6516 22.2935 20.019C22.2935 19.412 21.2728 19.1329 20.8659 18.9787C20.2761 18.7682 19.7169 18.4765 19.2036 18.1118C18.4862 17.6001 18.0362 16.7797 18.0484 15.8771C18.0442 13.8297 19.9835 12.9107 21.73 12.9103C22.5464 12.9035 23.4232 12.964 24.1832 13.2956C24.2925 13.3277 24.3151 13.4429 24.3147 13.546V15.4918C24.3216 15.6126 24.1875 15.6537 24.0967 15.6074Z"
-                        fill="#31A8FF"
-                      />
-                    </svg>
-                  }
-                  name="Photoshop"
-                />
-                <SoftWere
-                  svg={
-                    <svg
-                      width="19"
-                      height="19"
-                      viewBox="0 0 32 32"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <title>file_type_ai</title>
-                      <path
-                        d="M3.169,3.517H28.835V28.483H3.169Z"
-                        style={{ fill: "#1c0a00" }}
-                      />
-                      <path
-                        d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Z"
-                        style={{ fill: "#1c0a00" }}
-                      />
-                      <path
-                        d="M18.34,9.43c0-.093,.035-.14,.14-.14h1.832c.093,0,.14,.035,.14,.14v9.205c0,.093,-.023,.14,-.14,.14H20.505c-.117,0,-.152,-.058,-.152,-.152V12.08h-.012Z"
-                        style={{ fill: "#ff7f18" }}
-                      />
-                      <path
-                        d="M18.212,6.782a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,18.212,6.782Z"
-                        style={{ fill: "#ff7f18" }}
-                      />
-                      <path
-                        d="M13.962,13.269c-.327,-1.3,-1.1,-4.118,-1.388,-5.483h-.023c-.245,1.365,-.863,3.675,-1.353,5.483Z"
-                        style={{ fill: "#ff7f18" }}
-                      />
-                      <path
-                        d="M10.719,15.159l-.922,3.5c-.023,.093,-.058,.117,-.175,.117H8.909c-.117,0,-.14,-.035,-.117,-.175l3.313,-11.6a3.779,3.779,0,0,0,.117,-.968c0,-.082,.035,-.117,.093,-.117h2.45c,.082,0,.117,.023,.14,.117l3.71,12.588c.023,.093,0,.152,-.093,.152H16.585c-.093,0,-.152,-.023,-.175,-.1l-.957,-3.512H11.72Z"
-                        style={{ fill: "#ff7f18" }}
-                      />
-                    </svg>
-                  }
-                  name="Ilastrator"
-                />
-                <SoftWere
-                  svg={
-                    <svg
-                      version="1.1"
-                      id="Layer_1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      xmlnsXlink="http://www.w3.org/1999/xlink"
-                      x="0px"
-                      y="0px"
-                      viewBox="0 0 512 512"
-                      style={{ enableBackground: "new 0 0 512 512" }}
-                      xmlSpace="preserve"
-                      width={19}
-                      height={19}
-                    >
-                      <path
-                        style={{ fill: "#FFC61B" }}
-                        d="M438.558,512H19.786c-8.214,0-14.876-6.66-14.876-14.876V256.916c0-8.216,6.661-14.876,14.876-14.876s14.876,6.66,14.876,14.876v225.332h389.021v-32.833c0-8.216,6.661-14.876,14.876-14.876c8.214,0,14.876,6.66,14.876,14.876v47.709C453.434,505.34,446.773,512,438.558,512z"
-                      />
-                      <g>
-                        <polygon
-                          style={{ fill: "#FEE187" }}
-                          points="19.786,177.122 19.786,172.332 175.581,14.876 175.581,177.122"
-                        />
-                        <rect
-                          x="196.155"
-                          y="219.435"
-                          style={{ fill: "#FEE187" }}
-                          width="296.061"
-                          height="163.65"
-                        />
-                      </g>
-                      <g>
-                        <path
-                          style={{ fill: "#FFC61B" }}
-                          d="M492.216,204.559h-38.782V14.876C453.434,6.66,446.773,0,438.558,0H175.581c-0.18,0-0.359,0.021-0.538,0.027c-0.171,0.006-0.341,0.013-0.51,0.025c-0.641,0.046-1.278,0.118-1.903,0.244c-0.015,0.003-0.03,0.007-0.045,0.012c-0.617,0.126-1.22,0.305-1.813,0.507c-0.155,0.054-0.308,0.109-0.46,0.167c-0.589,0.223-1.166,0.472-1.723,0.768c-0.016,0.009-0.033,0.015-0.048,0.022c-0.57,0.306-1.113,0.663-1.641,1.043c-0.134,0.095-0.263,0.193-0.394,0.295c-0.522,0.403-1.029,0.829-1.499,1.303L9.21,161.868c-0.35,0.353-0.678,0.721-0.988,1.104c-0.207,0.254-0.388,0.521-0.576,0.784c-0.092,0.131-0.195,0.256-0.283,0.388c-0.213,0.323-0.403,0.656-0.588,0.991c-0.048,0.085-0.103,0.167-0.147,0.253c-0.181,0.344-0.339,0.695-0.491,1.047c-0.039,0.089-0.085,0.174-0.12,0.263c-0.138,0.338-0.253,0.68-0.364,1.025c-0.037,0.116-0.083,0.229-0.119,0.345c-0.094,0.315-0.165,0.634-0.238,0.954c-0.036,0.155-0.079,0.305-0.11,0.461c-0.057,0.292-0.091,0.586-0.131,0.881c-0.025,0.186-0.06,0.37-0.077,0.558c-0.027,0.286-0.031,0.573-0.043,0.86c-0.007,0.183-0.027,0.364-0.027,0.547v4.792c0,8.216,6.661,14.876,14.876,14.876H175.58c8.214,0,14.876-6.66,14.876-14.876V29.752h233.226v174.807H196.156c-8.214,0-14.876,6.66-14.876,14.876v163.644c0,8.216,6.661,14.876,14.876,14.876h296.059c8.215,0,14.876-6.66,14.876-14.876V219.435C507.092,211.219,500.43,204.559,492.216,204.559z M160.705,162.246H50.692l56.297-56.896l53.718-54.29v111.186H160.705z M477.34,368.203H211.032V234.311H477.34V368.203z"
-                        />
-                        <path
-                          style={{ fill: "#FFC61B" }}
-                          d="M248.835,259.784c0-3.124,2.874-5.873,7.248-5.873h25.866c16.494,0,29.489,7.747,29.489,28.74v0.625c0,20.993-13.494,28.99-30.738,28.99h-12.371v26.991c0,3.999-4.873,5.998-9.747,5.998c-4.873,0-9.747-1.999-9.747-5.998V259.784z M268.328,270.906v26.366h12.371c6.996,0,11.246-3.999,11.246-12.496v-1.375c0-8.497-4.249-12.496-11.246-12.496L268.328,270.906L268.328,270.906z"
-                        />
-                        <path
-                          style={{ fill: "#FFC61B" }}
-                          d="M319.935,259.784c0-3.124,2.874-5.873,7.248-5.873h25.866c16.494,0,29.489,7.747,29.489,28.74v0.625c0,20.993-13.494,28.99-30.738,28.99h-12.371v26.991c0,3.999-4.873,5.998-9.747,5.998s-9.747-1.999-9.747-5.998L319.935,259.784L319.935,259.784z M339.428,270.906v26.366h12.371c6.996,0,11.246-3.999,11.246-12.496v-1.375c0-8.497-4.249-12.496-11.246-12.496L339.428,270.906L339.428,270.906z"
-                        />
-                        <path
-                          style={{ fill: "#FFC61B" }}
-                          d="M445.139,253.911c4.122,0,5.873,4.498,5.873,8.622c0,4.748-2.126,8.872-5.873,8.872h-17.244v67.852c0,3.999-4.873,5.998-9.748,5.998c-4.872,0-9.747-1.999-9.747-5.998v-67.852h-17.244c-3.749,0-5.873-4.124-5.873-8.872c0-4.124,1.751-8.622,5.873-8.622H445.139z"
-                        />
-                      </g>
-                    </svg>
-                  }
-                  name="Adobe photoshop"
-                />
+
                 <div className="flex  items-center  rounded-2xl w-[87px] h-[31px] gap-[10px]">
-                  <button className="rounded-2xl border text-[12px] px-[10px] w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']">
+                  <button
+                    onClick={() => setTools(true)}
+                    className="rounded-2xl border text-[12px] px-[10px] w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']"
+                  >
                     + Add Tool
                   </button>
                 </div>
