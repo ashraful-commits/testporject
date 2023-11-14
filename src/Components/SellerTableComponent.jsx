@@ -129,7 +129,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         />
       )}
       {/* //=============================================table  */}
-      <table className="w-full">
+      <table className="w-full border min-h-[490px]">
         {/* //============================================table header  */}
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">

@@ -120,7 +120,7 @@ const TableComponent = ({ sellerId, input }) => {
     <div>
       {/* //=============================================edit modle  */}
       {editModel && <Model setClient={setEditModel} singleData={singleData} />}
-      <table className="w-full">
+      <table className="w-full border min-h-[490px]">
         {/* //======================================table header  */}
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
@@ -142,25 +142,25 @@ const TableComponent = ({ sellerId, input }) => {
                 Commission
               </th>
             )}
-            {loginInSeller?.role === "user" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
-                Project status
+
+            <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
+              Project status
+            </th>
+
+            {loginInSeller?.role === "admin" && (
+              <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
+                Commission
               </th>
             )}
             {loginInSeller?.role === "admin" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
-                Commission Rate
-              </th>
-            )}
-            {loginInSeller?.role === "admin" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
-                Permission status
+              <th className="text-[.8125rem] font-['work_sans'] w-[80px]  text-start font-[400]">
+                Permission
               </th>
             )}
             <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
               Client source
             </th>
-            <th className="text-[.8125rem] w-[100px] font-['work_sans'] flex justify-end items-center text-start font-[400]">
+            <th className="text-[.8125rem] w-[100px] font-['work_sans'] flex justify-end items-start  font-[400]">
               Action
             </th>
           </tr>
@@ -278,66 +278,60 @@ const TableComponent = ({ sellerId, input }) => {
                             ((item?.amount * 100) / 15 / 100).toFixed(2)}
                         </td>
                       )}
-                      {loginInSeller?.role === "user" && (
-                        <td
-                          className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
-                        >
-                          <button>
-                            <select
-                              className={` focus:outline-none w-[120px] ${
-                                item?.projectStatus == "pending" &&
-                                "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                              } ${
-                                item?.projectStatus == "complete" &&
-                                "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                              }  ${
-                                item?.projectStatus == "on hold" &&
-                                "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                              }   ${
-                                item?.projectStatus == "on going" &&
-                                "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                              }`}
-                              name="projectType"
-                              id=""
-                              value={item.projectStatus}
-                              onChange={(e) =>
-                                handleProjectStatus(item._id, e.target.value)
-                              }
+
+                      <td
+                        className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                      >
+                        <button>
+                          <select
+                            className={` focus:outline-none w-[100px] ${
+                              item?.projectStatus == "pending" &&
+                              "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                            } ${
+                              item?.projectStatus == "complete" &&
+                              "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                            }  ${
+                              item?.projectStatus == "on hold" &&
+                              "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                            }   ${
+                              item?.projectStatus == "on going" &&
+                              "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                            }`}
+                            name="projectType"
+                            id=""
+                            value={item.projectStatus}
+                            onChange={(e) =>
+                              handleProjectStatus(item._id, e.target.value)
+                            }
+                          >
+                            <option className="text-gray-500  " value="....">
+                              ...select...
+                            </option>
+                            <option className="text-gray-500  " value="pending">
+                              pending
+                            </option>
+                            <option
+                              className="text-gray-500  "
+                              value="on going"
                             >
-                              <option className="text-gray-500  " value="....">
-                                ...select...
-                              </option>
-                              <option
-                                className="text-gray-500  "
-                                value="pending"
-                              >
-                                pending
-                              </option>
-                              <option
-                                className="text-gray-500  "
-                                value="on going"
-                              >
-                                on going
-                              </option>
-                              <option
-                                className="text-gray-500  "
-                                value="on hold"
-                              >
-                                on hold
-                              </option>
-                              <option
-                                className="text-gray-500  "
-                                value="complete"
-                              >
-                                complete
-                              </option>
-                            </select>
-                          </button>
-                        </td>
-                      )}
+                              on going
+                            </option>
+                            <option className="text-gray-500  " value="on hold">
+                              on hold
+                            </option>
+                            <option
+                              className="text-gray-500  "
+                              value="complete"
+                            >
+                              complete
+                            </option>
+                          </select>
+                        </button>
+                      </td>
+
                       {loginInSeller?.role === "admin" && (
                         <td
-                          className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                          className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
                         >
                           <button>
                             <select
@@ -372,7 +366,7 @@ const TableComponent = ({ sellerId, input }) => {
                         </td>
                       )}
                       {loginInSeller?.role == "admin" && (
-                        <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                        <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[80px] text-[#3A3A49]">
                           <input
                             onChange={() =>
                               handlePermission(item._id, item.status)
