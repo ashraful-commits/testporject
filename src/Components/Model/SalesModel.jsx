@@ -143,7 +143,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   }, [singleData]);
   return (
     <>
-      <div className="w-screen min-h-[1240px] h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed bottom-0  top-0 left-0  z-[99999] flex justify-center ">
+      <div className="w-screen min-h-[1240px] h-screen pt-[150px] pl-[66px] bg-gray-900 bg-opacity-90 fixed bottom-0  top-0 left-0  z-[99999] flex justify-center ">
         {/* //==================================================close button  */}
         <button
           onClick={() => setModel(false)}
