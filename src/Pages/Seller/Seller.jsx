@@ -60,7 +60,7 @@ const Seller = () => {
       {model && <SalesModel setModel={setModel} sellerId={id} />}
       <div className="min-w-[1340px] relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
-          <div className="w-[640px] h-full flex items-center gap-[20px] ">
+          <div className="w-[640px] h-full flex items-center gap-[20px] rounded-md overflow-hidden">
             {singleSeller?.companyAvatar ? (
               <img
                 className="w-[86px] h-[70px]"

@@ -273,16 +273,16 @@ const Project = () => {
       <div className="min-w-[1340px] relative rounded-[15px]  pl-[48px]  pt-[30px]   min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px] bg-white">
         {/* //============================================================ header  */}
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
-          <div className="w-[640px] h-full flex items-center gap-[20px] ">
+          <div className="w-[640px] h-full flex items-center gap-[20px] rounded-md overflow-hidden ">
             {singleClient?.sellerId?.companyAvatar ? (
               <img
-                className="w-[86px] h-[70px]"
+                className="w-[86px] h-[70px] object-cover"
                 src={singleClient?.sellerId?.companyAvatar}
                 alt=""
               />
             ) : (
               <img
-                className="w-[86px] h-[70px]"
+                className="w-[86px] h-[70px] object-cover"
                 src="https://www.pngitem.com/pimgs/m/78-788231_icon-blue-company-icon-png-transparent-png.png"
                 alt=""
               />
