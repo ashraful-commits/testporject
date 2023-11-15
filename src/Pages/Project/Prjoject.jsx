@@ -26,7 +26,7 @@ const Project = () => {
   const pdfRef = useRef();
   const [selectedSalespersons, setSelectedSalespersons] = useState([]);
   const [selectTools, setSelectTools] = useState([]);
-
+  console.log(singleClient);
   //========================================================get all singleClient
   useEffect(() => {
     dispatch(getSingleClient(id));

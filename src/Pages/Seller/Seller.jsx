@@ -664,31 +664,35 @@ const Seller = () => {
           {/* //=================================================== all sales person  */}
           <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
             {singleSeller?.salesPerson?.length > 0 ? (
-              singleSeller?.salesPerson?.map((item, index) => {
-                return (
-                  <SalesPeople
-                    key={index}
-                    avatar={item.avatar}
-                    name={item.name}
-                    title="Sales Executive"
-                    project={
-                      item?.projects?.length > 0 ? item?.projects?.length : 0
-                    }
-                    clients={
-                      item?.client?.length > 0 ? item?.client?.length : 0
-                    }
-                    earning={
-                      item?.client?.length > 0
-                        ? calculateTotalCommissionForAllClients(item?.client)
-                        : 0
-                    }
-                    companyName={item.companyName}
-                    ActiveClient={item?.client?.length > 0 ? item?.client : []}
-                    companyLogo={item.companyAvatar}
-                    styles=""
-                  />
-                );
-              })
+              singleSeller?.salesPerson
+                ?.filter((item) => item.status === true)
+                ?.map((item, index) => {
+                  return (
+                    <SalesPeople
+                      key={index}
+                      avatar={item.avatar}
+                      name={item.name}
+                      title="Sales Executive"
+                      project={
+                        item?.projects?.length > 0 ? item?.projects?.length : 0
+                      }
+                      clients={
+                        item?.client?.length > 0 ? item?.client?.length : 0
+                      }
+                      earning={
+                        item?.client?.length > 0
+                          ? calculateTotalCommissionForAllClients(item?.client)
+                          : 0
+                      }
+                      companyName={item.companyName}
+                      ActiveClient={
+                        item?.client?.length > 0 ? item?.client : []
+                      }
+                      companyLogo={item.companyAvatar}
+                      styles=""
+                    />
+                  );
+                })
             ) : (
               <span>No sales Guy</span>
             )}
