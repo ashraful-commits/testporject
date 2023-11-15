@@ -7,11 +7,11 @@ const EmailSignature = () => {
 
   return (
     <div className="absolute top-0 left-0 w-screen h-screen min-h-screen bg-cyan-600 bg-opacity-20 flex justify-center items-center z-[9999999999999]">
-      <div className="min-w-[1440px] flex justify-center items-center bg-gray-200 h-full">
-        <div className="text-white w-[600px] h-[200px] text-center flex justify-center items-center max-w-md p-2 bg-white bg-opacity-90 rounded-md">
+      <div className="min-w-[1440px] relative flex justify-center items-center bg-gray-100 min-h-[909px] rounded-2xl">
+        <div className="text-white w-[500px] h-[200px] text-center flex justify-center items-center  p-2 bg-white bg-opacity-90 rounded-md">
           <Link
             to={`/`}
-            className="absolute top-10 left-4 bg-white hover:bg-gray-400 transition-all duration-500 ease-in-out p-2 rounded-full"
+            className="absolute top-5 left-4 bg-white hover:bg-gray-400 transition-all duration-500 ease-in-out p-2 rounded-full"
           >
             <svg
               width="22"

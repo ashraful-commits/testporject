@@ -14,6 +14,8 @@ import { Link, useParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import LoadingSpinner from "../../Components/LoadingSpin";
 import html2canvas from "html2canvas";
+
+import ClientFeedBack from "../../Components/ClientFeedBack";
 const Project = () => {
   //===================================== get all client state
   const { singleClient, loader } = useSelector(getAllClientState);
@@ -26,6 +28,7 @@ const Project = () => {
   const pdfRef = useRef();
   const [selectedSalespersons, setSelectedSalespersons] = useState([]);
   const [selectTools, setSelectTools] = useState([]);
+  const [menu, setMenu] = useState("Project Details");
   console.log(singleClient);
   //========================================================get all singleClient
   useEffect(() => {
@@ -278,7 +281,11 @@ const Project = () => {
                 alt=""
               />
             ) : (
-              <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />
+              <img
+                className="w-[86px] h-[70px]"
+                src="https://www.pngitem.com/pimgs/m/78-788231_icon-blue-company-icon-png-transparent-png.png"
+                alt=""
+              />
             )}
             <h1 className="text-[26px] capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
               Sales Portal / {singleClient?.sellerId?.name}
@@ -731,10 +738,20 @@ const Project = () => {
             {/* //========================================== manage project  */}
             <div className="manageProject flex justify-between items-center ">
               <div className="comment w-[375px] mt-[42px] rounded-[7px] h-[38px] border-[1px] border-[#DFDFDF] grid grid-cols-3">
-                <button className="active:bg-white active:shadow-lg text-[12px] font-[500] font-['work_sans']  rounded-[7px]  text-[#878790]">
+                <button
+                  onClick={() => setMenu("Project Details")}
+                  className={`${
+                    menu == "Project Details" && "shadow-md"
+                  } active:bg-white active:shadow-lg text-[12px] font-[500] font-['work_sans']  rounded-[7px]  text-[#878790]`}
+                >
                   Project Details
                 </button>
-                <button className=" active:bg-white active:shadow-lg text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out  rounded-[7px] text-[#878790]">
+                <button
+                  onClick={() => setMenu("Client Feedback")}
+                  className={`${
+                    menu == "Client Feedback" && "shadow-md"
+                  } active:bg-white active:shadow-lg text-[12px] font-[500] font-['work_sans']  rounded-[7px]  text-[#878790]`}
+                >
                   Client Feedback
                 </button>
                 <button className="active:bg-white active:shadow-lg text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out  rounded-[7px] text-[#878790]">
@@ -747,433 +764,448 @@ const Project = () => {
                 </button>
               </div>
             </div>
-            {/* //====================================================== project datiels  */}
-            <div className="projectDatials overflow-hidden rounded-[8px] border w-full mt-[18px] h-[150px] px-[20px] py-[15px]">
-              <div className="flex justify-between">
-                <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
-                  Project Details
-                </h1>
-                <button
-                  onClick={handlePdf}
-                  className="w-[120px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400] gap-[5px] hover:bg-gray-300 transition-all duration-500 ease-in-out"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="11"
-                    height="14"
-                    viewBox="0 0 11 14"
-                    fill="none"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M1.82258 0H6.50324L10.4703 4.13494V12.1774C10.4703 13.1849 9.65517 14 8.65116 14H1.82258C0.81509 14 2.87907e-10 13.1849 2.87907e-10 12.1774V1.82258C-1.76887e-05 0.81509 0.815072 0 1.82258 0Z"
-                      fill="#E5252A"
-                    />
-                    <path
-                      opacity="0.302"
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M6.49963 0V4.10345H10.4702L6.49963 0Z"
-                      fill="white"
-                    />
-                    <path
-                      d="M2.02539 10.4459V7.88867H3.11335C3.38272 7.88867 3.59612 7.96213 3.75703 8.11256C3.91795 8.25949 3.99842 8.45889 3.99842 8.70726C3.99842 8.95563 3.91795 9.15504 3.75703 9.30197C3.59612 9.45239 3.38272 9.52586 3.11335 9.52586H2.67956V10.4459H2.02539ZM2.67956 8.96964H3.03989C3.13783 8.96964 3.2148 8.94865 3.26728 8.89968C3.31974 8.85421 3.34775 8.79123 3.34775 8.70728C3.34775 8.62333 3.31976 8.56036 3.26728 8.51488C3.21481 8.4659 3.13785 8.44492 3.03989 8.44492H2.67956V8.96964ZM4.26777 10.4459V7.88867H5.17381C5.35222 7.88867 5.52015 7.91315 5.67756 7.96564C5.83497 8.0181 5.97841 8.09158 6.10434 8.19303C6.23029 8.29097 6.33173 8.4239 6.4052 8.59183C6.47515 8.75975 6.51365 8.95215 6.51365 9.16903C6.51365 9.38243 6.47517 9.57484 6.4052 9.74274C6.33173 9.91066 6.23029 10.0436 6.10434 10.1415C5.9784 10.243 5.83497 10.3164 5.67756 10.3689C5.52015 10.4214 5.35222 10.4459 5.17381 10.4459H4.26777ZM4.90795 9.88968H5.09685C5.1983 9.88968 5.29275 9.87919 5.38021 9.85469C5.46416 9.83021 5.54463 9.79172 5.62159 9.73926C5.69505 9.68679 5.75452 9.61331 5.7965 9.51537C5.83848 9.41742 5.85947 9.30197 5.85947 9.16903C5.85947 9.0326 5.83848 8.91716 5.7965 8.81922C5.75452 8.72127 5.69505 8.64781 5.62159 8.59533C5.54463 8.54286 5.46418 8.50437 5.38021 8.47989C5.29275 8.45541 5.1983 8.4449 5.09685 8.4449H4.90795V9.88968ZM6.84248 10.4459V7.88867H8.66158V8.4449H7.49666V8.85419H8.42719V9.40692H7.49666V10.4459H6.84248Z"
-                      fill="white"
-                    />
-                  </svg>{" "}
-                  Download PDF
-                </button>
-              </div>
-              <div className=" overflow-y-scroll h-full">
-                <p className="text-['work_sans'] font-[14px] mt-[20px] pb-10 leading-[18px]">
-                  {singleClient?.projectDesc}
-                </p>
-              </div>
-            </div>
-            {/* //============================================== team member  */}
-            <div className="teamMember overflow-hidden rounded-[8px] border w-full mt-[18px] h-[217px] px-[16px] py-[15px]">
-              <div className="flex justify-between">
-                <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
-                  Team
-                </h1>
-                <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
-                  Manage Team
-                </button>
-              </div>
-              <div className="grid grid-cols-4 h-full overflow-y-auto mt-5 pb-5">
-                {singleClient?.team?.length > 0 ? (
-                  singleClient?.team?.map((item, index) => {
-                    return (
-                      <Team
-                        key={index}
-                        avatar={item?.avatar}
-                        name={item?.name}
-                        title={item?.employment}
-                      />
-                    );
-                  })
-                ) : (
-                  <span>No team member</span>
-                )}
-                <button
-                  onClick={() => setTeam(!team)}
-                  className="flex p-[4px] items-center h-[42px] gap-[10px]"
-                >
-                  <div className="w-[42px] h-[42px] border rounded-full flex justify-center items-center bg-gray-100">
-                    +
+            {menu === "Project Details" && (
+              <>
+                {/* //====================================================== project datiels  */}
+                <div className="projectDatials overflow-hidden rounded-[8px] border w-full mt-[18px] h-[150px] px-[20px] py-[15px]">
+                  <div className="flex justify-between">
+                    <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
+                      Project Details
+                    </h1>
+                    <button
+                      onClick={handlePdf}
+                      className="w-[120px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400] gap-[5px] hover:bg-gray-300 transition-all duration-500 ease-in-out"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="11"
+                        height="14"
+                        viewBox="0 0 11 14"
+                        fill="none"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M1.82258 0H6.50324L10.4703 4.13494V12.1774C10.4703 13.1849 9.65517 14 8.65116 14H1.82258C0.81509 14 2.87907e-10 13.1849 2.87907e-10 12.1774V1.82258C-1.76887e-05 0.81509 0.815072 0 1.82258 0Z"
+                          fill="#E5252A"
+                        />
+                        <path
+                          opacity="0.302"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M6.49963 0V4.10345H10.4702L6.49963 0Z"
+                          fill="white"
+                        />
+                        <path
+                          d="M2.02539 10.4459V7.88867H3.11335C3.38272 7.88867 3.59612 7.96213 3.75703 8.11256C3.91795 8.25949 3.99842 8.45889 3.99842 8.70726C3.99842 8.95563 3.91795 9.15504 3.75703 9.30197C3.59612 9.45239 3.38272 9.52586 3.11335 9.52586H2.67956V10.4459H2.02539ZM2.67956 8.96964H3.03989C3.13783 8.96964 3.2148 8.94865 3.26728 8.89968C3.31974 8.85421 3.34775 8.79123 3.34775 8.70728C3.34775 8.62333 3.31976 8.56036 3.26728 8.51488C3.21481 8.4659 3.13785 8.44492 3.03989 8.44492H2.67956V8.96964ZM4.26777 10.4459V7.88867H5.17381C5.35222 7.88867 5.52015 7.91315 5.67756 7.96564C5.83497 8.0181 5.97841 8.09158 6.10434 8.19303C6.23029 8.29097 6.33173 8.4239 6.4052 8.59183C6.47515 8.75975 6.51365 8.95215 6.51365 9.16903C6.51365 9.38243 6.47517 9.57484 6.4052 9.74274C6.33173 9.91066 6.23029 10.0436 6.10434 10.1415C5.9784 10.243 5.83497 10.3164 5.67756 10.3689C5.52015 10.4214 5.35222 10.4459 5.17381 10.4459H4.26777ZM4.90795 9.88968H5.09685C5.1983 9.88968 5.29275 9.87919 5.38021 9.85469C5.46416 9.83021 5.54463 9.79172 5.62159 9.73926C5.69505 9.68679 5.75452 9.61331 5.7965 9.51537C5.83848 9.41742 5.85947 9.30197 5.85947 9.16903C5.85947 9.0326 5.83848 8.91716 5.7965 8.81922C5.75452 8.72127 5.69505 8.64781 5.62159 8.59533C5.54463 8.54286 5.46418 8.50437 5.38021 8.47989C5.29275 8.45541 5.1983 8.4449 5.09685 8.4449H4.90795V9.88968ZM6.84248 10.4459V7.88867H8.66158V8.4449H7.49666V8.85419H8.42719V9.40692H7.49666V10.4459H6.84248Z"
+                          fill="white"
+                        />
+                      </svg>{" "}
+                      Download PDF
+                    </button>
                   </div>
-                  <div className="text-[16px] font-[500] font-['work_sans']">
-                    Add Member
+                  <div className=" overflow-y-scroll h-full">
+                    <p className="text-['work_sans'] font-[14px] mt-[20px] pb-10 leading-[18px]">
+                      {singleClient?.projectDesc}
+                    </p>
                   </div>
-                </button>
-              </div>
-            </div>
-            {/* //================================================== softwere tools  */}
-            <div className="softwareTools overflow-hidden rounded-[8px] border w-full mt-[18px] h-[117px] px-[20px] py-[18px]">
-              <div className="flex justify-between">
-                <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
-                  Software & Tools
-                </h1>
-                <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
-                  Manage Tools
-                </button>
-              </div>
-              <div className="flex flex-wrap  h-full overflow-y-auto gap-[15px] mt-5 pb-10">
-                {singleClient?.tools.map((item, index) => {
-                  return (
-                    <SoftWere
-                      key={index}
-                      svg={
-                        (item == "Photoshop" && (
-                          <svg
-                            width="19"
-                            height="19"
-                            viewBox="0 0 32 32"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M2 12.1333C2 8.58633 2 6.81283 2.69029 5.45806C3.29749 4.26637 4.26637 3.29749 5.45806 2.69029C6.81283 2 8.58633 2 12.1333 2H19.8667C23.4137 2 25.1872 2 26.5419 2.69029C27.7336 3.29749 28.7025 4.26637 29.3097 5.45806C30 6.81283 30 8.58633 30 12.1333V19.8667C30 23.4137 30 25.1872 29.3097 26.5419C28.7025 27.7336 27.7336 28.7025 26.5419 29.3097C25.1872 30 23.4137 30 19.8667 30H12.1333C8.58633 30 6.81283 30 5.45806 29.3097C4.26637 28.7025 3.29749 27.7336 2.69029 26.5419C2 25.1872 2 23.4137 2 19.8667V12.1333Z"
-                              fill="#001E36"
-                            />
-                            <path
-                              d="M8 22.5162V10.2034C8 10.1197 8.035 10.0718 8.11667 10.0718C9.3223 10.0718 10.5274 10 11.7333 10C13.6902 10 15.809 10.6691 16.5517 12.7162C16.7267 13.2188 16.82 13.7333 16.82 14.2718C16.82 15.3009 16.5867 16.1504 16.12 16.8205C14.8164 18.6923 12.557 18.6632 10.5317 18.6632V22.5043C10.5475 22.618 10.4506 22.6718 10.3567 22.6718H8.14C8.04667 22.6718 8 22.6239 8 22.5162ZM10.5433 12.3812V16.4017C11.3464 16.4605 12.1867 16.4669 12.9583 16.2103C13.8102 15.9645 14.2767 15.2272 14.2767 14.3436C14.3003 13.5907 13.8901 12.8683 13.1917 12.5966C12.4294 12.2796 11.3662 12.2606 10.5433 12.3812Z"
-                              fill="#31A8FF"
-                            />
-                            <path
-                              d="M24.0967 15.6074C23.7437 15.4213 23.3677 15.2852 22.979 15.2028C22.4796 15.0853 20.5098 14.6737 20.509 15.7037C20.5265 16.2787 21.4393 16.5604 21.8426 16.7247C23.2585 17.2108 24.8607 18.0797 24.8292 19.8264C24.8725 22.0008 22.7657 22.8701 20.9598 22.8703C20.0197 22.88 19.0403 22.7344 18.1799 22.3308C18.0977 22.2873 18.0449 22.1944 18.0484 22.0996V20.019C18.0391 19.9356 18.1287 19.8627 18.1987 19.9227C19.0417 20.4325 20.0409 20.6801 21.0162 20.6933C21.4467 20.6933 22.2999 20.6516 22.2935 20.019C22.2935 19.412 21.2728 19.1329 20.8659 18.9787C20.2761 18.7682 19.7169 18.4765 19.2036 18.1118C18.4862 17.6001 18.0362 16.7797 18.0484 15.8771C18.0442 13.8297 19.9835 12.9107 21.73 12.9103C22.5464 12.9035 23.4232 12.964 24.1832 13.2956C24.2925 13.3277 24.3151 13.4429 24.3147 13.546V15.4918C24.3216 15.6126 24.1875 15.6537 24.0967 15.6074Z"
-                              fill="#31A8FF"
-                            />
-                          </svg>
-                        )) ||
-                        (item == "Illustrator" && (
-                          <svg
-                            width="19"
-                            height="19"
-                            viewBox="0 0 32 32"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <title>file_type_ai</title>
-                            <path
-                              d="M3.169,3.517H28.835V28.483H3.169Z"
-                              style={{ fill: "#1c0a00" }}
-                            />
-                            <path
-                              d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Z"
-                              style={{ fill: "#1c0a00" }}
-                            />
-                            <path
-                              d="M18.34,9.43c0-.093,.035-.14,.14-.14h1.832c.093,0,.14,.035,.14,.14v9.205c0,.093,-.023,.14,-.14,.14H20.505c-.117,0,-.152,-.058,-.152,-.152V12.08h-.012Z"
-                              style={{ fill: "#ff7f18" }}
-                            />
-                            <path
-                              d="M18.212,6.782a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,18.212,6.782Z"
-                              style={{ fill: "#ff7f18" }}
-                            />
-                            <path
-                              d="M13.962,13.269c-.327,-1.3,-1.1,-4.118,-1.388,-5.483h-.023c-.245,1.365,-.863,3.675,-1.353,5.483Z"
-                              style={{ fill: "#ff7f18" }}
-                            />
-                            <path
-                              d="M10.719,15.159l-.922,3.5c-.023,.093,-.058,.117,-.175,.117H8.909c-.117,0,-.14,-.035,-.117,-.175l3.313,-11.6a3.779,3.779,0,0,0,.117,-.968c0,-.082,.035,-.117,.093,-.117h2.45c,.082,0,.117,.023,.14,.117l3.71,12.588c.023,.093,0,.152,-.093,.152H16.585c-.093,0,-.152,-.023,-.175,-.1l-.957,-3.512H11.72Z"
-                              style={{ fill: "#ff7f18" }}
-                            />
-                          </svg>
-                        )) ||
-                        (item == "Illustrator" && (
-                          <svg
-                            width="19"
-                            height="19"
-                            viewBox="0 0 32 32"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <title>file_type_ai</title>
-                            <path
-                              d="M3.169,3.517H28.835V28.483H3.169Z"
-                              style={{ fill: "#1c0a00" }}
-                            />
-                            <path
-                              d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Z"
-                              style={{ fill: "#1c0a00" }}
-                            />
-                            <path
-                              d="M18.34,9.43c0-.093,.035-.14,.14-.14h1.832c.093,0,.14,.035,.14,.14v9.205c0,.093,-.023,.14,-.14,.14H20.505c-.117,0,-.152,-.058,-.152,-.152V12.08h-.012Z"
-                              style={{ fill: "#ff7f18" }}
-                            />
-                            <path
-                              d="M18.212,6.782a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,18.212,6.782Z"
-                              style={{ fill: "#ff7f18" }}
-                            />
-                            <path
-                              d="M13.962,13.269c-.327,-1.3,-1.1,-4.118,-1.388,-5.483h-.023c-.245,1.365,-.863,3.675,-1.353,5.483Z"
-                              style={{ fill: "#ff7f18" }}
-                            />
-                            <path
-                              d="M10.719,15.159l-.922,3.5c-.023,.093,-.058,.117,-.175,.117H8.909c-.117,0,-.14,-.035,-.117,-.175l3.313,-11.6a3.779,3.779,0,0,0,.117,-.968c0,-.082,.035,-.117,.093,-.117h2.45c,.082,0,.117,.023,.14,.117l3.71,12.588c.023,.093,0,.152,-.093,.152H16.585c-.093,0,-.152,-.023,-.175,-.1l-.957,-3.512H11.72Z"
-                              style={{ fill: "#ff7f18" }}
-                            />
-                          </svg>
-                        )) ||
-                        (item == "Figma" && (
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 16 16"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                          >
-                            <path
-                              fill="#1ABCFE"
-                              d="M8.55 8c0-1.289 1.019-2.333 2.275-2.333C12.082 5.667 13.1 6.71 13.1 8c0 1.289-1.018 2.333-2.275 2.333C9.57 10.333 8.55 9.29 8.55 8z"
-                            />
-                            <path
-                              fill="#0ACF83"
-                              d="M4 12.667c0-1.289 1.019-2.334 2.275-2.334H8.55v2.334C8.55 13.955 7.531 15 6.275 15S4 13.955 4 12.667z"
-                            />
-                            <path
-                              fill="#FF7262"
-                              d="M8.55 1v4.667h2.275c1.257 0 2.275-1.045 2.275-2.334C13.1 2.045 12.082 1 10.825 1H8.55z"
-                            />
-                            <path
-                              fill="#F24E1E"
-                              d="M4 3.333c0 1.289 1.019 2.334 2.275 2.334H8.55V1H6.275C5.019 1 4 2.045 4 3.333z"
-                            />
-                            <path
-                              fill="#A259FF"
-                              d="M4 8c0 1.289 1.019 2.333 2.275 2.333H8.55V5.667H6.275C5.019 5.667 4 6.71 4 8z"
-                            />
-                          </svg>
-                        )) ||
-                        (item == "Word" && (
-                          <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 48 48"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <rect
-                              x="6"
-                              y="6"
-                              width="36"
-                              height="36"
-                              rx="3"
-                              fill="#2F88FF"
-                              stroke="#000000"
-                              strokeWidth="4"
-                            />
-                            <path
-                              d="M14 16L18 32L24 19L30 32L34 16"
-                              stroke="white"
-                              strokeWidth="4"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        ))
-                      }
-                      name={item}
-                    />
-                  );
-                })}
-
-                <div className="flex  items-center  rounded-2xl w-[87px] h-[31px] gap-[10px]">
-                  <button
-                    onClick={() => setTools(true)}
-                    className="rounded-2xl border text-[12px] px-[10px] w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']"
-                  >
-                    + Add Tool
-                  </button>
                 </div>
-              </div>
-            </div>
-            {/* //==================================================== project files  */}
-            <div className="ProjectFiles overflow-hidden rounded-[8px] border w-full mt-[18px] h-[230px] px-[22px] py-[11px]">
-              <div className="flex justify-between">
-                <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px]  mt-[10px]font-['work_sans'] ">
-                  Project Files
-                </h1>
-                <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
-                  Manage Files
-                </button>
-              </div>
-              <div className="grid gap-[15px] h-full overflow-y-auto grid-cols-4 mt-5 pb-10">
-                {singleClient?.projectFile?.length > 0 ? (
-                  singleClient?.projectFile?.map((item, index) => {
-                    return (
-                      <ProjectFile
-                        key={index}
-                        svg={
-                          (item.split(".").pop() === "psd" && (
-                            <svg
-                              width="22"
-                              height="22"
-                              viewBox="0 0 32 32"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M3.167,3.517H28.833V28.483H3.167Z"
-                                style={{ fill: "#0c0824" }}
-                              />
-                              <path
-                                d="M3.167,3.517H28.833V28.483H3.167ZM2,29.65H30V2.35H2Zm18.877-16.1c-.922,0-1.237.467-1.237.852,0,.42.21.712,1.447,1.353,1.832.887,2.4,1.738,2.4,2.987,0,1.867-1.423,2.87-3.348,2.87a5.076,5.076,0,0,1-2.392-.5c-.082-.035-.093-.093-.093-.187V19.208c0-.117.058-.152.14-.093a4.33,4.33,0,0,0,2.345.688c.922,0,1.307-.385,1.307-.91,0-.42-.268-.793-1.447-1.4-1.657-.793-2.345-1.6-2.345-2.94,0-1.505,1.178-2.753,3.22-2.753a5.365,5.365,0,0,1,2.088.327.258.258,0,0,1,.117.233v1.6c0,.093-.058.152-.175.117a3.941,3.941,0,0,0-2.03-.525ZM10.843,14.938c.268.023.478.023.945.023,1.365,0,2.648-.478,2.648-2.333,0-1.482-.922-2.228-2.473-2.228-.467,0-.91.023-1.12.035Zm-2.077-6.2c0-.082.163-.14.257-.14.747-.035,1.855-.058,3.01-.058,3.232,0,4.492,1.773,4.492,4.037,0,2.963-2.147,4.235-4.783,4.235-.443,0-.595-.023-.91-.023v4.48c0,.093-.035.14-.14.14H8.907c-.093,0-.14-.035-.14-.14V8.743Z"
-                                style={{ fill: "#31c5f0" }}
-                              />
-                            </svg>
-                          )) ||
-                          (item.split(".").pop() === "ai" && (
-                            <svg
-                              width="22"
-                              height="22"
-                              viewBox="0 0 32 32"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <title>file_type_ai</title>
-                              <path
-                                d="M3.169,3.517H28.835V28.483H3.169Z"
-                                style={{ fill: "#1c0a00" }}
-                              />
-                              <path
-                                d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Zm18.34-17.57c0-.093.035-.14.14-.14h1.832c.093,0,.14.035.14.14v9.205c0,.093-.023.14-.14.14H20.505c-.117,0-.152-.058-.152-.152V12.08h-.012Zm-.128-2.648a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,20.214,9.432Zm-5.25,6.487c-.327-1.3-1.1-4.118-1.388-5.483h-.023c-.245,1.365-.863,3.675-1.353,5.483Zm-3.243,1.89-.922,3.5c-.023.093-.058.117-.175.117H8.909c-.117,0-.14-.035-.117-.175l3.313-11.6a3.779,3.779,0,0,0,.117-.968c0-.082.035-.117.093-.117h2.45c.082,0,.117.023.14.117l3.71,12.588c.023.093,0,.152-.093.152H16.585c-.093,0-.152-.023-.175-.1l-.957-3.512H11.72Z"
-                                style={{ fill: "#ff7f18" }}
-                              />
-                            </svg>
-                          )) ||
-                          (item.split(".").pop() === "jpg" && (
-                            <svg
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <mask
-                                id="mask0_1358_2896"
-                                style={{ maskType: "alpha" }}
-                                maskUnits="userSpaceOnUse"
-                                x="3"
-                                y="3"
-                                width="18"
-                                height="18"
+                {/* //============================================== team member  */}
+                <div className="teamMember overflow-hidden rounded-[8px] border w-full mt-[18px] h-[217px] px-[16px] py-[15px]">
+                  <div className="flex justify-between">
+                    <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
+                      Team
+                    </h1>
+                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
+                      Manage Team
+                    </button>
+                  </div>
+                  <div className="grid grid-cols-4 h-full overflow-y-auto mt-5 pb-5">
+                    {singleClient?.team?.length > 0 ? (
+                      singleClient?.team?.map((item, index) => {
+                        return (
+                          <Team
+                            key={index}
+                            avatar={item?.avatar}
+                            name={item?.name}
+                            title={item?.employment}
+                          />
+                        );
+                      })
+                    ) : (
+                      <span>No team member</span>
+                    )}
+                    <button
+                      onClick={() => setTeam(!team)}
+                      className="flex p-[4px] items-center h-[42px] gap-[10px]"
+                    >
+                      <div className="w-[42px] h-[42px] border rounded-full flex justify-center items-center bg-gray-100">
+                        +
+                      </div>
+                      <div className="text-[16px] font-[500] font-['work_sans']">
+                        Add Member
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                {/* //================================================== softwere tools  */}
+                <div className="softwareTools overflow-hidden rounded-[8px] border w-full mt-[18px] h-[117px] px-[20px] py-[18px]">
+                  <div className="flex justify-between">
+                    <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
+                      Software & Tools
+                    </h1>
+                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
+                      Manage Tools
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap  h-full overflow-y-auto gap-[15px] mt-5 pb-10">
+                    {singleClient?.tools.map((item, index) => {
+                      return (
+                        <SoftWere
+                          key={index}
+                          svg={
+                            (item == "Photoshop" && (
+                              <svg
+                                width="19"
+                                height="19"
+                                viewBox="0 0 32 32"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
                               >
                                 <path
-                                  d="M3 11C3 7.22876 3 5.34315 4.17157 4.17157C5.34315 3 7.22876 3 11 3H13C16.7712 3 18.6569 3 19.8284 4.17157C21 5.34315 21 7.22876 21 11V13C21 16.7712 21 18.6569 19.8284 19.8284C18.6569 21 16.7712 21 13 21H11C7.22876 21 5.34315 21 4.17157 19.8284C3 18.6569 3 16.7712 3 13V11Z"
-                                  fill="#273B4A"
+                                  d="M2 12.1333C2 8.58633 2 6.81283 2.69029 5.45806C3.29749 4.26637 4.26637 3.29749 5.45806 2.69029C6.81283 2 8.58633 2 12.1333 2H19.8667C23.4137 2 25.1872 2 26.5419 2.69029C27.7336 3.29749 28.7025 4.26637 29.3097 5.45806C30 6.81283 30 8.58633 30 12.1333V19.8667C30 23.4137 30 25.1872 29.3097 26.5419C28.7025 27.7336 27.7336 28.7025 26.5419 29.3097C25.1872 30 23.4137 30 19.8667 30H12.1333C8.58633 30 6.81283 30 5.45806 29.3097C4.26637 28.7025 3.29749 27.7336 2.69029 26.5419C2 25.1872 2 23.4137 2 19.8667V12.1333Z"
+                                  fill="#001E36"
                                 />
-                              </mask>
-                              <g mask="url(#mask0_1358_2896)">
                                 <path
-                                  d="M5.40989 12.5901L5.25713 12.7429C4.27646 13.7235 3.78613 14.2139 3.49264 14.8158C3.39066 15.025 3.30712 15.2427 3.24299 15.4664C3.05843 16.1102 3.09488 16.8027 3.16777 18.1877L3.5 24.5H21V19.7573C21 18.3059 21 17.5802 20.7614 16.9207C20.6962 16.7404 20.6181 16.565 20.5277 16.3959C20.1971 15.7774 19.6577 15.2919 18.5789 14.321L18.3643 14.1279C17.4682 13.3214 17.0202 12.9182 16.5078 12.8039C16.1864 12.7322 15.8523 12.741 15.5352 12.8295C15.0295 12.9705 14.6033 13.3967 13.7508 14.2492C13.1184 14.8816 12.8023 15.1977 12.4625 15.2406C12.2519 15.2672 12.0383 15.226 11.8526 15.1231C11.5531 14.9572 11.3742 14.5399 11.0166 13.7053C10.2559 11.9304 9.87554 11.0429 9.22167 10.7151C8.89249 10.5501 8.52413 10.4792 8.1572 10.5101C7.42836 10.5716 6.75554 11.2445 5.40989 12.5901L5.40989 12.5901Z"
-                                  fill="#2A4157"
-                                  fillOpacity="0.24"
-                                  stroke="#222222"
+                                  d="M8 22.5162V10.2034C8 10.1197 8.035 10.0718 8.11667 10.0718C9.3223 10.0718 10.5274 10 11.7333 10C13.6902 10 15.809 10.6691 16.5517 12.7162C16.7267 13.2188 16.82 13.7333 16.82 14.2718C16.82 15.3009 16.5867 16.1504 16.12 16.8205C14.8164 18.6923 12.557 18.6632 10.5317 18.6632V22.5043C10.5475 22.618 10.4506 22.6718 10.3567 22.6718H8.14C8.04667 22.6718 8 22.6239 8 22.5162ZM10.5433 12.3812V16.4017C11.3464 16.4605 12.1867 16.4669 12.9583 16.2103C13.8102 15.9645 14.2767 15.2272 14.2767 14.3436C14.3003 13.5907 13.8901 12.8683 13.1917 12.5966C12.4294 12.2796 11.3662 12.2606 10.5433 12.3812Z"
+                                  fill="#31A8FF"
                                 />
-                              </g>
-                              <path
-                                d="M3 11C3 7.22876 3 5.34315 4.17157 4.17157C5.34315 3 7.22876 3 11 3H13C16.7712 3 18.6569 3 19.8284 4.17157C21 5.34315 21 7.22876 21 11V13C21 16.7712 21 18.6569 19.8284 19.8284C18.6569 21 16.7712 21 13 21H11C7.22876 21 5.34315 21 4.17157 19.8284C3 18.6569 3 16.7712 3 13V11Z"
-                                stroke="#222222"
-                                strokeWidth="1.2"
-                              />
-                              <circle
-                                cx="16.5"
-                                cy="7.5"
-                                r="1.5"
-                                fill="#222222"
-                              />
-                            </svg>
-                          ))
-                        }
-                        name={
-                          (item.split(".").pop() === "psd" && "Photoshop") ||
-                          (item.split(".").pop() === "ai" && "Illustrator") ||
-                          (item.split(".").pop() === "fig " && "Figma") ||
-                          (item.split(".").pop() === "jpg" && "JPEG Image") ||
-                          (item.split(".").pop() === "png" && "PNG Image") ||
-                          (item.split(".").pop() === "doc" && "Word") ||
-                          (item.split(".").pop() === "xls" && "Excel") ||
-                          (item.split(".").pop() === "pdf" && "PDF Document") ||
-                          (item.split(".").pop() === "txt" && "Text") ||
-                          (item.split(".").pop() === "mp4" && "MP4 Video") ||
-                          (item.split(".").pop() === "mp3" && "MP3 Audio") ||
-                          (item.split(".").pop() === "zip" && "ZIP Archive") ||
-                          (item.split(".").pop() === "html" && "HTML") ||
-                          (item.split(".").pop() === "css" && "CSS") ||
-                          (item.split(".").pop() === "js" && "JavaScript") ||
-                          (item.split(".").pop() === "xlsx" &&
-                            "Excel Spreadsheet") ||
-                          (item.split(".").pop() === "pptx" && "PowerPoint") ||
-                          "Unknown"
-                        }
-                        title="Figma Link"
-                        file={item}
-                      />
-                    );
-                  })
-                ) : (
-                  <span>No Project files</span>
-                )}
+                                <path
+                                  d="M24.0967 15.6074C23.7437 15.4213 23.3677 15.2852 22.979 15.2028C22.4796 15.0853 20.5098 14.6737 20.509 15.7037C20.5265 16.2787 21.4393 16.5604 21.8426 16.7247C23.2585 17.2108 24.8607 18.0797 24.8292 19.8264C24.8725 22.0008 22.7657 22.8701 20.9598 22.8703C20.0197 22.88 19.0403 22.7344 18.1799 22.3308C18.0977 22.2873 18.0449 22.1944 18.0484 22.0996V20.019C18.0391 19.9356 18.1287 19.8627 18.1987 19.9227C19.0417 20.4325 20.0409 20.6801 21.0162 20.6933C21.4467 20.6933 22.2999 20.6516 22.2935 20.019C22.2935 19.412 21.2728 19.1329 20.8659 18.9787C20.2761 18.7682 19.7169 18.4765 19.2036 18.1118C18.4862 17.6001 18.0362 16.7797 18.0484 15.8771C18.0442 13.8297 19.9835 12.9107 21.73 12.9103C22.5464 12.9035 23.4232 12.964 24.1832 13.2956C24.2925 13.3277 24.3151 13.4429 24.3147 13.546V15.4918C24.3216 15.6126 24.1875 15.6537 24.0967 15.6074Z"
+                                  fill="#31A8FF"
+                                />
+                              </svg>
+                            )) ||
+                            (item == "Illustrator" && (
+                              <svg
+                                width="19"
+                                height="19"
+                                viewBox="0 0 32 32"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <title>file_type_ai</title>
+                                <path
+                                  d="M3.169,3.517H28.835V28.483H3.169Z"
+                                  style={{ fill: "#1c0a00" }}
+                                />
+                                <path
+                                  d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Z"
+                                  style={{ fill: "#1c0a00" }}
+                                />
+                                <path
+                                  d="M18.34,9.43c0-.093,.035-.14,.14-.14h1.832c.093,0,.14,.035,.14,.14v9.205c0,.093,-.023,.14,-.14,.14H20.505c-.117,0,-.152,-.058,-.152,-.152V12.08h-.012Z"
+                                  style={{ fill: "#ff7f18" }}
+                                />
+                                <path
+                                  d="M18.212,6.782a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,18.212,6.782Z"
+                                  style={{ fill: "#ff7f18" }}
+                                />
+                                <path
+                                  d="M13.962,13.269c-.327,-1.3,-1.1,-4.118,-1.388,-5.483h-.023c-.245,1.365,-.863,3.675,-1.353,5.483Z"
+                                  style={{ fill: "#ff7f18" }}
+                                />
+                                <path
+                                  d="M10.719,15.159l-.922,3.5c-.023,.093,-.058,.117,-.175,.117H8.909c-.117,0,-.14,-.035,-.117,-.175l3.313,-11.6a3.779,3.779,0,0,0,.117,-.968c0,-.082,.035,-.117,.093,-.117h2.45c,.082,0,.117,.023,.14,.117l3.71,12.588c.023,.093,0,.152,-.093,.152H16.585c-.093,0,-.152,-.023,-.175,-.1l-.957,-3.512H11.72Z"
+                                  style={{ fill: "#ff7f18" }}
+                                />
+                              </svg>
+                            )) ||
+                            (item == "Illustrator" && (
+                              <svg
+                                width="19"
+                                height="19"
+                                viewBox="0 0 32 32"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <title>file_type_ai</title>
+                                <path
+                                  d="M3.169,3.517H28.835V28.483H3.169Z"
+                                  style={{ fill: "#1c0a00" }}
+                                />
+                                <path
+                                  d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Z"
+                                  style={{ fill: "#1c0a00" }}
+                                />
+                                <path
+                                  d="M18.34,9.43c0-.093,.035-.14,.14-.14h1.832c.093,0,.14,.035,.14,.14v9.205c0,.093,-.023,.14,-.14,.14H20.505c-.117,0,-.152,-.058,-.152,-.152V12.08h-.012Z"
+                                  style={{ fill: "#ff7f18" }}
+                                />
+                                <path
+                                  d="M18.212,6.782a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,18.212,6.782Z"
+                                  style={{ fill: "#ff7f18" }}
+                                />
+                                <path
+                                  d="M13.962,13.269c-.327,-1.3,-1.1,-4.118,-1.388,-5.483h-.023c-.245,1.365,-.863,3.675,-1.353,5.483Z"
+                                  style={{ fill: "#ff7f18" }}
+                                />
+                                <path
+                                  d="M10.719,15.159l-.922,3.5c-.023,.093,-.058,.117,-.175,.117H8.909c-.117,0,-.14,-.035,-.117,-.175l3.313,-11.6a3.779,3.779,0,0,0,.117,-.968c0,-.082,.035,-.117,.093,-.117h2.45c,.082,0,.117,.023,.14,.117l3.71,12.588c.023,.093,0,.152,-.093,.152H16.585c-.093,0,-.152,-.023,-.175,-.1l-.957,-3.512H11.72Z"
+                                  style={{ fill: "#ff7f18" }}
+                                />
+                              </svg>
+                            )) ||
+                            (item == "Figma" && (
+                              <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 16 16"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                              >
+                                <path
+                                  fill="#1ABCFE"
+                                  d="M8.55 8c0-1.289 1.019-2.333 2.275-2.333C12.082 5.667 13.1 6.71 13.1 8c0 1.289-1.018 2.333-2.275 2.333C9.57 10.333 8.55 9.29 8.55 8z"
+                                />
+                                <path
+                                  fill="#0ACF83"
+                                  d="M4 12.667c0-1.289 1.019-2.334 2.275-2.334H8.55v2.334C8.55 13.955 7.531 15 6.275 15S4 13.955 4 12.667z"
+                                />
+                                <path
+                                  fill="#FF7262"
+                                  d="M8.55 1v4.667h2.275c1.257 0 2.275-1.045 2.275-2.334C13.1 2.045 12.082 1 10.825 1H8.55z"
+                                />
+                                <path
+                                  fill="#F24E1E"
+                                  d="M4 3.333c0 1.289 1.019 2.334 2.275 2.334H8.55V1H6.275C5.019 1 4 2.045 4 3.333z"
+                                />
+                                <path
+                                  fill="#A259FF"
+                                  d="M4 8c0 1.289 1.019 2.333 2.275 2.333H8.55V5.667H6.275C5.019 5.667 4 6.71 4 8z"
+                                />
+                              </svg>
+                            )) ||
+                            (item == "Word" && (
+                              <svg
+                                width="22"
+                                height="22"
+                                viewBox="0 0 48 48"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <rect
+                                  x="6"
+                                  y="6"
+                                  width="36"
+                                  height="36"
+                                  rx="3"
+                                  fill="#2F88FF"
+                                  stroke="#000000"
+                                  strokeWidth="4"
+                                />
+                                <path
+                                  d="M14 16L18 32L24 19L30 32L34 16"
+                                  stroke="white"
+                                  strokeWidth="4"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />
+                              </svg>
+                            ))
+                          }
+                          name={item}
+                        />
+                      );
+                    })}
 
-                <div className="flex  items-center  rounded-2xl w-[150px] h-[57px] overflow-hidden gap-[10px]">
-                  <label
-                    htmlFor="ProjectFillUpload"
-                    className="rounded-2xl cursor-pointer border  text-[14px]  w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']  flex justify-center items-center gap-2 border-dotted"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                    >
-                      <g clipPath="url(#clip0_700_5392)">
-                        <path
-                          d="M14.6666 8.6665C14.4898 8.6665 14.3202 8.73674 14.1952 8.86177C14.0702 8.98679 14 9.15636 14 9.33317V12.1418C13.9994 12.6344 13.8035 13.1067 13.4552 13.4551C13.1069 13.8034 12.6346 13.9993 12.142 13.9998H3.85796C3.36535 13.9993 2.89307 13.8034 2.54474 13.4551C2.19641 13.1067 2.00049 12.6344 1.99996 12.1418V9.33317C1.99996 9.15636 1.92972 8.98679 1.8047 8.86177C1.67967 8.73674 1.5101 8.6665 1.33329 8.6665C1.15648 8.6665 0.986912 8.73674 0.861888 8.86177C0.736864 8.98679 0.666626 9.15636 0.666626 9.33317V12.1418C0.667508 12.988 1.00402 13.7992 1.60232 14.3975C2.20062 14.9958 3.01184 15.3323 3.85796 15.3332H12.142C12.9881 15.3323 13.7993 14.9958 14.3976 14.3975C14.9959 13.7992 15.3324 12.988 15.3333 12.1418V9.33317C15.3333 9.15636 15.2631 8.98679 15.138 8.86177C15.013 8.73674 14.8434 8.6665 14.6666 8.6665Z"
-                          fill="#878790"
-                        />
-                        <path
-                          d="M4.47136 5.80485L7.33336 2.94285V11.3335C7.33336 11.5103 7.4036 11.6799 7.52862 11.8049C7.65365 11.9299 7.82322 12.0002 8.00003 12.0002C8.17684 12.0002 8.34641 11.9299 8.47143 11.8049C8.59646 11.6799 8.66669 11.5103 8.66669 11.3335V2.94285L11.5287 5.80485C11.6544 5.92629 11.8228 5.99348 11.9976 5.99197C12.1724 5.99045 12.3396 5.92033 12.4632 5.79673C12.5868 5.67312 12.657 5.50592 12.6585 5.33112C12.66 5.15632 12.5928 4.98792 12.4714 4.86218L8.47136 0.862183C8.34634 0.737202 8.1768 0.666992 8.00003 0.666992C7.82325 0.666992 7.65371 0.737202 7.52869 0.862183L3.52869 4.86218C3.40726 4.98792 3.34006 5.15632 3.34158 5.33112C3.3431 5.50592 3.41321 5.67312 3.53682 5.79673C3.66042 5.92033 3.82763 5.99045 4.00243 5.99197C4.17722 5.99348 4.34563 5.92629 4.47136 5.80485Z"
-                          fill="#878790"
-                        />
-                      </g>
-                      <defs>
-                        <clipPath id="clip0_700_5392">
-                          <rect width="16" height="16" fill="white" />
-                        </clipPath>
-                      </defs>
-                    </svg>
-                    Upload File
-                  </label>
-                  <input
-                    id="ProjectFillUpload"
-                    className="hidden"
-                    type="file"
-                    multiple
-                    onChange={handleFileUpload}
-                  />
+                    <div className="flex  items-center  rounded-2xl w-[87px] h-[31px] gap-[10px]">
+                      <button
+                        onClick={() => setTools(true)}
+                        className="rounded-2xl border text-[12px] px-[10px] w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']"
+                      >
+                        + Add Tool
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+                {/* //==================================================== project files  */}
+                <div className="ProjectFiles overflow-hidden rounded-[8px] border w-full mt-[18px] h-[230px] px-[22px] py-[11px]">
+                  <div className="flex justify-between">
+                    <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px]  mt-[10px]font-['work_sans'] ">
+                      Project Files
+                    </h1>
+                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
+                      Manage Files
+                    </button>
+                  </div>
+                  <div className="grid gap-[15px] h-full overflow-y-auto grid-cols-4 mt-5 pb-10">
+                    {singleClient?.projectFile?.length > 0 ? (
+                      singleClient?.projectFile?.map((item, index) => {
+                        return (
+                          <ProjectFile
+                            key={index}
+                            svg={
+                              (item.split(".").pop() === "psd" && (
+                                <svg
+                                  width="22"
+                                  height="22"
+                                  viewBox="0 0 32 32"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M3.167,3.517H28.833V28.483H3.167Z"
+                                    style={{ fill: "#0c0824" }}
+                                  />
+                                  <path
+                                    d="M3.167,3.517H28.833V28.483H3.167ZM2,29.65H30V2.35H2Zm18.877-16.1c-.922,0-1.237.467-1.237.852,0,.42.21.712,1.447,1.353,1.832.887,2.4,1.738,2.4,2.987,0,1.867-1.423,2.87-3.348,2.87a5.076,5.076,0,0,1-2.392-.5c-.082-.035-.093-.093-.093-.187V19.208c0-.117.058-.152.14-.093a4.33,4.33,0,0,0,2.345.688c.922,0,1.307-.385,1.307-.91,0-.42-.268-.793-1.447-1.4-1.657-.793-2.345-1.6-2.345-2.94,0-1.505,1.178-2.753,3.22-2.753a5.365,5.365,0,0,1,2.088.327.258.258,0,0,1,.117.233v1.6c0,.093-.058.152-.175.117a3.941,3.941,0,0,0-2.03-.525ZM10.843,14.938c.268.023.478.023.945.023,1.365,0,2.648-.478,2.648-2.333,0-1.482-.922-2.228-2.473-2.228-.467,0-.91.023-1.12.035Zm-2.077-6.2c0-.082.163-.14.257-.14.747-.035,1.855-.058,3.01-.058,3.232,0,4.492,1.773,4.492,4.037,0,2.963-2.147,4.235-4.783,4.235-.443,0-.595-.023-.91-.023v4.48c0,.093-.035.14-.14.14H8.907c-.093,0-.14-.035-.14-.14V8.743Z"
+                                    style={{ fill: "#31c5f0" }}
+                                  />
+                                </svg>
+                              )) ||
+                              (item.split(".").pop() === "ai" && (
+                                <svg
+                                  width="22"
+                                  height="22"
+                                  viewBox="0 0 32 32"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <title>file_type_ai</title>
+                                  <path
+                                    d="M3.169,3.517H28.835V28.483H3.169Z"
+                                    style={{ fill: "#1c0a00" }}
+                                  />
+                                  <path
+                                    d="M3.169,3.517H28.835V28.483H3.169ZM2,29.65H30V2.35H2Zm18.34-17.57c0-.093.035-.14.14-.14h1.832c.093,0,.14.035.14.14v9.205c0,.093-.023.14-.14.14H20.505c-.117,0-.152-.058-.152-.152V12.08h-.012Zm-.128-2.648a1.19,1.19,0,0,1,2.38,0,1.115,1.115,0,0,1-1.213,1.19A1.1,1.1,0,0,1,20.214,9.432Zm-5.25,6.487c-.327-1.3-1.1-4.118-1.388-5.483h-.023c-.245,1.365-.863,3.675-1.353,5.483Zm-3.243,1.89-.922,3.5c-.023.093-.058.117-.175.117H8.909c-.117,0-.14-.035-.117-.175l3.313-11.6a3.779,3.779,0,0,0,.117-.968c0-.082.035-.117.093-.117h2.45c.082,0,.117.023.14.117l3.71,12.588c.023.093,0,.152-.093.152H16.585c-.093,0-.152-.023-.175-.1l-.957-3.512H11.72Z"
+                                    style={{ fill: "#ff7f18" }}
+                                  />
+                                </svg>
+                              )) ||
+                              (item.split(".").pop() === "jpg" && (
+                                <svg
+                                  width="22"
+                                  height="22"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <mask
+                                    id="mask0_1358_2896"
+                                    style={{ maskType: "alpha" }}
+                                    maskUnits="userSpaceOnUse"
+                                    x="3"
+                                    y="3"
+                                    width="18"
+                                    height="18"
+                                  >
+                                    <path
+                                      d="M3 11C3 7.22876 3 5.34315 4.17157 4.17157C5.34315 3 7.22876 3 11 3H13C16.7712 3 18.6569 3 19.8284 4.17157C21 5.34315 21 7.22876 21 11V13C21 16.7712 21 18.6569 19.8284 19.8284C18.6569 21 16.7712 21 13 21H11C7.22876 21 5.34315 21 4.17157 19.8284C3 18.6569 3 16.7712 3 13V11Z"
+                                      fill="#273B4A"
+                                    />
+                                  </mask>
+                                  <g mask="url(#mask0_1358_2896)">
+                                    <path
+                                      d="M5.40989 12.5901L5.25713 12.7429C4.27646 13.7235 3.78613 14.2139 3.49264 14.8158C3.39066 15.025 3.30712 15.2427 3.24299 15.4664C3.05843 16.1102 3.09488 16.8027 3.16777 18.1877L3.5 24.5H21V19.7573C21 18.3059 21 17.5802 20.7614 16.9207C20.6962 16.7404 20.6181 16.565 20.5277 16.3959C20.1971 15.7774 19.6577 15.2919 18.5789 14.321L18.3643 14.1279C17.4682 13.3214 17.0202 12.9182 16.5078 12.8039C16.1864 12.7322 15.8523 12.741 15.5352 12.8295C15.0295 12.9705 14.6033 13.3967 13.7508 14.2492C13.1184 14.8816 12.8023 15.1977 12.4625 15.2406C12.2519 15.2672 12.0383 15.226 11.8526 15.1231C11.5531 14.9572 11.3742 14.5399 11.0166 13.7053C10.2559 11.9304 9.87554 11.0429 9.22167 10.7151C8.89249 10.5501 8.52413 10.4792 8.1572 10.5101C7.42836 10.5716 6.75554 11.2445 5.40989 12.5901L5.40989 12.5901Z"
+                                      fill="#2A4157"
+                                      fillOpacity="0.24"
+                                      stroke="#222222"
+                                    />
+                                  </g>
+                                  <path
+                                    d="M3 11C3 7.22876 3 5.34315 4.17157 4.17157C5.34315 3 7.22876 3 11 3H13C16.7712 3 18.6569 3 19.8284 4.17157C21 5.34315 21 7.22876 21 11V13C21 16.7712 21 18.6569 19.8284 19.8284C18.6569 21 16.7712 21 13 21H11C7.22876 21 5.34315 21 4.17157 19.8284C3 18.6569 3 16.7712 3 13V11Z"
+                                    stroke="#222222"
+                                    strokeWidth="1.2"
+                                  />
+                                  <circle
+                                    cx="16.5"
+                                    cy="7.5"
+                                    r="1.5"
+                                    fill="#222222"
+                                  />
+                                </svg>
+                              ))
+                            }
+                            name={
+                              (item.split(".").pop() === "psd" &&
+                                "Photoshop") ||
+                              (item.split(".").pop() === "ai" &&
+                                "Illustrator") ||
+                              (item.split(".").pop() === "fig " && "Figma") ||
+                              (item.split(".").pop() === "jpg" &&
+                                "JPEG Image") ||
+                              (item.split(".").pop() === "png" &&
+                                "PNG Image") ||
+                              (item.split(".").pop() === "doc" && "Word") ||
+                              (item.split(".").pop() === "xls" && "Excel") ||
+                              (item.split(".").pop() === "pdf" &&
+                                "PDF Document") ||
+                              (item.split(".").pop() === "txt" && "Text") ||
+                              (item.split(".").pop() === "mp4" &&
+                                "MP4 Video") ||
+                              (item.split(".").pop() === "mp3" &&
+                                "MP3 Audio") ||
+                              (item.split(".").pop() === "zip" &&
+                                "ZIP Archive") ||
+                              (item.split(".").pop() === "html" && "HTML") ||
+                              (item.split(".").pop() === "css" && "CSS") ||
+                              (item.split(".").pop() === "js" &&
+                                "JavaScript") ||
+                              (item.split(".").pop() === "xlsx" &&
+                                "Excel Spreadsheet") ||
+                              (item.split(".").pop() === "pptx" &&
+                                "PowerPoint") ||
+                              "Unknown"
+                            }
+                            title="Figma Link"
+                            file={item}
+                          />
+                        );
+                      })
+                    ) : (
+                      <span>No Project files</span>
+                    )}
+
+                    <div className="flex  items-center  rounded-2xl w-[150px] h-[57px] overflow-hidden gap-[10px]">
+                      <label
+                        htmlFor="ProjectFillUpload"
+                        className="rounded-2xl cursor-pointer border  text-[14px]  w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']  flex justify-center items-center gap-2 border-dotted"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 16 16"
+                          fill="none"
+                        >
+                          <g clipPath="url(#clip0_700_5392)">
+                            <path
+                              d="M14.6666 8.6665C14.4898 8.6665 14.3202 8.73674 14.1952 8.86177C14.0702 8.98679 14 9.15636 14 9.33317V12.1418C13.9994 12.6344 13.8035 13.1067 13.4552 13.4551C13.1069 13.8034 12.6346 13.9993 12.142 13.9998H3.85796C3.36535 13.9993 2.89307 13.8034 2.54474 13.4551C2.19641 13.1067 2.00049 12.6344 1.99996 12.1418V9.33317C1.99996 9.15636 1.92972 8.98679 1.8047 8.86177C1.67967 8.73674 1.5101 8.6665 1.33329 8.6665C1.15648 8.6665 0.986912 8.73674 0.861888 8.86177C0.736864 8.98679 0.666626 9.15636 0.666626 9.33317V12.1418C0.667508 12.988 1.00402 13.7992 1.60232 14.3975C2.20062 14.9958 3.01184 15.3323 3.85796 15.3332H12.142C12.9881 15.3323 13.7993 14.9958 14.3976 14.3975C14.9959 13.7992 15.3324 12.988 15.3333 12.1418V9.33317C15.3333 9.15636 15.2631 8.98679 15.138 8.86177C15.013 8.73674 14.8434 8.6665 14.6666 8.6665Z"
+                              fill="#878790"
+                            />
+                            <path
+                              d="M4.47136 5.80485L7.33336 2.94285V11.3335C7.33336 11.5103 7.4036 11.6799 7.52862 11.8049C7.65365 11.9299 7.82322 12.0002 8.00003 12.0002C8.17684 12.0002 8.34641 11.9299 8.47143 11.8049C8.59646 11.6799 8.66669 11.5103 8.66669 11.3335V2.94285L11.5287 5.80485C11.6544 5.92629 11.8228 5.99348 11.9976 5.99197C12.1724 5.99045 12.3396 5.92033 12.4632 5.79673C12.5868 5.67312 12.657 5.50592 12.6585 5.33112C12.66 5.15632 12.5928 4.98792 12.4714 4.86218L8.47136 0.862183C8.34634 0.737202 8.1768 0.666992 8.00003 0.666992C7.82325 0.666992 7.65371 0.737202 7.52869 0.862183L3.52869 4.86218C3.40726 4.98792 3.34006 5.15632 3.34158 5.33112C3.3431 5.50592 3.41321 5.67312 3.53682 5.79673C3.66042 5.92033 3.82763 5.99045 4.00243 5.99197C4.17722 5.99348 4.34563 5.92629 4.47136 5.80485Z"
+                              fill="#878790"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_700_5392">
+                              <rect width="16" height="16" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                        Upload File
+                      </label>
+                      <input
+                        id="ProjectFillUpload"
+                        className="hidden"
+                        type="file"
+                        multiple
+                        onChange={handleFileUpload}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+            {menu === "Client Feedback" && <ClientFeedBack />}
           </div>
           {/* //====================================================== right section  */}
           <div className="right border w-[315px] overflow-hidden rounded-[8px] mt-1 flex justify-center">

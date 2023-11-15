@@ -12,9 +12,25 @@ import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import { getSingleSeller } from "../../Features/Seller/SellerApi";
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 import LoadingSpinner from "../../Components/LoadingSpin";
+import ClientComponent from "../../Components/ClientComponent";
+import ProjectComponent from "../../Components/ProjectComponent";
+import StatisticComponent from "../../Components/StatisticComponent";
 const Seller = () => {
   //===========================================all state
   const [model, setModel] = useState(false);
+  const [menu, setMenu] = useState("Manage Sales People");
+  const [input, setInput] = useState({
+    text: "",
+    startDate: "",
+    endDate: "",
+  });
+  //===============================================================handle input change
+  const handleOnChange = (e) => {
+    setInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
   //==================================================get all seller state
   const { singleSeller, loader } = useSelector(getAllSellerState);
 
@@ -45,7 +61,15 @@ const Seller = () => {
       <div className="min-w-[1340px] relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] ">
-            <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />{" "}
+            {singleSeller?.companyAvatar ? (
+              <img
+                className="w-[86px] h-[70px]"
+                src={singleSeller?.companyAvatar}
+                alt=""
+              />
+            ) : (
+              <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />
+            )}
             <h1 className="text-[26px] capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
               Admin Dashboard
             </h1>
@@ -398,27 +422,53 @@ const Seller = () => {
           <div className="search mt-[20px] w-full h-[38px] flex items-center justify-between">
             <div className="flex">
               <div className="sales_client_project_statistics border  w-[375px] h-[38px] flex justify-between items-center rounded-md">
-                <button className="text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]">
+                <button
+                  onClick={() => setMenu("Manage Sales People")}
+                  className={`${
+                    menu === "Manage Sales People" ? "shadow-md" : ""
+                  } text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                >
                   Sales Guy
                 </button>
-                <button className="text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]">
+                <button
+                  onClick={() => setMenu("Manage Clients")}
+                  className={`${
+                    menu === "Manage Clients" ? "shadow-md" : ""
+                  } text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                >
                   Clients
                 </button>
-                <button className="text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]">
+                <button
+                  onClick={() => setMenu("Manage Projects")}
+                  className={`${
+                    menu === "Manage Projects" ? "shadow-md" : ""
+                  } text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                >
                   Projects
                 </button>
-                <button className="text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]">
+                <button
+                  onClick={() => setMenu("Manage Statistic")}
+                  className={`${
+                    menu === "Manage Statistic" ? "shadow-md" : ""
+                  } text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                >
                   Statistics
                 </button>
               </div>
               <div className="sales_client_project_statistics border  w-[225px] h-[38px] flex justify-between items-center rounded-md ml-[13px] gap-1 px-[10px]">
                 <input
                   type="text"
+                  name="startDate"
+                  value={input.startDate}
+                  onChange={handleOnChange}
                   placeholder="Mar 23, 2023"
                   className="w-[45%] focus:outline-none text-[12px] font-['work_sans']"
                 />
                 <input
                   type="text"
+                  name="endDate"
+                  value={input.endDate}
+                  onChange={handleOnChange}
                   placeholder="Mar 23, 2023"
                   className="w-[45%] focus:outline-none text-[12px] font-['work_sans']"
                 />
@@ -461,6 +511,9 @@ const Seller = () => {
                 </button>
                 <input
                   type="text"
+                  name="text"
+                  value={input.text}
+                  onChange={handleOnChange}
                   placeholder="Search"
                   className="w-[90%] focus:outline-none text-[12px] font-['work_sans']"
                 />
@@ -660,44 +713,160 @@ const Seller = () => {
             />
           </div>
           <h1 className="mt-[25px] text-[22px] font-['work_sans'] tracking-[-.9px]">
-            Manage Sales People
+            {menu}
           </h1>
           {/* //=================================================== all sales person  */}
-          <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
-            {singleSeller?.salesPerson?.length > 0 ? (
-              singleSeller?.salesPerson
-                ?.filter((item) => item.status === true)
-                ?.map((item, index) => {
-                  return (
-                    <SalesPeople
-                      key={index}
-                      avatar={item.avatar}
-                      name={item.name}
-                      title="Sales Executive"
-                      project={
-                        item?.projects?.length > 0 ? item?.projects?.length : 0
-                      }
-                      clients={
-                        item?.client?.length > 0 ? item?.client?.length : 0
-                      }
-                      earning={
-                        item?.client?.length > 0
-                          ? calculateTotalCommissionForAllClients(item?.client)
-                          : 0
-                      }
-                      companyName={item.companyName}
-                      ActiveClient={
-                        item?.client?.length > 0 ? item?.client : []
-                      }
-                      companyLogo={item.companyAvatar}
-                      styles=""
-                    />
-                  );
-                })
-            ) : (
-              <span>No sales Guy</span>
-            )}
-          </div>
+          {menu === "Manage Sales People" && (
+            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
+              {singleSeller?.salesPerson?.length > 0 ? (
+                singleSeller?.salesPerson
+                  ?.filter((seller) => {
+                    return (
+                      (input?.text
+                        ? seller?.name
+                            ?.toLowerCase()
+                            .includes(input?.text?.toLowerCase())
+                        : true) &&
+                      (input?.startDate
+                        ? new Date(seller?.date) >= new Date(input?.startDate)
+                        : true) &&
+                      (input?.endDate
+                        ? new Date(seller?.date) <= new Date(input?.endDate)
+                        : true) &&
+                      (input?.status ? seller?.status === input?.status : true)
+                    );
+                  })
+                  ?.map((item, index) => {
+                    return (
+                      <SalesPeople
+                        key={index}
+                        avatar={item.avatar}
+                        name={item.name}
+                        title="Sales Executive"
+                        project={
+                          item?.projects?.length > 0
+                            ? item?.projects?.length
+                            : 0
+                        }
+                        clients={
+                          item?.client?.length > 0 ? item?.client?.length : 0
+                        }
+                        earning={
+                          item?.client?.length > 0
+                            ? calculateTotalCommissionForAllClients(
+                                item?.client
+                              )
+                            : 0
+                        }
+                        companyName={item.companyName}
+                        ActiveClient={
+                          item?.client?.length > 0 ? item?.client : []
+                        }
+                        companyLogo={item.companyAvatar}
+                        styles=""
+                      />
+                    );
+                  })
+              ) : (
+                <span>No sales Guy</span>
+              )}
+            </div>
+          )}
+          {menu === "Manage Clients" && (
+            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
+              {singleSeller?.client?.length > 0 ? (
+                singleSeller?.client
+                  ?.filter((client) => {
+                    return (
+                      (input?.text
+                        ? client?.clientName
+                            ?.toLowerCase()
+                            .includes(input?.text?.toLowerCase())
+                        : true) &&
+                      (input?.startDate
+                        ? new Date(client?.date) >= new Date(input?.startDate)
+                        : true) &&
+                      (input?.endDate
+                        ? new Date(client?.date) <= new Date(input?.endDate)
+                        : true) &&
+                      (input?.status
+                        ? client?.projectStatus === input?.status
+                        : true)
+                    );
+                  })
+                  ?.map((item, index) => {
+                    return (
+                      <ClientComponent
+                        clientAvatar={item?.clientAvatar}
+                        clientName={item?.clientName}
+                        key={index}
+                        amount={item?.amount}
+                        date={item?.date}
+                        timeFrame={item?.timeFrame}
+                        companyName={item?.companyName}
+                        projectStatus={item?.projectStatus}
+                        projectName={item?.projectName}
+                        team={item?.team}
+                        email={item?.clientEmail}
+                        mobile={item?.clientPhone}
+                      />
+                    );
+                  })
+              ) : (
+                <span>No Client</span>
+              )}
+            </div>
+          )}
+          {menu === "Manage Projects" && (
+            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
+              {singleSeller?.client?.length > 0 ? (
+                singleSeller?.client
+                  ?.filter((client) => {
+                    return (
+                      (input?.text
+                        ? client?.clientName
+                            ?.toLowerCase()
+                            .includes(input?.text?.toLowerCase())
+                        : true) &&
+                      (input?.startDate
+                        ? new Date(client?.date) >= new Date(input?.startDate)
+                        : true) &&
+                      (input?.endDate
+                        ? new Date(client?.date) <= new Date(input?.endDate)
+                        : true) &&
+                      (input?.status
+                        ? client?.projectStatus === input?.status
+                        : true)
+                    );
+                  })
+                  ?.map((item, index) => {
+                    return (
+                      <ProjectComponent
+                        clientAvatar={item?.clientAvatar}
+                        clientName={item?.clientName}
+                        key={index}
+                        amount={item?.amount}
+                        date={item?.date}
+                        timeFrame={item?.timeFrame}
+                        companyName={item?.companyName}
+                        projectStatus={item?.projectStatus}
+                        projectName={item?.projectName}
+                        team={item?.team}
+                        email={item?.clientEmail}
+                        mobile={item?.clientPhone}
+                      />
+                    );
+                  })
+              ) : (
+                <span>No Projects</span>
+              )}
+            </div>
+          )}
+          {menu === "Manage Statistic" && (
+            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
+              <StatisticComponent />
+            </div>
+          )}
         </div>
       </div>
     </>
