@@ -94,25 +94,26 @@ const SalesPeople = ({
       </h5>
       <div className="flex w-full mt-3">
         <div className="clients flex w-full">
-          {ActiveClient.length > 0
-            ? ActiveClient.map((item, index) => {
+          {ActiveClient?.length > 0
+            ? ActiveClient?.map((item, index) => {
                 return (
                   <div
                     key={index}
                     className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px]"
                   >
-                    item?.clientAvatar?
-                    <img
-                      className="w-full h-full rounded-full  border-[2px] border-white"
-                      src={item?.clientAvatar}
-                      alt=""
-                    />
-                    :
-                    <img
-                      className="w-full h-full rounded-full  border-[2px] border-white"
-                      src={avatar}
-                      alt=""
-                    />
+                    {item?.clientAvatar ? (
+                      <img
+                        className="w-full h-full rounded-full  border-[2px] border-white"
+                        src={item?.clientAvatar}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="w-full h-full rounded-full  border-[2px] border-white"
+                        src={avatar}
+                        alt=""
+                      />
+                    )}
                   </div>
                 );
               })

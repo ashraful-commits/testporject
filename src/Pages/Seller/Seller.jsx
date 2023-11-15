@@ -17,6 +17,7 @@ const Seller = () => {
   const [model, setModel] = useState(false);
   //==================================================get all seller state
   const { singleSeller, loader } = useSelector(getAllSellerState);
+
   //==================================================login seller
   const { loginInSeller } = useSelector(getAllSellerState);
   //================================================= use params

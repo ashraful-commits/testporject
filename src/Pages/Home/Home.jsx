@@ -126,9 +126,12 @@ const Home = () => {
             <p className=" transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[16px] tracking-[-1px] mr-[1px]">
               Sales Toolkit
             </p>
-            <button className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] mt-[8px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
+            <Link
+              to={`/email/${loginInSeller?._id}`}
+              className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] mt-[8px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+            >
               Email Signature
-            </button>
+            </Link>
             <button className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
               Email Setup
             </button>
