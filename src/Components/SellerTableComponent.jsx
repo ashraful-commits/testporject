@@ -39,7 +39,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
 
   //===========================set limit
   const [limit, setLimit] = useState(7);
-  console.log([...loginInSeller.salesPerson, loginInSeller]);
+
   //========================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
@@ -129,7 +129,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         />
       )}
       {/* //=============================================table  */}
-      <table className="w-full border min-h-[490px]">
+      <table className="w-full border min-h-[490px] h-full">
         {/* //============================================table header  */}
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
@@ -573,7 +573,8 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
           )}
         </tbody>
         {/* //=================================================== footer  */}
-        {(seller?.length >= 1 || loginInSeller?.salesPerson?.length >= 1) && (
+        {(seller?.length >= 1 ||
+          [loginInSeller, ...loginInSeller.salesPerson]?.length >= 1) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button

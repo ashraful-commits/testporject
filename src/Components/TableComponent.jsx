@@ -120,10 +120,10 @@ const TableComponent = ({ sellerId, input }) => {
     <div>
       {/* //=============================================edit modle  */}
       {editModel && <Model setClient={setEditModel} singleData={singleData} />}
-      <table className="w-full border min-h-[490px]">
+      <table className="w-full border min-h-[490px] rounded-md ">
         {/* //======================================table header  */}
         <thead>
-          <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
+          <tr className="w-full min-h-[1.875rem] h-full bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
             <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
               Company Name
             </th>
@@ -166,9 +166,9 @@ const TableComponent = ({ sellerId, input }) => {
           </tr>
         </thead>
         {/* //==========================================table body  */}
-        <tbody className="relative">
+        <tbody className="relative w-full h-full">
           {(loader || sellerLoader) && (
-            <div className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top left-0">
+            <div className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top-0 left-0">
               <div className="w-full absolute h-full top-[45%]">
                 <LoadingSpinner />
               </div>

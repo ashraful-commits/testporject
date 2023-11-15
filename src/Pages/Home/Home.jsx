@@ -1144,8 +1144,8 @@ const Home = () => {
                         <option className="text-[#256682]" value="on hold">
                           On hold
                         </option>
-                        <option className="text-[#256682]" value="completed">
-                          Completed
+                        <option className="text-[#256682]" value="complete">
+                          Complete
                         </option>
                       </select>
                     </div>
