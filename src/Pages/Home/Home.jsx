@@ -376,7 +376,7 @@ const Home = () => {
               <div className="not_setting flex gap-[7px]">
                 <button
                   onClick={() => setNotification(!notification)}
-                  className="notification hover:bg-gray-400 transition-all relative hover:scale-105 duration-500 ease-in-out  w-[37px] h-[37px] justify-center items-center flex rounded-full bg-gray-200"
+                  className="notification hover:bg-gray-400 transition-all relative duration-500 ease-in-out  w-[37px] h-[37px] justify-center items-center flex rounded-full bg-gray-200"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -404,7 +404,7 @@ const Home = () => {
                   <span className="w-2  h-2 absolute top-[2px] right-1 rounded-full bg-orange-400"></span>
                   {/* //====================================== Notification dropdown menu */}
                   {notification && (
-                    <div className="absolute border overflow-hidden p-[18px] w-[325px] h-[580px] bg-white z-[99999] shadow-lg right-[10px] top-[35px] rounded-[10px]">
+                    <div className="absolute border overflow-hidden p-[18px] w-[325px] h-[580px] bg-white z-[9999999999] shadow-lg right-[10px]  top-[35px] rounded-[10px]">
                       <div className="header flex items-center justify-between">
                         <p className="font-[500]">Notifications</p>
                         <a
