@@ -5,7 +5,7 @@ const Team = ({ avatar, title, name, delay }) => {
       initial={{ x: -15, opacity: 0.1 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{
-        duration: 2,
+        duration: 1,
 
         ease: [0.17, 0.67, 0.83, 0.67],
         delay: delay,
