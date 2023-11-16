@@ -17,7 +17,7 @@ import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCou
 import SellerTableComponent from "../../Components/SellerTableComponent";
 import useFormHook from "../../Hooks/useFormHook";
 import DatePicker from "react-datepicker";
-import { motion } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 const Home = () => {
   //==============================================all state
   const [notification, setNotification] = useState(false);
@@ -106,6 +106,8 @@ const Home = () => {
       setPercentage(0);
     }
   }, [loginInSeller.client]);
+  const { scrollYProgress } = useScroll();
+  console.log(scrollYProgress);
   //======================================================== return
   return (
     <motion.div
@@ -892,7 +894,7 @@ const Home = () => {
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.2,
               }}
-              className="total_customer w-[236px] h-[136px] rounded-[8px] bg-darkBlue  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out"
+              className="total_customer w-[236px] h-[136px] rounded-[8px] bg-darkBlue  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out "
             >
               <div className="customer flex justify-start items-start mt-[10px] ml-[15px] gap-[9px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-white">

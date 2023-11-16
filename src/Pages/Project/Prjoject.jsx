@@ -140,15 +140,14 @@ const Project = () => {
       {/* //================================================ team  */}
       {tools && (
         <motion.div
-          initial={{ y: -15, opacity: 0.1 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0.1 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{
-            duration: 2,
-            type: "spring",
-            stiffness: 200,
+            duration: 0.2,
+
             ease: [0.17, 0.67, 0.83, 0.67],
-            delay: 0.4,
+            delay: 0.1,
           }}
           className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5"
         >
@@ -222,14 +221,13 @@ const Project = () => {
       )}
       {team && (
         <motion.div
-          initial={{ y: -15, opacity: 0.1 }}
-          animate={{ y: 0, opacity: 1 }}
+          initial={{ opacity: 0.1 }}
+          animate={{ opacity: 1 }}
           transition={{
-            duration: 2,
-            type: "spring",
-            stiffness: 200,
+            duration: 0.3,
+
             ease: [0.17, 0.67, 0.83, 0.67],
-            delay: 0.6,
+            delay: 0.1,
           }}
           className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5"
         >
