@@ -21,7 +21,7 @@ const SalesPeople = ({
       animate={{ y: 0, opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{
-        duration: 2,
+        duration: 1,
         type: "spring",
         stiffness: 200,
         ease: [0.17, 0.67, 0.83, 0.67],
