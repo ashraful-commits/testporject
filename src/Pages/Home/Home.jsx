@@ -111,6 +111,7 @@ const Home = () => {
     <motion.div
       initial={{ y: -15, opacity: 0.1 }}
       animate={{ y: 0, opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{
         duration: 1,
         type: "spring",

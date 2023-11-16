@@ -198,6 +198,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                     <motion.tr
                       initial={{ y: -15, opacity: 0.1 }}
                       animate={{ y: 0, opacity: 1 }}
+                      exit={{ opacity: 0 }}
                       transition={{
                         duration: 2,
                         type: "spring",

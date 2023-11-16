@@ -3,6 +3,7 @@ const Team = ({ avatar, title, name, delay }) => {
   return (
     <motion.div
       initial={{ x: -15, opacity: 0.1 }}
+      exit={{ opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{
         duration: 1,
