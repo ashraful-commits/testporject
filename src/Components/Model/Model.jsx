@@ -280,7 +280,7 @@ const Model = ({ setClient, singleData }) => {
                     Country
                   </label>
                   <select
-                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] rounded-md mt-[-10px]"
+                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="country"
                     value={input.country}
                     onChange={handleInputChange}
@@ -327,7 +327,7 @@ const Model = ({ setClient, singleData }) => {
                     State
                   </label>
                   <select
-                    className="border w-full h-[37px]  text-gray-500 px-[12px] tracking-[.5px]  rounded-md mt-[-10px]"
+                    className="border w-full h-[37px]  text-gray-500 px-[12px] tracking-[.5px] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="state"
                     value={input.state}
                     onChange={handleInputChange}
@@ -430,7 +430,7 @@ const Model = ({ setClient, singleData }) => {
                     Type of Project
                   </label>
                   <select
-                    className="border w-full h-[37px]  text-gray-500 px-[12px] tracking-[.5px]  rounded-md mt-[-10px]"
+                    className="border w-full h-[37px]  text-gray-500 px-[12px] tracking-[.5px] hover:scale-105 transition-all duration-500 ease-in-out  rounded-md mt-[-10px]"
                     name="projectType"
                     id=""
                     value={input.projectType}
@@ -493,7 +493,7 @@ const Model = ({ setClient, singleData }) => {
                     Project Source
                   </label>
                   <select
-                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] rounded-md mt-[-10px]"
+                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="projectSource"
                     value={input.projectSource}
                     onChange={handleInputChange}
@@ -516,7 +516,7 @@ const Model = ({ setClient, singleData }) => {
                     Timeframe
                   </label>
                   <select
-                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] rounded-md mt-[-10px]"
+                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="timeFrame"
                     value={input.timeFrame}
                     id=""
@@ -586,7 +586,7 @@ const Model = ({ setClient, singleData }) => {
               </div>
               <button
                 type="submit"
-                className="text-white mt-[-15px] bg-purple-500 w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-purple-700 transition-all ease-in-out duration-500"
+                className="text-white mt-[-15px]  bg-purple-500 w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-purple-700 transition-all ease-in-out duration-500 hover:scale-105 "
               >
                 Submit Now
               </button>

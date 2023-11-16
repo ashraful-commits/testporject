@@ -1,8 +1,20 @@
 //======================================project details component
+import { motion } from "framer-motion";
 
-const ProjectDetails = ({ svg, title, number, styles }) => {
+const ProjectDetails = ({ svg, title, number, styles, delay }) => {
   return (
-    <div className="border rounded-md gap-[10px] h-[97px] w-[240px] flex items-center justify-center">
+    <motion.div
+      initial={{ y: -15, opacity: 0.1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 2,
+        type: "spring",
+        stiffness: 200,
+        ease: [0.17, 0.67, 0.83, 0.67],
+        delay: delay,
+      }}
+      className="border transition-all ease-in-out duration-500 hover:scale-105 rounded-md gap-[10px] h-[97px] w-[240px] flex items-center justify-center"
+    >
       <div className="w-[42px] h-[42px] rounded-full bg-gray-200 shrink-0 flex justify-center items-center ml-4">
         {svg}
       </div>
@@ -22,7 +34,7 @@ const ProjectDetails = ({ svg, title, number, styles }) => {
           )}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

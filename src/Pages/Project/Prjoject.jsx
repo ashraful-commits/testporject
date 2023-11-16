@@ -16,6 +16,7 @@ import LoadingSpinner from "../../Components/LoadingSpin";
 import html2canvas from "html2canvas";
 
 import ClientFeedBack from "../../Components/ClientFeedBack";
+import { motion } from "framer-motion";
 const Project = () => {
   //===================================== get all client state
   const { singleClient, loader } = useSelector(getAllClientState);
@@ -138,7 +139,18 @@ const Project = () => {
       )}
       {/* //================================================ team  */}
       {tools && (
-        <div className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5">
+        <motion.div
+          initial={{ y: -15, opacity: 0.1 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            duration: 2,
+            type: "spring",
+            stiffness: 200,
+            ease: [0.17, 0.67, 0.83, 0.67],
+            delay: 0.4,
+          }}
+          className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5"
+        >
           <button
             className="group-hover:opacity-100 opacity-0 w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center hover:bg-gray-400 transition-all duration-500 ease-in-out "
             onClick={() => setTools(false)}
@@ -200,15 +212,26 @@ const Project = () => {
 
             <button
               type="submit"
-              className="h-[30px] justify-end col-span-4 bg-darkBlue text-white"
+              className="h-[30px] justify-end col-span-4 bg-darkBlue text-white transition-all ease-in-out duration-500 hover:scale-105"
             >
               Add Tools
             </button>
           </form>
-        </div>
+        </motion.div>
       )}
       {team && (
-        <div className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5">
+        <motion.div
+          initial={{ y: -15, opacity: 0.1 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            duration: 2,
+            type: "spring",
+            stiffness: 200,
+            ease: [0.17, 0.67, 0.83, 0.67],
+            delay: 0.6,
+          }}
+          className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5"
+        >
           <button
             className="group-hover:opacity-100 opacity-0 w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center hover:bg-gray-400 transition-all duration-500 ease-in-out "
             onClick={() => setTeam(false)}
@@ -263,14 +286,25 @@ const Project = () => {
 
             <button
               type="submit"
-              className="h-[30px] justify-end col-span-4 bg-darkBlue text-white"
+              className="h-[30px] justify-end col-span-4 bg-darkBlue text-white transition-all ease-in-out duration-500 hover:scale-105"
             >
               Add Team Member
             </button>
           </form>
-        </div>
+        </motion.div>
       )}
-      <div className="min-w-[1340px] relative rounded-[15px]  pl-[48px]  pt-[30px]   min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px] bg-white">
+      <motion.div
+        initial={{ y: -15, opacity: 0.1 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          duration: 2,
+          type: "spring",
+          stiffness: 200,
+          ease: [0.17, 0.67, 0.83, 0.67],
+          delay: 0.8,
+        }}
+        className="min-w-[1340px] relative rounded-[15px]  pl-[48px]  pt-[30px]   min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px] bg-white"
+      >
         {/* //============================================================ header  */}
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] rounded-md overflow-hidden ">
@@ -485,6 +519,7 @@ const Project = () => {
             {/* //===================================== client datiels section  */}
             <div className="flex gap-[px] mt-[16px]">
               <DetialsSections
+                delay={0.2}
                 name={singleClient?.clientName}
                 title="client Name"
                 svg={
@@ -535,6 +570,7 @@ const Project = () => {
                 }
               />
               <DetialsSections
+                delay={0.4}
                 name={singleClient?.companyName}
                 title="Company Name"
                 svg={
@@ -585,6 +621,7 @@ const Project = () => {
                 }
               />
               <DetialsSections
+                delay={0.6}
                 name={singleClient?.date}
                 title="Assigned Date"
                 svg={
@@ -635,6 +672,7 @@ const Project = () => {
                 }
               />
               <DetialsSections
+                delay={0.8}
                 name={singleClient?.timeFrame}
                 title="Deadline"
                 svg={
@@ -737,7 +775,7 @@ const Project = () => {
             </div>
             {/* //========================================== manage project  */}
             <div className="manageProject flex justify-between items-center ">
-              <div className="comment w-[375px] mt-[42px] rounded-[7px] h-[38px] border-[1px] border-[#DFDFDF] grid grid-cols-3">
+              <div className="comment w-[375px] mt-[42px] rounded-[7px] h-[38px] border-[1px] border-[#DFDFDF] grid grid-cols-3 transition-all ease-in-out duration-500 hover:scale-105">
                 <button
                   onClick={() => setMenu("Project Details")}
                   className={`${
@@ -759,7 +797,7 @@ const Project = () => {
                 </button>
               </div>
               <div className="button h-full flex justify-center items-center">
-                <button className="bg-cyan-600 text-[14px] font-[500] text-white hover:bg-cyan-900 transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px]">
+                <button className="bg-cyan-600 text-[14px] font-[500] text-white hover:bg-cyan-900 transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105">
                   Manage Project
                 </button>
               </div>
@@ -829,6 +867,7 @@ const Project = () => {
                             avatar={item?.avatar}
                             name={item?.name}
                             title={item?.employment}
+                            delay={`.${index + 3}`}
                           />
                         );
                       })
@@ -837,7 +876,7 @@ const Project = () => {
                     )}
                     <button
                       onClick={() => setTeam(!team)}
-                      className="flex p-[4px] items-center h-[42px] gap-[10px]"
+                      className="flex p-[4px] items-center h-[42px] gap-[10px] transition-all ease-in-out duration-500 hover:scale-105"
                     >
                       <div className="w-[42px] h-[42px] border rounded-full flex justify-center items-center bg-gray-100">
                         +
@@ -854,7 +893,7 @@ const Project = () => {
                     <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
                       Software & Tools
                     </h1>
-                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
+                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out hover:scale-105">
                       Manage Tools
                     </button>
                   </div>
@@ -1013,6 +1052,7 @@ const Project = () => {
                             ))
                           }
                           name={item}
+                          delay={`.${index + 3}`}
                         />
                       );
                     })}
@@ -1020,7 +1060,7 @@ const Project = () => {
                     <div className="flex  items-center  rounded-2xl w-[87px] h-[31px] gap-[10px]">
                       <button
                         onClick={() => setTools(true)}
-                        className="rounded-2xl border text-[12px] px-[10px] w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']"
+                        className="rounded-2xl border text-[12px] px-[10px] w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans'] hover:scale-105"
                       >
                         + Add Tool
                       </button>
@@ -1033,7 +1073,7 @@ const Project = () => {
                     <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px]  mt-[10px]font-['work_sans'] ">
                       Project Files
                     </h1>
-                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
+                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out hover:scale-105">
                       Manage Files
                     </button>
                   </div>
@@ -1309,7 +1349,7 @@ const Project = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

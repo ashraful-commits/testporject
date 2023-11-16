@@ -147,7 +147,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
         {/* //==================================================close button  */}
         <button
           onClick={() => setModel(false)}
-          className="absolute right-16 top-10 z-[99999]"
+          className="absolute right-16 top-10 hover:scale-105 transition-all duration-500 ease-in-out z-[99999]"
         >
           <svg
             width="23px"
@@ -326,7 +326,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                 </div>
                 <button
                   type="submit"
-                  className="text-white mt-[15px] bg-purple-500 w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-purple-700 my-3 transition-all ease-in-out duration-500"
+                  className="text-white hover:scale-110  mt-[15px] bg-purple-500 w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-purple-700 my-3 transition-all ease-in-out duration-500"
                 >
                   Submit Now
                 </button>

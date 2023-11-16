@@ -44,7 +44,7 @@ const ProjectFile = ({ svg, name, title, file }) => {
   //   document.body.removeChild(downloadLink);
   // };
   return (
-    <div className="flex gap-[14px] relative h-[57px]  w-[214px] items-center justify-start pl-[20px] mb-[2px] border rounded-md">
+    <div className="flex transition-all ease-in-out duration-500 hover:scale-105 gap-[14px] relative h-[57px]  w-[214px] items-center justify-start pl-[20px] mb-[2px] border rounded-md">
       {downloadMenu && (
         <div className="download absolute top-4 right-6">
           <Link to={file} target="blank">

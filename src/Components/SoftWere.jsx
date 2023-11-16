@@ -1,11 +1,22 @@
-const SoftWere = ({ svg, name }) => {
+import { motion } from "framer-motion";
+const SoftWere = ({ svg, name, delay }) => {
   return (
-    <div className=" flex h-[30px]">
+    <motion.div
+      initial={{ y: -15, opacity: 0.1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 2,
+
+        ease: [0.17, 0.67, 0.83, 0.67],
+        delay: delay,
+      }}
+      className=" flex h-[30px] transition-all ease-in-out duration-500 hover:scale-105"
+    >
       <button className="border flex gap-[5px] px-[10px] py-[1px] rounded-2xl bg-gray-100 hover:bg-gray-300 hover:text-white transition-all duration-500 ease-in-out justify-center items-center">
         {svg}
         <span className="text-[12px] font-['work_sans']">{name}</span>
       </button>
-    </div>
+    </motion.div>
   );
 };
 

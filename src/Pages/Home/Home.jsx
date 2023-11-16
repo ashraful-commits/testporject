@@ -17,6 +17,7 @@ import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCou
 import SellerTableComponent from "../../Components/SellerTableComponent";
 import useFormHook from "../../Hooks/useFormHook";
 import DatePicker from "react-datepicker";
+import { motion } from "framer-motion";
 const Home = () => {
   //==============================================all state
   const [notification, setNotification] = useState(false);
@@ -107,13 +108,24 @@ const Home = () => {
   }, [loginInSeller.client]);
   //======================================================== return
   return (
-    <div className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden">
+    <motion.div
+      initial={{ y: -15, opacity: 0.1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 2,
+        type: "spring",
+        stiffness: 200,
+        ease: [0.17, 0.67, 0.83, 0.67],
+        delay: 0.2,
+      }}
+      className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden"
+    >
       <>
         {/* //================================================ model  */}
         {clientModel && <Model setClient={setClientModel} />}
         {/*=================================================== sidebar  */}
         <div className="sidebar flex flex-col items-center w-[295px]  bg-mediumBlack overflow-hidden">
-          <div className="logo   w-full flex justify-center items-start ">
+          <div className="logo   w-full flex justify-center itehover:scale-105 transition-all duration-500 ease-in-outbuttonms-start ">
             <img className="w-[205px] mt-[52px] h-auto" src={logo} alt="" />
           </div>
           <div className="user mt-[85px] flex flex-col  items-center">
@@ -159,25 +171,25 @@ const Home = () => {
             </p>
             <Link
               to={`/email/${loginInSeller?._id}`}
-              className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] mt-[8px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+              className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] mt-[8px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
             >
               Email Signature
             </Link>
-            <button className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
+            <button className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
               Email Setup
             </button>
-            <button className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
+            <button className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
               Pricing
             </button>
             <Link
               target="blank"
               to={loginInSeller?.website}
-              className="hover:bg-darkBlue transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+              className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
             >
               Website
             </Link>
             <div className="flex justify-center items-center gap-3">
-              <button>
+              <button className="hover:scale-110 transition-all duration-500 ease-in-out">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -204,7 +216,7 @@ const Home = () => {
                   </defs>
                 </svg>
               </button>
-              <button>
+              <button className="hover:scale-110 transition-all duration-500 ease-in-out">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -258,7 +270,7 @@ const Home = () => {
                   />
                 </svg>
               </button>
-              <button>
+              <button className="hover:scale-110 transition-all duration-500 ease-in-out">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="12"
@@ -352,7 +364,7 @@ const Home = () => {
               <div className="not_setting flex gap-[7px]">
                 <button
                   onClick={() => setNotification(!notification)}
-                  className="noti hover:bg-gray-400 transition-all relative duration-500 ease-in-out  w-[37px] h-[37px] justify-center items-center flex rounded-full bg-gray-200"
+                  className="notification hover:bg-gray-400 transition-all relative hover:scale-105 duration-500 ease-in-out  w-[37px] h-[37px] justify-center items-center flex rounded-full bg-gray-200"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -735,7 +747,7 @@ const Home = () => {
                     </div>
                   )}
                 </button>
-                <button className="setting hover:bg-gray-400 transition-all duration-500 ease-in-out w-[37px] h-[37px] justify-center items-center flex rounded-full bg-gray-200">
+                <button className="setting hover:bg-gray-400 transition-all duration-500 ease-in-out w-[37px] h-[37px] justify-center items-center flex rounded-full bg-gray-200 scale-105">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -861,7 +873,7 @@ const Home = () => {
           </div>
           {/*================================================ calculation  */}
           <div className="calculation mt-[20px] flex justify-between">
-            <div className="total_customer w-[236px] h-[136px] rounded-[8px] bg-darkBlue  grid grid-rows-2 ">
+            <div className="total_customer w-[236px] h-[136px] rounded-[8px] bg-darkBlue  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out">
               <div className="customer flex justify-start items-start mt-[10px] ml-[15px] gap-[9px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-white">
                   <svg
@@ -928,7 +940,7 @@ const Home = () => {
                 <p className="text-white font-[400]  text-[13px]">This Week</p>
               </div>
             </div>
-            <div className="rate border w-[236px] h-[136px] rounded-[8px] bg-white  grid grid-rows-2 ">
+            <div className="rate border w-[236px] h-[136px] rounded-[8px] bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out ">
               <div className="customer flex justify-start items-start w-full mt-[10px] pl-[15px]  border-b gap-[7px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#267596]">
                   <svg
@@ -971,12 +983,12 @@ const Home = () => {
                   %
                 </h2>
 
-                <button className="text-gray-500 font-[400] w-[98px] h-[19px] tracking-[0.7px]  text-[13px] border bg-[#F5F5F5] rounded-[4px] mr-[22px] mb-[10px] flex justify-center items-center">
+                <button className="text-gray-500 font-[400] w-[98px] h-[19px] tracking-[0.7px]  text-[13px] border bg-[#F5F5F5] rounded-[4px] mr-[22px] mb-[10px] hover:scale-105 duration-500 ease-in-out transition-all flex justify-center items-center">
                   view contract
                 </button>
               </div>
             </div>
-            <div className="total_commission w-[236px] border h-[136px] rounded-[8px] bg-white  grid grid-rows-2 ">
+            <div className="total_commission w-[236px] border h-[136px] rounded-[8px] bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out">
               <div className="total_earned flex justify-start items-start mt-[10px]  border-b pl-[12px] gap-[10px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-opacity-[.1] mt-[4px] bg-[#267596]">
                   <svg
@@ -1011,7 +1023,7 @@ const Home = () => {
                 </h2>
               </div>
             </div>
-            <div className="withdrawn w-[236px] h-[136px] rounded-[8px] border bg-white  grid grid-rows-2 ">
+            <div className="withdrawn w-[236px] h-[136px] rounded-[8px] border bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out">
               <div className="customer flex justify-start items-start mt-[10px] pl-[14px] border-b gap-[9px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#267596]">
                   <svg
@@ -1046,7 +1058,7 @@ const Home = () => {
             {/*============================================= search  */}
             <div className="search  flex justify-between items-center w-full h-[40px]">
               <div className="flex w-full h-[40px] items-center">
-                <div className="text_search w-[222px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px]">
+                <div className="text_search w-[222px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px] hover:scale-105 transition-all duration-500 ease-in-out">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -1069,7 +1081,7 @@ const Home = () => {
                   />
                 </div>
                 {sellerTable && (
-                  <div className="text_search h-[40px]  w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px]">
+                  <div className="text_search h-[40px]  w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px] hover:scale-105 transition-all duration-500 ease-in-out">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -1093,7 +1105,7 @@ const Home = () => {
                   </div>
                 )}
                 {sellerTable && (
-                  <div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500]">
+                  <div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out">
                     <select
                       className="w-full focus:outline-none h-full"
                       name="role"
@@ -1115,7 +1127,7 @@ const Home = () => {
                 )}
                 {!sellerTable && (
                   <>
-                    <div className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]">
+                    <div className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]  transition-all duration-500 ease-in-out">
                       <DatePicker
                         className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
                         selected={input.startDate}
@@ -1158,7 +1170,7 @@ const Home = () => {
                         </defs>
                       </svg>
                     </div>
-                    <div className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500]">
+                    <div className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out">
                       <select
                         className="w-full focus:outline-none h-full"
                         name="status"
@@ -1196,7 +1208,7 @@ const Home = () => {
                       rol: "",
                     })
                   }
-                  className="w-[40px] rounded-md h-[40px] flex justify-center items-center border ml-4 border-gray-300 hover:bg-gray-200 transition-all duration-500 ease-in-out"
+                  className="w-[40px] rounded-md h-[40px] flex justify-center items-center border ml-4 border-gray-300 hover:bg-gray-200 transition-all duration-500 ease-in-out hover:scale-105"
                 >
                   <svg
                     fill="#7b7a7a"
@@ -1215,12 +1227,12 @@ const Home = () => {
               <div className="addClient gap-[10px] flex items-center justify-self-end right-0">
                 <button
                   onClick={() => setSellerTable(!sellerTable)}
-                  className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px]"
+                  className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
                 >
                   {sellerTable ? "Client" : "Seller"}
                 </button>
 
-                <div className="help w-[40px] h-[38px] flex justify-center items-center bg-[#A4A4A61A]">
+                <div className="help w-[40px] h-[38px] flex justify-center items-center bg-[#A4A4A61A] hover:scale-105 transition-all duration-500 ease-in-out">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -1251,7 +1263,7 @@ const Home = () => {
                 </div>
                 <button
                   onClick={() => setClientModel(true)}
-                  className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px]"
+                  className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
                 >
                   Add Client
                   <svg
@@ -1287,7 +1299,7 @@ const Home = () => {
           </div>
         </div>
       </>
-    </div>
+    </motion.div>
   );
 };
 

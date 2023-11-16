@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 //=======================================salesPeople function
 const SalesPeople = ({
   avatar,
@@ -12,9 +13,21 @@ const SalesPeople = ({
   companyName,
   ActiveClient,
   styles,
+  delay,
 }) => {
   return (
-    <div className="border p-[22px] flex-col rounded-md w-[304px] h-[340px] flex items-center ">
+    <motion.div
+      initial={{ y: -15, opacity: 0.1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 2,
+        type: "spring",
+        stiffness: 200,
+        ease: [0.17, 0.67, 0.83, 0.67],
+        delay: delay,
+      }}
+      className="border transition-all ease-in-out duration-500 hover:scale-95 p-[22px] flex-col rounded-md w-[304px] h-[340px] flex items-center "
+    >
       <div className="people w-full gap-[18px] flex items-center">
         {/* //============================================avatar  */}
         <div className="avatar w-[51px] h-[51px] rounded-full overflow-hidden">
@@ -129,7 +142,7 @@ const SalesPeople = ({
           Manage
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

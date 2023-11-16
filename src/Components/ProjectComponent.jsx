@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 const ProjectComponent = ({
   clientAvatar,
   clientName,
@@ -12,7 +13,17 @@ const ProjectComponent = ({
   mobile,
 }) => {
   return (
-    <div className="rounded-md p-[22px]  w-[304px] h-[340px] border">
+    <motion.div
+      initial={{ y: -15, opacity: 0.1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 1,
+
+        ease: [0.17, 0.67, 0.83, 0.67],
+        delay: 0.1,
+      }}
+      className="rounded-md transition-all ease-in-out duration-500 hover:scale-105 p-[22px]  w-[304px] h-[340px] border"
+    >
       <div className="people w-full gap-[18px] flex items-center">
         {/* //============================================avatar  */}
         <div className="avatar w-[51px] h-[51px] rounded-full overflow-hidden">
@@ -172,7 +183,7 @@ const ProjectComponent = ({
           Team
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

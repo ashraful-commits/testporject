@@ -15,6 +15,7 @@ import LoadingSpinner from "../../Components/LoadingSpin";
 import ClientComponent from "../../Components/ClientComponent";
 import ProjectComponent from "../../Components/ProjectComponent";
 import StatisticComponent from "../../Components/StatisticComponent";
+import { motion } from "framer-motion";
 const Seller = () => {
   //===========================================all state
   const [model, setModel] = useState(false);
@@ -58,7 +59,18 @@ const Seller = () => {
       )}
       {/*=========================================== sales model  */}
       {model && <SalesModel setModel={setModel} sellerId={id} />}
-      <div className="min-w-[1340px] relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden ">
+      <motion.div
+        initial={{ y: -15, opacity: 0.1 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          duration: 2,
+          type: "spring",
+          stiffness: 200,
+          ease: [0.17, 0.67, 0.83, 0.67],
+          delay: 0.4,
+        }}
+        className="min-w-[1340px] relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden "
+      >
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] rounded-md overflow-hidden">
             {singleSeller?.companyAvatar ? (
@@ -82,7 +94,7 @@ const Seller = () => {
                   Sales Toolkit
                 </p>
                 <div className="buttonGroup flex items-center mt-[5px] justify-between ml-[5px] mr-[8px]">
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790] flex items-center gap-[5px]">
+                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790] flex items-center gap-[5px]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -101,10 +113,10 @@ const Seller = () => {
                     </svg>
                     Email signature
                   </button>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
                     Email setup
                   </button>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
                     pricing
                   </button>
                   <Link
@@ -113,7 +125,7 @@ const Seller = () => {
                   >
                     website
                   </Link>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -140,7 +152,7 @@ const Seller = () => {
                       </defs>
                     </svg>
                   </button>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -194,7 +206,7 @@ const Seller = () => {
                       />
                     </svg>
                   </button>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="12"
@@ -257,6 +269,7 @@ const Seller = () => {
           {/* //=================================================total  */}
           <div className="total flex justify-start gap-4">
             <Total
+              delay={0.1}
               number={
                 singleSeller?.salesPerson.length > 0
                   ? singleSeller?.salesPerson.length
@@ -293,6 +306,7 @@ const Seller = () => {
               }
             />
             <Total
+              delay={0.3}
               number={
                 singleSeller?.projects?.length > 0
                   ? singleSeller?.projects.length
@@ -339,6 +353,7 @@ const Seller = () => {
               }
             />
             <Total
+              delay={0.5}
               number={
                 singleSeller?.client?.length > 0
                   ? singleSeller?.client?.length
@@ -393,6 +408,7 @@ const Seller = () => {
               }
             />
             <Total
+              delay={0.7}
               number={calculateTotalCommissionForAllClients(
                 singleSeller?.client
               )}
@@ -426,7 +442,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Sales People")}
                   className={`${
                     menu === "Manage Sales People" ? "shadow-md" : ""
-                  } text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                  } text-[12px] transition-all ease-in-out duration-500 hover:scale-105 font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
                 >
                   Sales Guy
                 </button>
@@ -434,7 +450,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Clients")}
                   className={`${
                     menu === "Manage Clients" ? "shadow-md" : ""
-                  } text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
                 >
                   Clients
                 </button>
@@ -442,7 +458,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Projects")}
                   className={`${
                     menu === "Manage Projects" ? "shadow-md" : ""
-                  } text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
                 >
                   Projects
                 </button>
@@ -450,7 +466,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Statistic")}
                   className={`${
                     menu === "Manage Statistic" ? "shadow-md" : ""
-                  } text-[12px] font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
                 >
                   Statistics
                 </button>
@@ -462,7 +478,7 @@ const Seller = () => {
                   value={input.startDate}
                   onChange={handleOnChange}
                   placeholder="Mar 23, 2023"
-                  className="w-[45%] focus:outline-none text-[12px] font-['work_sans']"
+                  className="w-[45%] transition-all ease-in-out duration-500 hover:scale-105 focus:outline-none text-[12px] font-['work_sans']"
                 />
                 <input
                   type="text"
@@ -470,9 +486,9 @@ const Seller = () => {
                   value={input.endDate}
                   onChange={handleOnChange}
                   placeholder="Mar 23, 2023"
-                  className="w-[45%] focus:outline-none text-[12px] font-['work_sans']"
+                  className="w-[45%] transition-all ease-in-out duration-500 hover:scale-105 focus:outline-none text-[12px] font-['work_sans']"
                 />
-                <button className="w-[10%]">
+                <button className="w-[10%] transition-all ease-in-out duration-500 hover:scale-105">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
@@ -494,8 +510,8 @@ const Seller = () => {
                   </svg>
                 </button>
               </div>
-              <div className="sales_client_project_statistics border  w-[225px] h-[38px] flex justify-between items-center rounded-md ml-[13px] gap-1 px-[10px]">
-                <button className="w-[10%]">
+              <div className="sales_client_project_statistics border transition-all ease-in-out duration-500 hover:scale-105 w-[225px] h-[38px] flex justify-between items-center rounded-md ml-[13px] gap-1 px-[10px]">
+                <button className="w-[10%] transition-all ease-in-out duration-500 hover:scale-105">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -515,12 +531,12 @@ const Seller = () => {
                   value={input.text}
                   onChange={handleOnChange}
                   placeholder="Search"
-                  className="w-[90%] focus:outline-none text-[12px] font-['work_sans']"
+                  className="w-[90%] transition-all ease-in-out duration-500 hover:scale-105 focus:outline-none text-[12px] font-['work_sans']"
                 />
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button className="w-[91px] rounded-md bg-gray-400 h-[38px] flex justify-center items-center hover:bg-gray-600 text-white transition-all duration-500 ease-in-out">
+              <button className="w-[91px] transition-all ease-in-out duration-500 hover:scale-105 rounded-md bg-gray-400 h-[38px] flex justify-center items-center hover:bg-gray-600 text-white transition-all duration-500 ease-in-out">
                 Support
               </button>
               <button
@@ -528,7 +544,7 @@ const Seller = () => {
                   loginInSeller?._id !== id && loginInSeller?.role !== "admin"
                 }
                 onClick={() => setModel(!model)}
-                className={`w-[170px]   rounded-md h-[38px] bg-cyan-500 flex justify-center items-center gap-2 text-white hover:bg-cyan-600 transition-all duration-500 ease-in-out`}
+                className={`w-[170px] transition-all ease-in-out duration-500 hover:scale-105  rounded-md h-[38px] bg-cyan-500 flex justify-center items-center gap-2 text-white hover:bg-cyan-600 transition-all duration-500 ease-in-out`}
               >
                 Add Sales Person
                 <svg
@@ -553,6 +569,7 @@ const Seller = () => {
           {/* //================================================ project datiels  */}
           <div className=" mt-[20px]  flex items-center justify-between">
             <ProjectDetails
+              delay={0.1}
               svg={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -585,6 +602,7 @@ const Seller = () => {
               }
             />
             <ProjectDetails
+              delay={0.3}
               svg={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -616,6 +634,7 @@ const Seller = () => {
               styles={`text-red-500`}
             />
             <ProjectDetails
+              delay={0.5}
               svg={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -649,6 +668,7 @@ const Seller = () => {
               }
             />
             <ProjectDetails
+              delay={0.7}
               svg={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -681,6 +701,7 @@ const Seller = () => {
               styles={`text-red-500`}
             />
             <ProjectDetails
+              delay={0.9}
               svg={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -739,6 +760,7 @@ const Seller = () => {
                   ?.map((item, index) => {
                     return (
                       <SalesPeople
+                        delay={`.${index}`}
                         key={index}
                         avatar={item.avatar}
                         name={item.name}
@@ -868,7 +890,7 @@ const Seller = () => {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

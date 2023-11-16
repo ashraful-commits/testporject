@@ -125,3 +125,22 @@ p {
 html {
   scroll-behavior: smooth;
 }
+
+button:hover {
+  animation: hoverAnimation 3s alternate infinite ease-in-out;
+  transition: all;
+  animation-duration: 500ms;
+  animation-delay: 500ms;
+}
+
+@keyframes hoverAnimation {
+  0% {
+    box-shadow: 0 0 5px #9bbec8;
+  }
+  50% {
+    box-shadow: 0 0 10px #9bbec8;
+  }
+  100% {
+    box-shadow: 0 0 50px #9bbec8;
+  }
+}

@@ -1,6 +1,17 @@
-const Team = ({ avatar, title, name }) => {
+import { motion } from "framer-motion";
+const Team = ({ avatar, title, name, delay }) => {
   return (
-    <div className="flex gap-[10px] h-[48px] mb-[20px]">
+    <motion.div
+      initial={{ x: -15, opacity: 0.1 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{
+        duration: 2,
+
+        ease: [0.17, 0.67, 0.83, 0.67],
+        delay: delay,
+      }}
+      className="flex transition-all ease-in-out duration-500 hover:scale-105 gap-[10px] h-[48px] mb-[20px]"
+    >
       <div className="w-[42px] h-[42px] overflow-hidden">
         <img
           className=" object-cover w-full h-full rounded-full"
@@ -16,7 +27,7 @@ const Team = ({ avatar, title, name }) => {
           {title}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

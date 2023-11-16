@@ -19,6 +19,7 @@ import {
 import { Link } from "react-router-dom";
 import { Toastify } from "../Utils/Tostify";
 import SalesModel from "./Model/SalesModel";
+import { motion } from "framer-motion";
 
 const SellerTableComponent = ({ setModel, sellerId, input }) => {
   const { loader, error, message } = useSelector(getAllClientState);
@@ -194,11 +195,20 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 })
                 ?.map((item, index) => {
                   return (
-                    <tr
+                    <motion.tr
+                      initial={{ y: -15, opacity: 0.1 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        duration: 2,
+                        type: "spring",
+                        stiffness: 200,
+                        ease: [0.17, 0.67, 0.83, 0.67],
+                        delay: `.${index}`,
+                      }}
                       key={index}
                       className={`${
                         loginInSeller?._id === item?._id ? "bg-green-100" : ""
-                      } w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center`}
+                      } w-full grid grid-flow-col hover:scale-[101%] transition-all duration-500 ease-in-out justify-between items-center border-b py-2 h-[3.4375rem]  text-center`}
                     >
                       <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                         <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
@@ -371,7 +381,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                           </svg>
                         </button>
                       </td>
-                    </tr>
+                    </motion.tr>
                   );
                 })
             ) : (
@@ -401,7 +411,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 return (
                   <tr
                     key={index}
-                    className="w-full grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
+                    className="w-full hover:scale-[101%] transition-all duration-500 ease-in-out grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
                   >
                     <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
                       <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
@@ -578,7 +588,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button
-                className="text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] w-[25px] hover:scale-105  h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={prevPage}
               >
                 <svg
@@ -616,7 +626,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                     onClick={() => setCurrentPage(index + 1)}
                     className={`${
                       currentPage === index + 1 ? "bg-darkBlue text-white" : ""
-                    } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                    } text-[14px] w-[25px] h-[25px] hover:scale-105  flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
                   >
                     {index + 1}
                   </button>
@@ -632,7 +642,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 <option value="7">7</option>
               </select>
               <button
-                className="text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] hover:scale-105  w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={nextPage}
               >
                 <svg

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import user from "../../public/user.png";
+import { motion } from "framer-motion";
 const Total = ({
   number,
   totalSalesGuy,
@@ -9,9 +10,20 @@ const Total = ({
   styles,
   title,
   svg,
+  delay,
 }) => {
   return (
-    <div className="border w-[304px] h-[150px] rounded-md">
+    <motion.div
+      initial={{ y: -15, opacity: 0.1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 2,
+
+        ease: [0.17, 0.67, 0.83, 0.67],
+        delay: delay,
+      }}
+      className="border w-[304px] transition-all ease-in-out duration-500 hover:scale-105 h-[150px] rounded-md"
+    >
       <div className="border-b h-[55px] flex items-center gap-2">
         <div
           className={`svg w-[27px] h-[27px] border rounded-md ml-4  flex justify-center items-center ${styles}`}
@@ -116,7 +128,7 @@ const Total = ({
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

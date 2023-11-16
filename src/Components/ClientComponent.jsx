@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ClientComponent = ({
   clientAvatar,
@@ -12,9 +13,20 @@ const ClientComponent = ({
   team,
   email,
   mobile,
+  delay,
 }) => {
   return (
-    <div className="rounded-md p-[22px]  w-[304px] h-[340px] border">
+    <motion.div
+      initial={{ y: -15, opacity: 0.1 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 1,
+
+        ease: [0.17, 0.67, 0.83, 0.67],
+        delay: 0.1,
+      }}
+      className="rounded-md p-[22px] transition-all ease-in-out duration-500 hover:scale-105  w-[304px] h-[340px] border"
+    >
       <div className="people w-full gap-[18px] flex items-center">
         {/* //============================================avatar  */}
         <div className="avatar w-[51px] h-[51px] rounded-full overflow-hidden">
@@ -144,7 +156,11 @@ const ClientComponent = ({
           {team?.length > 0
             ? team?.map((item, index) => {
                 return (
-                  <Link key={index} to={`/seller/${item?._id}`}>
+                  <Link
+                    key={index}
+                    className="transition-all ease-in-out duration-500 hover:scale-105"
+                    to={`/seller/${item?._id}`}
+                  >
                     <div className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-15px]">
                       {item?.avatar ? (
                         <img
@@ -173,7 +189,7 @@ const ClientComponent = ({
           Team
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
