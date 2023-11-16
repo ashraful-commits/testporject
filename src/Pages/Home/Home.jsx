@@ -112,7 +112,7 @@ const Home = () => {
       initial={{ y: -15, opacity: 0.1 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{
-        duration: 2,
+        duration: 1,
         type: "spring",
         stiffness: 200,
         ease: [0.17, 0.67, 0.83, 0.67],
@@ -173,7 +173,7 @@ const Home = () => {
               initial={{ y: -15, opacity: 0.1 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{
-                duration: 2,
+                duration: 1,
                 type: "spring",
                 stiffness: 200,
                 ease: [0.17, 0.67, 0.83, 0.67],
@@ -886,9 +886,8 @@ const Home = () => {
               initial={{ y: -15, opacity: 0.1 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{
-                duration: 2,
-                type: "spring",
-                stiffness: 200,
+                duration: 1,
+
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.2,
               }}
@@ -964,9 +963,8 @@ const Home = () => {
               initial={{ y: -15, opacity: 0.1 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{
-                duration: 2,
-                type: "spring",
-                stiffness: 200,
+                duration: 1,
+
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.4,
               }}
@@ -1023,9 +1021,8 @@ const Home = () => {
               initial={{ y: -15, opacity: 0.1 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{
-                duration: 2,
-                type: "spring",
-                stiffness: 200,
+                duration: 1,
+
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.6,
               }}
@@ -1069,9 +1066,8 @@ const Home = () => {
               initial={{ y: -15, opacity: 0.1 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{
-                duration: 2,
-                type: "spring",
-                stiffness: 200,
+                duration: 1,
+
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.8,
               }}
