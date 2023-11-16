@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 const Team = ({ avatar, title, name, delay }) => {
   return (
     <motion.div
-      initial={{ x: -15, opacity: 0.1 }}
+      initial={{ y: -15, opacity: 0.1 }}
       exit={{ opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{
-        duration: 1,
+        duration: 0.6,
 
         ease: [0.17, 0.67, 0.83, 0.67],
         delay: delay,

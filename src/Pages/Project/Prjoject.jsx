@@ -866,7 +866,7 @@ const Project = () => {
                             avatar={item?.avatar}
                             name={item?.name}
                             title={item?.employment}
-                            delay={`.${index + 1}`}
+                            delay={`.${index}`}
                           />
                         );
                       })
