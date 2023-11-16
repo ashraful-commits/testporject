@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const ClientComponent = ({
   clientAvatar,
   clientName,
@@ -142,24 +144,23 @@ const ClientComponent = ({
           {team?.length > 0
             ? team?.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px]"
-                  >
-                    {item?.avatar ? (
-                      <img
-                        className="w-full h-full rounded-full  border-[2px] border-white"
-                        src={item?.avatar}
-                        alt=""
-                      />
-                    ) : (
-                      <img
-                        className="w-full h-full rounded-full  border-[2px] border-white"
-                        src="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"
-                        alt=""
-                      />
-                    )}
-                  </div>
+                  <Link key={index} to={`/seller/${item?._id}`}>
+                    <div className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-15px]">
+                      {item?.avatar ? (
+                        <img
+                          className="w-full h-full rounded-full  border-[2px] border-white"
+                          src={item?.avatar}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          className="w-full h-full rounded-full  border-[2px] border-white"
+                          src="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"
+                          alt=""
+                        />
+                      )}
+                    </div>
+                  </Link>
                 );
               })
             : ""}

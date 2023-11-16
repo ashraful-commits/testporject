@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 //=======================================salesPeople function
 const SalesPeople = ({
   avatar,
@@ -97,24 +98,23 @@ const SalesPeople = ({
           {ActiveClient?.length > 0
             ? ActiveClient?.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-                    className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px]"
-                  >
-                    {item?.clientAvatar ? (
-                      <img
-                        className="w-full h-full rounded-full  border-[2px] border-white"
-                        src={item?.clientAvatar}
-                        alt=""
-                      />
-                    ) : (
-                      <img
-                        className="w-full h-full rounded-full  border-[2px] border-white"
-                        src={avatar}
-                        alt=""
-                      />
-                    )}
-                  </div>
+                  <Link key={index} to={`/${item?._id}`}>
+                    <div className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px]">
+                      {item?.clientAvatar ? (
+                        <img
+                          className="w-full h-full rounded-full  border-[2px] border-white"
+                          src={item?.clientAvatar}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          className="w-full h-full rounded-full  border-[2px] border-white"
+                          src={avatar}
+                          alt=""
+                        />
+                      )}
+                    </div>
+                  </Link>
                 );
               })
             : ""}

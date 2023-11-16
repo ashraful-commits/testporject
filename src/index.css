@@ -122,3 +122,6 @@ p {
 .kgGExh {
   width: 100px !important;
 }
+html {
+  scroll-behavior: smooth;
+}

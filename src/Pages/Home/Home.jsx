@@ -16,7 +16,7 @@ import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCou
 
 import SellerTableComponent from "../../Components/SellerTableComponent";
 import useFormHook from "../../Hooks/useFormHook";
-
+import DatePicker from "react-datepicker";
 const Home = () => {
   //==============================================all state
   const [notification, setNotification] = useState(false);
@@ -32,6 +32,8 @@ const Home = () => {
     email: "",
     rol: "",
   });
+  //====================================================== percentage state
+  const [percentage, setPercentage] = useState(0);
   //=========================================== redux data
   const { error, message, loginInSeller, seller } =
     useSelector(getAllSellerState);
@@ -74,6 +76,35 @@ const Home = () => {
       })
     );
   }, []);
+  //===================================================== percentage
+  useEffect(() => {
+    const today = new Date();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - today.getDay());
+    console.log(startOfWeek);
+    const oneWeekAgo = new Date(startOfWeek);
+    oneWeekAgo.setDate(startOfWeek.getDate() - 7);
+    console.log(oneWeekAgo);
+    const currentWeekData = loginInSeller?.client.filter(
+      (item) =>
+        new Date(item.createdAt) >= startOfWeek &&
+        new Date(item.createdAt) <= today
+    );
+
+    const lastWeekData = loginInSeller?.client.filter(
+      (item) =>
+        new Date(item.createdAt) >= oneWeekAgo &&
+        new Date(item.createdAt) < startOfWeek
+    );
+    if (lastWeekData > 0) {
+      const percentageChange =
+        ((currentWeekData - lastWeekData) / lastWeekData) * 100;
+      setPercentage(percentageChange);
+    } else {
+      // Handle the case where lastWeekData has zero length (to avoid division by zero)
+      setPercentage(0);
+    }
+  }, [loginInSeller.client]);
   //======================================================== return
   return (
     <div className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden">
@@ -877,7 +908,7 @@ const Home = () => {
                     : 0}
                 </h2>
                 <span className="text-[#3AAE54] border-[0.3px solid bg-[#5CCE75] text-[12px] flex justify-between px-[7px] items-center gap-[5px] w-[49px] h-[19px] bg-opacity-[.1] text-[#5CCE75] rounded-md">
-                  3.9%
+                  {percentage.toFixed(1)}%
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -1071,7 +1102,7 @@ const Home = () => {
                       id=""
                     >
                       <option className="text-[#256682]" value="">
-                        ....
+                        select role
                       </option>
                       <option className="text-[#256682]" value="admin">
                         admin
@@ -1085,22 +1116,22 @@ const Home = () => {
                 {!sellerTable && (
                   <>
                     <div className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]">
-                      <input
-                        onChange={handleInputChange}
-                        value={input.endDate}
-                        name="endDate"
-                        type="text"
-                        className="text-[12px] focus:outline-none font-['Roboto'] w-[60px]  capitalize placeholder:text-[12px] placeholder:font-[400] "
-                        placeholder="End Time"
+                      <DatePicker
+                        className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
+                        selected={input.startDate}
+                        placeholderText="Start Time"
+                        onChange={(date) =>
+                          setInput((prev) => ({ ...prev, startDate: date }))
+                        }
                       />
                       -
-                      <input
-                        type="text"
-                        onChange={handleInputChange}
-                        name="startDate"
-                        value={input.startDate}
-                        className="text-[12px] font-['Roboto'] placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
-                        placeholder="Start Time"
+                      <DatePicker
+                        className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
+                        selected={input.endDate}
+                        placeholderText="End Time"
+                        onChange={(date) =>
+                          setInput((prev) => ({ ...prev, endDate: date }))
+                        }
                       />
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1136,7 +1167,7 @@ const Home = () => {
                         id=""
                       >
                         <option className="text-[#256682]" value="">
-                          ...
+                          Status
                         </option>
                         <option className="text-[#256682]" value="pending">
                           Pending
