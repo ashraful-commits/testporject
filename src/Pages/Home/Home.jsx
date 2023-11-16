@@ -170,6 +170,15 @@ const Home = () => {
               Sales Toolkit
             </p>
             <Link
+              initial={{ y: -15, opacity: 0.1 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 2,
+                type: "spring",
+                stiffness: 200,
+                ease: [0.17, 0.67, 0.83, 0.67],
+                delay: 0.2,
+              }}
               to={`/email/${loginInSeller?._id}`}
               className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] mt-[8px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
             >
@@ -873,7 +882,18 @@ const Home = () => {
           </div>
           {/*================================================ calculation  */}
           <div className="calculation mt-[20px] flex justify-between">
-            <div className="total_customer w-[236px] h-[136px] rounded-[8px] bg-darkBlue  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out">
+            <motion.div
+              initial={{ y: -15, opacity: 0.1 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 2,
+                type: "spring",
+                stiffness: 200,
+                ease: [0.17, 0.67, 0.83, 0.67],
+                delay: 0.2,
+              }}
+              className="total_customer w-[236px] h-[136px] rounded-[8px] bg-darkBlue  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out"
+            >
               <div className="customer flex justify-start items-start mt-[10px] ml-[15px] gap-[9px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-white">
                   <svg
@@ -939,8 +959,19 @@ const Home = () => {
 
                 <p className="text-white font-[400]  text-[13px]">This Week</p>
               </div>
-            </div>
-            <div className="rate border w-[236px] h-[136px] rounded-[8px] bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out ">
+            </motion.div>
+            <motion.div
+              initial={{ y: -15, opacity: 0.1 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 2,
+                type: "spring",
+                stiffness: 200,
+                ease: [0.17, 0.67, 0.83, 0.67],
+                delay: 0.4,
+              }}
+              className="rate border w-[236px] h-[136px] rounded-[8px] bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out "
+            >
               <div className="customer flex justify-start items-start w-full mt-[10px] pl-[15px]  border-b gap-[7px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#267596]">
                   <svg
@@ -987,8 +1018,19 @@ const Home = () => {
                   view contract
                 </button>
               </div>
-            </div>
-            <div className="total_commission w-[236px] border h-[136px] rounded-[8px] bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out">
+            </motion.div>
+            <motion.div
+              initial={{ y: -15, opacity: 0.1 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 2,
+                type: "spring",
+                stiffness: 200,
+                ease: [0.17, 0.67, 0.83, 0.67],
+                delay: 0.6,
+              }}
+              className="total_commission w-[236px] border h-[136px] rounded-[8px] bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out"
+            >
               <div className="total_earned flex justify-start items-start mt-[10px]  border-b pl-[12px] gap-[10px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-opacity-[.1] mt-[4px] bg-[#267596]">
                   <svg
@@ -1022,8 +1064,19 @@ const Home = () => {
                     : 0}
                 </h2>
               </div>
-            </div>
-            <div className="withdrawn w-[236px] h-[136px] rounded-[8px] border bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out">
+            </motion.div>
+            <motion.div
+              initial={{ y: -15, opacity: 0.1 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 2,
+                type: "spring",
+                stiffness: 200,
+                ease: [0.17, 0.67, 0.83, 0.67],
+                delay: 0.8,
+              }}
+              className="withdrawn w-[236px] h-[136px] rounded-[8px] border bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out"
+            >
               <div className="customer flex justify-start items-start mt-[10px] pl-[14px] border-b gap-[9px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#267596]">
                   <svg
@@ -1051,7 +1104,7 @@ const Home = () => {
                     : 0}
                 </h2>
               </div>
-            </div>
+            </motion.div>
           </div>
           {/* =================================================table  */}
           <div className="table w-full h-full   mt-[20px]">
