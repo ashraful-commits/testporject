@@ -30,7 +30,7 @@ const Project = () => {
   const [selectedSalespersons, setSelectedSalespersons] = useState([]);
   const [selectTools, setSelectTools] = useState([]);
   const [menu, setMenu] = useState("Project Details");
-  console.log(singleClient);
+
   //========================================================get all singleClient
   useEffect(() => {
     dispatch(getSingleClient(id));

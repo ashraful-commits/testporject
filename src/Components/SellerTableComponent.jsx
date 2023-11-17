@@ -23,8 +23,7 @@ import { motion } from "framer-motion";
 
 const SellerTableComponent = ({ setModel, sellerId, input }) => {
   const { loader, error, message } = useSelector(getAllClientState);
-  console.log(message);
-  console.log(error);
+
   const {
     loginInSeller,
     seller,
@@ -118,7 +117,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
       getAllSeller({ role: loginInSeller?.role, page: currentPage, limit })
     );
   }, [dispatch, limit, currentPage, loginInSeller]);
-  console.log(input);
+
   return (
     <div>
       {/* //===================================edit model  */}
@@ -130,7 +129,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         />
       )}
       {/* //=============================================table  */}
-      <table className="w-full border min-h-[490px] h-full">
+      <table className="w-full border min-h-[490px] h-full overflow-hidden">
         {/* //============================================table header  */}
         <thead>
           <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
@@ -175,6 +174,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
               </div>
             </div>
           )}
+
           {loginInSeller?.role === "admin" ? (
             seller?.length > 0 ? (
               seller
@@ -390,8 +390,8 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 No Seller!
               </span>
             )
-          ) : [loginInSeller, ...loginInSeller.salesPerson]?.length > 0 ? (
-            [loginInSeller, ...loginInSeller.salesPerson]
+          ) : [...loginInSeller.salesPerson, loginInSeller]?.length > 0 ? (
+            [...loginInSeller.salesPerson, loginInSeller]
               .filter((seller) => {
                 return (
                   (input?.text
@@ -585,7 +585,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         </tbody>
         {/* //=================================================== footer  */}
         {(seller?.length >= 1 ||
-          [loginInSeller, ...loginInSeller.salesPerson]?.length >= 1) && (
+          [...loginInSeller.salesPerson, loginInSeller]?.length >= 1) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button

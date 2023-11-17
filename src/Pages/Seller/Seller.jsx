@@ -16,6 +16,7 @@ import ClientComponent from "../../Components/ClientComponent";
 import ProjectComponent from "../../Components/ProjectComponent";
 import StatisticComponent from "../../Components/StatisticComponent";
 import { motion } from "framer-motion";
+import DatePicker from "react-datepicker";
 const Seller = () => {
   //===========================================all state
   const [model, setModel] = useState(false);
@@ -472,44 +473,50 @@ const Seller = () => {
                   Statistics
                 </button>
               </div>
-              <div className="sales_client_project_statistics border  w-[225px] h-[38px] flex justify-between items-center rounded-md ml-[13px] gap-1 px-[10px]">
-                <input
-                  type="text"
-                  name="startDate"
-                  value={input.startDate}
-                  onChange={handleOnChange}
-                  placeholder="Mar 23, 2023"
-                  className="w-[45%] transition-all ease-in-out duration-500 hover:scale-105 focus:outline-none text-[12px] font-['work_sans']"
-                />
-                <input
-                  type="text"
-                  name="endDate"
-                  value={input.endDate}
-                  onChange={handleOnChange}
-                  placeholder="Mar 23, 2023"
-                  className="w-[45%] transition-all ease-in-out duration-500 hover:scale-105 focus:outline-none text-[12px] font-['work_sans']"
-                />
-                <button className="w-[10%] transition-all ease-in-out duration-500 hover:scale-105">
+              <div className="sales_client_project_statistics  h-[38px] flex justify-between items-center rounded-md ml-[13px] gap-1 px-[10px]">
+                <div className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]  transition-all duration-500 ease-in-out">
+                  <DatePicker
+                    className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
+                    selected={input.startDate}
+                    placeholderText="Start Time"
+                    onChange={(date) =>
+                      setInput((prev) => ({ ...prev, startDate: date }))
+                    }
+                  />
+                  -
+                  <DatePicker
+                    className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
+                    selected={input.endDate}
+                    placeholderText="End Time"
+                    onChange={(date) =>
+                      setInput((prev) => ({ ...prev, endDate: date }))
+                    }
+                  />
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
+                    height="15"
+                    viewBox="0 0 14 15"
                     fill="none"
                   >
-                    <g clipPath="url(#clip0_684_1791)">
+                    <g clipPath="url(#clip0_657_266)">
                       <path
-                        d="M12.7502 1.87695H10.1252V0.876953C10.1252 0.808203 10.069 0.751953 10.0002 0.751953H9.12523C9.05648 0.751953 9.00023 0.808203 9.00023 0.876953V1.87695H5.00024V0.876953C5.00024 0.808203 4.94399 0.751953 4.87524 0.751953H4.00024C3.93149 0.751953 3.87524 0.808203 3.87524 0.876953V1.87695H1.25024C0.973681 1.87695 0.750244 2.10039 0.750244 2.37695V12.752C0.750244 13.0285 0.973681 13.252 1.25024 13.252H12.7502C13.0268 13.252 13.2502 13.0285 13.2502 12.752V2.37695C13.2502 2.10039 13.0268 1.87695 12.7502 1.87695ZM12.1252 12.127H1.87524V6.18945H12.1252V12.127ZM1.87524 5.12695V3.00195H3.87524V3.75195C3.87524 3.8207 3.93149 3.87695 4.00024 3.87695H4.87524C4.94399 3.87695 5.00024 3.8207 5.00024 3.75195V3.00195H9.00023V3.75195C9.00023 3.8207 9.05648 3.87695 9.12523 3.87695H10.0002C10.069 3.87695 10.1252 3.8207 10.1252 3.75195V3.00195H12.1252V5.12695H1.87524Z"
+                        d="M12.7502 2.37695H10.1252V1.37695C10.1252 1.3082 10.069 1.25195 10.0002 1.25195H9.12523C9.05648 1.25195 9.00023 1.3082 9.00023 1.37695V2.37695H5.00024V1.37695C5.00024 1.3082 4.94399 1.25195 4.87524 1.25195H4.00024C3.93149 1.25195 3.87524 1.3082 3.87524 1.37695V2.37695H1.25024C0.973681 2.37695 0.750244 2.60039 0.750244 2.87695V13.252C0.750244 13.5285 0.973681 13.752 1.25024 13.752H12.7502C13.0268 13.752 13.2502 13.5285 13.2502 13.252V2.87695C13.2502 2.60039 13.0268 2.37695 12.7502 2.37695ZM12.1252 12.627H1.87524V6.68945H12.1252V12.627ZM1.87524 5.62695V3.50195H3.87524V4.25195C3.87524 4.3207 3.93149 4.37695 4.00024 4.37695H4.87524C4.94399 4.37695 5.00024 4.3207 5.00024 4.25195V3.50195H9.00023V4.25195C9.00023 4.3207 9.05648 4.37695 9.12523 4.37695H10.0002C10.069 4.37695 10.1252 4.3207 10.1252 4.25195V3.50195H12.1252V5.62695H1.87524Z"
                         fill="#757575"
                       />
                     </g>
                     <defs>
-                      <clipPath id="clip0_684_1791">
-                        <rect width="14" height="14" fill="white" />
+                      <clipPath id="clip0_657_266">
+                        <rect
+                          width="14"
+                          height="14"
+                          fill="white"
+                          transform="translate(0 0.5)"
+                        />
                       </clipPath>
                     </defs>
                   </svg>
-                </button>
+                </div>
               </div>
               <div className="sales_client_project_statistics border transition-all ease-in-out duration-500 hover:scale-105 w-[225px] h-[38px] flex justify-between items-center rounded-md ml-[13px] gap-1 px-[10px]">
                 <button className="w-[10%] transition-all ease-in-out duration-500 hover:scale-105">

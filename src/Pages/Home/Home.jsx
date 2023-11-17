@@ -82,10 +82,10 @@ const Home = () => {
     const today = new Date();
     const startOfWeek = new Date(today);
     startOfWeek.setDate(today.getDate() - today.getDay());
-    console.log(startOfWeek);
+
     const oneWeekAgo = new Date(startOfWeek);
     oneWeekAgo.setDate(startOfWeek.getDate() - 7);
-    console.log(oneWeekAgo);
+
     const currentWeekData = loginInSeller?.client.filter(
       (item) =>
         new Date(item.createdAt) >= startOfWeek &&
@@ -105,9 +105,9 @@ const Home = () => {
       // Handle the case where lastWeekData has zero length (to avoid division by zero)
       setPercentage(0);
     }
-  }, [loginInSeller.client]);
-  const { scrollYProgress } = useScroll();
-  console.log(scrollYProgress);
+  }, [loginInSeller?.client]);
+
+
   //======================================================== return
   return (
     <motion.div
