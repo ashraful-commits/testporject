@@ -7,6 +7,7 @@ import { LoggedInSeller, getAllSeller } from "./Features/Seller/SellerApi";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const dispatch = useDispatch();
@@ -16,8 +17,10 @@ function App() {
   }, [dispatch]);
   return (
     <>
-      <RouterProvider router={PageRouter} />
-      <ToastContainer />
+      <AnimatePresence initial={true} mode="wait">
+        <RouterProvider router={PageRouter} />
+        <ToastContainer />
+      </AnimatePresence>
     </>
   );
 }
