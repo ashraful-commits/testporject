@@ -444,7 +444,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Sales People")}
                   className={`${
                     menu === "Manage Sales People" ? "shadow-md" : ""
-                  } text-[12px] transition-all ease-in-out duration-500 hover:scale-105 font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                  } text-[12px] transition-all ease-in-out duration-500 hover:scale-105 font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
                 >
                   Sales Guy
                 </button>
@@ -452,7 +452,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Clients")}
                   className={`${
                     menu === "Manage Clients" ? "shadow-md" : ""
-                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
                 >
                   Clients
                 </button>
@@ -460,7 +460,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Projects")}
                   className={`${
                     menu === "Manage Projects" ? "shadow-md" : ""
-                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
                 >
                   Projects
                 </button>
@@ -468,7 +468,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Statistic")}
                   className={`${
                     menu === "Manage Statistic" ? "shadow-md" : ""
-                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px]`}
+                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
                 >
                   Statistics
                 </button>

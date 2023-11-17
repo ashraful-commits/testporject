@@ -634,6 +634,22 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
               >
                 2
               </button>
+              <button
+                onClick={() => setCurrentPage(3)}
+                className={`${
+                  currentPage === 3 ? "bg-darkBlue text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+              >
+                3
+              </button>
+              <button
+                onClick={() => setCurrentPage(4)}
+                className={`${
+                  currentPage === 4 ? "bg-darkBlue text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+              >
+                4
+              </button>
               <select
                 onChange={handleLimit}
                 className="w-[50px] text-[14px] rounded-md font-[400] text-[#A6A8B1] focus:outline-none border"
