@@ -176,11 +176,17 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           className="main_model z-[999999999] w-[500px] rounded-[10px] h-[65vh]   justify-center items-center flex flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom relative"
         >
           {salesLoader && (
-            <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]">
+            <motion.div
+              initial={{ opacity: 0.4 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0.4 }}
+              transition={{ duration: 1.3 }}
+              className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]"
+            >
               <div className="absolute top-[45%]">
                 <LoadingSpinner />
               </div>
-            </div>
+            </motion.div>
           )}
           <div className="pt-[10px] bg-white w-full col-span-2">
             <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">

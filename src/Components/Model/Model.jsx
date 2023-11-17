@@ -237,11 +237,17 @@ const Model = ({ setClient, singleData }) => {
       >
         {/* //========================================================= loader  */}
         {loader && (
-          <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-600 z-[99999999999999999]">
+          <motion.div
+            initial={{ opacity: 0.4 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0.4 }}
+            transition={{ duration: 1.3 }}
+            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-600 z-[99999999999999999]"
+          >
             <div className="w-full h-full absolute top-[45%]">
               <LoadingSpinner />
             </div>
-          </div>
+          </motion.div>
         )}
         <div className=" sticky top-0 pt-[42px] bg-white w-full">
           <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">

@@ -168,11 +168,17 @@ const TableComponent = ({ sellerId, input }) => {
         {/* //==========================================table body  */}
         <tbody className="relative w-full h-full">
           {(loader || sellerLoader) && (
-            <div className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top-0 left-0">
+            <motion.div
+              initial={{ opacity: 0.4 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0.4 }}
+              transition={{ duration: 1.3 }}
+              className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top-0 left-0"
+            >
               <div className="w-full absolute h-full top-[45%]">
                 <LoadingSpinner />
               </div>
-            </div>
+            </motion.div>
           )}
           {loginInSeller?.role === "admin" ? (
             client?.length > 0 ? (
