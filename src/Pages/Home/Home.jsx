@@ -120,7 +120,7 @@ const Home = () => {
         ease: [0.17, 0.67, 0.83, 0.67],
         delay: 0.2,
       }}
-      className="min-w-[1340px]  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden"
+      className="min-w-[1340px] scroll-smooth  bg-[#fff] rounded-[15px] min-h-[909px] grid grid-flow-col overflow-hidden"
     >
       <>
         {/* //================================================ model  */}

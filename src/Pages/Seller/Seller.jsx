@@ -71,7 +71,7 @@ const Seller = () => {
           ease: [0.17, 0.67, 0.83, 0.67],
           delay: 0.4,
         }}
-        className="min-w-[1340px] relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden "
+        className="min-w-[1340px] scroll-smooth relative rounded-[15px] pl-[48px]  pt-[30px] mb-[30px] bg-[#FFF] min-h-auto h-[1061px] overflow-hidden "
       >
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] rounded-md overflow-hidden">
