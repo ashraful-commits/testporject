@@ -11,6 +11,7 @@ import {
   setMessageEmpty,
 } from "../Features/Seller/SellerSlice";
 import LoadingSpinner from "../Components/LoadingSpin";
+import { motion } from "framer-motion";
 const Register = () => {
   //================================================= use form hook
   const { input, setInput, handleInputChange } = useFormHook({
@@ -160,7 +161,7 @@ const Register = () => {
               handleInputChange={handleInputChange}
             />
             <div className="imgPrev flex gap-5 col-span-2 w-full items-center justify-center">
-              <label
+              <motion.label
                 htmlFor="sellerAvatar"
                 className="w-[100px] h-[100px] border rounded-full overflow-hidden p-[5px]"
               >
@@ -178,8 +179,15 @@ const Register = () => {
                     alt=""
                   />
                 )}
-              </label>
-              <label
+              </motion.label>
+              <motion.label
+                initial={{ y: -15, x: -15, opacity: 0.3 }}
+                animate={{ y: 0, x: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.6,
+                }}
                 htmlFor="companyAvatar"
                 className="w-[100px] h-[100px] border rounded-full overflow-hidden p-[5px]"
               >
@@ -197,7 +205,7 @@ const Register = () => {
                     alt=""
                   />
                 )}
-              </label>
+              </motion.label>
             </div>
             <input
               type="file"
@@ -211,12 +219,19 @@ const Register = () => {
               className="hidden"
               id="companyAvatar"
             />
-            <button
+            <motion.button
+              initial={{ y: -15, x: -15, opacity: 0.3 }}
+              animate={{ y: 0, x: 0, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.8,
+              }}
               type="submit"
               className="text-[18px] hover:scale-105 col-span-2 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-full mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
             >
               Register
-            </button>
+            </motion.button>
             <p className="text-[12px] col-span-2 w-full text-center text-gray-500">
               Already have an account
               <Link

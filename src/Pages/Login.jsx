@@ -11,6 +11,7 @@ import {
 } from "../Features/Seller/SellerSlice";
 import { Toastify } from "../Utils/Tostify";
 import LoadingSpinner from "../Components/LoadingSpin";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const { input, setInput, handleInputChange } = useFormHook({
@@ -86,12 +87,19 @@ const Login = () => {
               required="required"
               handleInputChange={handleInputChange}
             />
-            <button
+            <motion.button
+              initial={{ y: -15, x: -15, opacity: 0.3 }}
+              animate={{ y: 0, x: 0, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.4,
+              }}
               type="submit"
               className="text-[18px] hover:scale-105 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
             >
               Login
-            </button>
+            </motion.button>
             <p className="text-[12px] text-center text-gray-500">
               Don&apos;t have an account{" "}
               <Link
