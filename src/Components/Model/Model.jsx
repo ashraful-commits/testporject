@@ -203,7 +203,7 @@ const Model = ({ setClient, singleData }) => {
   }, [singleData, setInput]);
   //=================================================return
   return (
-    <div className="w-screen h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed top-0 left-0 scroll-smooth overflow-y-auto z-[99999] flex justify-center">
+    <motion.div className="w-screen h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed top-0 left-0 scroll-smooth overflow-y-auto z-[99999] flex justify-center">
       {/* //====================================================close button  */}
       <button
         onClick={() => setClient(false)}
@@ -223,7 +223,18 @@ const Model = ({ setClient, singleData }) => {
         </svg>
       </button>
       {/* //====================================================main model  */}
-      <div className="main_model z-[999999999] w-[868px] rounded-[10px] relative h-[90vh] scroll-smooth overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom">
+      <motion.div
+        initial={{ scale: 0.3 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0 }}
+        transition={{
+          duration: 1.5,
+          type: "spring",
+          stiffness: 100,
+          damping: 12,
+        }}
+        className="main_model z-[999999999] w-[868px] rounded-[10px] relative h-[90vh] scroll-smooth overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom"
+      >
         {/* //========================================================= loader  */}
         {loader && (
           <div className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-600 z-[99999999999999999]">
@@ -799,8 +810,8 @@ const Model = ({ setClient, singleData }) => {
             </div>
           </div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
