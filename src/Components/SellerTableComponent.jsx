@@ -618,21 +618,22 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                   </g>
                 </svg>
               </button>
-              {Array.from({
-                length: Math.ceil(loginInSeller?.salesPerson?.length / limit),
-              }).map((_, index) => {
-                return (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentPage(index + 1)}
-                    className={`${
-                      currentPage === index + 1 ? "bg-darkBlue text-white" : ""
-                    } text-[14px] w-[25px] h-[25px] hover:scale-105  flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
-                  >
-                    {index + 1}
-                  </button>
-                );
-              })}
+              <button
+                onClick={() => setCurrentPage(1)}
+                className={`${
+                  currentPage === 1 ? "bg-darkBlue text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+              >
+                1
+              </button>
+              <button
+                onClick={() => setCurrentPage(2)}
+                className={`${
+                  currentPage === 2 ? "bg-darkBlue text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+              >
+                2
+              </button>
               <select
                 onChange={handleLimit}
                 className="w-[50px] text-[14px] rounded-md font-[400] text-[#A6A8B1] focus:outline-none border"

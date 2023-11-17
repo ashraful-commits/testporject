@@ -107,7 +107,6 @@ const Home = () => {
     }
   }, [loginInSeller?.client]);
 
-
   //======================================================== return
   return (
     <motion.div
@@ -1110,7 +1109,16 @@ const Home = () => {
             {/*============================================= search  */}
             <div className="search  flex justify-between items-center w-full h-[40px]">
               <div className="flex w-full h-[40px] items-center">
-                <div className="text_search w-[222px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px] hover:scale-105 transition-all duration-500 ease-in-out">
+                <motion.div
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.1,
+                  }}
+                  className="text_search w-[222px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px] hover:scale-105 transition-all duration-500 ease-in-out"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -1131,9 +1139,18 @@ const Home = () => {
                     type="text"
                     placeholder="Search"
                   />
-                </div>
+                </motion.div>
                 {sellerTable && (
-                  <div className="text_search h-[40px]  w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px] hover:scale-105 transition-all duration-500 ease-in-out">
+                  <motion.div
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.3,
+                    }}
+                    className="text_search h-[40px]  w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px] hover:scale-105 transition-all duration-500 ease-in-out"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18"
@@ -1154,11 +1171,18 @@ const Home = () => {
                       type="text"
                       placeholder="email"
                     />
-                  </div>
+                  </motion.div>
                 )}
                 {sellerTable && (
-                  <div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out">
-                    <select
+                  <motion.div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out">
+                    <motion.select
+                      initial={{ y: -15, opacity: 0.3 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: 0.6,
+                      }}
                       className="w-full focus:outline-none h-full"
                       name="role"
                       onChange={handleInputChange}
@@ -1174,12 +1198,21 @@ const Home = () => {
                       <option className="text-[#256682]" value="user">
                         user
                       </option>
-                    </select>
-                  </div>
+                    </motion.select>
+                  </motion.div>
                 )}
                 {!sellerTable && (
                   <>
-                    <div className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]  transition-all duration-500 ease-in-out">
+                    <motion.div
+                      initial={{ y: -15, opacity: 0.3 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: 0.3,
+                      }}
+                      className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]  transition-all duration-500 ease-in-out"
+                    >
                       <DatePicker
                         className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
                         selected={input.startDate}
@@ -1221,9 +1254,25 @@ const Home = () => {
                           </clipPath>
                         </defs>
                       </svg>
-                    </div>
-                    <div className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out">
-                      <select
+                    </motion.div>
+                    <motion.div
+                      initial={{ y: -15, opacity: 0.3 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: 0.1,
+                      }}
+                      className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#256682] text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out"
+                    >
+                      <motion.select
+                        initial={{ y: -15, opacity: 0.3 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: 0.6,
+                        }}
                         className="w-full focus:outline-none h-full"
                         name="status"
                         onChange={handleInputChange}
@@ -1245,11 +1294,18 @@ const Home = () => {
                         <option className="text-[#256682]" value="complete">
                           Complete
                         </option>
-                      </select>
-                    </div>
+                      </motion.select>
+                    </motion.div>
                   </>
                 )}
-                <button
+                <motion.button
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.3,
+                  }}
                   onClick={() =>
                     setInput({
                       text: "",
@@ -1274,17 +1330,33 @@ const Home = () => {
                       fillRule="evenodd"
                     />
                   </svg>
-                </button>
+                </motion.button>
               </div>
               <div className="addClient gap-[10px] flex items-center justify-self-end right-0">
-                <button
+                <motion.button
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.2,
+                  }}
                   onClick={() => setSellerTable(!sellerTable)}
                   className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
                 >
                   {sellerTable ? "Client" : "Seller"}
-                </button>
+                </motion.button>
 
-                <div className="help w-[40px] h-[38px] flex justify-center items-center bg-[#A4A4A61A] hover:scale-105 transition-all duration-500 ease-in-out">
+                <motion.div
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.1,
+                  }}
+                  className="help w-[40px] h-[38px] flex justify-center items-center bg-[#A4A4A61A] hover:scale-105 transition-all duration-500 ease-in-out"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -1312,8 +1384,15 @@ const Home = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                </div>
-                <button
+                </motion.div>
+                <motion.button
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.1,
+                  }}
                   onClick={() => setClientModel(true)}
                   className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#267596] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
                 >
@@ -1334,7 +1413,7 @@ const Home = () => {
                       fill="white"
                     />
                   </svg>
-                </button>
+                </motion.button>
               </div>
             </div>
             {/* ========================== table container  */}

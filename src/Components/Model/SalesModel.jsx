@@ -11,7 +11,7 @@ import {
 } from "../../Features/Seller/SellerApi";
 import { Toastify } from "../../Utils/Tostify";
 import { setMessageEmpty } from "../../Features/Client/ClientSlice";
-
+import { motion } from "framer-motion";
 const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   const {
     loader: salesLoader,
@@ -244,7 +244,14 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                     >
                       Role
                     </label>
-                    <select
+                    <motion.select
+                      initial={{ y: -15, opacity: 0.3 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: 0.1 * Math.random() * 10,
+                      }}
                       className="border w-full focus:outline-none  text-gray-500 px-[12px] tracking-[.5px] h-[37px] my-2 font-['work_sans'] rounded-md mt-[-10px]"
                       name="role"
                       value={input.role}
@@ -262,12 +269,19 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                       >
                         Admin
                       </option>
-                    </select>
+                    </motion.select>
                   </div>
                 )}
 
                 <div className="flex gap-5 col-span-2 justify-center">
-                  <label
+                  <motion.label
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1 * Math.random() * 10,
+                    }}
                     htmlFor="uploadAvatar"
                     className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
                   >
@@ -279,8 +293,15 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                     ) : (
                       "Select avatar"
                     )}
-                  </label>
-                  <label
+                  </motion.label>
+                  <motion.label
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1 * Math.random() * 10,
+                    }}
                     htmlFor="uploadCompanyAvatar"
                     className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
                   >
@@ -292,7 +313,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                     ) : (
                       "company avatar"
                     )}
-                  </label>
+                  </motion.label>
                 </div>
 
                 <input
@@ -309,7 +330,16 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                 />
               </div>
               <div className="submit_section  flex justify-center flex-col items-center mt-5 bg-white col-span-2 ">
-                <div className="agree flex w-full align-middle items-center gap-[20px]">
+                <motion.div
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.1 * Math.random() * 10,
+                  }}
+                  className="agree flex w-full align-middle items-center gap-[20px]"
+                >
                   <input type="checkbox" className="w-4 h-4" />
                   <label
                     className="text-gray-900 font-[800] text-[12px] font-['Lato']"
@@ -323,13 +353,20 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                       terms & condition
                     </a>
                   </label>
-                </div>
-                <button
+                </motion.div>
+                <motion.button
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.1 * Math.random() * 10,
+                  }}
                   type="submit"
                   className="text-white hover:scale-110  mt-[15px] bg-purple-500 w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-purple-700 my-3 transition-all ease-in-out duration-500"
                 >
                   Submit Now
-                </button>
+                </motion.button>
               </div>
             </div>
           </form>

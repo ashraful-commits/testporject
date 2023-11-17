@@ -474,7 +474,16 @@ const Seller = () => {
                 </button>
               </div>
               <div className="sales_client_project_statistics  h-[38px] flex justify-between items-center rounded-md ml-[13px] gap-1 px-[10px]">
-                <div className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]  transition-all duration-500 ease-in-out">
+                <motion.div
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.3,
+                  }}
+                  className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]  transition-all duration-500 ease-in-out"
+                >
                   <DatePicker
                     className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
                     selected={input.startDate}
@@ -516,10 +525,19 @@ const Seller = () => {
                       </clipPath>
                     </defs>
                   </svg>
-                </div>
+                </motion.div>
               </div>
               <div className="sales_client_project_statistics border transition-all ease-in-out duration-500 hover:scale-105 w-[225px] h-[38px] flex justify-between items-center rounded-md ml-[13px] gap-1 px-[10px]">
-                <button className="w-[10%] transition-all ease-in-out duration-500 hover:scale-105">
+                <motion.button
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.4,
+                  }}
+                  className="w-[10%] transition-all ease-in-out duration-500 hover:scale-105"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -532,7 +550,7 @@ const Seller = () => {
                       fill="#878790"
                     />
                   </svg>
-                </button>
+                </motion.button>
                 <input
                   type="text"
                   name="text"
@@ -542,7 +560,14 @@ const Seller = () => {
                   className="w-[90%] transition-all ease-in-out duration-500 hover:scale-105 focus:outline-none text-[12px] font-['work_sans']"
                 />
               </div>
-              <button
+              <motion.button
+                initial={{ y: -15, opacity: 0.3 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.3,
+                }}
                 onClick={() =>
                   setInput({
                     text: "",
@@ -564,13 +589,38 @@ const Seller = () => {
                     fillRule="evenodd"
                   />
                 </svg>
-              </button>
+              </motion.button>
             </div>
-            <div className="flex items-center gap-3">
-              <button className="w-[91px] transition-all ease-in-out duration-500 hover:scale-105 rounded-md bg-gray-400 h-[38px] flex justify-center items-center hover:bg-gray-600 text-white transition-all duration-500 ease-in-out">
+            <motion.div
+              initial={{ y: -15, opacity: 0.3 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.4,
+              }}
+              className="flex items-center gap-3"
+            >
+              <motion.button
+                initial={{ y: -15, opacity: 0.3 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.4,
+                }}
+                className="w-[91px] transition-all ease-in-out duration-500 hover:scale-105 rounded-md bg-gray-400 h-[38px] flex justify-center items-center hover:bg-gray-600 text-white "
+              >
                 Support
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                initial={{ y: -15, opacity: 0.3 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.7,
+                }}
                 disabled={
                   loginInSeller?._id !== id && loginInSeller?.role !== "admin"
                 }
@@ -594,8 +644,8 @@ const Seller = () => {
                     fill="white"
                   />
                 </svg>
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           </div>
           {/* //================================================ project datiels  */}
           <div className=" mt-[20px]  flex items-center justify-between">

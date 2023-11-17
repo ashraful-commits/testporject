@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpin";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import { LoggedInSeller } from "../../Features/Seller/SellerApi";
+import { motion } from "framer-motion";
 
 const Model = ({ setClient, singleData }) => {
   //============================= form hook
@@ -354,7 +355,14 @@ const Model = ({ setClient, singleData }) => {
                 Client Full Address
               </label>
 
-              <input
+              <motion.input
+                initial={{ y: -15, opacity: 0.3 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.1 * Math.random() * 10,
+                }}
                 name="clientAddress"
                 value={input.clientAddress}
                 onChange={handleInputChange}
@@ -387,7 +395,16 @@ const Model = ({ setClient, singleData }) => {
                   >
                     Budget
                   </label>
-                  <div className="inputs flex mt-[2px] items-center gap-[30px]">
+                  <motion.div
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1 * Math.random() * 10,
+                    }}
+                    className="inputs flex mt-[2px] items-center gap-[30px]"
+                  >
                     <div className="checkboxs flex items-center gap-[10px]">
                       <input
                         name="budget"
@@ -420,7 +437,7 @@ const Model = ({ setClient, singleData }) => {
                         Hourly Rate
                       </label>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
                 <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[18px]">
                   <label
@@ -429,7 +446,14 @@ const Model = ({ setClient, singleData }) => {
                   >
                     Type of Project
                   </label>
-                  <select
+                  <motion.select
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1 * Math.random() * 10,
+                    }}
                     className="border w-full h-[37px]  text-gray-500 px-[12px] tracking-[.5px] hover:scale-105 transition-all duration-500 ease-in-out  rounded-md mt-[-10px]"
                     name="projectType"
                     id=""
@@ -451,7 +475,7 @@ const Model = ({ setClient, singleData }) => {
                     <option className="text-gray-500 " value="Graphic Design">
                       Graphic Design
                     </option>
-                  </select>
+                  </motion.select>
 
                   <FormInput
                     type="text"
@@ -472,7 +496,14 @@ const Model = ({ setClient, singleData }) => {
               >
                 Brief Description of Project
               </label>
-              <textarea
+              <motion.textarea
+                initial={{ y: -15, opacity: 0.3 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.1 * Math.random() * 10,
+                }}
                 className="border w-full h-[80px] rounded-[10px] mt-[10px] py-[8px] px-[16px]"
                 name="projectDesc"
                 value={input.projectDesc}
@@ -481,7 +512,7 @@ const Model = ({ setClient, singleData }) => {
                 cols="30"
                 rows="10"
                 placeholder="Mar 4, 2023"
-              ></textarea>
+              ></motion.textarea>
             </div>
             <div className="project_datials flex flex-col items-start">
               <div className="sections w-full items-center justify-center grid grid-cols-2 gap-[20px]">
@@ -492,7 +523,14 @@ const Model = ({ setClient, singleData }) => {
                   >
                     Project Source
                   </label>
-                  <select
+                  <motion.select
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1 * Math.random() * 10,
+                    }}
                     className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="projectSource"
                     value={input.projectSource}
@@ -508,14 +546,21 @@ const Model = ({ setClient, singleData }) => {
                     <option className="text-gray-500" value="Freelancer">
                       Freelancer
                     </option>
-                  </select>
+                  </motion.select>
                   <label
                     className="text-gray-900 font-[800] text-[12px] font-['Lato']"
                     htmlFor=""
                   >
                     Timeframe
                   </label>
-                  <select
+                  <motion.select
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1 * Math.random() * 10,
+                    }}
                     className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="timeFrame"
                     value={input.timeFrame}
@@ -534,7 +579,7 @@ const Model = ({ setClient, singleData }) => {
                     <option className="text-gray-500" value="3 Month">
                       3 Month
                     </option>
-                  </select>
+                  </motion.select>
                 </div>
                 <div className="left_section w-full flex flex-col gap-[16px] items-start">
                   <FormInput
@@ -550,14 +595,21 @@ const Model = ({ setClient, singleData }) => {
                   >
                     Upload Relevant Document
                   </label>
-                  <label
+                  <motion.label
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1 * Math.random() * 10,
+                    }}
                     className="text-gray-500 cursor-pointer transition-all ease-in-out duration-500 hover:bg-gray-300 border bg-gray-200 w-full h-[36px] rounded-md mt-[-5px] flex justify-center font-['Lato'] text-[12px] items-center tracking-[0.24px]"
                     htmlFor="uploadFile"
                   >
                     {projectFiles?.length > 0
                       ? projectFiles?.length + `  File Uploaded`
                       : "Upload Files"}
-                  </label>
+                  </motion.label>
                   <input
                     id="uploadFile"
                     className="w-full  border h-[36px] hidden"
@@ -569,7 +621,16 @@ const Model = ({ setClient, singleData }) => {
               </div>
             </div>
             <div className="submit_section sticky bottom-0 bg-white flex justify-between items-start py-[42px]">
-              <div className="agree flex items-center gap-[20px]">
+              <motion.div
+                initial={{ y: -15, opacity: 0.3 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.1 * Math.random() * 10,
+                }}
+                className="agree flex items-center gap-[20px]"
+              >
                 <input type="checkbox" className="w-4 h-4" />
                 <label
                   className="text-gray-900 font-[800] text-[12px] font-['Lato']"
@@ -583,30 +644,53 @@ const Model = ({ setClient, singleData }) => {
                     terms & condition
                   </a>
                 </label>
-              </div>
-              <button
+              </motion.div>
+              <motion.button
+                initial={{ y: -15, opacity: 0.3 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.1 * Math.random() * 10,
+                }}
                 type="submit"
                 className="text-white mt-[-15px]  bg-purple-500 w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-purple-700 transition-all ease-in-out duration-500 hover:scale-105 "
               >
                 Submit Now
-              </button>
+              </motion.button>
             </div>
           </div>
           {/* //=============================================================== left section  */}
           <div className="left w-[220px] flex flex-col items-start">
-            <div className="avatar border flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]">
+            <motion.div
+              initial={{ y: -15, opacity: 0.3 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.1 * Math.random() * 10,
+              }}
+              className="avatar border flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
+            >
               {avatar ? (
                 <img className="w-full h-full object-cover" src={avatar} />
               ) : (
                 "Select avatar"
               )}
-            </div>
-            <label
+            </motion.div>
+            <motion.label
+              initial={{ y: -15, opacity: 0.3 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.1 * Math.random() * 10,
+              }}
               className="border  text-gray-500 font-['Lato'] font-[600] w-[180px] h-[36px] mt-[12px] ml-[5px] flex justify-center rounded-md items-center"
               htmlFor="uploadAvatar"
             >
               Upload client avatar
-            </label>
+            </motion.label>
             <input
               type="file"
               onChange={handleClientAvatar}
@@ -638,7 +722,17 @@ const Model = ({ setClient, singleData }) => {
               {projectFiles?.length > 0 ? (
                 projectFiles?.map((item, index) => {
                   return (
-                    <div key={index} className="relative group">
+                    <motion.div
+                      initial={{ y: -15, opacity: 0.3 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{
+                        duration: 0.3,
+                        delay: 0.1 * index,
+                      }}
+                      key={index}
+                      className="relative group"
+                    >
                       <span
                         onClick={() => handleDelete(item)}
                         className="absolute cursor-pointer hidden group-hover:block bg-gray-300 rounded-full top-1 right-1 p-[5px]"
@@ -659,11 +753,20 @@ const Model = ({ setClient, singleData }) => {
                         </svg>
                       </span>
                       <FilePreview item={item} />
-                    </div>
+                    </motion.div>
                   );
                 })
               ) : (
-                <div className=" col-span-2 gap-[5px] grid grid-cols-2  w-full ">
+                <motion.div
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.1 * Math.random() * 10,
+                  }}
+                  className=" col-span-2 gap-[5px] grid grid-cols-2  w-full "
+                >
                   <img
                     className="w-full border h-full object-cover"
                     src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
@@ -691,7 +794,7 @@ const Model = ({ setClient, singleData }) => {
                     className="w-full border h-full object-cover"
                     src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
                   />
-                </div>
+                </motion.div>
               )}
             </div>
           </div>
