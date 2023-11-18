@@ -4,7 +4,7 @@ import useFormHook from "./../Hooks/useFormHook";
 import { useDispatch, useSelector } from "react-redux";
 import { SellerLogin } from "../Features/Seller/SellerApi";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   getAllSellerState,
   setMessageEmpty,
@@ -12,15 +12,32 @@ import {
 import { Toastify } from "../Utils/Tostify";
 import LoadingSpinner from "../Components/LoadingSpin";
 import { motion } from "framer-motion";
+import { clientLogin } from "../Features/Client/ClientApi";
+import { getAllClientState } from "../Features/Client/ClientSlice";
 
 const Login = () => {
   const { input, setInput, handleInputChange } = useFormHook({
     email: "",
     password: "",
   });
+  const {
+    input: input2,
+    setInput: setInput2,
+    handleInputChange: handleClientInputChange,
+  } = useFormHook({
+    clientEmail: "",
+    password: "",
+  });
+  //====================================
+  const [loginState, setLoginState] = useState("seller");
   //===================================state
-  const { message, error, loginInSeller, loader } =
-    useSelector(getAllSellerState);
+  const { message, error, loader } = useSelector(getAllSellerState);
+  const {
+    message: clientMsg,
+    error: clientError,
+    loader: clientLoader,
+    clientLoginData,
+  } = useSelector(getAllClientState);
 
   //=================================== dispatch
   const dispatch = useDispatch();
@@ -32,85 +49,168 @@ const Login = () => {
     dispatch(SellerLogin(input));
     setInput({ email: "", password: "" });
   };
+  const handleClientLoginSubmit = (e) => {
+    e.preventDefault();
+    dispatch(clientLogin(input2));
+    setInput2({ clientEmail: "", password: "" });
+  };
 
   //====================================== all alert toastify
   useEffect(() => {
-    if (error) {
-      Toastify(error, "error");
+    if (error || clientError) {
+      Toastify(error || clientError, "error");
       dispatch(setMessageEmpty());
     }
-    if (message) {
-      Toastify(message, "success");
+    if (message || clientMsg) {
+      Toastify(message || clientMsg, "success");
       dispatch(setMessageEmpty());
     }
 
     if (localStorage.getItem("Seller")) {
       navigate("/");
     }
-  }, [message, error, navigate, dispatch]);
+    if (localStorage.getItem("Client") && clientLoginData) {
+      navigate(`/${clientLoginData[0]?._id}`);
+    }
+  }, [message, error, navigate, dispatch, clientError, clientMsg]);
   return (
     <>
       {/* //=================================================loader  */}
-      {loader && (
-        <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
-          <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
-            <LoadingSpinner />
+      {loader ||
+        (clientLoader && (
+          <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
+            <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
+              <LoadingSpinner />
+            </div>
+          </div>
+        ))}
+
+      <div className="min-w-full relative z-0 gap-10 min-h-screen flex flex-col justify-center items-center overflow-hidden">
+        <div className="flex justify-center gap-5 ">
+          <div className="flex gap-3 items-center">
+            <input
+              value={loginState}
+              checked={loginState === "seller"}
+              onChange={() => setLoginState("seller")}
+              className="w-5 h-5 cursor-pointer"
+              name="login"
+              type="radio"
+            />
+            <label className="font-bold font-['work_sans']" htmlFor="login">
+              Seller
+            </label>
+          </div>
+          <div className="flex gap-3 items-center">
+            <input
+              checked={loginState === "client"}
+              onChange={() => setLoginState("client")}
+              className="w-5 h-5 cursor-pointer"
+              name="login"
+              type="radio"
+            />
+            <label className="font-bold font-['work_sans']" htmlFor="login">
+              Client
+            </label>
           </div>
         </div>
-      )}
-      <div className="min-w-full relative z-0 min-h-screen flex justify-center items-center overflow-hidden">
-        <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
-          <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
-            Login
-          </h1>
-          {/* //================================================form  */}
-          <form
-            onSubmit={handleLoginSubmit}
-            action=""
-            className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
-          >
-            <FormInput
-              label="Email"
-              type="email"
-              required="required"
-              placeholder="Email"
-              name="email"
-              value={input.email}
-              handleInputChange={handleInputChange}
-            />
-            <FormInput
-              label="Password"
-              placeholder="Password"
-              name="password"
-              type="password"
-              value={input.password}
-              required="required"
-              handleInputChange={handleInputChange}
-            />
-            <motion.button
-              initial={{ y: -15, x: -15, opacity: 0.3 }}
-              animate={{ y: 0, x: 0, opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 0.3,
-                delay: 0.4,
-              }}
-              type="submit"
-              className="text-[18px] hover:scale-105 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
+        {loginState === "seller" ? (
+          <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
+            <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
+              Seller Login
+            </h1>
+            {/* //================================================form  */}
+            <form
+              onSubmit={handleLoginSubmit}
+              action=""
+              className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
             >
-              Login
-            </motion.button>
-            <p className="text-[12px] text-center text-gray-500">
-              Don&apos;t have an account{" "}
-              <Link
-                className="text-purple-500 font-[600] hover:text-purple-700 transition-all duration-500 ease-out"
-                to="/register"
+              <FormInput
+                label="Email"
+                type="email"
+                required="required"
+                placeholder="Email"
+                name="email"
+                value={input.email}
+                handleInputChange={handleInputChange}
+              />
+              <FormInput
+                label="Password"
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={input.password}
+                required="required"
+                handleInputChange={handleInputChange}
+              />
+              <motion.button
+                initial={{ y: -15, x: -15, opacity: 0.3 }}
+                animate={{ y: 0, x: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.4,
+                }}
+                type="submit"
+                className="text-[18px] hover:scale-105 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
               >
-                Register
-              </Link>
-            </p>
-          </form>
-        </div>
+                Login
+              </motion.button>
+              <p className="text-[12px] text-center text-gray-500">
+                Don&apos;t have an account{" "}
+                <Link
+                  className="text-purple-500 font-[600] hover:text-purple-700 transition-all duration-500 ease-out"
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </p>
+            </form>
+          </div>
+        ) : (
+          <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
+            <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
+              Client Login
+            </h1>
+            {/* //================================================form  */}
+            <form
+              onSubmit={handleClientLoginSubmit}
+              action=""
+              className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
+            >
+              <FormInput
+                label="Client Email"
+                type="email"
+                required="required"
+                placeholder="Client email"
+                name="clientEmail"
+                value={input2.clientEmail}
+                handleInputChange={handleClientInputChange}
+              />
+              <FormInput
+                label="Password"
+                placeholder="Password"
+                name="password"
+                type="password"
+                value={input2.password}
+                required="required"
+                handleInputChange={handleClientInputChange}
+              />
+              <motion.button
+                initial={{ y: -15, x: -15, opacity: 0.3 }}
+                animate={{ y: 0, x: 0, opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  duration: 0.3,
+                  delay: 0.4,
+                }}
+                type="submit"
+                className="text-[18px] hover:scale-105 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
+              >
+                Login
+              </motion.button>
+            </form>
+          </div>
+        )}
       </div>
     </>
   );

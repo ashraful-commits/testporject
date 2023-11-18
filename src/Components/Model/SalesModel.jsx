@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import LoadingSpinner from "../LoadingSpin";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
@@ -12,6 +12,7 @@ import {
 import { Toastify } from "../../Utils/Tostify";
 import { setMessageEmpty } from "../../Features/Client/ClientSlice";
 import { motion } from "framer-motion";
+
 const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   const {
     loader: salesLoader,
@@ -29,6 +30,8 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     website: "",
     companyName: "",
   });
+  //==========================================ref
+  const form = useRef();
   //================================state
   const [avatar, setAvatar] = useState(null);
   const [componyAvatar, setComponyAvatar] = useState(null);
@@ -195,6 +198,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           </div>
           {/* //=========================form  */}
           <form
+            ref={form}
             onSubmit={handleSubmit}
             className="form_content col-span-2 grid relative justify-between mt-[10px] overflow-hidden items-center"
           >

@@ -8,12 +8,14 @@ import { LoggedInSeller, getAllSeller } from "./Features/Seller/SellerApi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AnimatePresence } from "framer-motion";
+import { LoggedInClient } from "./Features/Client/ClientApi";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(LoggedInSeller());
+    dispatch(LoggedInClient());
   }, [dispatch]);
   return (
     <>

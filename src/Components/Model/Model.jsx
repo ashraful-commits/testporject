@@ -35,6 +35,7 @@ const Model = ({ setClient, singleData }) => {
     document: "",
     clientAvatar: "",
     companyName: "",
+    password: "",
   });
 
   //==========================file preview
@@ -142,6 +143,7 @@ const Model = ({ setClient, singleData }) => {
         formData.append("amount", input.amount);
         formData.append("projectDesc", input.projectDesc);
         formData.append("timeFrame", input.timeFrame);
+        formData.append("password", input.password);
         for (let i = 0; i < projectFiles.length; i++) {
           formData.append("projectFile", projectFiles[i]);
         }
@@ -291,6 +293,19 @@ const Model = ({ setClient, singleData }) => {
                     value={input.clientEmail}
                     handleInputChange={handleInputChange}
                   />
+                  {singleData ? (
+                    ""
+                  ) : (
+                    <FormInput
+                      type="password"
+                      placeholder="Enter Password"
+                      label="Password"
+                      name="password"
+                      value={input.password}
+                      handleInputChange={handleInputChange}
+                    />
+                  )}
+
                   <label
                     className="text-gray-900 font-[800] text-[12px] font-['Lato']"
                     htmlFor=""

@@ -17,6 +17,7 @@ import ProjectComponent from "../../Components/ProjectComponent";
 import StatisticComponent from "../../Components/StatisticComponent";
 import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
+
 const Seller = () => {
   //===========================================all state
   const [model, setModel] = useState(false);
@@ -48,6 +49,7 @@ const Seller = () => {
     }
   }, [dispatch, id]);
   //=====================================================return
+
   return (
     <>
       {/* //========================================loader  */}

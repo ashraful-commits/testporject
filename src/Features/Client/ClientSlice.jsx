@@ -1,6 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
+  LoggedInClient,
+  LogoutClient,
+  clientLogin,
   createClient,
   deleteClient,
   fileDownloadFunc,
@@ -21,6 +24,7 @@ const ClientSlice = createSlice({
     message: null,
     singleClient: null,
     downloadLink: null,
+    clientLoginData: null,
   },
   reducers: {
     setMessageEmpty: (state, action) => {
@@ -164,6 +168,41 @@ const ClientSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(fileDownloadFunc.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      }) //===========================================================file download
+      .addCase(clientLogin.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(clientLogin.fulfilled, (state, action) => {
+        state.loader = false;
+        state.message = action.payload.message;
+        localStorage.setItem("Client", JSON.stringify(action.payload.client));
+      })
+      .addCase(clientLogin.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(LoggedInClient.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(LoggedInClient.fulfilled, (state, action) => {
+        state.loader = false;
+        state.message = action.payload.message;
+        state.clientLoginData = action.payload.client;
+      })
+      .addCase(LoggedInClient.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(LogoutClient.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(LogoutClient.fulfilled, (state, action) => {
+        state.loader = false;
+        state.message = action.payload.message;
+      })
+      .addCase(LogoutClient.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });

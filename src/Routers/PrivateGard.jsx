@@ -5,7 +5,7 @@ import { Navigate, Outlet } from "react-router-dom";
 const PrivateGard = () => {
   //==========================================state of seller
   const { loinInSeller } = useSelector((state) => state.Seller);
-  if (localStorage.getItem("Seller")) {
+  if (localStorage.getItem("Seller") || localStorage.getItem("Client")) {
     return <Outlet />;
   } else {
     //=======================================================return

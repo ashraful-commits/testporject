@@ -9,8 +9,12 @@ import Invoices from "../../Components/Invoices";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllClientState } from "../../Features/Client/ClientSlice";
 import { useEffect, useRef, useState } from "react";
-import { getSingleClient, updateClient } from "../../Features/Client/ClientApi";
-import { Link, useParams } from "react-router-dom";
+import {
+  LogoutClient,
+  getSingleClient,
+  updateClient,
+} from "../../Features/Client/ClientApi";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import LoadingSpinner from "../../Components/LoadingSpin";
 import html2canvas from "html2canvas";
@@ -19,7 +23,8 @@ import ClientFeedBack from "../../Components/ClientFeedBack";
 import { motion } from "framer-motion";
 const Project = () => {
   //===================================== get all client state
-  const { singleClient, loader } = useSelector(getAllClientState);
+  const { singleClient, loader, clientLoginData } =
+    useSelector(getAllClientState);
   //====================================================dispatch and all state
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -30,6 +35,9 @@ const Project = () => {
   const [selectedSalespersons, setSelectedSalespersons] = useState([]);
   const [selectTools, setSelectTools] = useState([]);
   const [menu, setMenu] = useState("Project Details");
+  const [dropdown, setDropdown] = useState(false);
+  //===================================================navigate
+  const navigate = useNavigate();
 
   //========================================================get all singleClient
   useEffect(() => {
@@ -116,6 +124,12 @@ const Project = () => {
     setSelectedSalespersons(allTeam);
     setSelectTools(allTools);
   }, [singleClient]);
+  //========================================handleLogout
+  const handleLogout = () => {
+    dispatch(LogoutClient());
+    localStorage.clear("Client");
+    navigate("/login");
+  };
   //===================================================return
   return (
     <>
@@ -475,33 +489,107 @@ const Project = () => {
                 </div>
               </div>
             </div>
-
-            <Link
-              to="/"
-              className="w-[140px]  gap-[14px] mt-[12px] h-[46px] flex justify-start items-center overflow-hidden "
-            >
-              {singleClient?.sellerId?.avatar ? (
-                <img
-                  className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
-                  src={singleClient?.sellerId?.avatar}
-                  alt=""
-                />
-              ) : (
-                <img
-                  className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
-                  src={user}
-                  alt=""
-                />
+            <div className="relative">
+              {dropdown && (
+                <div className="absolute rounded-md shadow-md p-3 flex flex-col gap-2 top-12 left-5 bg-white border w-[120px] h-[100px]">
+                  <button className="flex justify-center gap-2 font-['work_sans'] font-[500] items-center">
+                    <svg
+                      fill="#000000"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      data-name="Layer 1"
+                    >
+                      <path d="M19.9,12.66a1,1,0,0,1,0-1.32L21.18,9.9a1,1,0,0,0,.12-1.17l-2-3.46a1,1,0,0,0-1.07-.48l-1.88.38a1,1,0,0,1-1.15-.66l-.61-1.83A1,1,0,0,0,13.64,2h-4a1,1,0,0,0-1,.68L8.08,4.51a1,1,0,0,1-1.15.66L5,4.79A1,1,0,0,0,4,5.27L2,8.73A1,1,0,0,0,2.1,9.9l1.27,1.44a1,1,0,0,1,0,1.32L2.1,14.1A1,1,0,0,0,2,15.27l2,3.46a1,1,0,0,0,1.07.48l1.88-.38a1,1,0,0,1,1.15.66l.61,1.83a1,1,0,0,0,1,.68h4a1,1,0,0,0,.95-.68l.61-1.83a1,1,0,0,1,1.15-.66l1.88.38a1,1,0,0,0,1.07-.48l2-3.46a1,1,0,0,0-.12-1.17ZM18.41,14l.8.9-1.28,2.22-1.18-.24a3,3,0,0,0-3.45,2L12.92,20H10.36L10,18.86a3,3,0,0,0-3.45-2l-1.18.24L4.07,14.89l.8-.9a3,3,0,0,0,0-4l-.8-.9L5.35,6.89l1.18.24a3,3,0,0,0,3.45-2L10.36,4h2.56l.38,1.14a3,3,0,0,0,3.45,2l1.18-.24,1.28,2.22-.8.9A3,3,0,0,0,18.41,14ZM11.64,8a4,4,0,1,0,4,4A4,4,0,0,0,11.64,8Zm0,6a2,2,0,1,1,2-2A2,2,0,0,1,11.64,14Z" />
+                    </svg>
+                    Setting
+                  </button>
+                  <button
+                    className="flex justify-center gap-2 font-['work_sans'] font-[500] items-center"
+                    onClick={handleLogout}
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 15 15"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13.5 7.5L10.5 10.75M13.5 7.5L10.5 4.5M13.5 7.5L4 7.5M8 13.5H1.5L1.5 1.5L8 1.5"
+                        stroke="#000000"
+                      />
+                    </svg>
+                    Log out
+                  </button>
+                </div>
               )}
-              <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
-                <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
-                  {singleClient?.sellerId?.name}
-                </p>
-                <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
-                  {singleClient?.sellerId?.email}
-                </span>
-              </div>
-            </Link>
+              {localStorage.getItem("Client") ? (
+                singleClient?.sellerId?.avatar ? (
+                  <div className="flex items-end gap-3 justify-end">
+                    <img
+                      onClick={() => setDropdown(!dropdown)}
+                      className=" w-[46px] h-[46px] mt-[0px] cursor-pointer ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                      src={singleClient?.sellerId?.avatar}
+                      alt=""
+                    />
+                    <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
+                      <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
+                        {singleClient?.sellerId?.name}
+                      </p>
+                      <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
+                        {singleClient?.sellerId?.email}
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="flex items-end gap-3 justify-end">
+                    <img
+                      onClick={() => setDropdown(!dropdown)}
+                      className=" w-[46px] cursor-pointer h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                      src={user}
+                      alt=""
+                    />
+                    <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
+                      <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
+                        {singleClient?.sellerId?.name}
+                      </p>
+                      <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
+                        {singleClient?.sellerId?.email}
+                      </span>
+                    </div>
+                  </div>
+                )
+              ) : (
+                <Link
+                  to="/"
+                  className="w-[140px]  gap-[14px] mt-[12px] h-[46px] flex justify-start items-center overflow-hidden "
+                >
+                  {singleClient?.sellerId?.avatar ? (
+                    <img
+                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                      src={singleClient?.sellerId?.avatar}
+                      alt=""
+                    />
+                  ) : (
+                    <img
+                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                      src={user}
+                      alt=""
+                    />
+                  )}
+                  <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
+                    <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
+                      {singleClient?.sellerId?.name}
+                    </p>
+                    <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
+                      {singleClient?.sellerId?.email}
+                    </span>
+                  </div>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
         {/* //==========================================================main container  */}

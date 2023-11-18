@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 //======================================================== base url
-// const BASE_URL = "https://wordshpere.onrender.com";
-const BASE_URL = "http://localhost:5050";
+const BASE_URL = "https://wordshpere.onrender.com";
+// const BASE_URL = "http://localhost:5050";
 
 //=========================================================createClient
 export const createClient = createAsyncThunk(
@@ -12,6 +12,25 @@ export const createClient = createAsyncThunk(
       const response = await axios.post(`${BASE_URL}/api/v1/client`, data, {
         withCredentials: true,
       });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+//=========================================================client Login
+export const clientLogin = createAsyncThunk(
+  "client/clientLogin",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/v1/client/login`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
 
       return response.data;
     } catch (error) {
@@ -150,6 +169,36 @@ export const fileDownloadFunc = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+export const LoggedInClient = createAsyncThunk(
+  "client/LoggedInClient",
+  async (thunkAPI) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/v1/client/me`, {
+        withCredentials: true,
+      });
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+//=============================================================logout seller
+export const LogoutClient = createAsyncThunk(
+  "client/LogoutClient",
+  async (thunkAPI) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/v1/client/logout`, {
+        withCredentials: true,
+      });
+
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

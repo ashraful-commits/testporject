@@ -4,7 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 const PublicGard = () => {
   //=============================================seller state
   const { loginInSeller } = useSelector((state) => state.Seller);
-  if (!localStorage.getItem("Seller")) {
+  if (!localStorage.getItem("Seller") || !localStorage.getItem("Client")) {
     return <Outlet />;
   }
   //===================================================return
