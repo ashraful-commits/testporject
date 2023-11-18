@@ -962,17 +962,19 @@ const Project = () => {
                       <span>No team member</span>
                     )}
 
-                    <button
-                      onClick={() => setTeam(!team)}
-                      className="flex p-[4px] items-center h-[42px] gap-[10px] transition-all ease-in-out duration-500 hover:scale-105"
-                    >
-                      <div className="w-[42px] h-[42px] border rounded-full flex justify-center items-center bg-gray-100">
-                        +
-                      </div>
-                      <div className="text-[16px] font-[500] font-['work_sans']">
-                        Add Member
-                      </div>
-                    </button>
+                    {!localStorage.getItem("Client") && (
+                      <button
+                        onClick={() => setTeam(!team)}
+                        className="flex p-[4px] items-center h-[42px] gap-[10px] transition-all ease-in-out duration-500 hover:scale-105"
+                      >
+                        <div className="w-[42px] h-[42px] border rounded-full flex justify-center items-center bg-gray-100">
+                          +
+                        </div>
+                        <div className="text-[16px] font-[500] font-['work_sans']">
+                          Add Member
+                        </div>
+                      </button>
+                    )}
                   </div>
                 </div>
                 {/* //================================================== softwere tools  */}
