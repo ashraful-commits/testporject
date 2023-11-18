@@ -961,6 +961,7 @@ const Project = () => {
                     ) : (
                       <span>No team member</span>
                     )}
+
                     <button
                       onClick={() => setTeam(!team)}
                       className="flex p-[4px] items-center h-[42px] gap-[10px] transition-all ease-in-out duration-500 hover:scale-105"
