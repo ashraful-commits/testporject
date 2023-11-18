@@ -136,25 +136,45 @@ const Home = () => {
               className="avatar border-[1px] rounded-full overflow-hidden p-[9px] border-[#267596]"
             >
               {loginInSeller?.avatar ? (
-                <img
+                <motion.img
+                  initial={{ rotate: 45, scale: 1.4 }}
+                  animate={{ rotate: 0, scale: 1 }}
+                  exit={{ rotate: 45 }}
+                  transition={{ duration: 0.47, ease: "easeInOut", delay: 0.8 }}
                   className="w-[84px] h-[84px] rounded-full"
                   src={loginInSeller?.avatar}
                   alt=""
                 />
               ) : (
-                <img
+                <motion.img
+                  initial={{ rotate: 45, scale: 1.4 }}
+                  animate={{ rotate: 0, scale: 1 }}
+                  exit={{ rotate: 45 }}
+                  transition={{ duration: 0.47, ease: "easeInOut", delay: 0.8 }}
                   className="w-[84px] h-[84px] rounded-full"
                   src={avatar}
                   alt=""
                 />
               )}
             </Link>
-            <h4 className="text-gray-100 text-[24px] font-[500] tracking-[-.2px]  mt-[10px] font-['Lato'] capitalize">
+            <motion.h4
+              initial={{ x: -10, scale: 1.2 }}
+              animate={{ x: 0, scale: 1 }}
+              exit={{ x: -10, scale: 1.4 }}
+              transition={{ duration: 0.47, ease: "easeInOut", delay: 0.8 }}
+              className="text-gray-100 text-[24px] font-[500] tracking-[-.2px]  mt-[10px] font-['Lato'] capitalize"
+            >
               {loginInSeller?.name}
-            </h4>
-            <span className="text-white text-[13px] font-['Lato']">
+            </motion.h4>
+            <motion.span
+              initial={{ x: -10, scale: 1.2 }}
+              animate={{ x: 0, scale: 1 }}
+              exit={{ x: -10, scale: 1.4 }}
+              transition={{ duration: 0.47, ease: "easeInOut", delay: 0.9 }}
+              className="text-white text-[13px] font-['Lato']"
+            >
               {loginInSeller?.email}
-            </span>
+            </motion.span>
           </div>
           <div className="withdrawn mt-[50px] text-center flex flex-col items-center">
             <p className="text-white leading-[18px] tracking-[.2px] mt-[3px] font-[500] font-['Lato'] mr-[7px] text-[14px]">
@@ -186,12 +206,34 @@ const Home = () => {
             >
               Email Signature
             </Link>
-            <button className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
+            <motion.button
+              initial={{ y: -15, opacity: 0.1 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 1,
+                type: "spring",
+                stiffness: 200,
+                ease: [0.17, 0.67, 0.83, 0.67],
+                delay: 0.2,
+              }}
+              className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+            >
               Email Setup
-            </button>
-            <button className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center">
+            </motion.button>
+            <motion.button
+              initial={{ y: -15, opacity: 0.1 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 1,
+                type: "spring",
+                stiffness: 200,
+                ease: [0.17, 0.67, 0.83, 0.67],
+                delay: 0.2,
+              }}
+              className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+            >
               Pricing
-            </button>
+            </motion.button>
             <Link
               target="blank"
               to={loginInSeller?.website}
@@ -403,7 +445,17 @@ const Home = () => {
                   <span className="w-2  h-2 absolute top-[2px] right-1 rounded-full bg-orange-400"></span>
                   {/* //====================================== Notification dropdown menu */}
                   {notification && (
-                    <div className="absolute border overflow-hidden p-[18px] w-[325px] h-[580px] bg-white z-[9999999999] shadow-lg right-[10px]  top-[35px] rounded-[10px]">
+                    <motion.div
+                      initial={{ opacity: 0.4, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0.4, y: -10 }}
+                      transition={{
+                        duration: 0.2,
+                        delay: 0.1,
+                        ease: "linear",
+                      }}
+                      className="absolute border overflow-hidden p-[18px] w-[325px] h-[580px] bg-white z-[9999999999] shadow-lg right-[10px]  top-[35px] rounded-[10px]"
+                    >
                       <div className="header flex items-center justify-between">
                         <p className="font-[500]">Notifications</p>
                         <a
@@ -755,7 +807,7 @@ const Home = () => {
                           </div>
                         </li>
                       </ul>
-                    </div>
+                    </motion.div>
                   )}
                 </button>
                 <button className="setting hover:bg-gray-400 transition-all duration-500 ease-in-out w-[37px] h-[37px] justify-center items-center flex rounded-full bg-gray-200 scale-105">
