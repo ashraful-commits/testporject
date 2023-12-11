@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteClient,
@@ -6,6 +6,7 @@ import {
   permissionUpdate,
   projectStatusUpdate,
   updateCommissionRate,
+  updateSalesCommissionRate,
 } from "../Features/Client/ClientApi";
 import {
   getAllClientState,
@@ -34,6 +35,17 @@ const TableComponent = ({ sellerId, input }) => {
   const [singleData, setSingleData] = useState({});
   //========================================================================================set limit
   const [limit, setLimit] = useState(7);
+  //========================================================================================set limit
+  const [dropdown, setDropdown] = useState(false);
+  //=======================================================================================dropId
+  const [dropId, setDropId] = useState(null);
+  //================================all ref
+  const dropdownRef = useRef();
+  //========================================= handledrop down men
+  const handleDropdown = (id) => {
+    setDropdown(!dropdown);
+    setDropId(id);
+  };
   //===================================================================================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
@@ -85,6 +97,13 @@ const TableComponent = ({ sellerId, input }) => {
       dispatch(LoggedInSeller());
     });
   };
+  const handleSalesCommission = (id, salesCommissionRate) => {
+    dispatch(updateSalesCommissionRate({ id, salesCommissionRate })).then(
+      () => {
+        dispatch(LoggedInSeller());
+      }
+    );
+  };
   //===================================================================================get user client
   useEffect(() => {
     dispatch(
@@ -115,20 +134,27 @@ const TableComponent = ({ sellerId, input }) => {
       dispatch(setMessageEmpty());
     }
   }, [message, error, dispatch]);
+  //===================================window dorpdown menu
+  const handleWindowDropdwon = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target.value)) {
+      setDropdown(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("click", handleWindowDropdwon);
+    return () => window.removeEventListener("click", handleWindowDropdwon);
+  }, []);
   //=========================================================================return
   return (
-    <div>
+    <div ref={dropdownRef}>
       {/* //=============================================edit modle  */}
       {editModel && <Model setClient={setEditModel} singleData={singleData} />}
-      <table className="w-full border min-h-[490px] rounded-md ">
+      <table className="w-full  min-h-[490px] rounded-md ">
         {/* //======================================table header  */}
         <thead>
-          <tr className="w-full min-h-[1.875rem] h-full bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
-            <th className="text-[.8125rem] w-[120px] font-['work_sans'] text-start font-[400]">
-              Company Name
-            </th>
-
-            <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
+          <tr className="w-full min-h-[1.875rem] h-full  grid pr-6 grid-flow-col justify-between border-b py-2 text-center">
+            <th className="text-[.8125rem] font-['work_sans'] w-[30px]  text-start font-[400]"></th>
+            <th className="text-[.8125rem] font-['work_sans'] -ml-[4rem] w-[120px]  text-start font-[400]">
               Client Name
             </th>
             <th className="text-[.8125rem] w-[100px] font-['work_sans'] text-start font-[400]">
@@ -142,17 +168,23 @@ const TableComponent = ({ sellerId, input }) => {
                 Commission
               </th>
             )}
-
-            <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
-              Project status
-            </th>
-
-            {loginInSeller?.role === "admin" && (
+            {loginInSeller?.role === "super_admin" && (
               <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
-                Commission
+                Project status
               </th>
             )}
             {loginInSeller?.role === "admin" && (
+              <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
+                Com. rate
+              </th>
+            )}
+            {loginInSeller?.role === "super_admin" && (
+              <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
+                Com. rate
+              </th>
+            )}
+
+            {loginInSeller?.role === "super_admin" && (
               <th className="text-[.8125rem] font-['work_sans'] w-[80px]  text-start font-[400]">
                 Permission
               </th>
@@ -160,27 +192,25 @@ const TableComponent = ({ sellerId, input }) => {
             <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
               Client source
             </th>
-            <th className="text-[.8125rem] w-[100px] font-['work_sans'] flex justify-end items-start  font-[400]">
-              Action
-            </th>
+            <th className="text-[.8125rem] w-[50px] font-['work_sans'] flex justify-end items-start  font-[400]"></th>
           </tr>
         </thead>
         {/* //==========================================table body  */}
-        <tbody className="relative w-full h-full">
+        <tbody className="relative w-full h-full border">
           {(loader || sellerLoader) && (
             <motion.div
               initial={{ opacity: 0.4 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.4 }}
               transition={{ duration: 1.3 }}
-              className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top-0 left-0"
+              className="w-full h-full bg-[#6E28D4] bg-opacity-20 absolute top-0 left-0"
             >
               <div className="w-full absolute h-full top-[45%]">
                 <LoadingSpinner />
               </div>
             </motion.div>
           )}
-          {loginInSeller?.role === "admin" ? (
+          {loginInSeller?.role === "super_admin" ? (
             client?.length > 0 ? (
               client
                 .filter((client) => {
@@ -219,17 +249,14 @@ const TableComponent = ({ sellerId, input }) => {
                         loginInSeller?._id === item?.sellerId?._id
                           ? "bg-green-100"
                           : ""
-                      } w-full grid grid-flow-col hover:scale-[101%] transition-all duration-500 ease-in-out justify-between items-center border-b py-2 h-[3.4375rem]  text-center`}
+                      } w-full grid grid-flow-col  transition-all duration-500 ease-in-out justify-between items-center border-b py-2 h-[3.4375rem] relative text-center`}
                     >
-                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
-                        <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
+                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-[#6E28D4]">
+                        <span className="text-[.8125rem] font-[500] px-[1rem] block text-[#D9D9D9]">
                           {index + 1}.
                         </span>{" "}
-                        <span className=" capitalize truncate text-[13px] font-[500] text-[#267596] w-[120px]">
-                          {item.companyName}
-                        </span>
                       </td>
-                      <td className="w-[120px] overflow-hidden items-center flex gap-[.3125rem] relative">
+                      <td className="w-[120px]  -ml-[4rem] overflow-hidden items-center flex gap-[.3125rem] relative">
                         <Link to={`/${item._id}`}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +267,7 @@ const TableComponent = ({ sellerId, input }) => {
                           >
                             <path
                               d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
-                              fill="#78B3CC"
+                              fill="#CDAAFF"
                             />
                           </svg>
                         </Link>
@@ -261,7 +288,7 @@ const TableComponent = ({ sellerId, input }) => {
                           </Link>
                         )}
 
-                        <span className="  capitalize truncate text-[13px] font-[500] text-[#267596] w-[70px]">
+                        <span className="  capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[70px]">
                           {item.clientName}
                         </span>
                       </td>
@@ -277,7 +304,7 @@ const TableComponent = ({ sellerId, input }) => {
                           aria-valuemax="10000"
                         >
                           <div
-                            className="bg-[#267596] h-full "
+                            className="bg-[#6E28D4] h-full "
                             style={{
                               width: `${((100 * item?.amount) / 100000).toFixed(
                                 2
@@ -295,56 +322,99 @@ const TableComponent = ({ sellerId, input }) => {
                         </td>
                       )}
 
-                      <td
-                        className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
-                      >
-                        <button>
-                          <select
-                            className={` focus:outline-none w-[100px] ${
-                              item?.projectStatus == "pending" &&
-                              "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                            } ${
-                              item?.projectStatus == "complete" &&
-                              "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                            }  ${
-                              item?.projectStatus == "on hold" &&
-                              "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                            }   ${
-                              item?.projectStatus == "on going" &&
-                              "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
-                            }`}
-                            name="projectType"
-                            id=""
-                            value={item.projectStatus}
-                            onChange={(e) =>
-                              handleProjectStatus(item._id, e.target.value)
-                            }
-                          >
-                            <option className="text-gray-500  " value="....">
-                              ...select...
-                            </option>
-                            <option className="text-gray-500  " value="pending">
-                              pending
-                            </option>
-                            <option
-                              className="text-gray-500  "
-                              value="on going"
+                      {loginInSeller?.role === "super_admin" && (
+                        <td
+                          className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                        >
+                          <button>
+                            <select
+                              className={` focus:outline-none w-[100px] ${
+                                item?.projectStatus == "pending" &&
+                                "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                              } ${
+                                item?.projectStatus == "complete" &&
+                                "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                              }  ${
+                                item?.projectStatus == "on hold" &&
+                                "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                              }   ${
+                                item?.projectStatus == "on going" &&
+                                "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                              }`}
+                              name="projectType"
+                              id=""
+                              value={item.projectStatus}
+                              onChange={(e) =>
+                                handleProjectStatus(item._id, e.target.value)
+                              }
                             >
-                              on going
-                            </option>
-                            <option className="text-gray-500  " value="on hold">
-                              on hold
-                            </option>
-                            <option
-                              className="text-gray-500  "
-                              value="complete"
+                              <option className="text-gray-500  " value="....">
+                                ...select...
+                              </option>
+                              <option
+                                className="text-gray-500  "
+                                value="pending"
+                              >
+                                pending
+                              </option>
+                              <option
+                                className="text-gray-500  "
+                                value="on going"
+                              >
+                                on going
+                              </option>
+                              <option
+                                className="text-gray-500  "
+                                value="on hold"
+                              >
+                                on hold
+                              </option>
+                              <option
+                                className="text-gray-500  "
+                                value="complete"
+                              >
+                                complete
+                              </option>
+                            </select>
+                          </button>
+                        </td>
+                      )}
+                      {loginInSeller?.role === "super_admin" && (
+                        <td
+                          className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                        >
+                          <button>
+                            <select
+                              className={` focus:outline-none border rounded-full w-full px-2`}
+                              name="commissionRate"
+                              id=""
+                              value={item?.commissionRate}
+                              onChange={(e) =>
+                                handleCommission(item._id, e.target.value)
+                              }
                             >
-                              complete
-                            </option>
-                          </select>
-                        </button>
-                      </td>
-
+                              <option className="text-gray-500  " value="">
+                                ...
+                              </option>
+                              <option className="text-gray-500  " value="5">
+                                5%
+                              </option>
+                              <option className="text-gray-500 " value="10">
+                                10%
+                              </option>
+                              <option className="text-gray-500 " value="15">
+                                15%
+                              </option>
+                              <option className="text-gray-500 " value="20">
+                                20%
+                              </option>
+                              <option className="text-gray-500 " value="25">
+                                25%
+                              </option>
+                            </select>
+                          </button>
+                        </td>
+                      )}
                       {loginInSeller?.role === "admin" && (
                         <td
                           className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
@@ -381,7 +451,7 @@ const TableComponent = ({ sellerId, input }) => {
                           </button>
                         </td>
                       )}
-                      {loginInSeller?.role == "admin" && (
+                      {loginInSeller?.role == "super_admin" && (
                         <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[80px] text-[#3A3A49]">
                           <input
                             onChange={() =>
@@ -392,89 +462,42 @@ const TableComponent = ({ sellerId, input }) => {
                           />
                         </td>
                       )}
-
                       <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                         {item?.projectSource}
                       </td>
-                      <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[100px] h-full text-[#3A3A49]">
-                        <Link to={`/${item?._id}`}>
+                      <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49] ">
+                        <button
+                          className="cursor-pointer w-full h-full hover:border rounded-md transition-all ease-in-out duration-500 flex justify-center items-center"
+                          onClick={() => handleDropdown(item?._id)}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="20"
+                            width="5"
                             height="20"
-                            viewBox="0 0 24 24"
+                            viewBox="0 0 5 20"
                             fill="none"
-                            stroke="#000000"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
-                            <path d="M12 13a1 1 0 100-2 1 1 0 000 2z" />
-                            <path d="M21 8V5a2 2 0 00-2-2H5a2 2 0 00-2 2v3m18 8v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3" />
-                          </svg>
-                        </Link>
-                        <button onClick={() => handleEdit(item._id)}>
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
-                              d="M20.4445 6.88859C18.7779 7.4441 16.5559 5.22205 17.1114 3.55551"
-                              stroke="#0095FF"
-                              strokeWidth="1.5"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M4.54427 2.26411C4.54427 3.47531 3.52724 4.45822 2.27208 4.45822C1.01691 4.45822 -0.00012207 3.47531 -0.00012207 2.26411C-0.00012207 1.05201 1.01691 0.0699997 2.27208 0.0699997C3.52724 0.0699997 4.54427 1.05201 4.54427 2.26411ZM4.54427 10.035C4.54427 11.239 3.52724 12.2146 2.27208 12.2146C1.01691 12.2146 -0.00012207 11.239 -0.00012207 10.035C-0.00012207 8.83105 1.01691 7.85538 2.27208 7.85538C3.52724 7.85538 4.54427 8.83105 4.54427 10.035ZM4.54427 17.8059C4.54427 19.018 3.52724 20 2.27208 20C1.01691 20 -0.00012207 19.018 -0.00012207 17.8059C-0.00012207 16.5947 1.01691 15.6118 2.27208 15.6118C3.52724 15.6118 4.54427 16.5947 4.54427 17.8059Z"
+                              fill="#D0D7DD"
+                              fillOpacity="0.72727"
                             />
-                            <path
-                              d="M16.9766 3.6903L13.3862 7.28073C11.8253 8.84163 10.718 10.7974 10.1826 12.9389L10.0091 13.6329C9.95503 13.8491 10.1509 14.045 10.3671 13.9909L11.0611 13.8174C13.2026 13.282 15.1584 12.1747 16.7193 10.6138L20.3097 7.02338C20.7517 6.58139 21 5.98192 21 5.35684C21 4.05519 19.9448 3 18.6432 3C18.0181 3 17.4186 3.24831 16.9766 3.6903Z"
-                              stroke="#0095FF"
-                              strokeWidth="1.5"
-                            />
-                            <path
-                              d="M12 3C10.9767 3 9.95334 3.11763 8.95043 3.35288C6.17301 4.00437 4.00437 6.17301 3.35288 8.95043C2.88237 10.9563 2.88237 13.0437 3.35288 15.0496C4.00437 17.827 6.17301 19.9956 8.95044 20.6471C10.9563 21.1176 13.0437 21.1176 15.0496 20.6471C17.827 19.9956 19.9956 17.827 20.6471 15.0496C20.8824 14.0466 21 13.0233 21 12"
-                              stroke="#363853"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </button>
-                        <button onClick={() => handleDelete(item._id)}>
-                          <svg
-                            fill="#000000"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            id="delete"
-                            data-name="Line Color"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon line-color"
-                          >
-                            <path
-                              id="secondary"
-                              d="M16,7V4a1,1,0,0,0-1-1H9A1,1,0,0,0,8,4V7"
-                              style={{
-                                fill: "none",
-                                stroke: "rgb(44, 169, 188)",
-                                strokeLinecap: "round",
-                                strokeLinejoin: "round",
-                                strokeWidth: 2,
-                              }}
-                            ></path>
-                            <path
-                              id="primary"
-                              d="M18,20V7H6V20a1,1,0,0,0,1,1H17A1,1,0,0,0,18,20ZM4,7H20"
-                              style={{
-                                fill: "none",
-                                stroke: "rgb(0, 0, 0)",
-                                strokeLinecap: "round",
-                                strokeLinejoin: "round",
-                                strokeWidth: 2,
-                              }}
-                            ></path>
                           </svg>
                         </button>
                       </td>
+                      {dropdown && dropId === item?._id && (
+                        <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md top-12 right-12 bg-white z-[99] absolute">
+                          <Link to={`/${item._id}`}>View</Link>
+                          <button onClick={() => handleEdit(item._id)}>
+                            Edit
+                          </button>
+                          <button onClick={() => handleDelete(item._id)}>
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </motion.tr>
                   );
                 })
@@ -508,17 +531,14 @@ const TableComponent = ({ sellerId, input }) => {
                 return (
                   <tr
                     key={index}
-                    className="w-full grid hover:scale-[98] transition-all duration-500 ease-in-out grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
+                    className="w-full grid transition-all duration-500 ease-in-out grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
                   >
-                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-[#6E28D4]">
                       <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                         {index + 1}.
-                      </span>{" "}
-                      <span className=" capitalize truncate text-[13px] font-[500] text-[#267596] w-[120px]">
-                        {item.companyName}
                       </span>
                     </td>
-                    <td className="w-[120px] overflow-hidden items-center flex gap-[.3125rem] relative">
+                    <td className="w-[120px] overflow-hidden -ml-14 items-center flex gap-[.3125rem] relative">
                       <Link to={`/${item._id}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -529,7 +549,7 @@ const TableComponent = ({ sellerId, input }) => {
                         >
                           <path
                             d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
-                            fill="#78B3CC"
+                            fill="#CDAAFF"
                           />
                         </svg>
                       </Link>
@@ -549,7 +569,7 @@ const TableComponent = ({ sellerId, input }) => {
                         </Link>
                       )}
 
-                      <span className="  capitalize truncate text-[13px] font-[500] text-[#267596] w-[70px]">
+                      <span className="  capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[70px]">
                         {item.clientName}
                       </span>
                     </td>
@@ -565,7 +585,7 @@ const TableComponent = ({ sellerId, input }) => {
                         aria-valuemax="10000"
                       >
                         <div
-                          className="bg-[#267596] h-full "
+                          className="bg-[#6E28D4] h-full "
                           style={{
                             width: `${((100 * item?.amount) / 100000).toFixed(
                               2
@@ -630,7 +650,7 @@ const TableComponent = ({ sellerId, input }) => {
                         </button>
                       </td>
                     )}
-                    {loginInSeller?.role === "admin" && (
+                    {loginInSeller?.role === "super_admin" && (
                       <td
                         className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
                       >
@@ -663,7 +683,41 @@ const TableComponent = ({ sellerId, input }) => {
                         </button>
                       </td>
                     )}
-                    {loginInSeller?.role == "admin" && (
+
+                    {loginInSeller?.role === "admin" && (
+                      <td
+                        className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                      >
+                        <button>
+                          <select
+                            className={` focus:outline-none border rounded-full`}
+                            name="commissionRate"
+                            id=""
+                            value={item?.salesCommissionRate}
+                            onChange={(e) =>
+                              handleSalesCommission(item._id, e.target.value)
+                            }
+                          >
+                            <option className="text-gray-500 " value="5">
+                              5%
+                            </option>
+                            <option className="text-gray-500 " value="10">
+                              10%
+                            </option>
+                            <option className="text-gray-500 " value="15">
+                              15%
+                            </option>
+                            <option className="text-gray-500 " value="20">
+                              20%
+                            </option>
+                            <option className="text-gray-500 " value="25">
+                              25%
+                            </option>
+                          </select>
+                        </button>
+                      </td>
+                    )}
+                    {loginInSeller?.role == "supper_admin" && (
                       <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                         <input
                           onChange={() =>
@@ -674,74 +728,46 @@ const TableComponent = ({ sellerId, input }) => {
                         />
                       </td>
                     )}
-                    <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
-                      {item?.projectSource}
+
+                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                      <span className=" capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[120px]">
+                        {item.projectSource}
+                      </span>
                     </td>
-                    <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[100px] h-full text-[#3A3A49]">
-                      <Link to={`/${item._id}`}>
+
+                    <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49]">
+                      <button
+                        className="cursor-pointer w-full h-full hover:border rounded-md transition-all ease-in-out duration-500 flex justify-center items-center"
+                        onClick={() => handleDropdown(item?._id)}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="20"
+                          width="5"
                           height="20"
-                          viewBox="0 0 24 24"
+                          viewBox="0 0 5 20"
                           fill="none"
-                          stroke="#000000"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
-                          <path d="M12 13a1 1 0 100-2 1 1 0 000 2z" />
-                          <path d="M21 8V5a2 2 0 00-2-2H5a2 2 0 00-2 2v3m18 8v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3" />
-                        </svg>
-                      </Link>
-                      <button onClick={() => handleSellerEdit(item._id)}>
-                        <svg
-                          fill="#000000"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z" />
-                        </svg>
-                      </button>
-                      <button onClick={() => handleDelete(item._id)}>
-                        <svg
-                          fill="#000000"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          id="delete"
-                          data-name="Line Color"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon line-color"
                         >
                           <path
-                            id="secondary"
-                            d="M16,7V4a1,1,0,0,0-1-1H9A1,1,0,0,0,8,4V7"
-                            style={{
-                              fill: "none",
-                              stroke: "rgb(44, 169, 188)",
-                              strokeLinecap: "round",
-                              strokeLinejoin: "round",
-                              strokeWidth: 2,
-                            }}
-                          ></path>
-                          <path
-                            id="primary"
-                            d="M18,20V7H6V20a1,1,0,0,0,1,1H17A1,1,0,0,0,18,20ZM4,7H20"
-                            style={{
-                              fill: "none",
-                              stroke: "rgb(0, 0, 0)",
-                              strokeLinecap: "round",
-                              strokeLinejoin: "round",
-                              strokeWidth: 2,
-                            }}
-                          ></path>
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M4.54427 2.26411C4.54427 3.47531 3.52724 4.45822 2.27208 4.45822C1.01691 4.45822 -0.00012207 3.47531 -0.00012207 2.26411C-0.00012207 1.05201 1.01691 0.0699997 2.27208 0.0699997C3.52724 0.0699997 4.54427 1.05201 4.54427 2.26411ZM4.54427 10.035C4.54427 11.239 3.52724 12.2146 2.27208 12.2146C1.01691 12.2146 -0.00012207 11.239 -0.00012207 10.035C-0.00012207 8.83105 1.01691 7.85538 2.27208 7.85538C3.52724 7.85538 4.54427 8.83105 4.54427 10.035ZM4.54427 17.8059C4.54427 19.018 3.52724 20 2.27208 20C1.01691 20 -0.00012207 19.018 -0.00012207 17.8059C-0.00012207 16.5947 1.01691 15.6118 2.27208 15.6118C3.52724 15.6118 4.54427 16.5947 4.54427 17.8059Z"
+                            fill="#D0D7DD"
+                            fillOpacity="0.72727"
+                          />
                         </svg>
                       </button>
                     </td>
+                    {dropdown && dropId === item?._id && (
+                      <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md  top-12 right-12 bg-white z-[999] absolute">
+                        <Link to={`/${item._id}`}>view</Link>
+                        <button onClick={() => handleSellerEdit(item._id)}>
+                          Edit
+                        </button>
+                        <button onClick={() => handleDelete(item._id)}>
+                          Delete
+                        </button>
+                      </div>
+                    )}
                   </tr>
                 );
               })
@@ -756,7 +782,7 @@ const TableComponent = ({ sellerId, input }) => {
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button
-                className="text-[14px]   w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%]"
+                className="text-[14px]   w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%]"
                 onClick={prevPage}
               >
                 <svg
@@ -788,32 +814,32 @@ const TableComponent = ({ sellerId, input }) => {
               <button
                 onClick={() => setCurrentPage(1)}
                 className={`${
-                  currentPage === 1 ? "bg-darkBlue text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 1 ? "bg-[#6E28D4] text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 {1}
               </button>
               <button
                 onClick={() => setCurrentPage(2)}
                 className={`${
-                  currentPage === 2 ? "bg-darkBlue text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 2 ? "bg-[#6E28D4] text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 2
               </button>
               <button
                 onClick={() => setCurrentPage(3)}
                 className={`${
-                  currentPage === 3 ? "bg-darkBlue text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 3 ? "bg-[#6E28D4] text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 3
               </button>
               <button
                 onClick={() => setCurrentPage(4)}
                 className={`${
-                  currentPage === 4 ? "bg-darkBlue text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 4 ? "bg-[#6E28D4] text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 4
               </button>
@@ -827,7 +853,7 @@ const TableComponent = ({ sellerId, input }) => {
                 <option value="7">7</option>
               </select>
               <button
-                className="text-[14px]  w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%] "
+                className="text-[14px]  w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%] "
                 onClick={nextPage}
               >
                 <svg

@@ -11,6 +11,7 @@ const Total = ({
   title,
   svg,
   delay,
+  percentage,
 }) => {
   return (
     <motion.div
@@ -46,8 +47,8 @@ const Total = ({
         <div className="flex">
           {title === "Total Projects" && (
             <div className="flex items-center justify-center gap-2">
-              <button className="border flex items-center gap-1 px-1 border-green-500 rounded-md bg-green-200">
-                3.9%
+              <button className="border flex items-center gap-1 w-10 px-1 border-green-500 rounded-md bg-green-200">
+                {percentage}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="6"

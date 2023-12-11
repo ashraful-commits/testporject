@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 //======================================================== base url
-const BASE_URL = "https://wordshpere.onrender.com";
-// const BASE_URL = "http://localhost:5050";
+// const BASE_URL = "https://wordshpere.onrender.com";
+const BASE_URL = "http://localhost:5050";
 
 //=========================================================createClient
 export const createClient = createAsyncThunk(
@@ -15,6 +15,7 @@ export const createClient = createAsyncThunk(
 
       return response.data;
     } catch (error) {
+      console.log(error.message);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -44,7 +45,7 @@ export const getAllClient = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/api/v1/client/${data.sellerId}?page=${data.page}&limit=${data.limit}&role=${data.role}`,
+        `${BASE_URL}/api/v1/client/${data.sellerId}?page=${data.page}&limit=${data.limit}`,
 
         { withCredentials: true }
       );
@@ -157,6 +158,23 @@ export const updateCommissionRate = createAsyncThunk(
     }
   }
 );
+//=============================================================== client commission update
+export const updateSalesCommissionRate = createAsyncThunk(
+  "client/updateSalesCommissionRate",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.patch(
+        `${BASE_URL}/api/v1/client/salescommissionRate/${data.id}`,
+        { salesCommissionRate: data.salesCommissionRate },
+        { withCredentials: true }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 //==================================================================file download
 export const fileDownloadFunc = createAsyncThunk(
   "client/fileDownload",
@@ -195,6 +213,26 @@ export const LogoutClient = createAsyncThunk(
       const response = await axios.get(`${BASE_URL}/api/v1/client/logout`, {
         withCredentials: true,
       });
+
+      return response.data;
+    } catch (error) {
+      console.log(error.response);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+//=============================================================logout seller
+export const deleteFiles = createAsyncThunk(
+  "client/deleteFiles",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/v1/client/deletefile`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
 
       return response.data;
     } catch (error) {

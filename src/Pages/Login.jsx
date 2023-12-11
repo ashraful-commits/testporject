@@ -88,129 +88,63 @@ const Login = () => {
       <div className="min-w-full relative z-0 gap-10 min-h-screen flex flex-col justify-center items-center overflow-hidden">
         <div className="flex justify-center gap-5 ">
           <div className="flex gap-3 items-center">
-            <input
-              value={loginState}
-              checked={loginState === "seller"}
-              onChange={() => setLoginState("seller")}
-              className="w-5 h-5 cursor-pointer"
-              name="login"
-              type="radio"
-            />
-            <label className="font-bold font-['work_sans']" htmlFor="login">
-              Seller
-            </label>
-          </div>
-          <div className="flex gap-3 items-center">
-            <input
-              checked={loginState === "client"}
-              onChange={() => setLoginState("client")}
-              className="w-5 h-5 cursor-pointer"
-              name="login"
-              type="radio"
-            />
-            <label className="font-bold font-['work_sans']" htmlFor="login">
-              Client
-            </label>
-          </div>
-        </div>
-        {loginState === "seller" ? (
-          <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
-            <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
+            <h1 className="font-bold text-[24px] font-['work_sans']">
               Seller Login
             </h1>
-            {/* //================================================form  */}
-            <form
-              onSubmit={handleLoginSubmit}
-              action=""
-              className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
-            >
-              <FormInput
-                label="Email"
-                type="email"
-                required="required"
-                placeholder="Email"
-                name="email"
-                value={input.email}
-                handleInputChange={handleInputChange}
-              />
-              <FormInput
-                label="Password"
-                placeholder="Password"
-                name="password"
-                type="password"
-                value={input.password}
-                required="required"
-                handleInputChange={handleInputChange}
-              />
-              <motion.button
-                initial={{ y: -15, x: -15, opacity: 0.3 }}
-                animate={{ y: 0, x: 0, opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: 0.3,
-                  delay: 0.4,
-                }}
-                type="submit"
-                className="text-[18px] hover:scale-105 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
-              >
-                Login
-              </motion.button>
-              <p className="text-[12px] text-center text-gray-500">
-                Don&apos;t have an account{" "}
-                <Link
-                  className="text-purple-500 font-[600] hover:text-purple-700 transition-all duration-500 ease-out"
-                  to="/register"
-                >
-                  Register
-                </Link>
-              </p>
-            </form>
           </div>
-        ) : (
-          <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
-            <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
-              Client Login
-            </h1>
-            {/* //================================================form  */}
-            <form
-              onSubmit={handleClientLoginSubmit}
-              action=""
-              className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
+        </div>
+        <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
+          <h1 className="text-[20px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
+            Login
+          </h1>
+          {/* //================================================form  */}
+          <form
+            onSubmit={handleLoginSubmit}
+            action=""
+            className="mt-4 flex flex-col gap-5 py-5 border-t-[2px]"
+          >
+            <FormInput
+              label="Email"
+              type="email"
+              required="required"
+              placeholder="Email"
+              name="email"
+              value={input.email}
+              handleInputChange={handleInputChange}
+            />
+            <FormInput
+              label="Password"
+              placeholder="Password"
+              name="password"
+              type="password"
+              value={input.password}
+              required="required"
+              handleInputChange={handleInputChange}
+            />
+            <motion.button
+              initial={{ y: -15, x: -15, opacity: 0.3 }}
+              animate={{ y: 0, x: 0, opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.3,
+                delay: 0.4,
+              }}
+              type="submit"
+              className="text-[18px] hover:scale-105 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
             >
-              <FormInput
-                label="Client Email"
-                type="email"
-                required="required"
-                placeholder="Client email"
-                name="clientEmail"
-                value={input2.clientEmail}
-                handleInputChange={handleClientInputChange}
-              />
-              <FormInput
-                label="Password"
-                placeholder="Password"
-                name="password"
-                type="password"
-                value={input2.password}
-                required="required"
-                handleInputChange={handleClientInputChange}
-              />
-              <motion.button
-                initial={{ y: -15, x: -15, opacity: 0.3 }}
-                animate={{ y: 0, x: 0, opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: 0.3,
-                  delay: 0.4,
-                }}
-                type="submit"
-                className="text-[18px] hover:scale-105 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
+              Login
+            </motion.button>
+            <p className="text-[12px] text-center text-gray-500">
+              Don&apos;t have an account{" "}
+              <Link
+                className="text-purple-500 font-[600] hover:text-purple-700 transition-all duration-500 ease-out"
+                to="/register"
               >
-                Login
-              </motion.button>
-            </form>
-          </div>
-        )}
+                Register
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </>
   );

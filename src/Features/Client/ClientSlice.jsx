@@ -13,6 +13,7 @@ import {
   projectStatusUpdate,
   updateClient,
   updateCommissionRate,
+  updateSalesCommissionRate,
 } from "./ClientApi";
 
 const ClientSlice = createSlice({
@@ -154,6 +155,23 @@ const ClientSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(updateCommissionRate.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(updateSalesCommissionRate.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(updateSalesCommissionRate.fulfilled, (state, action) => {
+        state.loader = false;
+        state.client[
+          state.client.findIndex(
+            (item) => item._id === action.payload.client._id
+          )
+        ] = action.payload.client;
+
+        state.message = action.payload.message;
+      })
+      .addCase(updateSalesCommissionRate.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       })

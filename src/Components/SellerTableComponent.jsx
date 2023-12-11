@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteClient, permissionUpdate } from "../Features/Client/ClientApi";
 import {
@@ -39,7 +39,16 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
 
   //===========================set limit
   const [limit, setLimit] = useState(7);
-
+  const [dropdown, setDropdown] = useState(false);
+  //=======================================================================================dropId
+  const [dropId, setDropId] = useState(null);
+  //================================all ref
+  const dropdownRef = useRef();
+  //========================================= handledrop down men
+  const handleDropdown = (id) => {
+    setDropdown(!dropdown);
+    setDropId(id);
+  };
   //========================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
@@ -118,8 +127,17 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
     );
   }, [dispatch, limit, currentPage, loginInSeller]);
 
+  const handleWindowDropdwon = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target.value)) {
+      setDropdown(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("click", handleWindowDropdwon);
+    return () => window.removeEventListener("click", handleWindowDropdwon);
+  }, []);
   return (
-    <div>
+    <div ref={dropdownRef}>
       {/* //===================================edit model  */}
       {editModel && (
         <SalesModel
@@ -129,10 +147,11 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         />
       )}
       {/* //=============================================table  */}
-      <table className="w-full border min-h-[490px] h-full overflow-hidden">
+      <table className="w-full  min-h-[490px] h-full overflow-hidden">
         {/* //============================================table header  */}
         <thead>
-          <tr className="w-full h-[1.875rem] bg-[#E7E7E7] grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
+          <tr className="w-full h-[1.875rem]  grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
+            <th className="text-[.8125rem] flex items-center justify-start w-[20px] font-['work_sans'] text-start font-[400]"></th>
             <th className="text-[.8125rem] flex items-center justify-start w-[120px] font-['work_sans'] text-start font-[400]">
               Seller Name
             </th>
@@ -149,24 +168,22 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
               Total Sales Guy
             </th>
 
-            {loginInSeller?.role === "admin" && (
+            {loginInSeller?.role === "super_admin" && (
               <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
                 Seller Role
               </th>
             )}
-            {loginInSeller?.role === "admin" && (
+            {loginInSeller?.role === "super_admin" && (
               <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
                 Permission status
               </th>
             )}
 
-            <th className="text-[.8125rem] w-[80px] font-['work_sans'] flex items-center justify-end text-start font-[400]">
-              Action
-            </th>
+            <th className="text-[.8125rem] w-[80px] font-['work_sans'] flex items-center justify-end text-start font-[400]"></th>
           </tr>
         </thead>
         {/* //================================================table body  */}
-        <tbody className="relative">
+        <tbody className="relative border">
           {(loader || sellerLoader) && (
             <motion.div
               initial={{ opacity: 0.2 }}
@@ -181,7 +198,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
             </motion.div>
           )}
 
-          {loginInSeller?.role === "admin" ? (
+          {loginInSeller?.role === "super_admin" ? (
             seller?.length > 0 ? (
               seller
                 ?.filter((seller) => {
@@ -215,13 +232,15 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       key={index}
                       className={`${
                         loginInSeller?._id === item?._id ? "bg-green-100" : ""
-                      } w-full grid grid-flow-col hover:scale-[101%] transition-all duration-500 ease-in-out justify-between items-center border-b py-2 h-[3.4375rem]  text-center`}
+                      } w-full grid grid-flow-col hover:scale-[101%] transition-all duration-500 ease-in-out justify-between items-center border-b py-2 h-[3.4375rem]  text-center relative`}
                     >
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[20px]  text-[#6E28D4]">
                         <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                           {index + 1}.
                         </span>{" "}
-                        <span className="truncate text-[13px] capitalize font-[500] text-[#267596] w-[120px]">
+                      </td>
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                        <span className="truncate text-[13px] capitalize font-[500] text-[#6E28D4] w-[120px]">
                           {item.name}
                         </span>
                       </td>
@@ -229,7 +248,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         className=" cursor-pointer"
                         to={`/seller/${item._id}`}
                       >
-                        <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                        <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
                           {item.avatar ? (
                             <img
                               className="w-[35px] h-[35px] rounded-full"
@@ -244,28 +263,28 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                           )}
                         </td>
                       </Link>
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
                         {item?.client?.length > 0 ? (
                           <span>{item?.client?.length}</span>
                         ) : (
                           <span>0</span>
                         )}
                       </td>
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
                         {item?.projects?.length > 0 ? (
                           <span>{item?.projects?.length}</span>
                         ) : (
                           <span>0</span>
                         )}
                       </td>
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
                         {item?.salesPerson?.length > 0 ? (
                           <span>{item?.salesPerson?.length}</span>
                         ) : (
                           <span>0</span>
                         )}
                       </td>
-                      {loginInSeller?.role === "admin" && (
+                      {loginInSeller?.role === "super_admin" && (
                         <td
                           className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
                         >
@@ -277,6 +296,9 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                               } ${
                                 item?.role == "user" &&
                                 "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
+                              }${
+                                item?.role == "super_admin" &&
+                                "text-[#FFF] border-[.0187rem] bg-[#8787ff] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
                               }  `}
                               name="projectType"
                               id=""
@@ -288,6 +310,12 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                               <option className="text-gray-500 " value="user">
                                 User
                               </option>
+                              <option
+                                className="text-gray-500 "
+                                value="super_admin"
+                              >
+                                Super admin
+                              </option>
                               <option className="text-gray-500 " value="admin">
                                 Admin
                               </option>
@@ -296,7 +324,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         </td>
                       )}
 
-                      {loginInSeller?.role === "admin" && (
+                      {loginInSeller?.role === "super_admin" && (
                         <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                           <input
                             onChange={() =>
@@ -309,85 +337,39 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         </td>
                       )}
 
-                      <td className="  relative z-0 text-[.8125rem] flex items-center justify-end gap-2 truncate text-center pr-4 font-[400] w-[120px] h-full text-[#3A3A49]">
-                        <Link to={`/seller/${item?._id}`}>
+                      <td className="  relative z-0 text-[.8125rem] flex items-center justify-end gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49]">
+                        <button
+                          className="cursor-pointer w-full h-full hover:border rounded-md transition-all ease-in-out duration-500 flex justify-center items-center"
+                          onClick={() => handleDropdown(item?._id)}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
+                            width="5"
+                            height="20"
+                            viewBox="0 0 5 20"
                             fill="none"
-                            stroke="#000000"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
-                            <path d="M12 13a1 1 0 100-2 1 1 0 000 2z" />
-                            <path d="M21 8V5a2 2 0 00-2-2H5a2 2 0 00-2 2v3m18 8v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3" />
-                          </svg>
-                        </Link>
-                        <button onClick={() => handleEdit(item._id)}>
-                          <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
-                              d="M20.4445 6.88859C18.7779 7.4441 16.5559 5.22205 17.1114 3.55551"
-                              stroke="#0095FF"
-                              strokeWidth="1.5"
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M4.54427 2.26411C4.54427 3.47531 3.52724 4.45822 2.27208 4.45822C1.01691 4.45822 -0.00012207 3.47531 -0.00012207 2.26411C-0.00012207 1.05201 1.01691 0.0699997 2.27208 0.0699997C3.52724 0.0699997 4.54427 1.05201 4.54427 2.26411ZM4.54427 10.035C4.54427 11.239 3.52724 12.2146 2.27208 12.2146C1.01691 12.2146 -0.00012207 11.239 -0.00012207 10.035C-0.00012207 8.83105 1.01691 7.85538 2.27208 7.85538C3.52724 7.85538 4.54427 8.83105 4.54427 10.035ZM4.54427 17.8059C4.54427 19.018 3.52724 20 2.27208 20C1.01691 20 -0.00012207 19.018 -0.00012207 17.8059C-0.00012207 16.5947 1.01691 15.6118 2.27208 15.6118C3.52724 15.6118 4.54427 16.5947 4.54427 17.8059Z"
+                              fill="#D0D7DD"
+                              fillOpacity="0.72727"
                             />
-                            <path
-                              d="M16.9766 3.6903L13.3862 7.28073C11.8253 8.84163 10.718 10.7974 10.1826 12.9389L10.0091 13.6329C9.95503 13.8491 10.1509 14.045 10.3671 13.9909L11.0611 13.8174C13.2026 13.282 15.1584 12.1747 16.7193 10.6138L20.3097 7.02338C20.7517 6.58139 21 5.98192 21 5.35684C21 4.05519 19.9448 3 18.6432 3C18.0181 3 17.4186 3.24831 16.9766 3.6903Z"
-                              stroke="#0095FF"
-                              strokeWidth="1.5"
-                            />
-                            <path
-                              d="M12 3C10.9767 3 9.95334 3.11763 8.95043 3.35288C6.17301 4.00437 4.00437 6.17301 3.35288 8.95043C2.88237 10.9563 2.88237 13.0437 3.35288 15.0496C4.00437 17.827 6.17301 19.9956 8.95044 20.6471C10.9563 21.1176 13.0437 21.1176 15.0496 20.6471C17.827 19.9956 19.9956 17.827 20.6471 15.0496C20.8824 14.0466 21 13.0233 21 12"
-                              stroke="#363853"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </button>
-                        <button onClick={() => handleDelete(item?._id)}>
-                          <svg
-                            fill="#000000"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            id="delete"
-                            data-name="Line Color"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon line-color"
-                          >
-                            <path
-                              id="secondary"
-                              d="M16,7V4a1,1,0,0,0-1-1H9A1,1,0,0,0,8,4V7"
-                              style={{
-                                fill: "none",
-                                stroke: "rgb(44, 169, 188)",
-                                strokeLinecap: "round",
-                                strokeLinejoin: "round",
-                                strokeWidth: 2,
-                              }}
-                            ></path>
-                            <path
-                              id="primary"
-                              d="M18,20V7H6V20a1,1,0,0,0,1,1H17A1,1,0,0,0,18,20ZM4,7H20"
-                              style={{
-                                fill: "none",
-                                stroke: "rgb(0, 0, 0)",
-                                strokeLinecap: "round",
-                                strokeLinejoin: "round",
-                                strokeWidth: 2,
-                              }}
-                            ></path>
                           </svg>
                         </button>
                       </td>
+                      {dropdown && dropId === item?._id && (
+                        <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md top-12 right-12 bg-white z-[99] absolute">
+                          <Link to={`/seller/${item?._id}`}>View</Link>
+                          <button onClick={() => handleEdit(item._id)}>
+                            Edit
+                          </button>
+                          <button onClick={() => handleDelete(item?._id)}>
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </motion.tr>
                   );
                 })
@@ -418,13 +400,15 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 return (
                   <tr
                     key={index}
-                    className="w-full hover:scale-[101%] transition-all duration-500 ease-in-out grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
+                    className="w-full hover:scale-[101%] transition-all duration-500 ease-in-out grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center relative"
                   >
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[20px]  text-[#6E28D4]">
                       <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                         {index + 1}.
                       </span>
-                      <span className="truncate text-[13px] capitalize font-[500] text-[#267596] w-[120px]">
+                    </td>
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                      <span className="truncate text-[13px] capitalize font-[500] text-[#6E28D4] w-[120px]">
                         {item.name}
                       </span>
                     </td>
@@ -432,7 +416,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       className=" cursor-pointer"
                       to={`/seller/${item._id}`}
                     >
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
                         {item.avatar ? (
                           <img
                             className="w-[35px] h-[35px] rounded-full"
@@ -447,28 +431,28 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         )}
                       </td>
                     </Link>
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
                       {item?.client?.length > 0 ? (
                         <span>{item?.client?.length}</span>
                       ) : (
                         <span>0</span>
                       )}
                     </td>
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
                       {item?.projects?.length > 0 ? (
                         <span>{item?.projects?.length}</span>
                       ) : (
                         <span>0</span>
                       )}
                     </td>
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#267596]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
                       {item?.salesPerson?.length > 0 ? (
                         <span>{item?.salesPerson?.length}</span>
                       ) : (
                         <span>0</span>
                       )}
                     </td>
-                    {loginInSeller?.role === "admin" && (
+                    {loginInSeller?.role === "super_admin" && (
                       <td
                         className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
                       >
@@ -497,12 +481,18 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                             <option className="text-gray-500 " value="admin">
                               Admin
                             </option>
+                            <option
+                              className="text-gray-500 "
+                              value="super_admin"
+                            >
+                              Super admin
+                            </option>
                           </select>
                         </button>
                       </td>
                     )}
 
-                    {loginInSeller?.role === "admin" && (
+                    {loginInSeller?.role === "super_admin" && (
                       <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
                         <input
                           onChange={() =>
@@ -515,71 +505,39 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       </td>
                     )}
 
-                    <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[120px] h-full text-[#3A3A49]">
-                      <Link to={`/seller/${item?._id}`}>
+                    <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49]">
+                      <button
+                        className="cursor-pointer w-full h-full hover:border rounded-md transition-all ease-in-out duration-500 flex justify-center items-center"
+                        onClick={() => handleDropdown(item?._id)}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
+                          width="5"
+                          height="20"
+                          viewBox="0 0 5 20"
                           fill="none"
-                          stroke="#000000"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z" />
-                          <path d="M12 13a1 1 0 100-2 1 1 0 000 2z" />
-                          <path d="M21 8V5a2 2 0 00-2-2H5a2 2 0 00-2 2v3m18 8v3a2 2 0 01-2 2H5a2 2 0 01-2-2v-3" />
-                        </svg>
-                      </Link>
-                      <button onClick={() => handleEdit(item._id)}>
-                        <svg
-                          fill="#000000"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z" />
-                        </svg>
-                      </button>
-                      <button onClick={() => handleDelete(item._id)}>
-                        <svg
-                          fill="#000000"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          id="delete"
-                          data-name="Line Color"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon line-color"
                         >
                           <path
-                            id="secondary"
-                            d="M16,7V4a1,1,0,0,0-1-1H9A1,1,0,0,0,8,4V7"
-                            style={{
-                              fill: "none",
-                              stroke: "rgb(44, 169, 188)",
-                              strokeLinecap: "round",
-                              strokeLinejoin: "round",
-                              strokeWidth: 2,
-                            }}
-                          ></path>
-                          <path
-                            id="primary"
-                            d="M18,20V7H6V20a1,1,0,0,0,1,1H17A1,1,0,0,0,18,20ZM4,7H20"
-                            style={{
-                              fill: "none",
-                              stroke: "rgb(0, 0, 0)",
-                              strokeLinecap: "round",
-                              strokeLinejoin: "round",
-                              strokeWidth: 2,
-                            }}
-                          ></path>
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M4.54427 2.26411C4.54427 3.47531 3.52724 4.45822 2.27208 4.45822C1.01691 4.45822 -0.00012207 3.47531 -0.00012207 2.26411C-0.00012207 1.05201 1.01691 0.0699997 2.27208 0.0699997C3.52724 0.0699997 4.54427 1.05201 4.54427 2.26411ZM4.54427 10.035C4.54427 11.239 3.52724 12.2146 2.27208 12.2146C1.01691 12.2146 -0.00012207 11.239 -0.00012207 10.035C-0.00012207 8.83105 1.01691 7.85538 2.27208 7.85538C3.52724 7.85538 4.54427 8.83105 4.54427 10.035ZM4.54427 17.8059C4.54427 19.018 3.52724 20 2.27208 20C1.01691 20 -0.00012207 19.018 -0.00012207 17.8059C-0.00012207 16.5947 1.01691 15.6118 2.27208 15.6118C3.52724 15.6118 4.54427 16.5947 4.54427 17.8059Z"
+                            fill="#D0D7DD"
+                            fillOpacity="0.72727"
+                          />
                         </svg>
                       </button>
                     </td>
+                    {dropdown && dropId === item?._id && (
+                      <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md top-12 right-12 bg-white z-[99] absolute">
+                        <Link to={`/seller/${item?._id}`}>View</Link>
+                        <button onClick={() => handleEdit(item._id)}>
+                          Edit
+                        </button>
+                        <button onClick={() => handleDelete(item._id)}>
+                          Delete
+                        </button>
+                      </div>
+                    )}
                   </tr>
                 );
               })

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-//============================================ custom input
+//============================================ TODO:custom input
 const FormInput = ({
   type,
   label,
@@ -40,5 +40,5 @@ const FormInput = ({
     </motion.div>
   );
 };
-//=================================================FormInput
+//================================================= TODO:FormInput
 export default FormInput;

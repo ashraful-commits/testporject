@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { fileDownloadFunc } from "../Features/Client/ClientApi";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getAllClientState } from "../Features/Client/ClientSlice";
 import { Link } from "react-router-dom";
-
-import fileDownload from "js-file-download";
+import { deleteFiles } from "../Features/Client/ClientApi";
 
 const ProjectFile = ({ svg, name, title, file }) => {
   const [downloadMenu, setDownloadMenu] = useState(false);
@@ -13,36 +12,10 @@ const ProjectFile = ({ svg, name, title, file }) => {
   const handleDownlaod = (file) => {
     setDownloadMenu(!downloadMenu);
   };
-  // const handleFileDownload = () => {
-  //   const fileFormat = file?.split(".").pop();
-  //   // const encodedUrl = encodeURIComponent(file);
-  //   console.log(file);
-  //   // fileDownload(file, `filename.${fileFormat}`);
-  //   // window.open(file);
-  //   // dispatch(
-  //   //   fileDownloadFunc({ file: encodedUrl, fileFormat: fileFormat })
-  //   // ).then((res) => {
-  //   //   fileDownload(file, `filename.${fileFormat}`);
-  //   // });
-  //   // Replace 'public-id' with the actual public ID of the image
-  //   const imageUrl = file;
-
-  //   // Create an anchor element
-  //   const downloadLink = document.createElement("a");
-  //   downloadLink.href = imageUrl;
-
-  //   // Set the download attribute with the desired filename
-  //   downloadLink.download = `your-image-filename.jpg.${fileFormat}`;
-
-  //   // Append the anchor to the document body
-  //   document.body.appendChild(downloadLink);
-
-  //   // Trigger a click on the anchor to initiate the download
-  //   downloadLink.click();
-
-  //   // Remove the anchor from the document body
-  //   document.body.removeChild(downloadLink);
-  // };
+  //=============================================TODO:deleteFile
+  const handleDeleteFile = (file) => {
+    dispatch(deleteFiles(file));
+  };
   return (
     <div className="flex transition-all ease-in-out duration-500 hover:scale-105 gap-[14px] relative h-[57px]  w-[214px] items-center justify-start pl-[20px] mb-[2px] border rounded-md">
       {downloadMenu && (
@@ -60,19 +33,19 @@ const ProjectFile = ({ svg, name, title, file }) => {
               <path d="M8 6.641l1.121-1.12a1 1 0 0 1 1.415 1.413L7.707 9.763a.997.997 0 0 1-1.414 0L3.464 6.934A1 1 0 1 1 4.88 5.52L6 6.641V1a1 1 0 1 1 2 0v5.641zM1 12h12a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2z" />
             </svg>
           </Link>
-          {/* <button onClick={() => handleFileDownload(file)}>
+          <button onClick={() => handleDeleteFile(file)}>
             <svg
               fill="#000000"
-              width="24"
-              height="24"
-              viewBox="-5 -5 24 24"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              version="1.2"
+              baseProfile="tiny"
               xmlns="http://www.w3.org/2000/svg"
-              preserveAspectRatio="xMinYMin"
-              className="jam jam-download"
             >
-              <path d="M8 6.641l1.121-1.12a1 1 0 0 1 1.415 1.413L7.707 9.763a.997.997 0 0 1-1.414 0L3.464 6.934A1 1 0 1 1 4.88 5.52L6 6.641V1a1 1 0 1 1 2 0v5.641zM1 12h12a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2z" />
+              <path d="M12 4c-4.419 0-8 3.582-8 8s3.581 8 8 8 8-3.582 8-8-3.581-8-8-8zm3.707 10.293c.391.391.391 1.023 0 1.414-.195.195-.451.293-.707.293s-.512-.098-.707-.293l-2.293-2.293-2.293 2.293c-.195.195-.451.293-.707.293s-.512-.098-.707-.293c-.391-.391-.391-1.023 0-1.414l2.293-2.293-2.293-2.293c-.391-.391-.391-1.023 0-1.414s1.023-.391 1.414 0l2.293 2.293 2.293-2.293c.391-.391 1.023-.391 1.414 0s.391 1.023 0 1.414l-2.293 2.293 2.293 2.293z" />
             </svg>
-          </button> */}
+          </button>
         </div>
       )}
       <div className="w-[23px] h-[23px] overflow-hidden">{svg}</div>

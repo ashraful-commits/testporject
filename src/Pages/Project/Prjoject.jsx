@@ -22,10 +22,10 @@ import html2canvas from "html2canvas";
 import ClientFeedBack from "../../Components/ClientFeedBack";
 import { motion } from "framer-motion";
 const Project = () => {
-  //===================================== get all client state
+  //===================================== TODO:get all client state
   const { singleClient, loader, clientLoginData } =
     useSelector(getAllClientState);
-  //====================================================dispatch and all state
+  //====================================================TODO:dispatch and all state
   const dispatch = useDispatch();
   const { id } = useParams();
   const [team, setTeam] = useState(false);
@@ -36,14 +36,14 @@ const Project = () => {
   const [selectTools, setSelectTools] = useState([]);
   const [menu, setMenu] = useState("Project Details");
   const [dropdown, setDropdown] = useState(false);
-  //===================================================navigate
+  //===================================================TODO:navigate
   const navigate = useNavigate();
 
-  //========================================================get all singleClient
+  //========================================================TODO:get all singleClient
   useEffect(() => {
     dispatch(getSingleClient(id));
   }, [dispatch, id]);
-  //===========================================================handle file upload
+  //===========================================================TODO:handle file upload
   const handleFileUpload = (e) => {
     const formData = new FormData();
     [...e.target.files].forEach((item) => {
@@ -53,7 +53,7 @@ const Project = () => {
       dispatch(getSingleClient(id));
     });
   };
-  //=====================================download pdf
+  //=====================================TODO:download pdf
   const handlePdf = () => {
     setPdf(true);
     const capture = pdfRef.current;
@@ -67,7 +67,7 @@ const Project = () => {
       setPdf(false);
     });
   };
-  //=====================================team member checkbox
+  //=====================================TODO:team member checkbox
   const handleInputChange = (e) => {
     const selectedValue = String(e.target.value);
 
@@ -79,7 +79,7 @@ const Project = () => {
       setSelectedSalespersons((prev) => [...prev, selectedValue]);
     }
   };
-  //=====================================tools  checkbox
+  //=====================================TODO:tools  checkbox
   const handleToolsInputChange = (e) => {
     const selectedValue = String(e.target.value);
 
@@ -89,7 +89,7 @@ const Project = () => {
       setSelectTools((prev) => [...prev, selectedValue]);
     }
   };
-  //================================= handle team update
+  //================================= TODO:handle team update
   const handleTeamUpdate = (e) => {
     e.preventDefault();
 
@@ -100,7 +100,7 @@ const Project = () => {
       setTeam(false);
     });
   };
-  //================================= handle tools update
+  //================================= TODO:handle tools update
   const handleToolsSubmit = (e) => {
     e.preventDefault();
 
@@ -111,7 +111,7 @@ const Project = () => {
       }
     );
   };
-  //============================================ edit team member data
+  //============================================ TODO:edit team member data
   useEffect(() => {
     let allTeam = [];
     let allTools = [];
@@ -124,16 +124,17 @@ const Project = () => {
     setSelectedSalespersons(allTeam);
     setSelectTools(allTools);
   }, [singleClient]);
-  //========================================handleLogout
+  //========================================TODO:handleLogout
   const handleLogout = () => {
     dispatch(LogoutClient());
     localStorage.clear("Client");
     navigate("/login");
   };
-  //===================================================return
+
+  //===================================================TODO:return
   return (
     <>
-      {/* //================================================== loader  */}
+      {/* //================================================== TODO:loader  */}
       {loader && (
         <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-cyan-600 flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
@@ -141,7 +142,7 @@ const Project = () => {
           </div>
         </div>
       )}
-      {/* //===================================================pdf download  */}
+      {/* //===================================================TODO:pdf download  */}
       {pdf && (
         <div
           ref={pdfRef}
@@ -151,7 +152,7 @@ const Project = () => {
           {singleClient?.projectDesc}
         </div>
       )}
-      {/* //================================================ team  */}
+      {/* //================================================ TODO:team  */}
       {tools && (
         <motion.div
           initial={{ opacity: 0.1 }}
@@ -318,7 +319,7 @@ const Project = () => {
         }}
         className="min-w-[1340px] scroll-smooth relative rounded-[15px]  pl-[48px]  pt-[30px]   min-h-[1140px] h-[1140px] grid grid-flow-row overflow-hidden mb-[30px] bg-white"
       >
-        {/* //============================================================ header  */}
+        {/* //============================================================ TODO:header  */}
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] rounded-md overflow-hidden ">
             {singleClient?.sellerId?.companyAvatar ? (
@@ -592,9 +593,9 @@ const Project = () => {
             </div>
           </div>
         </div>
-        {/* //==========================================================main container  */}
+        {/* //==========================================================TODO:main container  */}
         <div className="main-container flex min-w-full gap-[43px] w-[1300px] mt-[52px] tracking-[-.52px] h-[1072px] ">
-          {/* //========================================================left section  */}
+          {/* //========================================================TODO:left section  */}
           <div className="left w-[938px] h-full">
             <h1 className="text-[26px] font-[600] text-[#3a3a49] font-['work_sans']">
               Real-Time Video Processing using Chromakey (Greenscreen) Effect{" "}
@@ -603,7 +604,7 @@ const Project = () => {
               Visual UI / UX Design & Branding
             </p>
 
-            {/* //===================================== client datiels section  */}
+            {/* //===================================== TODO:client datiels section  */}
             <div className="flex gap-[px] mt-[16px]">
               <DetialsSections
                 delay={0.2}
@@ -860,7 +861,7 @@ const Project = () => {
                 }
               />
             </div>
-            {/* //========================================== manage project  */}
+            {/* //========================================== TODO:manage project  */}
             <div className="manageProject flex justify-between items-center ">
               <div className="comment w-[375px] mt-[42px] rounded-[7px] h-[38px] border-[1px] border-[#DFDFDF] grid grid-cols-3 transition-all ease-in-out duration-500 hover:scale-105">
                 <button
@@ -935,7 +936,7 @@ const Project = () => {
                     </p>
                   </div>
                 </div>
-                {/* //============================================== team member  */}
+                {/* //============================================== TODO:team member  */}
                 <div className="teamMember overflow-hidden rounded-[8px] border w-full mt-[18px] h-[217px] px-[16px] py-[15px]">
                   <div className="flex justify-between">
                     <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
@@ -977,7 +978,7 @@ const Project = () => {
                     )}
                   </div>
                 </div>
-                {/* //================================================== softwere tools  */}
+                {/* //================================================== TODO:softwere tools  */}
                 <div className="softwareTools overflow-hidden rounded-[8px] border w-full mt-[18px] h-[117px] px-[20px] py-[18px]">
                   <div className="flex justify-between">
                     <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
@@ -1157,7 +1158,7 @@ const Project = () => {
                     </div>
                   </div>
                 </div>
-                {/* //==================================================== project files  */}
+                {/* //==================================================== TODO:project files  */}
                 <div className="ProjectFiles overflow-hidden rounded-[8px] border w-full mt-[18px] h-[230px] px-[22px] py-[11px]">
                   <div className="flex justify-between">
                     <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px]  mt-[10px]font-['work_sans'] ">
@@ -1337,7 +1338,7 @@ const Project = () => {
             )}
             {menu === "Client Feedback" && <ClientFeedBack />}
           </div>
-          {/* //====================================================== right section  */}
+          {/* //====================================================== TODO:right section  */}
           <div className="right border w-[315px] overflow-hidden rounded-[8px] mt-1 flex justify-center">
             <div className=" w-full h-full flex flex-col items-center">
               <div className="payment mt-3 flex justify-center items-center gap-2">

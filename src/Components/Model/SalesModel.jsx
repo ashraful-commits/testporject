@@ -30,16 +30,16 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     website: "",
     companyName: "",
   });
-  //==========================================ref
+  //========================================== TODO:ref
   const form = useRef();
-  //================================state
+  //================================ TODO:state
   const [avatar, setAvatar] = useState(null);
   const [componyAvatar, setComponyAvatar] = useState(null);
   const [photo, setPhoto] = useState(null);
   const [companyPhoto, setCompanyPhoto] = useState(null);
   const dispatch = useDispatch();
 
-  //========================handle Avatar
+  //======================== TODO:handle Avatar
 
   const handleSellerAvatar = (e) => {
     setAvatar(URL.createObjectURL(e.target.files[0]));
@@ -49,7 +49,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     setComponyAvatar(URL.createObjectURL(e.target.files[0]));
     setCompanyPhoto(e.target.files[0]);
   };
-  //===========================handle inputChange
+  //=========================== TODO:handle inputChange
   const handleInputChange = (e) => {
     console.log(e);
     setInput((prev) => ({
@@ -57,7 +57,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
       [e.target.name]: e.target.value,
     }));
   };
-  //============================ form submit
+  //============================  TODO:form submit
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -147,7 +147,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   return (
     <>
       <div className="w-screen min-h-[1240px] h-screen pt-[150px] pl-[66px] bg-gray-900 bg-opacity-90 fixed bottom-0  top-0 left-0  z-[99999] flex justify-center ">
-        {/* //==================================================close button  */}
+        {/* //================================================== TODO:close button  */}
         <button
           onClick={() => setModel(false)}
           className="absolute right-16 top-10 hover:scale-105 transition-all duration-500 ease-in-out z-[99999]"
@@ -165,7 +165,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
             />
           </svg>
         </button>
-        {/* //========================================== main model  */}
+        {/* //==========================================  TODO:main model  */}
         <motion.div
           initial={{ scale: 0.3 }}
           animate={{ scale: 1 }}
@@ -196,7 +196,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
               {title ? title : "Add New"} person
             </h1>
           </div>
-          {/* //=========================form  */}
+          {/* //========================= TODO:form  */}
           <form
             ref={form}
             onSubmit={handleSubmit}
@@ -289,6 +289,12 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                         value="admin"
                       >
                         Admin
+                      </option>
+                      <option
+                        className="text-gray-500 border-none"
+                        value="super_admin"
+                      >
+                        Super admin
                       </option>
                     </motion.select>
                   </div>

@@ -19,7 +19,7 @@ import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
 
 const Seller = () => {
-  //===========================================all state
+  //===========================================TODO:all state
   const [model, setModel] = useState(false);
   const [menu, setMenu] = useState("Manage Sales People");
   const [input, setInput] = useState({
@@ -27,32 +27,62 @@ const Seller = () => {
     startDate: "",
     endDate: "",
   });
-  //===============================================================handle input change
+  //===============================================================TODO:handle input change
   const handleOnChange = (e) => {
     setInput((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
-  //==================================================get all seller state
+  //==================================================TODO:get all seller state
   const { singleSeller, loader } = useSelector(getAllSellerState);
 
-  //==================================================login seller
+  //==================================================TODO:login seller
   const { loginInSeller } = useSelector(getAllSellerState);
-  //================================================= use params
+  //================================================= TODO:use params
   const { id } = useParams();
   const dispatch = useDispatch();
-  //================================================get single seller
+  //================================================TODO:get single seller
   useEffect(() => {
     if (id) {
       dispatch(getSingleSeller(id));
     }
   }, [dispatch, id]);
-  //=====================================================return
+  //=====================================================TODO:return
+  // ========= TODO:percentage state
+  const [percentage, setPercentage] = useState(0);
+  useEffect(() => {
+    const today = new Date();
+    const startOfWeek = new Date(today);
+    startOfWeek.setDate(today.getDate() - today.getDay());
+
+    const oneWeekAgo = new Date(startOfWeek);
+    oneWeekAgo.setDate(startOfWeek.getDate() - 7);
+
+    const currentWeekData = singleSeller?.client.filter(
+      (item) =>
+        new Date(item.createdAt) >= startOfWeek &&
+        new Date(item.createdAt) <= today
+    );
+
+    const lastWeekData = singleSeller?.client.filter(
+      (item) =>
+        new Date(item.createdAt) >= oneWeekAgo &&
+        new Date(item.createdAt) < startOfWeek
+    );
+    if (lastWeekData > 0) {
+      const percentageChange =
+        ((currentWeekData - lastWeekData) / lastWeekData) * 100;
+      setPercentage(percentageChange);
+    } else {
+      // Handle the case where lastWeekData has zero length (to avoid division by zero)
+      setPercentage(0);
+    }
+  }, [singleSeller]);
 
   return (
     <>
-      {/* //========================================loader  */}
+      {/* //========================================TODO: loader  */}
       {loader && (
         <div className="w-screen bg-opacity-20 min-h-[1240px] h-screen z-[9999999999999] bg-cyan-200 flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
@@ -60,7 +90,7 @@ const Seller = () => {
           </div>
         </div>
       )}
-      {/*=========================================== sales model  */}
+      {/*=========================================== TODO:sales model  */}
       {model && <SalesModel setModel={setModel} sellerId={id} />}
       <motion.div
         initial={{ y: -15, opacity: 0.1 }}
@@ -270,7 +300,7 @@ const Seller = () => {
           </div>
         </div>
         <div className="main-container pr-[36px] flex min-w-full flex-col  w-[1300px] mt-[30px]  tracking-[-.52px] h-[1072px] ">
-          {/* //=================================================total  */}
+          {/* //=================================================TODO:total  */}
           <div className="total flex justify-start gap-4">
             <Total
               delay={0.1}
@@ -321,6 +351,7 @@ const Seller = () => {
               TotalEarnings=""
               styles={`bg-green-200 border border-green-500`}
               title="Total Projects"
+              percentage={percentage}
               svg={
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -624,7 +655,8 @@ const Seller = () => {
                   delay: 0.7,
                 }}
                 disabled={
-                  loginInSeller?._id !== id && loginInSeller?.role !== "admin"
+                  loginInSeller?._id !== id &&
+                  loginInSeller?.role !== "super_admin"
                 }
                 onClick={() => setModel(!model)}
                 className={`w-[170px] transition-all ease-in-out duration-500 hover:scale-105  rounded-md h-[38px] bg-cyan-500 flex justify-center items-center gap-2 text-white hover:bg-cyan-600 transition-all duration-500 ease-in-out`}
@@ -649,7 +681,7 @@ const Seller = () => {
               </motion.button>
             </motion.div>
           </div>
-          {/* //================================================ project datiels  */}
+          {/* //================================================TODO: project datiels  */}
           <div className=" mt-[20px]  flex items-center justify-between">
             <ProjectDetails
               delay={0.1}
@@ -819,7 +851,7 @@ const Seller = () => {
           <h1 className="mt-[25px] text-[22px] font-['work_sans'] tracking-[-.9px]">
             {menu}
           </h1>
-          {/* //=================================================== all sales person  */}
+          {/* //=================================================== TODO:all sales person  */}
           {menu === "Manage Sales People" && (
             <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
               {singleSeller?.salesPerson?.length > 0 ? (

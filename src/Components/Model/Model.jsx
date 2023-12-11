@@ -14,9 +14,10 @@ import LoadingSpinner from "../LoadingSpin";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import { LoggedInSeller } from "../../Features/Seller/SellerApi";
 import { motion } from "framer-motion";
+import { getAllCompanyState } from "../../Features/Company/CompanySlice";
 
 const Model = ({ setClient, singleData }) => {
-  //============================= form hook
+  //=============================  TODO:form hook
   const { input, setInput, handleInputChange } = useFormHook({
     clientName: "",
     clientEmail: "",
@@ -36,20 +37,22 @@ const Model = ({ setClient, singleData }) => {
     clientAvatar: "",
     companyName: "",
     password: "",
+    commissionRate: "",
   });
 
-  //==========================file preview
+  //========================== TODO:file preview
   const [Id, setId] = useState({});
 
-  //==================================handle project file
+  //================================== TODO:handle project file
   const [projectFiles, setProjectFile] = useState(null);
   const { client, message, loader, error } = useSelector(getAllClientState);
   const { loginInSeller } = useSelector(getAllSellerState);
+  const { company } = useSelector(getAllCompanyState);
   const [avatar, setAvatar] = useState(null);
   const [photo, setPhoto] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //=======================================handle project file
+  //======================================= TODO:handle project file
   const handleProjectFile = (e) => {
     const allFiles = [...e.target.files];
 
@@ -65,17 +68,17 @@ const Model = ({ setClient, singleData }) => {
       }
     });
   };
-  //======================================== handle delete
+  //========================================  TODO:handle delete
   const handleDelete = (item) => {
     setProjectFile([...projectFiles.filter((file) => file !== item)]);
   };
-  //================================handle client avatar
+  //================================ TODO:handle client avatar
   const handleClientAvatar = (e) => {
     setPhoto(e.target.files[0]);
     setAvatar(URL.createObjectURL(e.target.files[0]));
   };
 
-  //======================================handle submit
+  //====================================== TODO:handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -93,6 +96,7 @@ const Model = ({ setClient, singleData }) => {
       formData.append("amount", input.amount);
       formData.append("projectDesc", input.projectDesc);
       formData.append("timeFrame", input.timeFrame);
+      formData.append("commissionRate", input.commissionRate);
       for (let i = 0; i < projectFiles?.length; i++) {
         formData.append("projectFile", projectFiles[i]);
       }
@@ -102,7 +106,7 @@ const Model = ({ setClient, singleData }) => {
       formData.append("companyName", input.companyName);
 
       dispatch(updateClient({ formData, id: Id }))
-        .then((res) => {
+        .then(() => {
           dispatch(LoggedInSeller());
         })
         .catch((error) => {
@@ -180,7 +184,7 @@ const Model = ({ setClient, singleData }) => {
     }
   };
 
-  //===================================== alert toastify
+  //=====================================  TODO:alert toastify
   useEffect(() => {
     if (error) {
       Toastify(error, "error");
@@ -196,17 +200,31 @@ const Model = ({ setClient, singleData }) => {
       navigate("/");
     }
   }, [message, error, navigate, dispatch, setClient]);
-  //=========================================single edit data
+  //========================================= TODO:single edit data
   useEffect(() => {
     setInput({ ...singleData });
     setId(singleData?._id);
     setAvatar(singleData?.clientAvatar);
     setProjectFile(singleData?.projectFile);
   }, [singleData, setInput]);
-  //=================================================return
+  //================================================= handle commission rate
+  useEffect(() => {
+    if (input.companyName == "6574cfcf42c936d81ba1df7a") {
+      setInput((prev) => ({
+        ...prev,
+        commissionRate: 10,
+      }));
+    }
+    if (input.companyName == "6574d4642dac4d48fa4d2c86") {
+      setInput((prev) => ({
+        ...prev,
+        commissionRate: 15,
+      }));
+    }
+  }, [input.companyName, setInput]);
   return (
     <motion.div className="w-screen h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed top-0 left-0 scroll-smooth overflow-y-auto z-[99999] flex justify-center">
-      {/* //====================================================close button  */}
+      {/* //==================================================== TODO:close button  */}
       <button
         onClick={() => setClient(false)}
         className="absolute right-16 top-10 z-[99999]"
@@ -224,7 +242,7 @@ const Model = ({ setClient, singleData }) => {
           />
         </svg>
       </button>
-      {/* //====================================================main model  */}
+      {/* //==================================================== TODO:main model  */}
       <motion.div
         initial={{ scale: 0.3 }}
         animate={{ scale: 1 }}
@@ -237,7 +255,7 @@ const Model = ({ setClient, singleData }) => {
         }}
         className="main_model z-[999999999] w-[868px] rounded-[10px] relative h-[90vh] scroll-smooth overflow-y-scroll flex justify-start items-start flex-col bg-white border-2 pt-0 p-[42px] pb-0 scrollbar-custom"
       >
-        {/* //========================================================= loader  */}
+        {/* //=========================================================  TODO:loader  */}
         {loader && (
           <motion.div
             initial={{ opacity: 0.4 }}
@@ -260,12 +278,12 @@ const Model = ({ setClient, singleData }) => {
           please provide us with a rough idea about the project you can leave
           any field empty if you don&apos;t have information about it
         </p>
-        {/* //=============================================================== form  */}
+        {/* //===============================================================  TODO:form  */}
         <form
           onSubmit={handleSubmit}
           className="form_content grid gap-[45px] relative grid-flow-col justify-between mt-[43px] scroll-smooth overflow-y-auto"
         >
-          {/* //=========================================================right section  */}
+          {/* //========================================================= TODO:right section  */}
           <div className="right w-[490px] flex flex-col gap-[36px]">
             <div className="client_information flex flex-col items-start">
               <h5 className="text-gray-900 tracking-[.6px] text-[16px] font-['Lato'] font-[600]">
@@ -336,15 +354,34 @@ const Model = ({ setClient, singleData }) => {
                   </select>
                 </div>
                 <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
-                  <FormInput
-                    type="text"
-                    placeholder="Company name"
-                    label="Company Name"
-                    width={"30px"}
+                  <label
+                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    htmlFor=""
+                  >
+                    Company Name
+                  </label>
+                  <select
+                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="companyName"
                     value={input.companyName}
-                    handleInputChange={handleInputChange}
-                  />
+                    onChange={handleInputChange}
+                  >
+                    <option className="text-gray-500" value="">
+                      ....
+                    </option>
+
+                    {company?.map((item, i) => {
+                      return (
+                        <option
+                          key={i}
+                          className="text-gray-500"
+                          value={item?._id}
+                        >
+                          {item?.companyName}
+                        </option>
+                      );
+                    })}
+                  </select>
                   <FormInput
                     type="text"
                     placeholder="Enter Phone"
@@ -352,6 +389,13 @@ const Model = ({ setClient, singleData }) => {
                     name="clientPhone"
                     value={input.clientPhone}
                     handleInputChange={handleInputChange}
+                  />
+                  <FormInput
+                    type="text"
+                    placeholder="Commission rate"
+                    label="Commission rate"
+                    value={input.commissionRate}
+                    onChange={handleInputChange}
                   />
                   <label
                     className="text-gray-900 font-[800] text-[12px] font-['Lato']"

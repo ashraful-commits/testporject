@@ -1,4 +1,5 @@
 import Layout from "../Components/Layout";
+import Company from "../Pages/Company/Company";
 import EmailSignature from "../Pages/EmailSignature";
 import Home from "../Pages/Home/Home";
 import Project from "../Pages/Project/Prjoject";
@@ -27,6 +28,10 @@ const PrivateRouter = [
           {
             path: "/email/:id",
             element: <EmailSignature />,
+          },
+          {
+            path: "/company",
+            element: <Company />,
           },
         ],
       },
