@@ -174,12 +174,12 @@ const TableComponent = ({ sellerId, input }) => {
               </th>
             )}
             {loginInSeller?.role === "admin" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
+              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
                 commission rate
               </th>
             )}
             {loginInSeller?.role === "super_admin" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[100px]  text-start font-[400]">
+              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
                 commission rate
               </th>
             )}
