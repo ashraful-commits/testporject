@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 //======================================================== base url
-const BASE_URL = "https://wordshpere.onrender.com";
-// const BASE_URL = "http://localhost:5050";
+// const BASE_URL = "https://wordshpere.onrender.com";
+const BASE_URL = "http://localhost:5050";
 
 //=========================================================createClient
 export const createClient = createAsyncThunk(
@@ -42,10 +42,10 @@ export const clientLogin = createAsyncThunk(
 //=============================================================get all client
 export const getAllClient = createAsyncThunk(
   "client/getAllClient",
-  async (data, thunkAPI) => {
+  async (thunkAPI) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/api/v1/client/${data.sellerId}?page=${data.page}&limit=${data.limit}`,
+        `${BASE_URL}/api/v1/client/`,
 
         { withCredentials: true }
       );
@@ -124,73 +124,7 @@ export const permissionUpdate = createAsyncThunk(
     }
   }
 );
-//===============================================================project status update
-export const projectStatusUpdate = createAsyncThunk(
-  "client/projectStatusUpdate",
-  async (data, thunkAPI) => {
-    try {
-      const response = await axios.patch(
-        `${BASE_URL}/api/v1/client/projectStatusUpdate/${data.id}`,
-        { projectStatus: data.projectStatus },
-        { withCredentials: true }
-      );
 
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-//=============================================================== client commission update
-export const updateCommissionRate = createAsyncThunk(
-  "client/updateCommissionRate",
-  async (data, thunkAPI) => {
-    try {
-      const response = await axios.patch(
-        `${BASE_URL}/api/v1/client/commissionRate/${data.id}`,
-        { commissionRate: data.commissionRate },
-        { withCredentials: true }
-      );
-
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-//=============================================================== client commission update
-export const updateSalesCommissionRate = createAsyncThunk(
-  "client/updateSalesCommissionRate",
-  async (data, thunkAPI) => {
-    try {
-      const response = await axios.patch(
-        `${BASE_URL}/api/v1/client/salescommissionRate/${data.id}`,
-        { salesCommissionRate: data.salesCommissionRate },
-        { withCredentials: true }
-      );
-
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-//==================================================================file download
-export const fileDownloadFunc = createAsyncThunk(
-  "client/fileDownload",
-  async (data, thunkAPI) => {
-    try {
-      const response = await axios.get(
-        `${BASE_URL}/api/v1/client/file/${data.file}/${data.fileFormat}`,
-        { withCredentials: true }
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
 export const LoggedInClient = createAsyncThunk(
   "client/LoggedInClient",
   async (thunkAPI) => {
@@ -213,26 +147,6 @@ export const LogoutClient = createAsyncThunk(
       const response = await axios.get(`${BASE_URL}/api/v1/client/logout`, {
         withCredentials: true,
       });
-
-      return response.data;
-    } catch (error) {
-      console.log(error.response);
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-//=============================================================logout seller
-export const deleteFiles = createAsyncThunk(
-  "client/deleteFiles",
-  async (data, thunkAPI) => {
-    try {
-      const response = await axios.post(
-        `${BASE_URL}/api/v1/client/deletefile`,
-        data,
-        {
-          withCredentials: true,
-        }
-      );
 
       return response.data;
     } catch (error) {

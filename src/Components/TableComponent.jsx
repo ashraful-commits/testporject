@@ -1,17 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteClient,
-  getAllClient,
+  deleteProject,
+  getAllProject,
   permissionUpdate,
   projectStatusUpdate,
   updateCommissionRate,
   updateSalesCommissionRate,
-} from "../Features/Client/ClientApi";
-import {
-  getAllClientState,
-  setMessageEmpty,
-} from "../Features/Client/ClientSlice";
+} from "../Features/Project/ProjectApi";
+import { setMessageEmpty } from "../Features/Project/ProjectSlice";
 import Model from "./Model/Model";
 import swal from "sweetalert";
 import LoadingSpinner from "./LoadingSpin";
@@ -21,11 +18,14 @@ import { Link } from "react-router-dom";
 import { Toastify } from "../Utils/Tostify";
 import { LoggedInSeller } from "../Features/Seller/SellerApi";
 import { motion } from "framer-motion";
+import { getAllProjectState } from "../Features/Project/ProjectSlice";
 
 const TableComponent = ({ sellerId, input }) => {
-  const { client, loader, error, message } = useSelector(getAllClientState);
+  const { project, loader, error, message } = useSelector(getAllProjectState);
   const { loginInSeller, loader: sellerLoader } =
     useSelector(getAllSellerState);
+
+  console.log(project);
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,12 +49,12 @@ const TableComponent = ({ sellerId, input }) => {
   //===================================================================================handle edit
   const handleEdit = (id) => {
     setEditModel(true);
-    setSingleData(client.find((item) => item._id == id));
+    setSingleData(project.find((item) => item._id == id));
   };
   //===============================================================================handle edit
   const handleSellerEdit = (id) => {
     setEditModel(true);
-    setSingleData(loginInSeller?.client?.find((item) => item._id == id));
+    setSingleData(loginInSeller?.project?.find((item) => item._id == id));
   };
   //===============================================================================handle delete
   const handleDelete = (id) => {
@@ -66,7 +66,7 @@ const TableComponent = ({ sellerId, input }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        dispatch(deleteClient(id));
+        dispatch(deleteProject(id));
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
@@ -106,14 +106,7 @@ const TableComponent = ({ sellerId, input }) => {
   };
   //===================================================================================get user client
   useEffect(() => {
-    dispatch(
-      getAllClient({
-        sellerId,
-        page: currentPage,
-        limit,
-        role: loginInSeller?.role,
-      })
-    );
+    dispatch(getAllProject());
   }, [dispatch, sellerId, currentPage, limit, loginInSeller]);
   //====================================================================================next page
   const nextPage = () => {
@@ -154,7 +147,7 @@ const TableComponent = ({ sellerId, input }) => {
         <thead>
           <tr className="w-full min-h-[1.875rem] h-full  grid pr-6 grid-flow-col justify-between border-b py-2 text-center">
             <th className="text-[.8125rem] font-['work_sans'] w-[30px]  text-start font-[400]"></th>
-            <th className="text-[.8125rem] font-['work_sans'] -ml-[4rem] w-[120px]  text-start font-[400]">
+            <th className="text-[.8125rem] font-['work_sans'] -ml-[4rem] w-[150px]  text-start font-[400]">
               Client Name
             </th>
             <th className="text-[.8125rem] w-[100px] font-['work_sans'] text-start font-[400]">
@@ -211,23 +204,23 @@ const TableComponent = ({ sellerId, input }) => {
             </motion.div>
           )}
           {loginInSeller?.role === "super_admin" ? (
-            client?.length > 0 ? (
-              client
-                .filter((client) => {
+            project?.length > 0 ? (
+              project
+                .filter((project) => {
                   return (
                     (input?.text
-                      ? client?.clientName
+                      ? project?.clientName
                           ?.toLowerCase()
                           .includes(input?.text?.toLowerCase())
                       : true) &&
                     (input?.startDate
-                      ? new Date(client?.date) >= new Date(input?.startDate)
+                      ? new Date(project?.date) >= new Date(input?.startDate)
                       : true) &&
                     (input?.endDate
-                      ? new Date(client?.date) <= new Date(input?.endDate)
+                      ? new Date(project?.date) <= new Date(input?.endDate)
                       : true) &&
                     (input?.status
-                      ? client?.projectStatus === input?.status
+                      ? project?.projectStatus === input?.status
                       : true)
                   );
                 })
@@ -256,7 +249,7 @@ const TableComponent = ({ sellerId, input }) => {
                           {index + 1}.
                         </span>{" "}
                       </td>
-                      <td className="w-[120px]  -ml-[4rem] overflow-hidden items-center flex gap-[.3125rem] relative">
+                      <td className="w-[150px]  -ml-[4rem] overflow-hidden items-center flex gap-[.3125rem] relative">
                         <Link to={`/${item._id}`}>
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -272,11 +265,11 @@ const TableComponent = ({ sellerId, input }) => {
                           </svg>
                         </Link>
 
-                        {item?.clientAvatar ? (
+                        {item?.clientId?.clientAvatar ? (
                           <Link to={`/${item?._id}`}>
                             <img
                               className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
-                              src={item?.clientAvatar}
+                              src={item?.clientId?.clientAvatar}
                             />
                           </Link>
                         ) : (
@@ -288,8 +281,8 @@ const TableComponent = ({ sellerId, input }) => {
                           </Link>
                         )}
 
-                        <span className="  capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[70px]">
-                          {item.clientName}
+                        <span className="  capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[100px]">
+                          {item?.clientId?.clientName}
                         </span>
                       </td>
                       <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
@@ -506,25 +499,25 @@ const TableComponent = ({ sellerId, input }) => {
                 No Client!
               </span>
             )
-          ) : loginInSeller?.client?.length > 0 ? (
-            loginInSeller?.client
-              ?.filter((client) => {
+          ) : loginInSeller?.project?.length > 0 ? (
+            loginInSeller?.project
+              ?.filter((project) => {
                 return (
                   (input?.text
-                    ? client?.clientName
+                    ? project?.clientName
                         ?.toLowerCase()
                         .includes(input?.text?.toLowerCase())
                     : true) &&
                   (input?.startDate
-                    ? new Date(client?.date) >= new Date(input?.startDate)
+                    ? new Date(project?.date) >= new Date(input?.startDate)
                     : true) &&
                   (input?.endDate
-                    ? new Date(client?.date) <= new Date(input?.endDate)
+                    ? new Date(project?.date) <= new Date(input?.endDate)
                     : true) &&
                   (input?.status
-                    ? client?.projectStatus === input?.status
+                    ? project?.projectStatus === input?.status
                     : true) &&
-                  client?.status === true
+                  project?.status === true
                 );
               })
               .map((item, index) => {
@@ -778,7 +771,7 @@ const TableComponent = ({ sellerId, input }) => {
           )}
         </tbody>
         {/* //=======================================table footer  */}
-        {(client.length >= 1 || loginInSeller?.client?.length >= 1) && (
+        {(project?.length >= 1 || loginInSeller?.project?.length >= 1) && (
           <tfoot>
             <div className="flex justify-center items-center gap-2 py-5">
               <button

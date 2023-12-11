@@ -6,14 +6,10 @@ import {
   clientLogin,
   createClient,
   deleteClient,
-  fileDownloadFunc,
   getAllClient,
   getSingleClient,
   permissionUpdate,
-  projectStatusUpdate,
   updateClient,
-  updateCommissionRate,
-  updateSalesCommissionRate,
 } from "./ClientApi";
 
 const ClientSlice = createSlice({
@@ -24,7 +20,6 @@ const ClientSlice = createSlice({
     loader: false,
     message: null,
     singleClient: null,
-    downloadLink: null,
     clientLoginData: null,
   },
   reducers: {
@@ -109,23 +104,7 @@ const ClientSlice = createSlice({
         state.loader = false;
         state.error = action.payload.message;
       })
-      //====================================================== project status
-      .addCase(projectStatusUpdate.pending, (state, action) => {
-        state.loader = true;
-      })
-      .addCase(projectStatusUpdate.fulfilled, (state, action) => {
-        state.loader = false;
-        state.client[
-          state.client.findIndex(
-            (item) => item._id === action.payload.client._id
-          )
-        ] = action.payload.client;
-        state.message = action.payload.message;
-      })
-      .addCase(projectStatusUpdate.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.payload.message;
-      })
+
       //===========================================================get single client
       .addCase(getSingleClient.pending, (state, action) => {
         state.loader = true;
@@ -141,54 +120,6 @@ const ClientSlice = createSlice({
         state.error = action.payload.message;
       })
       //=========================================================update commission rate
-      .addCase(updateCommissionRate.pending, (state, action) => {
-        state.loader = true;
-      })
-      .addCase(updateCommissionRate.fulfilled, (state, action) => {
-        state.loader = false;
-        state.client[
-          state.client.findIndex(
-            (item) => item._id === action.payload.client._id
-          )
-        ] = action.payload.client;
-
-        state.message = action.payload.message;
-      })
-      .addCase(updateCommissionRate.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.payload.message;
-      })
-      .addCase(updateSalesCommissionRate.pending, (state, action) => {
-        state.loader = true;
-      })
-      .addCase(updateSalesCommissionRate.fulfilled, (state, action) => {
-        state.loader = false;
-        state.client[
-          state.client.findIndex(
-            (item) => item._id === action.payload.client._id
-          )
-        ] = action.payload.client;
-
-        state.message = action.payload.message;
-      })
-      .addCase(updateSalesCommissionRate.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.payload.message;
-      })
-      //===========================================================file download
-      .addCase(fileDownloadFunc.pending, (state, action) => {
-        state.loader = true;
-      })
-      .addCase(fileDownloadFunc.fulfilled, (state, action) => {
-        state.loader = false;
-        state.downloadLink = action.payload.downloadUrl;
-
-        state.message = action.payload.message;
-      })
-      .addCase(fileDownloadFunc.rejected, (state, action) => {
-        state.loader = false;
-        state.error = action.payload.message;
-      }) //===========================================================file download
       .addCase(clientLogin.pending, (state, action) => {
         state.loader = true;
       })

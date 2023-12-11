@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getAllClientState } from "../Features/Client/ClientSlice";
 import { Link } from "react-router-dom";
-import { deleteFiles } from "../Features/Client/ClientApi";
+import { deleteFiles } from "../Features/Project/ProjectApi";
+import { getAllProjectState } from "../Features/Project/ProjectSlice";
 
 const ProjectFile = ({ svg, name, title, file }) => {
   const [downloadMenu, setDownloadMenu] = useState(false);
   const dispatch = useDispatch();
-  const { downloadLink } = useSelector(getAllClientState);
+  const { downloadLink } = useSelector(getAllProjectState);
   const handleDownlaod = (file) => {
     setDownloadMenu(!downloadMenu);
   };
