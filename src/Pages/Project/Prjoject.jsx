@@ -1,6 +1,5 @@
 import bgImg from "../../../public/bgImg.png";
 import user from "../../../public/user.png";
-import Invoices from "../../Components/project/Invoices";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { LogoutClient, updateClient } from "../../Features/Client/ClientApi";
@@ -17,10 +16,10 @@ import DetialsSections from "../../Components/Project/DetialsSections";
 import Team from "../../Components/Project/Team";
 import SoftWere from "../../Components/Project/SoftWere";
 import ProjectFile from "../../Components/Project/ProjectFile";
+import Invoices from "../../Components/project/Invoices";
 const Project = () => {
   //===================================== TODO:get all client state
   const { singleProject, loader } = useSelector(getAllProjectState);
-  console.log(singleProject);
   //====================================================TODO:dispatch and all state
   const dispatch = useDispatch();
   const { id } = useParams();
