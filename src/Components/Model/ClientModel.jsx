@@ -287,17 +287,19 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
                       ....
                     </option>
 
-                    {company?.map((item, i) => {
-                      return (
-                        <option
-                          key={i}
-                          className="text-gray-500"
-                          value={item?._id}
-                        >
-                          {item?.companyName}
-                        </option>
-                      );
-                    })}
+                    {company
+                      ?.filter((item) => item.status == true)
+                      .map((item, i) => {
+                        return (
+                          <option
+                            key={i}
+                            className="text-gray-500"
+                            value={item?._id}
+                          >
+                            {item?.companyName}
+                          </option>
+                        );
+                      })}
                   </select>
                   <FormInput
                     type="text"

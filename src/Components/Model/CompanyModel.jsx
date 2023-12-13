@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import useFormHook from "../../Hooks/useFormHook";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCompanyState } from "../../Features/Company/CompanySlice";
+import {
+  getAllCompanyState,
+  setMessageEmpty,
+} from "../../Features/Company/CompanySlice";
 import LoadingSpinner from "../LoadingSpin";
 import FormInput from "../FormInput/FormInput";
 import { useEffect, useState } from "react";
@@ -22,7 +25,7 @@ const CompanyModel = ({ setModel, title, singleData }) => {
     website: "",
   });
   //======================================= TODO:state
-  const { loader } = useSelector(getAllCompanyState);
+  const { loader, error, message } = useSelector(getAllCompanyState);
 
   //================================================TODO all state
   const [componyAvatar, setCompanyAvatar] = useState(null);
@@ -48,7 +51,6 @@ const CompanyModel = ({ setModel, title, singleData }) => {
         formData.append("companyAvatar", componyAvatar);
       }
       dispatch(updateCompany({ formData, id: singleData?._id })).then(() => {
-        Toastify("Company Updated!", "success");
         setModel(false);
         setInput({
           companyName: "",
@@ -70,7 +72,6 @@ const CompanyModel = ({ setModel, title, singleData }) => {
       formData.append("companyAvatar", componyAvatar);
       if (componyAvatar) {
         dispatch(createCompany(formData)).then(() => {
-          Toastify("Company added!", "success");
           setModel(false);
           setInput({
             companyName: "",
@@ -84,7 +85,23 @@ const CompanyModel = ({ setModel, title, singleData }) => {
       }
     }
   };
+  //=====================================  TODO:alert toastify
+  useEffect(() => {
+    if (error) {
+      Toastify(error, "error");
+      dispatch(setMessageEmpty());
+      setModel(false);
+    }
+    if (message) {
+      Toastify(message, "success");
+      dispatch(setMessageEmpty());
+      setModel(false);
+    }
 
+    // if (localStorage.getItem("Seller")) {
+    //   navigate("/");
+    // }
+  }, [message, error, dispatch, setModel]);
   //====================================edit
   useEffect(() => {
     setInput((prev) => ({

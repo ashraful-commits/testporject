@@ -180,13 +180,13 @@ const Model = ({ setClient, singleData, setForm, title }) => {
   }, [singleData, setInput]);
   //================================================= handle commission rate
   useEffect(() => {
-    if (input.company == "6574cfcf42c936d81ba1df7a") {
+    if (input.company == "657a1bc0687f68c763928a96") {
       setInput((prev) => ({
         ...prev,
         commissionRate: 10,
       }));
     }
-    if (input.company == "6574d4642dac4d48fa4d2c86") {
+    if (input.company == "657a24ae1b068afbcf8039a0") {
       setInput((prev) => ({
         ...prev,
         commissionRate: 15,
@@ -339,17 +339,19 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                       ....
                     </option>
 
-                    {company?.map((item, i) => {
-                      return (
-                        <option
-                          key={i}
-                          className="text-gray-500"
-                          value={item?._id}
-                        >
-                          {item?.companyName}
-                        </option>
-                      );
-                    })}
+                    {company
+                      ?.filter((item) => item.status === true)
+                      .map((item, i) => {
+                        return (
+                          <option
+                            key={i}
+                            className="text-gray-500"
+                            value={item?._id}
+                          >
+                            {item?.companyName}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
                 <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">

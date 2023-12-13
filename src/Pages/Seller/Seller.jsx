@@ -8,7 +8,10 @@ import SalesPeople from "../../Components/Seller/SalesPeople";
 import { useEffect, useState } from "react";
 import SalesModel from "../../Components/Model/SalesModel";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllSellerState } from "../../Features/Seller/SellerSlice";
+import {
+  getAllSellerState,
+  setMessageEmpty,
+} from "../../Features/Seller/SellerSlice";
 import { getSingleSeller } from "../../Features/Seller/SellerApi";
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 import LoadingSpinner from "../../Components/LoadingSpin";
@@ -18,6 +21,7 @@ import StatisticComponent from "../../Components/StatisticComponent";
 import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
 import Total from "../../Components/Project/Total";
+import { Toastify } from "../../Utils/Tostify";
 
 const Seller = () => {
   //===========================================TODO:all state
@@ -36,9 +40,10 @@ const Seller = () => {
     }));
   };
   //==================================================TODO:get all seller state
-  const { singleSeller, loader } = useSelector(getAllSellerState);
+
   //==================================================TODO:login seller
-  const { loginInSeller } = useSelector(getAllSellerState);
+  const { loginInSeller, singleSeller, loader, message, error } =
+    useSelector(getAllSellerState);
   //================================================= TODO:use params
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -48,6 +53,20 @@ const Seller = () => {
       dispatch(getSingleSeller(id));
     }
   }, [dispatch, id]);
+
+  //==================================toastify
+  useEffect(() => {
+    if (error) {
+      Toastify(error, "error");
+      dispatch(setMessageEmpty());
+      setModel(false);
+    }
+    if (message) {
+      Toastify(message, "success");
+      dispatch(setMessageEmpty());
+      setModel(false);
+    }
+  }, [error, message, dispatch]);
   //=====================================================TODO:return
   // ========= TODO:percentage state
   const [percentage, setPercentage] = useState(0);
@@ -660,7 +679,9 @@ const Seller = () => {
                   loginInSeller?.role !== "super_admin"
                 }
                 onClick={() => setModel(!model)}
-                className={`w-[170px] transition-all ease-in-out duration-500 hover:scale-105  rounded-md h-[38px] bg-purple-500 flex justify-center items-center gap-2 text-white hover:bg-purple-600 transition-all duration-500 ease-in-out`}
+                className={
+                  "w-[170px]  hover:scale-105  rounded-md h-[38px] bg-purple-500 flex justify-center items-center gap-2 text-white hover:bg-purple-600 transition-all duration-500 ease-in-out"
+                }
               >
                 Add Sales Person
                 <svg

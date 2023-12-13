@@ -297,7 +297,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                                 "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
                               }${
                                 item?.role == "super_admin" &&
-                                "text-[#FFF] border-[.0187rem] bg-[#8787ff] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
+                                "text-[#FFF] border-[.0187rem] bg-[#a7ff74] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
                               }  `}
                               name="projectType"
                               id=""
@@ -306,16 +306,16 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                                 handleRoleUpdate(item._id, e.target.value)
                               }
                             >
-                              <option className="text-gray-500 " value="user">
+                              <option className="text-gray-200 " value="user">
                                 User
                               </option>
                               <option
-                                className="text-gray-500 "
+                                className="text-gray-200 "
                                 value="super_admin"
                               >
                                 Super admin
                               </option>
-                              <option className="text-gray-500 " value="admin">
+                              <option className="text-gray-200 " value="admin">
                                 Admin
                               </option>
                             </select>
@@ -463,6 +463,9 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                             } ${
                               item?.role == "user" &&
                               "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
+                            } ${
+                              item?.role == "super_admin" &&
+                              "text-[#FFF] border-[.0187rem] bg-[#adff87] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
                             }  `}
                             name="projectType"
                             id=""
@@ -471,17 +474,17 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                               handleRoleUpdate(item._id, e.target.value)
                             }
                           >
-                            <option className="text-gray-500 " value="user">
+                            <option className="text-gray-200 " value="user">
                               ...select...
                             </option>
-                            <option className="text-gray-500 " value="user">
+                            <option className="text-gray-200 " value="user">
                               User
                             </option>
-                            <option className="text-gray-500 " value="admin">
+                            <option className="text-gray-200 " value="admin">
                               Admin
                             </option>
                             <option
-                              className="text-gray-500 "
+                              className="text-gray-200 "
                               value="super_admin"
                             >
                               Super admin
