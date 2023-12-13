@@ -111,15 +111,16 @@ const Total = ({
           {title === "Total Clients" && (
             <div className="flex space-x-[-10px]">
               {totalClients?.slice(0, 4)?.map((item, index) => (
-                <Link key={index} to={`/${item?._id}`}>
-                  <div className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-5px] rounded-full border-[2px]">
-                    <img
-                      className="w-full h-full rounded-full"
-                      src={item?.clientAvatar}
-                      alt={`User ${index + 1}`}
-                    />
-                  </div>
-                </Link>
+                <div
+                  key={index}
+                  className="guy w-[29px] h-[29px] flex justify-center items-center border-white mr-[-5px] rounded-full border-[2px]"
+                >
+                  <img
+                    className="w-full h-full rounded-full"
+                    src={item?.clientAvatar}
+                    alt={`User ${index + 1}`}
+                  />
+                </div>
               ))}
               {totalClients?.length > 4 && (
                 <button className="w-[29px] h-[29px] flex justify-center items-center font-['work_sans'] text-[10px] rounded-full bg-gray-200 border-[2px] border-white">

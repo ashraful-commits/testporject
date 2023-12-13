@@ -67,6 +67,23 @@ export const deleteCompany = createAsyncThunk(
     }
   }
 );
+//==============================================================delete client
+export const getSingleCompany = createAsyncThunk(
+  "company/getSingleCompany",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/v1/company/${id}`,
+
+        { withCredentials: true }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 
 //===============================================================project status update
 export const companyStatus = createAsyncThunk(
@@ -75,7 +92,7 @@ export const companyStatus = createAsyncThunk(
     try {
       const response = await axios.patch(
         `${BASE_URL}/api/v1/company/${data.id}`,
-        { projectStatus: data.projectStatus },
+        { status: data.status },
         { withCredentials: true }
       );
 

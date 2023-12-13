@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import SalesModel from "../Model/SalesModel";
 import {
+  deleteSeller,
   getSingleSalesSeller,
   getSingleSeller,
 } from "../../Features/Seller/SellerApi";
+import swal from "sweetalert";
 //=======================================salesPeople function
 const SalesPeople = ({
   avatar,
@@ -22,6 +24,7 @@ const SalesPeople = ({
   ActiveClient,
   styles,
   delay,
+  sellerId,
   id,
 }) => {
   //=========================================== TODO: all state
@@ -32,7 +35,7 @@ const SalesPeople = ({
   const dropMenu = useRef();
   const dispatch = useDispatch();
   const { singleSales } = useSelector(getAllSellerState);
-  console.log(id);
+
   const dropdownMenu = (e) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
       setManage(false);
@@ -50,7 +53,27 @@ const SalesPeople = ({
       dispatch(getSingleSalesSeller(dropId));
     }
   }, [dispatch, dropId]);
-
+  //====================================================== TODO DELETE
+  const handleDelete = (id, sellerId) => {
+    if (id) {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteSeller({ id, sellerId }));
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+    }
+  };
   return (
     <>
       {dropDown && (
@@ -196,7 +219,10 @@ const SalesPeople = ({
                 >
                   Edit
                 </button>
-                <button className="w-full p-1 font-bold capitalize hover:text-gray-500 ">
+                <button
+                  onClick={() => handleDelete(id, sellerId)}
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                >
                   Delete
                 </button>
               </div>

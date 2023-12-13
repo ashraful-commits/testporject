@@ -200,12 +200,12 @@ const Header = ({ loginInSeller }) => {
           </div>
           <div className="relative">
             {dropdown && (
-              <div className="absolute rounded-md shadow-md p-3 flex flex-col gap-2 top-16 left-0 bg-white border-2 border-purple-300 w-[120px] h-[100px]">
+              <div className="absolute rounded-md shadow-md p-3 flex flex-col gap-2 top-16 left-0 bg-white border-2 border-purple-300 w-[140px] h-[auto]">
                 <span
                   className="absolute block w-8 h-8 bg-purple-300 border shadow-2xl -top-8 "
                   style={{ clipPath: "polygon(49% 37%, 0% 100%, 100% 100%)" }}
                 ></span>
-                <button className="flex justify-center gap-2 font-['work_sans'] font-[500] items-center">
+                <button className="flex justify-between gap-2 font-['work_sans'] font-[500] items-center">
                   <svg
                     fill="#000000"
                     width="16"
@@ -219,7 +219,7 @@ const Header = ({ loginInSeller }) => {
                   Setting
                 </button>
                 <button
-                  className="flex justify-center gap-2 font-['work_sans'] font-[500] items-center"
+                  className="flex justify-between gap-2 font-['work_sans'] font-[500] items-center"
                   onClick={handleLogout}
                 >
                   <svg
@@ -236,6 +236,27 @@ const Header = ({ loginInSeller }) => {
                   </svg>
                   Log out
                 </button>
+                <Link
+                  to="/company"
+                  className="flex justify-between gap-2 font-['work_sans'] font-[500] items-center"
+                >
+                  <svg
+                    fill="#000000"
+                    width="15"
+                    height="15"
+                    viewBox="-2 0 16 16"
+                    id="company-16px"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      id="Path_133"
+                      data-name="Path 133"
+                      d="M323.5-192h-9a1.5,1.5,0,0,0-1.5,1.5V-176h12v-14.5A1.5,1.5,0,0,0,323.5-192ZM318-177v-3h2v3Zm6,0h-3v-3.5a.5.5,0,0,0-.5-.5h-3a.5.5,0,0,0-.5.5v3.5h-3v-13.5a.5.5,0,0,1,.5-.5h9a.5.5,0,0,1,.5.5Zm-8-12h2v2h-2Zm4,0h2v2h-2Zm-4,4h2v2h-2Zm4,0h2v2h-2Z"
+                      transform="translate(-313 192)"
+                    />
+                  </svg>
+                  Companies
+                </Link>
               </div>
             )}
             {localStorage.getItem("Seller") ? (

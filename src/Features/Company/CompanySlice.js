@@ -5,6 +5,7 @@ import {
   createCompany,
   deleteCompany,
   getAllCompany,
+  getSingleCompany,
   updateCompany,
 } from "./CompanyApi";
 
@@ -12,6 +13,7 @@ const CompanySlice = createSlice({
   name: "company",
   initialState: {
     company: [],
+    singleCompany: null,
     error: null,
     loader: false,
     message: null,
@@ -78,6 +80,18 @@ const CompanySlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(deleteCompany.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(getSingleCompany.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(getSingleCompany.fulfilled, (state, action) => {
+        state.loader = false;
+        state.singleCompany = action.payload.company;
+        state.message = action.payload.message;
+      })
+      .addCase(getSingleCompany.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       })

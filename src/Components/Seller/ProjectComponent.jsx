@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { getSingleProject } from "../../Features/Project/ProjectApi";
+import {
+  deleteProject,
+  getSingleProject,
+} from "../../Features/Project/ProjectApi";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProjectState } from "../../Features/Project/ProjectSlice";
 import Model from "../Model/Model";
+import swal from "sweetalert";
 
 const ProjectComponent = ({
   clientAvatar,
@@ -49,6 +53,27 @@ const ProjectComponent = ({
       dispatch(getSingleProject(dropId));
     }
   }, [dispatch, id, dropId]);
+  //====================================================== TODO DELETE
+  const handleDelete = (id) => {
+    if (id) {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteProject(id));
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+    }
+  };
   return (
     <>
       {/* ==============================================TODO:model  */}
@@ -243,7 +268,10 @@ const ProjectComponent = ({
                 >
                   Edit
                 </button>
-                <button className="w-full p-1 font-bold capitalize hover:text-gray-500 ">
+                <button
+                  onClick={() => handleDelete(id)}
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                >
                   Delete
                 </button>
               </div>

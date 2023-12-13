@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import ClientModel from "../Model/ClientModel";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllClientState } from "../../Features/Client/ClientSlice";
-import { getSingleClient } from "../../Features/Client/ClientApi";
+import { deleteClient, getSingleClient } from "../../Features/Client/ClientApi";
+import swal from "sweetalert";
 
 const ClientComponent = ({
   clientAvatar,
@@ -42,11 +43,34 @@ const ClientComponent = ({
       window.removeEventListener("click", dropdownMenu);
     };
   }, []);
+  //====================================================== TODO:get data
   useEffect(() => {
     if (dropId) {
       dispatch(getSingleClient(dropId));
     }
   }, [dispatch, id, dropId]);
+
+  //====================================================== TODO DELETE
+  const handleDelete = (id) => {
+    if (id) {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteClient(id));
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+    }
+  };
   return (
     <>
       {/* =========================================dropdown menu  */}
@@ -216,7 +240,10 @@ const ClientComponent = ({
                 >
                   Edit
                 </button>
-                <button className="w-full p-1 font-bold capitalize hover:text-gray-500 ">
+                <button
+                  onClick={() => handleDelete(id)}
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                >
                   Delete
                 </button>
               </div>

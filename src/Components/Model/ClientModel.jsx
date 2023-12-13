@@ -119,6 +119,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
     if (error) {
       Toastify(error, "error");
       dispatch(setMessageEmpty());
+      setClient(false);
     }
     if (message) {
       Toastify(message, "success");

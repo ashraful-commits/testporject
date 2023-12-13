@@ -21,6 +21,7 @@ import {
 } from "../../Features/Project/ProjectApi";
 import { getAllClient } from "../../Features/Client/ClientApi";
 import { getAllProjectState } from "../../Features/Project/ProjectSlice";
+import { getAllCompany } from "../../Features/Company/CompanyApi";
 
 const Model = ({ setClient, singleData, setForm, title }) => {
   //=============================  TODO:form hook
@@ -40,7 +41,8 @@ const Model = ({ setClient, singleData, setForm, title }) => {
     password: "",
     commissionRate: "",
   });
-
+  console.log(singleData);
+  console.log(input);
   //========================== TODO:file preview
   const [Id, setId] = useState({});
 
@@ -158,6 +160,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
     if (error) {
       Toastify(error, "error");
       dispatch(setMessageEmpty());
+      setClient(false);
     }
     if (message) {
       Toastify(message, "success");
@@ -192,6 +195,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
   }, [input.company, setInput]);
   useEffect(() => {
     dispatch(getAllClient());
+    dispatch(getAllCompany());
   }, [dispatch]);
   return (
     <motion.div className="w-screen h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed top-0 left-0 scroll-smooth overflow-y-auto z-[99999] flex justify-center">

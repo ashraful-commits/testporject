@@ -59,10 +59,6 @@ const Home = () => {
       Toastify(message, "success");
       dispatch(setMessageEmpty());
     }
-
-    if (!localStorage.getItem("Seller")) {
-      navigate("/login");
-    }
   }, [error, message, dispatch, navigate]);
   //=============================================================== TODO:logged in seller data
   useEffect(() => {

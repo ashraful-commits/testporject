@@ -133,10 +133,12 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     if (error) {
       Toastify(error, "error");
       dispatch(setMessageEmpty());
+      setModel(false);
     }
     if (message) {
       Toastify(message, "success");
       dispatch(setMessageEmpty());
+      setModel(false);
     }
   }, [error, message, dispatch]);
   useEffect(() => {

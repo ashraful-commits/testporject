@@ -446,7 +446,7 @@ const Seller = () => {
             <Total
               delay={0.7}
               number={calculateTotalCommissionForAllClients(
-                singleSeller?.client
+                singleSeller?.projects
               )}
               totalSalesGuy=""
               totalProjects=""
@@ -882,6 +882,7 @@ const Seller = () => {
                         name={item.name}
                         title={item.employment}
                         id={item?._id}
+                        sellerId={id}
                         project={
                           item?.projects?.length > 0
                             ? item?.projects?.length
