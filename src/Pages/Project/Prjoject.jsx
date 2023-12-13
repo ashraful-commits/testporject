@@ -7,8 +7,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import LoadingSpinner from "../../Components/LoadingSpin";
 import html2canvas from "html2canvas";
-
-import ClientFeedBack from "../../Components/project/ClientFeedBack";
 import { motion } from "framer-motion";
 import { getAllProjectState } from "../../Features/Project/ProjectSlice";
 import { getSingleProject } from "../../Features/Project/ProjectApi";
@@ -17,6 +15,7 @@ import Team from "../../Components/Project/Team";
 import SoftWere from "../../Components/Project/SoftWere";
 import ProjectFile from "../../Components/Project/ProjectFile";
 import Invoices from "../../Components/project/Invoices";
+import ClientFeedBack from "../../Components/project/ClientFeedBack";
 const Project = () => {
   //===================================== TODO:get all client state
   const { singleProject, loader } = useSelector(getAllProjectState);
