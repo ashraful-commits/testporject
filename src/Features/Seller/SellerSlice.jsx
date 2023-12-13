@@ -7,6 +7,7 @@ import {
   SellerRegistration,
   deleteSeller,
   getAllSeller,
+  getSingleSalesSeller,
   getSingleSeller,
   updateSeller,
   updateSellerRole,
@@ -21,6 +22,7 @@ const SellerSlice = createSlice({
     loader: false,
     message: null,
     singleSeller: null,
+    singleSales: null,
     loginInSeller: localStorage.getItem("Seller")
       ? JSON.parse(localStorage.getItem("Seller"))
       : null,
@@ -70,7 +72,6 @@ const SellerSlice = createSlice({
       .addCase(SellerLogin.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
-        console.log(action);
       })
       //=======================================================logged In Seller
       .addCase(LoggedInSeller.pending, (state, action) => {
@@ -133,6 +134,17 @@ const SellerSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(getSingleSeller.rejected, (state, action) => {
+        state.loader = false;
+      })
+      .addCase(getSingleSalesSeller.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(getSingleSalesSeller.fulfilled, (state, action) => {
+        state.loader = false;
+        state.singleSales = action.payload.seller;
+        state.message = action.payload.message;
+      })
+      .addCase(getSingleSalesSeller.rejected, (state, action) => {
         state.loader = false;
       })
       //========================================================= update seller status

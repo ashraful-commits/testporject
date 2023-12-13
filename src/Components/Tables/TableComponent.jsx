@@ -24,7 +24,6 @@ const TableComponent = ({ sellerId, input }) => {
   const { project, loader, error, message } = useSelector(getAllProjectState);
   const { loginInSeller, loader: sellerLoader } =
     useSelector(getAllSellerState);
-  console.log(loginInSeller);
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -143,7 +142,13 @@ const TableComponent = ({ sellerId, input }) => {
   return (
     <div ref={dropdownRef}>
       {/* //=============================================edit modle  */}
-      {editModel && <Model setClient={setEditModel} singleData={singleData} />}
+      {editModel && (
+        <Model
+          setClient={setEditModel}
+          title="Edit Project"
+          singleData={singleData}
+        />
+      )}
       <table className="w-full  min-h-[490px] rounded-md ">
         {/* //======================================table header  */}
         <thead>

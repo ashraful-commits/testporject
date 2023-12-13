@@ -75,7 +75,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
   //====================================== TODO:handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
+
     const formData = new FormData();
     if (Id) {
       formData.append("clientId", input.clientId);

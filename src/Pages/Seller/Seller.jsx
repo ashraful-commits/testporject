@@ -37,7 +37,6 @@ const Seller = () => {
   };
   //==================================================TODO:get all seller state
   const { singleSeller, loader } = useSelector(getAllSellerState);
-  console.log(singleSeller);
   //==================================================TODO:login seller
   const { loginInSeller } = useSelector(getAllSellerState);
   //================================================= TODO:use params
@@ -881,7 +880,8 @@ const Seller = () => {
                         key={index}
                         avatar={item.avatar}
                         name={item.name}
-                        title="Sales Executive"
+                        title={item.employment}
+                        id={item?._id}
                         project={
                           item?.projects?.length > 0
                             ? item?.projects?.length
@@ -891,9 +891,9 @@ const Seller = () => {
                           item?.client?.length > 0 ? item?.client?.length : 0
                         }
                         earning={
-                          item?.client?.length > 0
+                          item?.projects?.length > 0
                             ? calculateTotalCommissionForAllClients(
-                                item?.client
+                                item?.projects
                               )
                             : 0
                         }

@@ -142,7 +142,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         <SalesModel
           setModel={setEditModel}
           singleData={singleData}
-          title="Edit"
+          title="Edit sales"
         />
       )}
       {/* //=============================================table  */}

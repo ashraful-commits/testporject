@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { BASE_URL } from "../../Utils/BaseUrl";
 //=========================================================base url
-const BASE_URL = "https://wordshpere.onrender.com";
-// const BASE_URL = "http://localhost:5050";
+
 //=======================================================sellerRegistration
 export const SellerRegistration = createAsyncThunk(
   "seller/SellerRegistration",
@@ -63,7 +63,6 @@ export const SellerLogin = createAsyncThunk(
         { withCredentials: true }
       );
 
-      console.log(response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -96,7 +95,6 @@ export const LogoutSeller = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.response);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -115,7 +113,6 @@ export const getAllSeller = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.response);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -135,7 +132,6 @@ export const updateSellerRole = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.response);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -155,7 +151,6 @@ export const updateSellerStatus = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.response);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -174,7 +169,6 @@ export const deleteSeller = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error.response);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -194,7 +188,25 @@ export const getSingleSeller = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.response);
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+//========================================================get single seller
+export const getSingleSalesSeller = createAsyncThunk(
+  "seller/getSingleSalesSeller",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/v1/seller/salesPerson/${id}`,
+
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

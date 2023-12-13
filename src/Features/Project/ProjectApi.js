@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-//======================================================== base url
-const BASE_URL = "https://wordshpere.onrender.com";
-// const BASE_URL = "http://localhost:5050";
+import { BASE_URL } from "../../Utils/BaseUrl";
 
 //=========================================================createProject
 export const createProject = createAsyncThunk(
@@ -15,7 +13,6 @@ export const createProject = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.message);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -166,7 +163,7 @@ export const fileDownloadFunc = createAsyncThunk(
         `${BASE_URL}/api/v1/project/file/${data.file}/${data.fileFormat}`,
         { withCredentials: true }
       );
-      console.log(response.data);
+
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -189,7 +186,6 @@ export const deleteFiles = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.response);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

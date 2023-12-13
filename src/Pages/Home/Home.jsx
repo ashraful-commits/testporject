@@ -199,7 +199,7 @@ const Home = () => {
                   Total Customers
                 </p>
               </div>
-              <div className="percentage flex justify-center gap-[10px] items-center">
+              <div className="percentage flex justify-start px-4 gap-[10px] items-center">
                 <h2 className="text-[35px] text-white mb-[10px] font-['Work_Sans']">
                   {loginInSeller?.client?.length > 0
                     ? loginInSeller?.client.length

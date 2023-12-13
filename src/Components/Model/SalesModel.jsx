@@ -7,6 +7,8 @@ import {
   AddSalePerson,
   LoggedInSeller,
   SellerRegistration,
+  getSingleSalesSeller,
+  getSingleSeller,
   updateSeller,
 } from "../../Features/Seller/SellerApi";
 import { Toastify } from "../../Utils/Tostify";
@@ -51,7 +53,6 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   };
   //=========================== TODO:handle inputChange
   const handleInputChange = (e) => {
-    console.log(e);
     setInput((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -139,7 +140,6 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     }
   }, [error, message, dispatch]);
   useEffect(() => {
-    console.log(singleData);
     setInput({ ...singleData });
     setAvatar(singleData?.avatar);
     setComponyAvatar(singleData?.companyAvatar);
@@ -220,7 +220,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   value={input.email}
                   handleInputChange={handleInputChange}
                 />
-                {title === "Edit" ? (
+                {title === "Edit sales" ? (
                   ""
                 ) : (
                   <FormInput

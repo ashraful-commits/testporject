@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-//======================================================== base url
-const BASE_URL = "https://wordshpere.onrender.com";
-// const BASE_URL = "http://localhost:5050";
+import { BASE_URL } from "../../Utils/BaseUrl";
 
 //=========================================================createClient
 export const createClient = createAsyncThunk(
@@ -15,7 +13,6 @@ export const createClient = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.message);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }
@@ -150,7 +147,6 @@ export const LogoutClient = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.response);
       return thunkAPI.rejectWithValue(error.response.data);
     }
   }

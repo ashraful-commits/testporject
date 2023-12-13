@@ -52,7 +52,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
   //====================================== TODO:handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input, photo);
+
     const sellerId = JSON.parse(localStorage.getItem("Seller"))._id;
     const formData = new FormData();
     if (Id) {
@@ -220,9 +220,9 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
                     handleInputChange={handleInputChange}
                   />
                   <FormInput
-                    type="text"
+                    type="email"
                     placeholder="Enter Email"
-                    label="Company email"
+                    label="Client email"
                     name="clientEmail"
                     value={input.clientEmail}
                     handleInputChange={handleInputChange}

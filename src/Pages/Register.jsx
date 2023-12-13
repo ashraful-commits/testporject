@@ -24,7 +24,6 @@ const Register = () => {
   });
   //================================================get message
   const { message, error, loader } = useSelector(getAllSellerState);
-  console.log(message, error);
   //================================================ preview state
   const [avatar, setAvatar] = useState(null);
   const [companyAvatar, setCompanyAvatar] = useState(null);
