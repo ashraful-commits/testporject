@@ -14,8 +14,8 @@ import DetialsSections from "../../Components/Project/DetialsSections";
 import Team from "../../Components/Project/Team";
 import SoftWere from "../../Components/Project/SoftWere";
 import ProjectFile from "../../Components/Project/ProjectFile";
-import Invoices from "../../Components/project/Invoices";
 import ClientFeedBack from "../../Components/project/ClientFeedBack";
+import Invoices from "../../Components/project/Invoices";
 const Project = () => {
   //===================================== TODO:get all client state
   const { singleProject, loader } = useSelector(getAllProjectState);
