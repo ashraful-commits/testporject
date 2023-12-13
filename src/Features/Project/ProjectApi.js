@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 //======================================================== base url
-// const BASE_URL = "https://wordshpere.onrender.com";
-const BASE_URL = "http://localhost:5050";
+const BASE_URL = "https://wordshpere.onrender.com";
+// const BASE_URL = "http://localhost:5050";
 
 //=========================================================createProject
 export const createProject = createAsyncThunk(
