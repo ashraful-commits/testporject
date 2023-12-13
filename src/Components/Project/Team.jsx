@@ -15,7 +15,7 @@ const Team = ({ avatar, title, name, delay }) => {
     >
       <div className="w-[42px] h-[42px] overflow-hidden">
         <img
-          className=" object-cover w-full h-full rounded-full"
+          className="object-cover w-full h-full rounded-full "
           src={avatar}
           alt=""
         />

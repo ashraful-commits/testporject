@@ -78,7 +78,7 @@ export const getSingleProject = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/api/v1/project/projectId/${id}`,
+        `${BASE_URL}/api/v1/project/${id}`,
 
         { withCredentials: true }
       );

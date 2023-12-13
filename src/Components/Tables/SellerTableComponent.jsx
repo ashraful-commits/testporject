@@ -1,25 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteClient, permissionUpdate } from "../Features/Client/ClientApi";
-import {
-  getAllClientState,
-  setMessageEmpty,
-} from "../Features/Client/ClientSlice";
 
 import swal from "sweetalert";
-import LoadingSpinner from "./LoadingSpin";
-import { getAllSellerState } from "../Features/Seller/SellerSlice";
+import LoadingSpinner from "../LoadingSpin";
+import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import {
   LoggedInSeller,
   deleteSeller,
   getAllSeller,
   updateSellerRole,
   updateSellerStatus,
-} from "../Features/Seller/SellerApi";
+} from "../../Features/Seller/SellerApi";
 import { Link } from "react-router-dom";
-import { Toastify } from "../Utils/Tostify";
-import SalesModel from "./Model/SalesModel";
+import { Toastify } from "../../Utils/Tostify";
+import SalesModel from "../Model/SalesModel";
 import { motion } from "framer-motion";
+import {
+  getAllClientState,
+  setMessageEmpty,
+} from "../../Features/Client/ClientSlice";
 
 const SellerTableComponent = ({ setModel, sellerId, input }) => {
   const { loader, error, message } = useSelector(getAllClientState);
@@ -190,7 +189,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.2 }}
               transition={{ duration: 1.3 }}
-              className="w-full h-full bg-cyan-600 bg-opacity-20 absolute top left-0"
+              className="absolute left-0 w-full h-full bg-purple-600 bg-opacity-20 top"
             >
               <div className="w-full absolute h-full top-[45%]">
                 <LoadingSpinner />
@@ -245,7 +244,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         </span>
                       </td>
                       <Link
-                        className=" cursor-pointer"
+                        className="cursor-pointer "
                         to={`/seller/${item._id}`}
                       >
                         <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
@@ -339,7 +338,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
 
                       <td className="  relative z-0 text-[.8125rem] flex items-center justify-end gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49]">
                         <button
-                          className="cursor-pointer w-full h-full hover:border rounded-md transition-all ease-in-out duration-500 flex justify-center items-center"
+                          className="flex items-center justify-center w-full h-full transition-all duration-500 ease-in-out rounded-md cursor-pointer hover:border"
                           onClick={() => handleDropdown(item?._id)}
                         >
                           <svg
@@ -413,7 +412,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       </span>
                     </td>
                     <Link
-                      className=" cursor-pointer"
+                      className="cursor-pointer "
                       to={`/seller/${item._id}`}
                     >
                       <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
@@ -507,7 +506,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
 
                     <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49]">
                       <button
-                        className="cursor-pointer w-full h-full hover:border rounded-md transition-all ease-in-out duration-500 flex justify-center items-center"
+                        className="flex items-center justify-center w-full h-full transition-all duration-500 ease-in-out rounded-md cursor-pointer hover:border"
                         onClick={() => handleDropdown(item?._id)}
                       >
                         <svg
@@ -551,9 +550,9 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         {(seller?.length >= 1 ||
           [...loginInSeller.salesPerson, loginInSeller]?.length >= 1) && (
           <tfoot>
-            <div className="flex justify-center items-center gap-2 py-5">
+            <div className="flex items-center justify-center gap-2 py-5">
               <button
-                className="text-[14px] w-[25px] hover:scale-105  h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] w-[25px] hover:scale-105  h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={prevPage}
               >
                 <svg
@@ -585,32 +584,32 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
               <button
                 onClick={() => setCurrentPage(1)}
                 className={`${
-                  currentPage === 1 ? "bg-darkBlue text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 1 ? "bg-purple-800 text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 1
               </button>
               <button
                 onClick={() => setCurrentPage(2)}
                 className={`${
-                  currentPage === 2 ? "bg-darkBlue text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 2 ? "bg-purple-800 text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 2
               </button>
               <button
                 onClick={() => setCurrentPage(3)}
                 className={`${
-                  currentPage === 3 ? "bg-darkBlue text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 3 ? "bg-purple-800 text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 3
               </button>
               <button
                 onClick={() => setCurrentPage(4)}
                 className={`${
-                  currentPage === 4 ? "bg-darkBlue text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 4 ? "bg-purple-800 text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 4
               </button>
@@ -624,7 +623,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 <option value="7">7</option>
               </select>
               <button
-                className="text-[14px] hover:scale-105  w-[25px] h-[25px] flex rounded-md hover:bg-darkBlue justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] hover:scale-105  w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={nextPage}
               >
                 <svg

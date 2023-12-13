@@ -49,7 +49,7 @@ const Header = ({ loginInSeller }) => {
         </div>
         <div className="w-[660px] h-[46px] flex justify-between items-center">
           <div className="h-[68px] w-[439px] relative">
-            <img className="h-full w-full " src={bgImg} alt="" />
+            <img className="w-full h-full " src={bgImg} alt="" />
             <div className="w-full h-full  absolute top-0 left-0 pl-[16px] pt-[7px]">
               <p className="text-[12px] font-[400] font-['work_sans'] p-[2px] text-[#878790]">
                 Sales Toolkit
@@ -202,7 +202,7 @@ const Header = ({ loginInSeller }) => {
             {dropdown && (
               <div className="absolute rounded-md shadow-md p-3 flex flex-col gap-2 top-16 left-0 bg-white border-2 border-purple-300 w-[120px] h-[100px]">
                 <span
-                  className="block w-8 h-8 bg-purple-300 absolute border -top-8 shadow-2xl "
+                  className="absolute block w-8 h-8 bg-purple-300 border shadow-2xl -top-8 "
                   style={{ clipPath: "polygon(49% 37%, 0% 100%, 100% 100%)" }}
                 ></span>
                 <button className="flex justify-center gap-2 font-['work_sans'] font-[500] items-center">
@@ -240,7 +240,7 @@ const Header = ({ loginInSeller }) => {
             )}
             {localStorage.getItem("Seller") ? (
               loginInSeller?.avatar ? (
-                <div className="flex items-end gap-3 justify-end">
+                <div className="flex items-end justify-end gap-3">
                   <img
                     onClick={() => setDropdown(!dropdown)}
                     className=" w-[46px] h-[46px] mt-[0px] cursor-pointer ml-[5px] border-[1px] rounded-full p-[2px] border-[#6E28D4]"
@@ -271,10 +271,10 @@ const Header = ({ loginInSeller }) => {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-end gap-3 justify-end">
+                <div className="flex items-end justify-end gap-3">
                   <img
                     onClick={() => setDropdown(!dropdown)}
-                    className=" w-[46px] cursor-pointer h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                    className=" w-[46px] cursor-pointer h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
                     src={user}
                     alt=""
                   />
@@ -309,13 +309,13 @@ const Header = ({ loginInSeller }) => {
               >
                 {loginInSeller?.avatar ? (
                   <img
-                    className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                    className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
                     src={loginInSeller?.avatar}
                     alt=""
                   />
                 ) : (
                   <img
-                    className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                    className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
                     src={user}
                     alt=""
                   />

@@ -29,7 +29,7 @@ const FormInput = ({
       </label>
       {/*========================================= input field  */}
       <input
-        className="border focus:outline-darkBlue transition-all duration-500 ease-in-out mt-[10px] w-full h-[36px] rounded-[5px] pl-[20px] font-['Lato'] placeholder:font-['work_sans'] placeholder:text-[10px]"
+        className="border focus:outline-purple-800 transition-all duration-500 ease-in-out mt-[10px] w-full h-[36px] rounded-[5px] pl-[20px] font-['Lato'] placeholder:font-['work_sans'] placeholder:text-[10px]"
         type={type}
         placeholder={placeholder}
         value={value}

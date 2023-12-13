@@ -147,7 +147,7 @@ const Company = () => {
                 delay: 0.2,
               }}
               to={`/email/${loginInSeller?._id}`}
-              className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] mt-[8px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+              className="hover:bg-purple-800 hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] mt-[8px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
             >
               Email Signature
             </Link>
@@ -161,7 +161,7 @@ const Company = () => {
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.2,
               }}
-              className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+              className="hover:bg-purple-800 hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
             >
               Email Setup
             </motion.button>
@@ -175,14 +175,14 @@ const Company = () => {
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.2,
               }}
-              className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+              className="hover:bg-purple-800 hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
             >
               Pricing
             </motion.button>
             <Link
               target="blank"
               to={loginInSeller?.website}
-              className="hover:bg-darkBlue hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
+              className="hover:bg-purple-800 hover:scale-105 transition-all duration-500 ease-in-out text-[#878790] font-['Work_Sans'] text-[12px] tracking-[-.2px] w-[154px] h-[26px] bg-mediumBlack rounded-[4px] text-center"
             >
               Website
             </Link>
@@ -324,7 +324,7 @@ const Company = () => {
               </svg>
               <button
                 onClick={handleLogout}
-                className="hover:text-darkBlue ease-in-out transition-all"
+                className="hover:text-purple-800 ease-in-out transition-all"
               >
                 Logout
               </button>

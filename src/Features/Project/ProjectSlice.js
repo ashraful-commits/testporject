@@ -48,12 +48,12 @@ const projectSlice = createSlice({
         state.loader = true;
       })
       .addCase(getAllProject.fulfilled, (state, action) => {
-        state.loader = false;
         state.project = action.payload.project;
+        state.loader = false;
       })
       .addCase(getAllProject.rejected, (state, action) => {
-        state.loader = false;
         state.error = action.payload.message;
+        state.loader = false;
       })
       //===================================================== update project
       .addCase(updateProject.pending, (state, action) => {
@@ -127,7 +127,7 @@ const projectSlice = createSlice({
       })
       .addCase(getSingleProject.fulfilled, (state, action) => {
         state.loader = false;
-        state.singleproject = action.payload.project;
+        state.singleProject = action.payload.project;
 
         state.message = action.payload.message;
       })

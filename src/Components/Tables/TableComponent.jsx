@@ -7,25 +7,24 @@ import {
   projectStatusUpdate,
   updateCommissionRate,
   updateSalesCommissionRate,
-} from "../Features/Project/ProjectApi";
-import { setMessageEmpty } from "../Features/Project/ProjectSlice";
-import Model from "./Model/Model";
+} from "../../Features/Project/ProjectApi";
+import { setMessageEmpty } from "../../Features/Project/ProjectSlice";
+import Model from "../Model/Model";
 import swal from "sweetalert";
-import LoadingSpinner from "./LoadingSpin";
-import { getAllSellerState } from "../Features/Seller/SellerSlice";
+import LoadingSpinner from "../LoadingSpin";
+import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 
 import { Link } from "react-router-dom";
-import { Toastify } from "../Utils/Tostify";
-import { LoggedInSeller } from "../Features/Seller/SellerApi";
+import { Toastify } from "../../Utils/Tostify";
+import { LoggedInSeller } from "../../Features/Seller/SellerApi";
 import { motion } from "framer-motion";
-import { getAllProjectState } from "../Features/Project/ProjectSlice";
+import { getAllProjectState } from "../../Features/Project/ProjectSlice";
 
 const TableComponent = ({ sellerId, input }) => {
   const { project, loader, error, message } = useSelector(getAllProjectState);
   const { loginInSeller, loader: sellerLoader } =
     useSelector(getAllSellerState);
-
-  console.log(project);
+  console.log(loginInSeller);
   const dispatch = useDispatch();
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,7 +53,7 @@ const TableComponent = ({ sellerId, input }) => {
   //===============================================================================handle edit
   const handleSellerEdit = (id) => {
     setEditModel(true);
-    setSingleData(loginInSeller?.project?.find((item) => item._id == id));
+    setSingleData(loginInSeller?.projects?.find((item) => item._id == id));
   };
   //===============================================================================handle delete
   const handleDelete = (id) => {
@@ -66,7 +65,9 @@ const TableComponent = ({ sellerId, input }) => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        dispatch(deleteProject(id));
+        dispatch(deleteProject(id)).then(() => {
+          dispatch(LoggedInSeller());
+        });
         swal("Poof! Your imaginary file has been deleted!", {
           icon: "success",
         });
@@ -97,6 +98,7 @@ const TableComponent = ({ sellerId, input }) => {
       dispatch(LoggedInSeller());
     });
   };
+  //=============================================================================handle sale commission
   const handleSalesCommission = (id, salesCommissionRate) => {
     dispatch(updateSalesCommissionRate({ id, salesCommissionRate })).then(
       () => {
@@ -341,29 +343,29 @@ const TableComponent = ({ sellerId, input }) => {
                                 handleProjectStatus(item._id, e.target.value)
                               }
                             >
-                              <option className="text-gray-500  " value="....">
+                              <option className="text-gray-500 " value="....">
                                 ...select...
                               </option>
                               <option
-                                className="text-gray-500  "
+                                className="text-gray-500 "
                                 value="pending"
                               >
                                 pending
                               </option>
                               <option
-                                className="text-gray-500  "
+                                className="text-gray-500 "
                                 value="on going"
                               >
                                 on going
                               </option>
                               <option
-                                className="text-gray-500  "
+                                className="text-gray-500 "
                                 value="on hold"
                               >
                                 on hold
                               </option>
                               <option
-                                className="text-gray-500  "
+                                className="text-gray-500 "
                                 value="complete"
                               >
                                 complete
@@ -386,10 +388,10 @@ const TableComponent = ({ sellerId, input }) => {
                                 handleCommission(item._id, e.target.value)
                               }
                             >
-                              <option className="text-gray-500  " value="">
+                              <option className="text-gray-500 " value="">
                                 ...
                               </option>
-                              <option className="text-gray-500  " value="5">
+                              <option className="text-gray-500 " value="5">
                                 5%
                               </option>
                               <option className="text-gray-500 " value="10">
@@ -422,10 +424,10 @@ const TableComponent = ({ sellerId, input }) => {
                                 handleCommission(item._id, e.target.value)
                               }
                             >
-                              <option className="text-gray-500  " value="">
+                              <option className="text-gray-500 " value="">
                                 ...
                               </option>
-                              <option className="text-gray-500  " value="5">
+                              <option className="text-gray-500 " value="5">
                                 5%
                               </option>
                               <option className="text-gray-500 " value="10">
@@ -460,7 +462,7 @@ const TableComponent = ({ sellerId, input }) => {
                       </td>
                       <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49] ">
                         <button
-                          className="cursor-pointer w-full h-full hover:border rounded-md transition-all ease-in-out duration-500 flex justify-center items-center"
+                          className="flex items-center justify-center w-full h-full transition-all duration-500 ease-in-out rounded-md cursor-pointer hover:border"
                           onClick={() => handleDropdown(item?._id)}
                         >
                           <svg
@@ -496,15 +498,15 @@ const TableComponent = ({ sellerId, input }) => {
                 })
             ) : (
               <span className="text-[12px] font-[600] text-center w-full inline-block py-5">
-                No Client!
+                No project!
               </span>
             )
-          ) : loginInSeller?.project?.length > 0 ? (
-            loginInSeller?.project
+          ) : loginInSeller?.projects?.length > 0 ? (
+            loginInSeller?.projects
               ?.filter((project) => {
                 return (
                   (input?.text
-                    ? project?.clientName
+                    ? project?.clientId?.clientName
                         ?.toLowerCase()
                         .includes(input?.text?.toLowerCase())
                     : true) &&
@@ -546,11 +548,11 @@ const TableComponent = ({ sellerId, input }) => {
                           />
                         </svg>
                       </Link>
-                      {item?.clientAvatar ? (
+                      {item?.clientId?.clientAvatar ? (
                         <Link to={`/${item?._id}`}>
                           <img
                             className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
-                            src={item?.clientAvatar}
+                            src={item?.clientId?.clientAvatar}
                           />
                         </Link>
                       ) : (
@@ -563,7 +565,7 @@ const TableComponent = ({ sellerId, input }) => {
                       )}
 
                       <span className="  capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[70px]">
-                        {item.clientName}
+                        {item?.clientId?.clientName}
                       </span>
                     </td>
                     <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
@@ -593,7 +595,8 @@ const TableComponent = ({ sellerId, input }) => {
                         $
                         {item?.amount &&
                           (
-                            (item?.amount * parseInt(item.commissionRate)) /
+                            (item?.amount *
+                              parseInt(item.salesCommissionRate)) /
                             100
                           ).toFixed(2)}
                       </td>
@@ -730,7 +733,7 @@ const TableComponent = ({ sellerId, input }) => {
 
                     <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49]">
                       <button
-                        className="cursor-pointer w-full h-full hover:border rounded-md transition-all ease-in-out duration-500 flex justify-center items-center"
+                        className="flex items-center justify-center w-full h-full transition-all duration-500 ease-in-out rounded-md cursor-pointer hover:border"
                         onClick={() => handleDropdown(item?._id)}
                       >
                         <svg
@@ -766,14 +769,14 @@ const TableComponent = ({ sellerId, input }) => {
               })
           ) : (
             <span className="text-[12px] font-[600] text-center w-full inline-block py-5">
-              No Client!
+              No project!
             </span>
           )}
         </tbody>
         {/* //=======================================table footer  */}
-        {(project?.length >= 1 || loginInSeller?.project?.length >= 1) && (
+        {(project?.length >= 1 || loginInSeller?.projects?.length >= 1) && (
           <tfoot>
-            <div className="flex justify-center items-center gap-2 py-5">
+            <div className="flex items-center justify-center gap-2 py-5">
               <button
                 className="text-[14px]   w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%]"
                 onClick={prevPage}

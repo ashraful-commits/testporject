@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import user from "../../public/user.png";
+
 import { motion } from "framer-motion";
 const Total = ({
   number,
@@ -47,7 +47,7 @@ const Total = ({
         <div className="flex">
           {title === "Total Projects" && (
             <div className="flex items-center justify-center gap-2">
-              <button className="border flex items-center gap-1 w-10 px-1 border-green-500 rounded-md bg-green-200">
+              <button className="flex items-center w-10 gap-1 px-1 bg-green-200 border border-green-500 rounded-md">
                 {percentage}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

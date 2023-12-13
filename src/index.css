@@ -135,12 +135,12 @@ button:hover {
 
 @keyframes hoverAnimation {
   0% {
-    box-shadow: 0 0 5px #9bbec8;
+    box-shadow: 0 0 5px #fcd2fa;
   }
   50% {
-    box-shadow: 0 0 10px #9bbec8;
+    box-shadow: 0 0 10px #fcd2fa;
   }
   100% {
-    box-shadow: 0 0 50px #9bbec8;
+    box-shadow: 0 0 50px #fcd2fa;
   }
 }

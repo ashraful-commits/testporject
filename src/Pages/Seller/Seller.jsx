@@ -2,9 +2,9 @@ import companyLogo from "../../../public/clientLogo.png";
 import bgImg from "../../../public/bgImg.png";
 import user from "../../../public/user.png";
 import { Link, useParams } from "react-router-dom";
-import Total from "../../Components/Total";
-import ProjectDetails from "../../Components/ProjectDetails";
-import SalesPeople from "../../Components/SalesPeople";
+
+import ProjectDetails from "../../Components/Project/ProjectDetails";
+import SalesPeople from "../../Components/Seller/SalesPeople";
 import { useEffect, useState } from "react";
 import SalesModel from "../../Components/Model/SalesModel";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,11 +12,12 @@ import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 import { getSingleSeller } from "../../Features/Seller/SellerApi";
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 import LoadingSpinner from "../../Components/LoadingSpin";
-import ClientComponent from "../../Components/ClientComponent";
-import ProjectComponent from "../../Components/ProjectComponent";
+import ClientComponent from "../../Components/Seller/ClientComponent";
+import ProjectComponent from "../../Components/Seller/ProjectComponent";
 import StatisticComponent from "../../Components/StatisticComponent";
 import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
+import Total from "../../Components/Project/Total";
 
 const Seller = () => {
   //===========================================TODO:all state
@@ -36,7 +37,7 @@ const Seller = () => {
   };
   //==================================================TODO:get all seller state
   const { singleSeller, loader } = useSelector(getAllSellerState);
-
+  console.log(singleSeller);
   //==================================================TODO:login seller
   const { loginInSeller } = useSelector(getAllSellerState);
   //================================================= TODO:use params
@@ -84,14 +85,16 @@ const Seller = () => {
     <>
       {/* //========================================TODO: loader  */}
       {loader && (
-        <div className="w-screen bg-opacity-20 min-h-[1240px] h-screen z-[9999999999999] bg-cyan-200 flex justify-center items-center absolute top-0 left-0">
+        <div className="w-screen bg-opacity-20 min-h-[1240px] h-screen z-[9999999999999] bg-purple-200 flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>
         </div>
       )}
       {/*=========================================== TODO:sales model  */}
-      {model && <SalesModel setModel={setModel} sellerId={id} />}
+      {model && (
+        <SalesModel setModel={setModel} title="Add Sales" sellerId={id} />
+      )}
       <motion.div
         initial={{ y: -15, opacity: 0.1 }}
         exit={{ opacity: 0 }}
@@ -122,7 +125,7 @@ const Seller = () => {
           </div>
           <div className="w-[600px] h-[46px] flex justify-between items-center">
             <div className="h-[68px] w-[439px] relative">
-              <img className="h-full w-full " src={bgImg} alt="" />
+              <img className="w-full h-full " src={bgImg} alt="" />
               <div className="w-full h-full  absolute top-0 left-0 pl-[16px] pt-[7px]">
                 <p className="text-[12px] font-[400] font-['work_sans'] p-[2px] text-[#878790]">
                   Sales Toolkit
@@ -270,7 +273,6 @@ const Seller = () => {
                 </div>
               </div>
             </div>
-
             <Link
               to="/"
               className="w-[140px]  gap-[14px] mt-[12px] h-[46px] flex justify-start items-center overflow-hidden "
@@ -301,7 +303,7 @@ const Seller = () => {
         </div>
         <div className="main-container pr-[36px] flex min-w-full flex-col  w-[1300px] mt-[30px]  tracking-[-.52px] h-[1072px] ">
           {/* //=================================================TODO:total  */}
-          <div className="total flex justify-start gap-4">
+          <div className="flex justify-start gap-4 total">
             <Total
               delay={0.1}
               number={
@@ -315,7 +317,7 @@ const Seller = () => {
               totalProjects=""
               totalClients=""
               TotalEarnings=""
-              styles={`bg-cyan-200 border border-cyan-500`}
+              styles={`bg-purple-200 border border-purple-500`}
               title="Total Sales Guy"
               svg={
                 <svg
@@ -659,7 +661,7 @@ const Seller = () => {
                   loginInSeller?.role !== "super_admin"
                 }
                 onClick={() => setModel(!model)}
-                className={`w-[170px] transition-all ease-in-out duration-500 hover:scale-105  rounded-md h-[38px] bg-cyan-500 flex justify-center items-center gap-2 text-white hover:bg-cyan-600 transition-all duration-500 ease-in-out`}
+                className={`w-[170px] transition-all ease-in-out duration-500 hover:scale-105  rounded-md h-[38px] bg-purple-500 flex justify-center items-center gap-2 text-white hover:bg-purple-600 transition-all duration-500 ease-in-out`}
               >
                 Add Sales Person
                 <svg
@@ -736,7 +738,7 @@ const Seller = () => {
               }
               title="Commission Due"
               number={
-                calculateTotalCommissionForAllClients(singleSeller?.client) -
+                calculateTotalCommissionForAllClients(singleSeller?.projects) -
                 (singleSeller &&
                 singleSeller.payment &&
                 singleSeller.payment.length > 0
@@ -937,15 +939,11 @@ const Seller = () => {
                         clientAvatar={item?.clientAvatar}
                         clientName={item?.clientName}
                         key={index}
-                        amount={item?.amount}
-                        date={item?.date}
-                        timeFrame={item?.timeFrame}
-                        companyName={item?.companyName}
-                        projectStatus={item?.projectStatus}
-                        projectName={item?.projectName}
-                        team={item?.team}
+                        company={item?.company}
                         email={item?.clientEmail}
                         mobile={item?.clientPhone}
+                        projects={item?.projects}
+                        id={item?._id}
                       />
                     );
                   })
@@ -956,41 +954,42 @@ const Seller = () => {
           )}
           {menu === "Manage Projects" && (
             <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
-              {singleSeller?.client?.length > 0 ? (
-                singleSeller?.client
-                  ?.filter((client) => {
+              {singleSeller?.projects?.length > 0 ? (
+                singleSeller?.projects
+                  ?.filter((project) => {
                     return (
                       (input?.text
-                        ? client?.clientName
+                        ? project?.clientName
                             ?.toLowerCase()
                             .includes(input?.text?.toLowerCase())
                         : true) &&
                       (input?.startDate
-                        ? new Date(client?.date) >= new Date(input?.startDate)
+                        ? new Date(project?.date) >= new Date(input?.startDate)
                         : true) &&
                       (input?.endDate
-                        ? new Date(client?.date) <= new Date(input?.endDate)
+                        ? new Date(project?.date) <= new Date(input?.endDate)
                         : true) &&
                       (input?.status
-                        ? client?.projectStatus === input?.status
+                        ? project?.projectStatus === input?.status
                         : true)
                     );
                   })
                   ?.map((item, index) => {
                     return (
                       <ProjectComponent
-                        clientAvatar={item?.clientAvatar}
-                        clientName={item?.clientName}
+                        clientAvatar={item?.clientId?.clientAvatar}
+                        clientName={item?.clientId?.clientName}
                         key={index}
                         amount={item?.amount}
                         date={item?.date}
                         timeFrame={item?.timeFrame}
-                        companyName={item?.companyName}
+                        companyName={item?.company?.companyName}
                         projectStatus={item?.projectStatus}
                         projectName={item?.projectName}
                         team={item?.team}
-                        email={item?.clientEmail}
-                        mobile={item?.clientPhone}
+                        email={item?.clientId?.clientEmail}
+                        mobile={item?.clientId?.clientPhone}
+                        id={item?._id}
                       />
                     );
                   })

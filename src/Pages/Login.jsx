@@ -78,23 +78,23 @@ const Login = () => {
       {/* //=================================================loader  */}
       {loader ||
         (clientLoader && (
-          <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
+          <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-purple-600 bg-opacity-20">
             <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
               <LoadingSpinner />
             </div>
           </div>
         ))}
 
-      <div className="min-w-full relative z-0 gap-10 min-h-screen flex flex-col justify-center items-center overflow-hidden">
+      <div className="relative z-0 flex flex-col items-center justify-center min-w-full min-h-screen gap-10 overflow-hidden">
         <div className="flex justify-center gap-5 ">
-          <div className="flex gap-3 items-center">
+          <div className="flex items-center gap-3">
             <h1 className="font-bold text-[24px] font-['work_sans']">
               Seller Login
             </h1>
           </div>
         </div>
         <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
-          <h1 className="text-[20px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
+          <h1 className="text-[20px] font-['Lato'] mt-[25px] text-purple-800 font-[900] uppercase">
             Login
           </h1>
           {/* //================================================form  */}

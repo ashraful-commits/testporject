@@ -88,16 +88,16 @@ const Register = () => {
     <>
       {/* //========================================loader  */}
       {loader && (
-        <div className="absolute w-screen h-screen min-h-[1240px] z-[999999999] top-0 left-0 bg-cyan-600 bg-opacity-20">
+        <div className="absolute w-screen h-screen min-h-[1240px] z-[999999999] top-0 left-0 bg-purple-600 bg-opacity-20">
           <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
             <LoadingSpinner />
           </div>
         </div>
       )}
       {/* //=============================================main container  */}
-      <div className="min-w-full relative z-0 min-h-screen flex justify-center items-center overflow-hidden">
+      <div className="relative z-0 flex items-center justify-center min-w-full min-h-screen overflow-hidden">
         <div className="login w-[500px] flex justify-start items-center flex-col h-auto rounded-lg shadow-md  bg-white px-4">
-          <h1 className="text-[24px] font-['Lato'] mt-[25px] text-darkBlue font-[900] uppercase">
+          <h1 className="text-[24px] font-['Lato'] mt-[25px] text-purple-800 font-[900] uppercase">
             Register
           </h1>
           {/* //================================================form  */}
@@ -160,7 +160,7 @@ const Register = () => {
               value={input.companyName}
               handleInputChange={handleInputChange}
             />
-            <div className="imgPrev flex gap-5 col-span-2 w-full items-center justify-center">
+            <div className="flex items-center justify-center w-full col-span-2 gap-5 imgPrev">
               <motion.label
                 htmlFor="sellerAvatar"
                 className="w-[100px] h-[100px] border rounded-full overflow-hidden p-[5px]"
@@ -168,13 +168,13 @@ const Register = () => {
                 {" "}
                 {avatar ? (
                   <img
-                    className="w-full h-full object-cover rounded-full"
+                    className="object-cover w-full h-full rounded-full"
                     src={URL.createObjectURL(avatar)}
                     alt=""
                   />
                 ) : (
                   <img
-                    className="w-full h-full object-cover rounded-full"
+                    className="object-cover w-full h-full rounded-full"
                     src="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"
                     alt=""
                   />
@@ -194,13 +194,13 @@ const Register = () => {
                 {" "}
                 {companyAvatar ? (
                   <img
-                    className="w-full h-full object-cover rounded-full"
+                    className="object-cover w-full h-full rounded-full"
                     src={URL.createObjectURL(companyAvatar)}
                     alt=""
                   />
                 ) : (
                   <img
-                    className="w-full h-full object-cover rounded-full"
+                    className="object-cover w-full h-full rounded-full"
                     src="https://storage.jobmarket.com.cy/static/default-company-avatar.jpg"
                     alt=""
                   />

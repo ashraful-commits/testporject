@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import logo from "../../../public/logo.png";
 import avatar from "../../../public/user.png";
-import TableComponent from "../../Components/TableComponent";
+
 import Model from "../../Components/Model/Model";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,19 +14,22 @@ import {
 
 import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCount";
 
-import SellerTableComponent from "../../Components/SellerTableComponent";
 import useFormHook from "../../Hooks/useFormHook";
 import DatePicker from "react-datepicker";
 import { motion } from "framer-motion";
 import Company from "./../Company/Company";
 import { getAllCompany } from "../../Features/Company/CompanyApi";
 import Header from "../../Components/Header";
+import ClientModel from "../../Components/Model/ClientModel";
+import TableComponent from "./../../Components/Tables/TableComponent";
+import SellerTableComponent from "../../Components/Tables/SellerTableComponent";
 const Home = () => {
   //==============================================TODO:all state
 
   const [clientModel, setClientModel] = useState(false);
   const [sellerTable, setSellerTable] = useState(false);
   const [currentTime, setCurrentTime] = useState(false);
+  const [Form, setForm] = useState(false);
   //====================================================TODO:use form hook
   const { input, setInput, handleInputChange } = useFormHook({
     text: "",
@@ -124,7 +127,23 @@ const Home = () => {
     >
       <>
         {/* //================================================ TODO:model  */}
-        {clientModel && <Model setClient={setClientModel} />}
+        {clientModel && (
+          <div>
+            {Form ? (
+              <Model
+                setForm={setForm}
+                title="Add Client"
+                setClient={setClientModel}
+              />
+            ) : (
+              <ClientModel
+                setForm={setForm}
+                title="Add project"
+                setClient={setClientModel}
+              />
+            )}
+          </div>
+        )}
 
         {/**======================================================TODO:dashboard */}
         <div className="dashboard px-[35px] w-[1400px] mt-[58px] h-full">
@@ -429,7 +448,7 @@ const Home = () => {
                         duration: 0.3,
                         delay: 0.6,
                       }}
-                      className="w-full focus:outline-none h-full"
+                      className="w-full h-full focus:outline-none"
                       name="role"
                       onChange={handleInputChange}
                       value={input.role}
@@ -566,7 +585,7 @@ const Home = () => {
                           duration: 0.3,
                           delay: 0.6,
                         }}
-                        className="w-full focus:outline-none h-full"
+                        className="w-full h-full focus:outline-none"
                         name="status"
                         onChange={handleInputChange}
                         value={input.status}

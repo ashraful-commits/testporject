@@ -184,7 +184,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.4 }}
               transition={{ duration: 1.3 }}
-              className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-600 z-[999999999999999999]"
+              className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-purple-600 z-[999999999999999999]"
             >
               <div className="absolute top-[45%]">
                 <LoadingSpinner />
@@ -202,8 +202,8 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
             onSubmit={handleSubmit}
             className="form_content col-span-2 grid relative justify-between mt-[10px] overflow-hidden items-center"
           >
-            <div className="right w-full flex flex-col justify-center">
-              <div className="  grid grid-cols-2 gap-y-2 gap-2  justify-center">
+            <div className="flex flex-col justify-center w-full right">
+              <div className="grid justify-center grid-cols-2 gap-2 gap-y-2">
                 <FormInput
                   placeholder="Name"
                   label={"Name"}
@@ -300,7 +300,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   </div>
                 )}
 
-                <div className="flex gap-5 col-span-2 justify-center">
+                <div className="flex justify-center col-span-2 gap-5">
                   <motion.label
                     initial={{ y: -15, opacity: 0.3 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -314,7 +314,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   >
                     {avatar ? (
                       <img
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                         src={avatar}
                       />
                     ) : (
@@ -334,7 +334,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   >
                     {componyAvatar ? (
                       <img
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                         src={componyAvatar}
                       />
                     ) : (
@@ -356,7 +356,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   id="uploadCompanyAvatar"
                 />
               </div>
-              <div className="submit_section  flex justify-center flex-col items-center mt-5 bg-white col-span-2 ">
+              <div className="flex flex-col items-center justify-center col-span-2 mt-5 bg-white submit_section ">
                 <motion.div
                   initial={{ y: -15, opacity: 0.3 }}
                   animate={{ y: 0, opacity: 1 }}

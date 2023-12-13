@@ -1,30 +1,26 @@
-import companyLogo from "../../../public/clientLogo.png";
 import bgImg from "../../../public/bgImg.png";
 import user from "../../../public/user.png";
-import DetialsSections from "../../Components/DetialsSections";
-import Team from "../../Components/Team";
-import SoftWere from "../../Components/SoftWere";
-import ProjectFile from "../../Components/ProjectFile";
-import Invoices from "../../Components/Invoices";
+import Invoices from "../../Components/project/Invoices";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllClientState } from "../../Features/Client/ClientSlice";
 import { useEffect, useRef, useState } from "react";
-import {
-  LogoutClient,
-  getSingleClient,
-  updateClient,
-} from "../../Features/Client/ClientApi";
+import { LogoutClient, updateClient } from "../../Features/Client/ClientApi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { jsPDF } from "jspdf";
 import LoadingSpinner from "../../Components/LoadingSpin";
 import html2canvas from "html2canvas";
 
-import ClientFeedBack from "../../Components/ClientFeedBack";
+import ClientFeedBack from "../../Components/project/ClientFeedBack";
 import { motion } from "framer-motion";
+import { getAllProjectState } from "../../Features/Project/ProjectSlice";
+import { getSingleProject } from "../../Features/Project/ProjectApi";
+import DetialsSections from "../../Components/Project/DetialsSections";
+import Team from "../../Components/Project/Team";
+import SoftWere from "../../Components/Project/SoftWere";
+import ProjectFile from "../../Components/Project/ProjectFile";
 const Project = () => {
   //===================================== TODO:get all client state
-  const { singleClient, loader, clientLoginData } =
-    useSelector(getAllClientState);
+  const { singleProject, loader } = useSelector(getAllProjectState);
+  console.log(singleProject);
   //====================================================TODO:dispatch and all state
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -39,9 +35,9 @@ const Project = () => {
   //===================================================TODO:navigate
   const navigate = useNavigate();
 
-  //========================================================TODO:get all singleClient
+  //========================================================TODO:get all singleProject
   useEffect(() => {
-    dispatch(getSingleClient(id));
+    dispatch(getSingleProject(id));
   }, [dispatch, id]);
   //===========================================================TODO:handle file upload
   const handleFileUpload = (e) => {
@@ -50,7 +46,7 @@ const Project = () => {
       formData.append("projectFile", item);
     });
     dispatch(updateClient({ id, formData })).then(() => {
-      dispatch(getSingleClient(id));
+      dispatch(getSingleProject(id));
     });
   };
   //=====================================TODO:download pdf
@@ -96,7 +92,7 @@ const Project = () => {
     dispatch(
       updateClient({ id, formData: { team: selectedSalespersons } })
     ).then(() => {
-      dispatch(getSingleClient(id));
+      dispatch(getSingleProject(id));
       setTeam(false);
     });
   };
@@ -106,7 +102,7 @@ const Project = () => {
 
     dispatch(updateClient({ id, formData: { tools: selectTools } })).then(
       () => {
-        dispatch(getSingleClient(id));
+        dispatch(getSingleProject(id));
         setTools(false);
       }
     );
@@ -115,15 +111,15 @@ const Project = () => {
   useEffect(() => {
     let allTeam = [];
     let allTools = [];
-    singleClient?.team?.forEach((item) => {
+    singleProject?.team?.forEach((item) => {
       allTeam?.push(item._id);
     });
-    singleClient?.tools?.forEach((item) => {
+    singleProject?.tools?.forEach((item) => {
       allTools?.push(item);
     });
     setSelectedSalespersons(allTeam);
     setSelectTools(allTools);
-  }, [singleClient]);
+  }, [singleProject]);
   //========================================TODO:handleLogout
   const handleLogout = () => {
     dispatch(LogoutClient());
@@ -136,7 +132,7 @@ const Project = () => {
     <>
       {/* //================================================== TODO:loader  */}
       {loader && (
-        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-cyan-600 flex justify-center items-center absolute top-0 left-0">
+        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-purple-600 flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>
@@ -149,7 +145,7 @@ const Project = () => {
           className="w-[50%] h-[60vh] absolute top-[10%] left-[25%] bg-white p-5"
           size="a4"
         >
-          {singleClient?.projectDesc}
+          {singleProject?.projectDesc}
         </div>
       )}
       {/* //================================================ TODO:team  */}
@@ -167,7 +163,7 @@ const Project = () => {
           className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5"
         >
           <button
-            className="group-hover:opacity-100 opacity-0 w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center hover:bg-gray-400 transition-all duration-500 ease-in-out "
+            className="flex items-center justify-center w-10 h-10 transition-all duration-500 ease-in-out bg-gray-200 rounded-full opacity-0 group-hover:opacity-100 hover:bg-gray-400 "
             onClick={() => setTools(false)}
           >
             <svg
@@ -227,7 +223,7 @@ const Project = () => {
 
             <button
               type="submit"
-              className="h-[30px] justify-end col-span-4 bg-darkBlue text-white transition-all ease-in-out duration-500 hover:scale-105"
+              className="h-[30px] justify-end col-span-4 bg-purple-800 text-white transition-all ease-in-out duration-500 hover:scale-105"
             >
               Add Tools
             </button>
@@ -247,7 +243,7 @@ const Project = () => {
           className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5"
         >
           <button
-            className="group-hover:opacity-100 opacity-0 w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center hover:bg-gray-400 transition-all duration-500 ease-in-out "
+            className="flex items-center justify-center w-10 h-10 transition-all duration-500 ease-in-out bg-gray-200 rounded-full opacity-0 group-hover:opacity-100 hover:bg-gray-400 "
             onClick={() => setTeam(false)}
           >
             <svg
@@ -264,8 +260,8 @@ const Project = () => {
             onSubmit={handleTeamUpdate}
             className="w-[50vw]  rounded-md h-auto border gap-3 bg-gray-50 grid grid-cols-4 grid-flow-row overflow-y-scroll p-2"
           >
-            {singleClient?.sellerId?.salesPerson?.length > 0 ? (
-              singleClient?.sellerId?.salesPerson?.map((item, index) => {
+            {singleProject?.sellerId?.salesPerson?.length > 0 ? (
+              singleProject?.sellerId?.salesPerson?.map((item, index) => {
                 return (
                   <div
                     key={index}
@@ -278,7 +274,7 @@ const Project = () => {
                       value={item?._id}
                       onChange={handleInputChange}
                     />
-                    <div className="w-full h-full flex-col flex justify-start items-center">
+                    <div className="flex flex-col items-center justify-start w-full h-full">
                       <img
                         className="w-[50px] h-[50px] rounded-full"
                         src={item?.avatar}
@@ -300,7 +296,7 @@ const Project = () => {
 
             <button
               type="submit"
-              className="h-[30px] justify-end col-span-4 bg-darkBlue text-white transition-all ease-in-out duration-500 hover:scale-105"
+              className="h-[30px] justify-end col-span-4 bg-purple-800 text-white transition-all ease-in-out duration-500 hover:scale-105"
             >
               Add Team Member
             </button>
@@ -322,10 +318,10 @@ const Project = () => {
         {/* //============================================================ TODO:header  */}
         <div className="header bg-white min-w-full flex items-center w-[1300px] h-[68px]">
           <div className="w-[640px] h-full flex items-center gap-[20px] rounded-md overflow-hidden ">
-            {singleClient?.sellerId?.companyAvatar ? (
+            {singleProject?.clientId?.companyAvatar ? (
               <img
                 className="w-[86px] h-[70px] object-cover"
-                src={singleClient?.sellerId?.companyAvatar}
+                src={singleProject?.clientId?.companyAvatar}
                 alt=""
               />
             ) : (
@@ -336,12 +332,12 @@ const Project = () => {
               />
             )}
             <h1 className="text-[26px] capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
-              Sales Portal / {singleClient?.sellerId?.name}
+              Sales Portal / {singleProject?.clientId?.clientName}
             </h1>
           </div>
           <div className="w-[600px] h-[46px] flex justify-between items-center">
             <div className="h-[68px] w-[439px] relative">
-              <img className="h-full w-full " src={bgImg} alt="" />
+              <img className="w-full h-full " src={bgImg} alt="" />
               <div className="w-full h-full  absolute top-0 left-0 pl-[16px] pt-[7px]">
                 <p className="text-[12px] font-[400] font-['work_sans'] p-[2px] text-[#878790]">
                   Sales Toolkit
@@ -374,7 +370,7 @@ const Project = () => {
                   </button>
                   <Link
                     target="blank"
-                    to={singleClient?.website}
+                    to={singleProject?.website}
                     className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]"
                   >
                     website
@@ -527,37 +523,37 @@ const Project = () => {
                 </div>
               )}
               {localStorage.getItem("Client") ? (
-                singleClient?.sellerId?.avatar ? (
-                  <div className="flex items-end gap-3 justify-end">
+                singleProject?.clientId?.clientAvatar ? (
+                  <div className="flex items-end justify-end gap-3">
                     <img
                       onClick={() => setDropdown(!dropdown)}
-                      className=" w-[46px] h-[46px] mt-[0px] cursor-pointer ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
-                      src={singleClient?.sellerId?.avatar}
+                      className=" w-[46px] h-[46px] mt-[0px] cursor-pointer ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
+                      src={singleProject?.clientId?.clientAvatar}
                       alt=""
                     />
                     <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
                       <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
-                        {singleClient?.sellerId?.name}
+                        {singleProject?.clientId?.clientName}
                       </p>
                       <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
-                        {singleClient?.sellerId?.email}
+                        {singleProject?.clientId?.clientEmail}
                       </span>
                     </div>
                   </div>
                 ) : (
-                  <div className="flex items-end gap-3 justify-end">
+                  <div className="flex items-end justify-end gap-3">
                     <img
                       onClick={() => setDropdown(!dropdown)}
-                      className=" w-[46px] cursor-pointer h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                      className=" w-[46px] cursor-pointer h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
                       src={user}
                       alt=""
                     />
                     <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
                       <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
-                        {singleClient?.sellerId?.name}
+                        {singleProject?.clientId?.clientName}
                       </p>
                       <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
-                        {singleClient?.sellerId?.email}
+                        {singleProject?.clientId?.clientEmail}
                       </span>
                     </div>
                   </div>
@@ -567,25 +563,25 @@ const Project = () => {
                   to="/"
                   className="w-[140px]  gap-[14px] mt-[12px] h-[46px] flex justify-start items-center overflow-hidden "
                 >
-                  {singleClient?.sellerId?.avatar ? (
+                  {singleProject?.clientId?.clientAvatar ? (
                     <img
-                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
-                      src={singleClient?.sellerId?.avatar}
+                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
+                      src={singleProject?.clientId?.clientAvatar}
                       alt=""
                     />
                   ) : (
                     <img
-                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
                       src={user}
                       alt=""
                     />
                   )}
                   <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
                     <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
-                      {singleClient?.sellerId?.name}
+                      {singleProject?.clientId?.clientName}
                     </p>
                     <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
-                      {singleClient?.sellerId?.email}
+                      {singleProject?.clientId?.clientEmail}
                     </span>
                   </div>
                 </Link>
@@ -608,7 +604,7 @@ const Project = () => {
             <div className="flex gap-[px] mt-[16px]">
               <DetialsSections
                 delay={0.2}
-                name={singleClient?.clientName}
+                name={singleProject?.clientId?.clientName}
                 title="client Name"
                 svg={
                   <svg
@@ -659,7 +655,7 @@ const Project = () => {
               />
               <DetialsSections
                 delay={0.4}
-                name={singleClient?.companyName}
+                name={singleProject?.company?.companyName}
                 title="Company Name"
                 svg={
                   <svg
@@ -710,7 +706,7 @@ const Project = () => {
               />
               <DetialsSections
                 delay={0.6}
-                name={singleClient?.date}
+                name={singleProject?.date}
                 title="Assigned Date"
                 svg={
                   <svg
@@ -761,7 +757,7 @@ const Project = () => {
               />
               <DetialsSections
                 delay={0.8}
-                name={singleClient?.timeFrame}
+                name={singleProject?.timeFrame}
                 title="Deadline"
                 svg={
                   <svg
@@ -811,7 +807,7 @@ const Project = () => {
                 }
               />
               <DetialsSections
-                name={singleClient?.budget}
+                name={singleProject?.budget}
                 title="Budget"
                 svg={
                   <svg
@@ -862,7 +858,7 @@ const Project = () => {
               />
             </div>
             {/* //========================================== TODO:manage project  */}
-            <div className="manageProject flex justify-between items-center ">
+            <div className="flex items-center justify-between manageProject ">
               <div className="comment w-[375px] mt-[42px] rounded-[7px] h-[38px] border-[1px] border-[#DFDFDF] grid grid-cols-3 transition-all ease-in-out duration-500 hover:scale-105">
                 <button
                   onClick={() => setMenu("Project Details")}
@@ -884,8 +880,8 @@ const Project = () => {
                   Client Feedback
                 </button>
               </div>
-              <div className="button h-full flex justify-center items-center">
-                <button className="bg-cyan-600 text-[14px] font-[500] text-white hover:bg-cyan-900 transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105">
+              <div className="flex items-center justify-center h-full button">
+                <button className="bg-purple-600 text-[14px] font-[500] text-white hover:bg-purple-900 transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105">
                   Manage Project
                 </button>
               </div>
@@ -930,9 +926,9 @@ const Project = () => {
                       Download PDF
                     </button>
                   </div>
-                  <div className=" overflow-y-scroll h-full">
+                  <div className="h-full overflow-y-scroll ">
                     <p className="text-['work_sans'] font-[14px] mt-[20px] pb-10 leading-[18px]">
-                      {singleClient?.projectDesc}
+                      {singleProject?.projectDesc}
                     </p>
                   </div>
                 </div>
@@ -946,9 +942,9 @@ const Project = () => {
                       Manage Team
                     </button>
                   </div>
-                  <div className="grid grid-cols-4 h-full overflow-y-auto mt-5 pb-5">
-                    {singleClient?.team?.length > 0 ? (
-                      singleClient?.team?.map((item, index) => {
+                  <div className="grid h-full grid-cols-4 pb-5 mt-5 overflow-y-auto">
+                    {singleProject?.team?.length > 0 ? (
+                      singleProject?.team?.map((item, index) => {
                         return (
                           <Team
                             key={index}
@@ -989,7 +985,7 @@ const Project = () => {
                     </button>
                   </div>
                   <div className="flex flex-wrap  h-full overflow-y-auto gap-[15px] mt-5 pb-10">
-                    {singleClient?.tools.map((item, index) => {
+                    {singleProject?.tools.map((item, index) => {
                       return (
                         <SoftWere
                           key={index}
@@ -1169,8 +1165,8 @@ const Project = () => {
                     </button>
                   </div>
                   <div className="grid gap-[15px] h-full overflow-y-auto grid-cols-4 mt-5 pb-10">
-                    {singleClient?.projectFile?.length > 0 ? (
-                      singleClient?.projectFile?.map((item, index) => {
+                    {singleProject?.projectFile?.length > 0 ? (
+                      singleProject?.projectFile?.map((item, index) => {
                         return (
                           <ProjectFile
                             key={index}
@@ -1340,8 +1336,8 @@ const Project = () => {
           </div>
           {/* //====================================================== TODO:right section  */}
           <div className="right border w-[315px] overflow-hidden rounded-[8px] mt-1 flex justify-center">
-            <div className=" w-full h-full flex flex-col items-center">
-              <div className="payment mt-3 flex justify-center items-center gap-2">
+            <div className="flex flex-col items-center w-full h-full ">
+              <div className="flex items-center justify-center gap-2 mt-3 payment">
                 <div className="w-[135px] h-[78px] flex flex-col   rounded-md justify-center items-center border pt-[10px]">
                   <h5 className="font-[400] font-['work_sans'] text-[12px]">
                     Payment Received
@@ -1369,11 +1365,11 @@ const Project = () => {
                     max={100}
                     value={
                       ((
-                        singleClient?.amount -
-                        (singleClient?.amount * 15) / 100
+                        singleProject?.amount -
+                        (singleProject?.amount * 15) / 100
                       ).toFixed(0) *
                         100) /
-                      singleClient?.amount
+                      singleProject?.amount
                     }
                     readOnly={true}
                     className="w-[75%] ml-3"
@@ -1381,8 +1377,8 @@ const Project = () => {
                   <span className="text-[14px] text-[#878769] font-[500]">
                     $
                     {(
-                      singleClient?.amount -
-                      (singleClient?.amount * 15) / 100
+                      singleProject?.amount -
+                      (singleProject?.amount * 15) / 100
                     ).toFixed(0)}
                   </span>
                 </div>

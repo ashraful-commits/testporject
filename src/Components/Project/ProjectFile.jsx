@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteFiles } from "../Features/Project/ProjectApi";
-import { getAllProjectState } from "../Features/Project/ProjectSlice";
+
+import { getAllProjectState } from "../../Features/Project/ProjectSlice";
+import { deleteFiles } from "../../Features/Project/ProjectApi";
 
 const ProjectFile = ({ svg, name, title, file }) => {
   const [downloadMenu, setDownloadMenu] = useState(false);
@@ -19,7 +20,7 @@ const ProjectFile = ({ svg, name, title, file }) => {
   return (
     <div className="flex transition-all ease-in-out duration-500 hover:scale-105 gap-[14px] relative h-[57px]  w-[214px] items-center justify-start pl-[20px] mb-[2px] border rounded-md">
       {downloadMenu && (
-        <div className="download absolute top-4 right-6">
+        <div className="absolute download top-4 right-6">
           <Link to={file} target="blank">
             <svg
               fill="#000000"
@@ -64,7 +65,7 @@ const ProjectFile = ({ svg, name, title, file }) => {
       {/* //===============================================download button  */}
       <button
         onClick={() => handleDownlaod(file)}
-        className=" justify-self-end cursor-pointer absolute right-3"
+        className="absolute cursor-pointer justify-self-end right-3"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

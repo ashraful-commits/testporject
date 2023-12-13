@@ -3,7 +3,6 @@ import useFormHook from "../../Hooks/useFormHook";
 import FormInput from "../FormInput/FormInput";
 import FilePreview from "../../Utils/FilePreview";
 import { useDispatch, useSelector } from "react-redux";
-import { createClient, updateClient } from "../../Features/Client/ClientApi";
 import {
   getAllClientState,
   setMessageEmpty,
@@ -11,20 +10,22 @@ import {
 import { Toastify } from "../../Utils/Tostify";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../LoadingSpin";
-import { getAllSellerState } from "../../Features/Seller/SellerSlice";
+
 import { LoggedInSeller } from "../../Features/Seller/SellerApi";
 import { motion } from "framer-motion";
 import { getAllCompanyState } from "../../Features/Company/CompanySlice";
+import {
+  createProject,
+  getAllProject,
+  updateProject,
+} from "../../Features/Project/ProjectApi";
+import { getAllClient } from "../../Features/Client/ClientApi";
+import { getAllProjectState } from "../../Features/Project/ProjectSlice";
 
-const Model = ({ setClient, singleData }) => {
+const Model = ({ setClient, singleData, setForm, title }) => {
   //=============================  TODO:form hook
   const { input, setInput, handleInputChange } = useFormHook({
-    clientName: "",
-    clientEmail: "",
-    clientPhone: "",
-    country: "",
-    state: "",
-    clientAddress: "",
+    clientId: "",
     projectName: "",
     projectType: "",
     budget: "",
@@ -35,7 +36,7 @@ const Model = ({ setClient, singleData }) => {
     date: "",
     document: "",
     clientAvatar: "",
-    companyName: "",
+    company: "",
     password: "",
     commissionRate: "",
   });
@@ -46,10 +47,8 @@ const Model = ({ setClient, singleData }) => {
   //================================== TODO:handle project file
   const [projectFiles, setProjectFile] = useState(null);
   const { client, message, loader, error } = useSelector(getAllClientState);
-  const { loginInSeller } = useSelector(getAllSellerState);
+  const { loader: projectLoader } = useSelector(getAllProjectState);
   const { company } = useSelector(getAllCompanyState);
-  const [avatar, setAvatar] = useState(null);
-  const [photo, setPhoto] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //======================================= TODO:handle project file
@@ -72,23 +71,14 @@ const Model = ({ setClient, singleData }) => {
   const handleDelete = (item) => {
     setProjectFile([...projectFiles.filter((file) => file !== item)]);
   };
-  //================================ TODO:handle client avatar
-  const handleClientAvatar = (e) => {
-    setPhoto(e.target.files[0]);
-    setAvatar(URL.createObjectURL(e.target.files[0]));
-  };
 
   //====================================== TODO:handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(input);
     const formData = new FormData();
     if (Id) {
-      formData.append("clientName", input.clientName);
-      formData.append("clientPhone", input.clientPhone);
-      formData.append("clientEmail", input.clientEmail);
-      formData.append("country", input.country);
-      formData.append("state", input.state);
-      formData.append("clientAddress", input.clientAddress);
+      formData.append("clientId", input.clientId);
       formData.append("projectName", input.projectName);
       formData.append("projectType", input.projectType);
       formData.append("projectSource", input.projectSource);
@@ -102,68 +92,50 @@ const Model = ({ setClient, singleData }) => {
       }
       formData.append("date", input.date);
       formData.append("document", input.document);
-      formData.append("clientAvatar", photo);
-      formData.append("companyName", input.companyName);
-
-      dispatch(updateClient({ formData, id: Id }))
+      formData.append("company", input.company);
+      dispatch(updateProject({ formData, id: Id }))
         .then(() => {
           dispatch(LoggedInSeller());
+          setClient(false);
+          setInput({
+            clientId: "",
+            projectName: "",
+            projectType: "",
+            budget: "",
+            amount: "",
+            projectDesc: "",
+            timeFrame: "",
+            projectSource: "",
+            date: "",
+            document: "",
+            company: "",
+          });
+          setId(null);
         })
         .catch((error) => {
-          console.error("Error updating client:", error);
+          console.error("Error updating project:", error);
         });
-      setInput({
-        clientName: "",
-        clientEmail: "",
-        clientPhone: "",
-        country: "",
-        state: "",
-        clientAddress: "",
-        projectName: "",
-        projectType: "",
-        budget: "",
-        amount: "",
-        projectDesc: "",
-        timeFrame: "",
-        projectSource: "",
-        date: "",
-        document: "",
-        companyName: "",
-      });
-      setId(null);
     } else {
-      if (photo) {
-        const sellerId = JSON.parse(localStorage.getItem("Seller"))._id;
-        formData.append("clientName", input.clientName);
-        formData.append("clientPhone", input.clientPhone);
-        formData.append("clientEmail", input.clientEmail);
-        formData.append("country", input.country);
-        formData.append("state", input.state);
-        formData.append("clientAddress", input.clientAddress);
-        formData.append("projectName", input.projectName);
-        formData.append("projectType", input.projectType);
-        formData.append("projectSource", input.projectSource);
-        formData.append("budget", input.budget);
-        formData.append("amount", input.amount);
-        formData.append("projectDesc", input.projectDesc);
-        formData.append("timeFrame", input.timeFrame);
-        formData.append("password", input.password);
-        for (let i = 0; i < projectFiles.length; i++) {
-          formData.append("projectFile", projectFiles[i]);
-        }
-        formData.append("date", input.date);
-        formData.append("document", input.document);
-        formData.append("clientAvatar", photo);
-        formData.append("companyName", input.companyName);
-        formData.append("sellerId", sellerId);
-        dispatch(createClient(formData));
+      const sellerId = JSON.parse(localStorage.getItem("Seller"))._id;
+      formData.append("clientId", input.clientId);
+      formData.append("projectName", input.projectName);
+      formData.append("projectType", input.projectType);
+      formData.append("projectSource", input.projectSource);
+      formData.append("budget", input.budget);
+      formData.append("amount", input.amount);
+      formData.append("projectDesc", input.projectDesc);
+      formData.append("timeFrame", input.timeFrame);
+      for (let i = 0; i < projectFiles.length; i++) {
+        formData.append("projectFile", projectFiles[i]);
+      }
+      formData.append("date", input.date);
+      formData.append("document", input.document);
+      formData.append("company", input.company);
+      formData.append("sellerId", sellerId);
+      dispatch(createProject(formData)).then(() => {
+        dispatch(LoggedInSeller());
         setInput({
-          clientName: "",
-          clientEmail: "",
-          clientPhone: "",
-          country: "",
-          state: "",
-          clientAddress: "",
+          clientId: "",
           projectName: "",
           projectType: "",
           budget: "",
@@ -173,14 +145,11 @@ const Model = ({ setClient, singleData }) => {
           projectSource: "",
           date: "",
           document: "",
-          companyName: "",
+          company: "",
         });
-        setPhoto(null);
         setProjectFile(null);
-      } else {
-        Toastify("Select Client Avatar", "error");
-        dispatch(setMessageEmpty());
-      }
+        setClient(false);
+      });
     }
   };
 
@@ -195,33 +164,35 @@ const Model = ({ setClient, singleData }) => {
       dispatch(setMessageEmpty());
       setClient(false);
     }
-
-    if (localStorage.getItem("Seller")) {
-      navigate("/");
-    }
   }, [message, error, navigate, dispatch, setClient]);
   //========================================= TODO:single edit data
   useEffect(() => {
-    setInput({ ...singleData });
+    setInput({
+      ...singleData,
+      company: singleData?.company?._id,
+      clientId: singleData?.clientId?._id,
+    });
     setId(singleData?._id);
-    setAvatar(singleData?.clientAvatar);
     setProjectFile(singleData?.projectFile);
   }, [singleData, setInput]);
   //================================================= handle commission rate
   useEffect(() => {
-    if (input.companyName == "6574cfcf42c936d81ba1df7a") {
+    if (input.company == "6574cfcf42c936d81ba1df7a") {
       setInput((prev) => ({
         ...prev,
         commissionRate: 10,
       }));
     }
-    if (input.companyName == "6574d4642dac4d48fa4d2c86") {
+    if (input.company == "6574d4642dac4d48fa4d2c86") {
       setInput((prev) => ({
         ...prev,
         commissionRate: 15,
       }));
     }
-  }, [input.companyName, setInput]);
+  }, [input.company, setInput]);
+  useEffect(() => {
+    dispatch(getAllClient());
+  }, [dispatch]);
   return (
     <motion.div className="w-screen h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed top-0 left-0 scroll-smooth overflow-y-auto z-[99999] flex justify-center">
       {/* //==================================================== TODO:close button  */}
@@ -262,7 +233,20 @@ const Model = ({ setClient, singleData }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0.4 }}
             transition={{ duration: 1.3 }}
-            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-600 z-[99999999999999999]"
+            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-purple-600 z-[99999999999999999]"
+          >
+            <div className="w-full h-full absolute top-[45%]">
+              <LoadingSpinner />
+            </div>
+          </motion.div>
+        )}
+        {projectLoader && (
+          <motion.div
+            initial={{ opacity: 0.4 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0.4 }}
+            transition={{ duration: 1.3 }}
+            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-purple-600 z-[99999999999999999]"
           >
             <div className="w-full h-full absolute top-[45%]">
               <LoadingSpinner />
@@ -270,14 +254,23 @@ const Model = ({ setClient, singleData }) => {
           </motion.div>
         )}
         <div className=" sticky top-0 pt-[42px] bg-white w-full">
+          <div className="flex gap-x-4">
+            <button
+              className="flex justify-center items-center w-[150px] h-[40px] font-bold text-white hover:bg-purple-900 transition-all duration-500 ease-in-out bg-green-500 rounded-md"
+              onClick={() => setForm(false)}
+            >
+              {title}
+            </button>
+          </div>
           <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
-            Please add Client & Project Details information
+            Please add Project Details information
           </h1>
         </div>
         <p className="text-gray-400 capitalize mt-[4px] font-['Lato'] tracking-[.2px]">
           please provide us with a rough idea about the project you can leave
           any field empty if you don&apos;t have information about it
         </p>
+
         {/* //===============================================================  TODO:form  */}
         <form
           onSubmit={handleSubmit}
@@ -285,7 +278,7 @@ const Model = ({ setClient, singleData }) => {
         >
           {/* //========================================================= TODO:right section  */}
           <div className="right w-[490px] flex flex-col gap-[36px]">
-            <div className="client_information flex flex-col items-start">
+            <div className="flex flex-col items-start client_information">
               <h5 className="text-gray-900 tracking-[.6px] text-[16px] font-['Lato'] font-[600]">
                 Client Information
               </h5>
@@ -293,66 +286,38 @@ const Model = ({ setClient, singleData }) => {
                 Visual UI / UX Design & Branding
               </p>
               <div className="sections w-full grid grid-cols-2 gap-[20px]">
-                <div className="right_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
-                  <FormInput
-                    type="text"
-                    placeholder="Jone Duo"
-                    label="Client Name"
-                    width={"30px"}
-                    name="clientName"
-                    value={input.clientName}
-                    handleInputChange={handleInputChange}
-                  />
-                  <FormInput
-                    type="text"
-                    placeholder="Enter Email"
-                    label="Company email"
-                    name="clientEmail"
-                    value={input.clientEmail}
-                    handleInputChange={handleInputChange}
-                  />
-                  {singleData ? (
-                    ""
-                  ) : (
-                    <FormInput
-                      type="password"
-                      placeholder="Enter Password"
-                      label="Password"
-                      name="password"
-                      value={input.password}
-                      handleInputChange={handleInputChange}
-                    />
-                  )}
-
+                <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
                   <label
                     className="text-gray-900 font-[800] text-[12px] font-['Lato']"
                     htmlFor=""
                   >
-                    Country
+                    Client Name
                   </label>
                   <select
                     className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
-                    name="country"
-                    value={input.country}
+                    name="clientId"
+                    value={input.clientId}
                     onChange={handleInputChange}
                   >
                     <option className="text-gray-500" value="">
                       ....
                     </option>
-                    <option className="text-gray-500" value="United State">
-                      United State
-                    </option>
-                    <option className="text-gray-500" value="Bangladesh">
-                      Bangladesh
-                    </option>
-                    <option className="text-gray-500" value="England">
-                      England
-                    </option>
-                    <option className="text-gray-500" value="Rassia">
-                      Rassia
-                    </option>
+
+                    {client?.map((item, i) => {
+                      return (
+                        <option
+                          key={i}
+                          className="text-gray-500"
+                          value={item?._id}
+                        >
+                          {item?.clientName}
+                        </option>
+                      );
+                    })}
                   </select>
                 </div>
+              </div>
+              <div className="sections w-full grid grid-cols-2 gap-[20px]">
                 <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
                   <label
                     className="text-gray-900 font-[800] text-[12px] font-['Lato']"
@@ -362,8 +327,8 @@ const Model = ({ setClient, singleData }) => {
                   </label>
                   <select
                     className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
-                    name="companyName"
-                    value={input.companyName}
+                    name="company"
+                    value={input.company}
                     onChange={handleInputChange}
                   >
                     <option className="text-gray-500" value="">
@@ -382,14 +347,8 @@ const Model = ({ setClient, singleData }) => {
                       );
                     })}
                   </select>
-                  <FormInput
-                    type="text"
-                    placeholder="Enter Phone"
-                    label="Client Phone Number"
-                    name="clientPhone"
-                    value={input.clientPhone}
-                    handleInputChange={handleInputChange}
-                  />
+                </div>
+                <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
                   <FormInput
                     type="text"
                     placeholder="Commission rate"
@@ -397,63 +356,14 @@ const Model = ({ setClient, singleData }) => {
                     value={input.commissionRate}
                     onChange={handleInputChange}
                   />
-                  <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
-                    htmlFor=""
-                  >
-                    State
-                  </label>
-                  <select
-                    className="border w-full h-[37px]  text-gray-500 px-[12px] tracking-[.5px] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
-                    name="state"
-                    value={input.state}
-                    onChange={handleInputChange}
-                  >
-                    <option className="text-gray-500 " value="">
-                      ....
-                    </option>
-                    <option className="text-gray-500 " value="Texas">
-                      Texas
-                    </option>
-                    <option className="text-gray-500 " value="Dhaka">
-                      Dhaka
-                    </option>
-                    <option className="text-gray-500 " value="London">
-                      London
-                    </option>
-                  </select>
                 </div>
               </div>
-              <label
-                className="text-gray-900 font-[800] text-[12px] font-['Lato'] mt-[20px]"
-                htmlFor=""
-              >
-                Client Full Address
-              </label>
-
-              <motion.input
-                initial={{ y: -15, opacity: 0.3 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: 0.3,
-                  delay: 0.1 * Math.random() * 10,
-                }}
-                name="clientAddress"
-                value={input.clientAddress}
-                onChange={handleInputChange}
-                className="w-full border mt-[10px] h-[36px] rounded-md pl-[16px] placeholder:uppercase placeholder:font-['Lato']"
-                type="text"
-                placeholder="3401 STAMFORD ST LAREDO TX 78043-1972 USA"
-              />
             </div>
-            <div className="project_information flex flex-col items-start">
+            <div className="flex flex-col items-start project_information">
               <h5 className="text-gray-900 tracking-[.6px] text-[16px] font-['Lato'] font-[600]">
                 Project Information
               </h5>
-              <p className="text-gray-600 font-['Lato'] tracking-[.5px] mt-[1px]">
-                Visual UI / UX Design & Branding
-              </p>
+
               <div className="sections w-full grid grid-cols-2 gap-[20px]">
                 <div className="right_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
                   <FormInput
@@ -565,7 +475,7 @@ const Model = ({ setClient, singleData }) => {
                 </div>
               </div>
             </div>
-            <div className="description w-full flex flex-col items-start">
+            <div className="flex flex-col items-start w-full description">
               <label
                 className="text-gray-900 font-[800] text-[12px] font-['Lato'] mt-[-16px]"
                 htmlFor=""
@@ -590,7 +500,7 @@ const Model = ({ setClient, singleData }) => {
                 placeholder="Mar 4, 2023"
               ></motion.textarea>
             </div>
-            <div className="project_datials flex flex-col items-start">
+            <div className="flex flex-col items-start project_datials">
               <div className="sections w-full items-center justify-center grid grid-cols-2 gap-[20px]">
                 <div className="right_section w-full flex flex-col gap-[19px] items-start mt-[-20px]">
                   <label
@@ -738,41 +648,6 @@ const Model = ({ setClient, singleData }) => {
           </div>
           {/* //=============================================================== left section  */}
           <div className="left w-[220px] flex flex-col items-start">
-            <motion.div
-              initial={{ y: -15, opacity: 0.3 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 0.3,
-                delay: 0.1 * Math.random() * 10,
-              }}
-              className="avatar border flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
-            >
-              {avatar ? (
-                <img className="w-full h-full object-cover" src={avatar} />
-              ) : (
-                "Select avatar"
-              )}
-            </motion.div>
-            <motion.label
-              initial={{ y: -15, opacity: 0.3 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                duration: 0.3,
-                delay: 0.1 * Math.random() * 10,
-              }}
-              className="border  text-gray-500 font-['Lato'] font-[600] w-[180px] h-[36px] mt-[12px] ml-[5px] flex justify-center rounded-md items-center"
-              htmlFor="uploadAvatar"
-            >
-              Upload client avatar
-            </motion.label>
-            <input
-              type="file"
-              onChange={handleClientAvatar}
-              className="hidden"
-              id="uploadAvatar"
-            />
             <p className="text-gray-700 font-[600] text-[16px] font-['Work_Sans'] mt-[20px] ml-[5px] ">
               Contact Us
             </p>
@@ -791,7 +666,7 @@ const Model = ({ setClient, singleData }) => {
             <h4 className="text-gray-800 text-[18px] font-[600] mt-[2px] font-['Work_Sans'] ml-[6px] tracking-[-.5px]">
               info@imageappeal.com
             </h4>
-            <div className="preview w-full h-auto overflow-hidden gap-2 grid grid-cols-2 mt-10">
+            <div className="grid w-full h-auto grid-cols-2 gap-2 mt-10 overflow-hidden preview">
               <h1 className="col-span-2 border-t border-b text-[16px] font-bold uppercase py-2">
                 Document Preview
               </h1>
@@ -844,30 +719,30 @@ const Model = ({ setClient, singleData }) => {
                   className=" col-span-2 gap-[5px] grid grid-cols-2  w-full "
                 >
                   <img
-                    className="w-full border h-full object-cover"
+                    className="object-cover w-full h-full border"
                     src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
                   />
 
                   <img
-                    className="w-full border h-full object-cover"
+                    className="object-cover w-full h-full border"
                     src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
                   />
                   <img
-                    className="w-full border h-full object-cover"
-                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
-                  />
-
-                  <img
-                    className="w-full border h-full object-cover"
-                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
-                  />
-                  <img
-                    className="w-full border h-full object-cover"
+                    className="object-cover w-full h-full border"
                     src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
                   />
 
                   <img
-                    className="w-full border h-full object-cover"
+                    className="object-cover w-full h-full border"
+                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+                  />
+                  <img
+                    className="object-cover w-full h-full border"
+                    src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
+                  />
+
+                  <img
+                    className="object-cover w-full h-full border"
                     src="https://assets.website-files.com/6324331488eeaaad6ed0be97/63620f99776dc1648a7a5d0a_image-preview.png"
                   />
                 </motion.div>

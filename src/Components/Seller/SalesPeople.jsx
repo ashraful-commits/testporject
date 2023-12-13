@@ -49,8 +49,8 @@ const SalesPeople = ({
         </div>
       </div>
       {/* //===================================================== work datials  */}
-      <div className="work_detials mt-5 flex justify-between w-full">
-        <div className="flex justify-center items-center flex-col">
+      <div className="flex justify-between w-full mt-5 work_detials">
+        <div className="flex flex-col items-center justify-center">
           <h4 className="text-[24px] text-[#230B34] font-['work_sans'] font-[600]">
             {project}
           </h4>
@@ -58,7 +58,7 @@ const SalesPeople = ({
             Project
           </h6>
         </div>
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex flex-col items-center justify-center">
           <h4 className="text-[24px] text-[#230B34] font-['work_sans'] font-[600]">
             {clients}
           </h4>
@@ -66,7 +66,7 @@ const SalesPeople = ({
             Clients
           </h6>
         </div>
-        <div className="flex justify-center items-center flex-col">
+        <div className="flex flex-col items-center justify-center">
           <h4 className="text-[24px] text-[#230B34] font-['work_sans'] font-[600]">
             {earning}
           </h4>
@@ -76,17 +76,17 @@ const SalesPeople = ({
         </div>
       </div>
       {/* //========================================================= company  */}
-      <div className="company flex w-full gap-2 mt-5 ">
+      <div className="flex w-full gap-2 mt-5 company ">
         <div className="companyLogo w-[41px] h-[41px] overflow-hidden rounded-md">
           {companyLogo ? (
             <img
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
               src={companyLogo}
               alt=""
             />
           ) : (
             <img
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
               src={
                 "https://storage.jobmarket.com.cy/static/default-company-avatar.jpg"
               }
@@ -108,7 +108,7 @@ const SalesPeople = ({
         Active Clients
       </h5>
       <div className="flex w-full mt-3">
-        <div className="clients flex w-full">
+        <div className="flex w-full clients">
           {ActiveClient?.length > 0
             ? ActiveClient?.map((item, index) => {
                 return (
@@ -139,7 +139,7 @@ const SalesPeople = ({
               : 0}
           </button>
         </div>
-        <button className="w-[117px] h-[40px] flex justify-center items-center bg-cyan-100 text-cyan-600 hover:text-white rounded-md hover:bg-cyan-700 transition-all">
+        <button className="w-[117px] h-[40px] flex justify-center items-center bg-purple-100 text-purple-600 hover:text-white rounded-md hover:bg-purple-700 transition-all">
           Manage
         </button>
       </div>

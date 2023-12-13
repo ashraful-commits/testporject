@@ -6,12 +6,12 @@ const EmailSignature = () => {
   const { loginInSeller } = useSelector(getAllSellerState);
 
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen min-h-screen bg-cyan-600 bg-opacity-20 flex justify-center items-center z-[9999999999999]">
+    <div className="absolute top-0 left-0 w-screen h-screen min-h-screen bg-purple-600 bg-opacity-20 flex justify-center items-center z-[9999999999999]">
       <div className="min-w-[1440px] relative flex justify-center items-center bg-gray-100 min-h-[909px] rounded-2xl">
         <div className="text-white w-[500px] h-[200px] text-center flex justify-center items-center  p-2 bg-white bg-opacity-90 rounded-md">
           <Link
             to={`/`}
-            className="absolute top-5 left-4 bg-white hover:bg-gray-400 transition-all duration-500 ease-in-out p-2 rounded-full"
+            className="absolute p-2 transition-all duration-500 ease-in-out bg-white rounded-full top-5 left-4 hover:bg-gray-400"
           >
             <svg
               width="22"
@@ -29,8 +29,8 @@ const EmailSignature = () => {
               </g>
             </svg>
           </Link>
-          <div className="flex justify-center items-center gap-2 w-full h-full">
-            <div className="flex justify-center items-center bg-cyan-600 h-full w-[180px]">
+          <div className="flex items-center justify-center w-full h-full gap-2">
+            <div className="flex justify-center items-center bg-purple-600 h-full w-[180px]">
               {loginInSeller.avatar ? (
                 <img
                   className="w-[100px] h-[100px] shrink-0 rounded-full"
@@ -43,15 +43,15 @@ const EmailSignature = () => {
                 />
               )}
             </div>
-            <div className="border w-full h-full flex flex-col border-cyan-300 items-start p-2">
-              <p className=" text-cyan-600 capitalize font-['work_sans'] text-[24px] leading-3 mt-3 font-[600]">
+            <div className="flex flex-col items-start w-full h-full p-2 border border-purple-300">
+              <p className=" text-purple-600 capitalize font-['work_sans'] text-[24px] leading-3 mt-3 font-[600]">
                 {loginInSeller?.name}
               </p>
               <p className=" text-gray-500 py-1 capitalize  font-['work_sans'] text-[20px] font-[400]">
                 {loginInSeller?.employment}
               </p>
 
-              <hr className="bg-cyan-600 my-2 h-[2px] w-full" />
+              <hr className="bg-purple-600 my-2 h-[2px] w-full" />
 
               <p className=" text-gray-600 flex justify-center items-center gap-2 font-['work_sans']">
                 <span>
