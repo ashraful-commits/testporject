@@ -1,4 +1,3 @@
-import React from "react";
 //=========================================invoices function
 const Invoices = ({ Due, number, date }) => {
   return (
