@@ -201,19 +201,19 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
           {/* //========================================admin seller */}
           {loginInSeller?.role === "super_admin" ? (
             <AdminSeller
-            input={input}
-            handleRoleUpdate={handleRoleUpdate}
-            loginInSeller={loginInSeller}
-            handleStatusUpdate={handleStatusUpdate}
-            handleDropdown={handleDropdown}
-            dropdown={dropdown}
-            dropId={dropId}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            seller={seller}
+              input={input}
+              handleRoleUpdate={handleRoleUpdate}
+              loginInSeller={loginInSeller}
+              handleStatusUpdate={handleStatusUpdate}
+              handleDropdown={handleDropdown}
+              dropdown={dropdown}
+              dropId={dropId}
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              seller={seller}
             />
-            ) : (
-            {/* //========================================any user  seller */}
+          ) : (
+            /*========================================any user  seller */
             <LoginUserSeller
               loginInSeller={loginInSeller}
               input={input}
