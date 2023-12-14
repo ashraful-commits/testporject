@@ -11,7 +11,7 @@ import {
   updateSellerRole,
   updateSellerStatus,
 } from "../../Features/Seller/SellerApi";
-import { Link } from "react-router-dom";
+
 import { Toastify } from "../../Utils/Tostify";
 import SalesModel from "../Model/SalesModel";
 import { motion } from "framer-motion";
@@ -32,14 +32,13 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
   } = useSelector(getAllSellerState);
 
   const dispatch = useDispatch();
-  const [currentPage, setCurrentPage] = useState(1);
   //=========================edit model
   const [editModel, setEditModel] = useState(false);
   //=================== singleData
   const [singleData, setSingleData] = useState({});
 
   //===========================set limit
-  const [limit, setLimit] = useState(7);
+
   const [dropdown, setDropdown] = useState(false);
   //=======================================================================================dropId
   const [dropId, setDropId] = useState(null);
@@ -60,6 +59,14 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
       );
 
     if (loginInSeller.role === "user") {
+      setSingleData(existingSeller);
+    } else {
+      const foundItem = seller?.find((item) => item._id === id);
+      if (foundItem) {
+        setSingleData(foundItem);
+      }
+    }
+    if (loginInSeller.role === "admin") {
       setSingleData(existingSeller);
     } else {
       const foundItem = seller?.find((item) => item._id === id);
@@ -89,10 +96,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
       }
     });
   };
-  //===============  handle limit
-  const handleLimit = (e) => {
-    setLimit(e.target.value);
-  };
+
   //===============handle permission
   const handleStatusUpdate = (id, status) => {
     dispatch(updateSellerStatus({ id, status }));
@@ -102,14 +106,6 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
     dispatch(updateSellerRole({ id, role }));
   };
 
-  //==========================next page
-  const nextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
-  //============prev page
-  const prevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
   //========================================= toastify
 
   useEffect(() => {
@@ -123,10 +119,8 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
     }
   }, [message, error, dispatch]);
   useEffect(() => {
-    dispatch(
-      getAllSeller({ role: loginInSeller?.role, page: currentPage, limit })
-    );
-  }, [dispatch, limit, currentPage, loginInSeller]);
+    dispatch(getAllSeller());
+  }, [dispatch, loginInSeller]);
 
   const handleWindowDropdwon = (e) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target.value)) {

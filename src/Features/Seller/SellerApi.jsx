@@ -104,12 +104,9 @@ export const getAllSeller = createAsyncThunk(
   "seller/getAllSeller",
   async (data, thunkAPI) => {
     try {
-      const response = await axios.get(
-        `${BASE_URL}/api/v1/seller?page=${data.page}&limit=${data.limit}&role=${data.role}`,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get(`${BASE_URL}/api/v1/seller`, {
+        withCredentials: true,
+      });
 
       return response.data;
     } catch (error) {

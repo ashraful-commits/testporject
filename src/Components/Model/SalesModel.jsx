@@ -7,8 +7,6 @@ import {
   AddSalePerson,
   LoggedInSeller,
   SellerRegistration,
-  getSingleSalesSeller,
-  getSingleSeller,
   updateSeller,
 } from "../../Features/Seller/SellerApi";
 import { Toastify } from "../../Utils/Tostify";
@@ -140,7 +138,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
       dispatch(setMessageEmpty());
       setModel(false);
     }
-  }, [error, message, dispatch]);
+  }, [error, message, dispatch, setModel]);
   useEffect(() => {
     setInput({ ...singleData });
     setAvatar(singleData?.avatar);
@@ -259,7 +257,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   type="text"
                   handleInputChange={handleInputChange}
                 />
-                {loginInSeller?.role === "admin" && (
+                {loginInSeller?.role === "super_admin" && (
                   <div className="flex flex-col gap-y-1">
                     <label
                       className="text-gray-900 text-start w-full my-2 font-[800] text-[12px] font-['Lato']"
