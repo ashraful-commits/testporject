@@ -382,15 +382,15 @@ const Home = () => {
                       duration: 0.3,
                       delay: 0.1,
                     }}
-                    className="text_search w-[150px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px]  transition-all duration-500 ease-in-out"
+                    className="text_search w-[150px] border h-[40px]  shrink-0 flex items-center p-[5px] mr-[8px] rounded-[8px]  transition-all duration-500 ease-in-out"
                   >
                     <select
                       onChange={handleInputChange}
                       name="companyName"
-                      className="w-full px-2"
+                      className="w-full px-2 focus:outline-none"
                       id=""
                     >
-                      <option value="">company</option>
+                      <option value="">...Company...</option>
                       {company?.map((item, index) => {
                         return (
                           <option value={item?.companyName} key={index}>
