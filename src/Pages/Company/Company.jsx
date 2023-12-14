@@ -134,7 +134,7 @@ const Company = () => {
         <>
           {/*=================================================== TODO:sidebar  */}
           <div className="sidebar flex flex-col items-center w-[295px]  bg-mediumBlack overflow-hidden">
-            <div className="flex justify-center w-full transition-all duration-500 logo itehover:scale-105 ease-in-outbuttonms-start ">
+            <div className="flex justify-center w-full transition-all duration-500 logo hover:scale-105 ease-in-outbuttonms-start ">
               <Link to="/">
                 <img className="w-[205px] mt-[52px] h-auto" src={logo} alt="" />
               </Link>
@@ -893,7 +893,7 @@ const Company = () => {
                 return (
                   <div
                     key={i}
-                    className="w-[300px] h-[300px] border rounded-lg p-5"
+                    className="w-[300px] h-[500px] border rounded-lg p-5"
                   >
                     <div className="flex items-end gap-x-4 ">
                       {item?.companyLogo ? (
@@ -915,49 +915,119 @@ const Company = () => {
 
                     <hr className="my-2" />
                     <div className="flex flex-col gap-y-3">
-                      <p className="text-[15px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-[12px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
                         Contact: {item.contact}
                       </p>
-                      <p className="text-[15px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-[12px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
                         Email: {item.email}
                       </p>
-                      <p className="text-[15px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-[12px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
                         Location: {item.location}
                       </p>
-                      <p className="text-[17px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-[14px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
                         About
                       </p>
                       <hr />
-                      <p className="text-[14px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-[14px] font-['Lato'] truncate overflow-clip font-[400] leading-[18px] tracking-[.2px] text-[#05222E]">
                         {item.desc}
                       </p>
                     </div>
-                    {loginInSeller.role === "super_admin" && (
-                      <div className="flex items-center justify-center w-full h-auto p-1 mt-2 mb-auto rounded-md gap-x-4 ">
-                        <div className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white hover:bg-gray-700   ">
-                          <input
-                            onClick={() =>
-                              handleCompanyStatus(item?._id, item?.status)
-                            }
-                            className=""
-                            checked={item?.status}
-                            type="checkbox"
-                          />
-                        </div>
-                        <button
-                          onClick={() => handleEdit(item?._id)}
-                          className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white hover:bg-gray-700   "
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => handleDelete(item?._id)}
-                          className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white hover:bg-gray-700   "
-                        >
-                          Delete
-                        </button>
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                      <div className="flex justify-between p-2 border rounded-md tutorial bg-cyan-100">
+                        <p className="font-['Lato'] font-bold">Tutorial</p>{" "}
+                        <span className="font-['Lato'] font-[500] block">
+                          0
+                        </span>
                       </div>
-                    )}
+                      <div className="flex justify-between p-2 border rounded-md course bg-cyan-100">
+                        <p className="font-['Lato'] font-bold">Course</p>{" "}
+                        <span className="font-['Lato'] font-[500] block">
+                          0
+                        </span>
+                      </div>
+                    </div>
+                    <div className="w-full overflow-hidden">
+                      <section className="p-2 mt-2 text-gray-600 border rounded-md body-font">
+                        <div className="container px-1 py-2 mx-auto">
+                          <div className="flex ">
+                            <div className="p-1">
+                              <div className="border-gray-200 border-opacity-50 ">
+                                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-cyan-100">
+                                  <svg
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    className="w-8 h-8"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                                  </svg>
+                                </div>
+                                <div className="">
+                                  <h2 className="mb-1 text-lg font-medium text-gray-900 title-font">
+                                    Shooting Stars
+                                  </h2>
+                                  <p className="truncate overflow-clip">
+                                    Blue bottle crucifix vinyl post-ironic four
+                                    dollar toast vegan taxidermy.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                    <div className="flex items-center justify-center mt-auto mr-3">
+                      {loginInSeller.role === "super_admin" && (
+                        <div className="flex items-center justify-center w-full h-auto p-1 mt-2 mb-auto rounded-md gap-x-4 ">
+                          <div className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-gray-700 ">
+                            <input
+                              onClick={() =>
+                                handleCompanyStatus(item?._id, item?.status)
+                              }
+                              className=""
+                              checked={item?.status}
+                              type="checkbox"
+                            />
+                          </div>
+                          <button
+                            onClick={() => handleEdit(item?._id)}
+                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-gray-700 "
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDelete(item?._id)}
+                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-gray-700 "
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                      <Link
+                        className="flex items-center justify-center w-8 h-8 mt-2 border rounded-md hover:bg-gray-200 "
+                        to={`/company/${item?._id}`}
+                      >
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 16 16"
+                          xmlns="http://www.w3.org/2000/svg"
+                          version="1.1"
+                          fill="none"
+                          stroke="#000000"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="1.5"
+                        >
+                          <path d="m1.75 8s2-4.25 6.25-4.25 6.25 4.25 6.25 4.25-2 4.25-6.25 4.25-6.25-4.25-6.25-4.25z" />
+                          <circle cx="8" cy="8" r="1.25" fill="#000000" />
+                        </svg>
+                      </Link>
+                    </div>
                   </div>
                 );
               })}
