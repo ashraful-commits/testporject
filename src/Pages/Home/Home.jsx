@@ -17,12 +17,12 @@ import { calculateTotalCommissionForAllClients } from "../../Utils/CommissionCou
 import useFormHook from "../../Hooks/useFormHook";
 import DatePicker from "react-datepicker";
 import { motion } from "framer-motion";
-import Company from "./../Company/Company";
 import { getAllCompany } from "../../Features/Company/CompanyApi";
 import Header from "../../Components/Header";
 import ClientModel from "../../Components/Model/ClientModel";
 import TableComponent from "./../../Components/Tables/TableComponent";
 import SellerTableComponent from "../../Components/Tables/SellerTableComponent";
+import { getAllCompanyState } from "../../Features/Company/CompanySlice";
 const Home = () => {
   //==============================================TODO:all state
 
@@ -38,12 +38,15 @@ const Home = () => {
     status: "",
     email: "",
     rol: "",
+    companyName: "",
   });
   //====================================================== TODO:percentage state
   const [percentage, setPercentage] = useState(0);
   //=========================================== TODO:redux data
   const { error, message, loginInSeller, seller } =
     useSelector(getAllSellerState);
+  //=========================================== TODO:redux data
+  const { company } = useSelector(getAllCompanyState);
   //===================================================== TODO:dispatch/navigate
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -154,7 +157,7 @@ const Home = () => {
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.2,
               }}
-              className="total_customer w-[305px] h-[150px] rounded-[8px] bg-[#6E28D4]  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out "
+              className="total_customer w-[305px] h-[150px] rounded-[8px] bg-cyan-700  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out "
             >
               <div className="customer flex justify-start items-start mt-[10px] ml-[15px] gap-[9px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-white">
@@ -234,7 +237,7 @@ const Home = () => {
               className="rate border w-[305px] h-[150px] rounded-[8px] bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out "
             >
               <div className="customer flex justify-start items-start w-full mt-[10px] pl-[15px]  border-b gap-[7px]">
-                <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#6E28D4]">
+                <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#5D5FEF] ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -292,7 +295,7 @@ const Home = () => {
               className="total_commission w-[305px] border h-[150px] rounded-[8px] bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out"
             >
               <div className="total_earned flex justify-start items-start mt-[10px]  border-b pl-[12px] gap-[10px]">
-                <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-opacity-[.1] mt-[4px] bg-[#6E28D4]">
+                <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-opacity-[.1] mt-[4px] bg-[#2F80ED] ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -337,7 +340,7 @@ const Home = () => {
               className="withdrawn w-[305px] h-[150px] rounded-[8px] border bg-white  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out"
             >
               <div className="customer flex justify-start items-start mt-[10px] pl-[14px] border-b gap-[9px]">
-                <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#6E28D4]">
+                <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#F2994A] ">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -370,6 +373,34 @@ const Home = () => {
             {/*============================================= TODO:search  */}
             <div className="search  flex justify-between items-center w-full h-[40px]">
               <div className="flex w-full h-[40px] items-center">
+                {!sellerTable && (
+                  <motion.div
+                    initial={{ y: -15, opacity: 0.3 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{
+                      duration: 0.3,
+                      delay: 0.1,
+                    }}
+                    className="text_search w-[150px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px]  transition-all duration-500 ease-in-out"
+                  >
+                    <select
+                      onChange={handleInputChange}
+                      name="companyName"
+                      className="w-full px-2"
+                      id=""
+                    >
+                      <option value="">company</option>
+                      {company?.map((item, index) => {
+                        return (
+                          <option value={item?.companyName} key={index}>
+                            {item?.companyName}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </motion.div>
+                )}
                 <motion.div
                   initial={{ y: -15, opacity: 0.3 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -378,7 +409,7 @@ const Home = () => {
                     duration: 0.3,
                     delay: 0.1,
                   }}
-                  className="text_search w-[222px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px] hover:scale-105 transition-all duration-500 ease-in-out"
+                  className="text_search w-[222px] border h-[40px]  shrink-0 flex items-center pl-[15px] mr-[8px] rounded-[8px] transition-all duration-500 ease-in-out"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -410,7 +441,7 @@ const Home = () => {
                       duration: 0.3,
                       delay: 0.3,
                     }}
-                    className="text_search h-[40px]  w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px] hover:scale-105 transition-all duration-500 ease-in-out"
+                    className="text_search h-[40px]  w-[222px] border flex items-center pl-[15px] mr-[8px] rounded-[8px]  transition-all duration-500 ease-in-out"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -435,7 +466,7 @@ const Home = () => {
                   </motion.div>
                 )}
                 {sellerTable && (
-                  <motion.div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#6E28D4] text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out">
+                  <motion.div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-cyan-700 text-[12px] font-[500] transition-all duration-500 ease-in-out">
                     <motion.select
                       initial={{ y: -15, opacity: 0.3 }}
                       animate={{ y: 0, opacity: 1 }}
@@ -450,16 +481,16 @@ const Home = () => {
                       value={input.role}
                       id=""
                     >
-                      <option className="text-[#6E28D4]" value="">
+                      <option className="text-cyan-700 " value="">
                         select role
                       </option>
-                      <option className="text-[#6E28D4]" value="admin">
+                      <option className="text-cyan-700 " value="admin">
                         admin
                       </option>
-                      <option className="text-[#6E28D4]" value="user">
+                      <option className="text-cyan-700 " value="user">
                         user
                       </option>
-                      <option className="text-[#6E28D4]" value="super_admin">
+                      <option className="text-cyan-700 " value="super_admin">
                         Super admin
                       </option>
                     </motion.select>
@@ -571,7 +602,7 @@ const Home = () => {
                         duration: 0.6,
                         delay: 0.1,
                       }}
-                      className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-[#6E28D4] text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out"
+                      className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-cyan-700 text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out"
                     >
                       <motion.select
                         initial={{ y: -15, opacity: 0.3 }}
@@ -587,19 +618,19 @@ const Home = () => {
                         value={input.status}
                         id=""
                       >
-                        <option className="text-[#6E28D4]" value="">
+                        <option className="text-cyan-700 " value="">
                           Status
                         </option>
-                        <option className="text-[#6E28D4]" value="pending">
+                        <option className="text-cyan-700 " value="pending">
                           Pending
                         </option>
-                        <option className="text-[#6E28D4]" value="on going">
+                        <option className="text-cyan-700 " value="on going">
                           On going
                         </option>
-                        <option className="text-[#6E28D4]" value="on hold">
+                        <option className="text-cyan-700 " value="on hold">
                           On hold
                         </option>
-                        <option className="text-[#6E28D4]" value="complete">
+                        <option className="text-cyan-700 " value="complete">
                           Complete
                         </option>
                       </motion.select>
@@ -651,7 +682,7 @@ const Home = () => {
                     delay: 0.2,
                   }}
                   onClick={() => setSellerTable(!sellerTable)}
-                  className="add-client pr-[4px] w-[121px] h-[38px] flex items-center justify-center gap-[10px] bg-[#6E28D4] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
+                  className="add-client pr-[4px] w-[121px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px] bg-cyan-700  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
                 >
                   {sellerTable ? "Client" : "Seller"}
                 </motion.button>
@@ -703,7 +734,7 @@ const Home = () => {
                     delay: 0.1,
                   }}
                   onClick={() => setClientModel(true)}
-                  className="add-client pr-[4px] w-[162px] h-[38px] flex items-center justify-center gap-[10px] bg-[#6E28D4] hover:bg-[#1b5269] transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
+                  className="add-client pr-[4px] w-[162px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px] bg-cyan-700  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
                 >
                   Add New Client
                   <svg

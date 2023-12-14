@@ -130,7 +130,7 @@ const Project = () => {
     <>
       {/* //================================================== TODO:loader  */}
       {loader && (
-        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-purple-600 flex justify-center items-center absolute top-0 left-0">
+        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-cyan-700  flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>
@@ -221,7 +221,7 @@ const Project = () => {
 
             <button
               type="submit"
-              className="h-[30px] justify-end col-span-4 bg-purple-800 text-white transition-all ease-in-out duration-500 hover:scale-105"
+              className="h-[30px] justify-end col-span-4 bg-cyan-700 text-white transition-all ease-in-out duration-500 hover:scale-105"
             >
               Add Tools
             </button>
@@ -294,7 +294,7 @@ const Project = () => {
 
             <button
               type="submit"
-              className="h-[30px] justify-end col-span-4 bg-purple-800 text-white transition-all ease-in-out duration-500 hover:scale-105"
+              className="h-[30px] justify-end col-span-4 bg-cyan-800 text-white transition-all ease-in-out duration-500 hover:scale-105"
             >
               Add Team Member
             </button>
@@ -525,7 +525,7 @@ const Project = () => {
                   <div className="flex items-end justify-end gap-3">
                     <img
                       onClick={() => setDropdown(!dropdown)}
-                      className=" w-[46px] h-[46px] mt-[0px] cursor-pointer ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
+                      className=" w-[46px] h-[46px] mt-[0px] cursor-pointer ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
                       src={singleProject?.clientId?.clientAvatar}
                       alt=""
                     />
@@ -542,7 +542,7 @@ const Project = () => {
                   <div className="flex items-end justify-end gap-3">
                     <img
                       onClick={() => setDropdown(!dropdown)}
-                      className=" w-[46px] cursor-pointer h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
+                      className=" w-[46px] cursor-pointer h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
                       src={user}
                       alt=""
                     />
@@ -563,13 +563,13 @@ const Project = () => {
                 >
                   {singleProject?.clientId?.clientAvatar ? (
                     <img
-                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
+                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
                       src={singleProject?.clientId?.clientAvatar}
                       alt=""
                     />
                   ) : (
                     <img
-                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-purple-600"
+                      className=" w-[46px] h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
                       src={user}
                       alt=""
                     />
@@ -879,7 +879,7 @@ const Project = () => {
                 </button>
               </div>
               <div className="flex items-center justify-center h-full button">
-                <button className="bg-purple-600 text-[14px] font-[500] text-white hover:bg-purple-900 transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105">
+                <button className="bg-cyan-700  text-[14px] font-[500] text-white hover:bg-gray-800  transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105">
                   Manage Project
                 </button>
               </div>

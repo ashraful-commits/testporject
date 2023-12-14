@@ -103,7 +103,7 @@ const Seller = () => {
     <>
       {/* //========================================TODO: loader  */}
       {loader && (
-        <div className="w-screen bg-opacity-20 min-h-[1240px] h-screen z-[9999999999999] bg-purple-200 flex justify-center items-center absolute top-0 left-0">
+        <div className="w-screen bg-opacity-20 min-h-[1240px] h-screen z-[9999999999999] bg-gray-100  flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>
@@ -335,7 +335,7 @@ const Seller = () => {
               totalProjects=""
               totalClients=""
               TotalEarnings=""
-              styles={`bg-purple-200 border border-purple-500`}
+              styles={`bg-cyan-100  border border-cyan-500`}
               title="Total Sales Guy"
               svg={
                 <svg
@@ -369,7 +369,7 @@ const Seller = () => {
               totalProjects={singleSeller?.Projects}
               totalClients=""
               TotalEarnings=""
-              styles={`bg-green-200 border border-green-500`}
+              styles={`bg-green-100  border border-green-500`}
               title="Total Projects"
               percentage={percentage}
               svg={
@@ -680,7 +680,7 @@ const Seller = () => {
                 }
                 onClick={() => setModel(!model)}
                 className={
-                  "w-[170px]  hover:scale-105  rounded-md h-[38px] bg-purple-500 flex justify-center items-center gap-2 text-white hover:bg-purple-600 transition-all duration-500 ease-in-out"
+                  "w-[170px]  hover:scale-105  rounded-md h-[38px] bg-cyan-700  flex justify-center items-center gap-2 text-white hover:bg-gray-700  transition-all duration-500 ease-in-out"
                 }
               >
                 Add Sales Person

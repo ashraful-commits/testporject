@@ -78,7 +78,7 @@ const Login = () => {
       {/* //=================================================loader  */}
       {loader ||
         (clientLoader && (
-          <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-purple-600 bg-opacity-20">
+          <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-cyan-700  bg-opacity-20">
             <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
               <LoadingSpinner />
             </div>
@@ -94,7 +94,7 @@ const Login = () => {
           </div>
         </div>
         <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
-          <h1 className="text-[20px] font-['Lato'] mt-[25px] text-purple-800 font-[900] uppercase">
+          <h1 className="text-[20px] font-['Lato'] mt-[25px] text-cyan-800 font-[900] uppercase">
             Login
           </h1>
           {/* //================================================form  */}
@@ -130,14 +130,14 @@ const Login = () => {
                 delay: 0.4,
               }}
               type="submit"
-              className="text-[18px] hover:scale-105 uppercase bg-purple-500 text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-purple-800 transition-all duration-500 ease-in-out"
+              className="text-[18px] hover:scale-105 uppercase bg-cyan-700  text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-gray-700  transition-all duration-500 ease-in-out"
             >
               Login
             </motion.button>
             <p className="text-[12px] text-center text-gray-500">
               Don&apos;t have an account{" "}
               <Link
-                className="text-purple-500 font-[600] hover:text-purple-700 transition-all duration-500 ease-out"
+                className="text-cyan-700  font-[600] hover:text-cyan-700 transition-all duration-500 ease-out"
                 to="/register"
               >
                 Register

@@ -11,14 +11,14 @@ const FormInput = ({
 }) => {
   return (
     <motion.div
-      initial={{ y: -15, x: -15, opacity: 0.3 }}
-      animate={{ y: 0, x: 0, opacity: 1 }}
+      initial={{ y: -5, opacity: 0.3 }}
+      animate={{ y: 0, opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{
         duration: 0.3,
         delay: 0.1 * Math.random() * 10,
       }}
-      className="w-full flex flex-col items-center hover:scale-105 transition-all duration-500 ease-in-out"
+      className="flex flex-col items-center w-full transition-all duration-500 ease-in-out hover:scale-105"
     >
       {/* ==========================================label  */}
       <label
@@ -29,7 +29,7 @@ const FormInput = ({
       </label>
       {/*========================================= input field  */}
       <input
-        className="border focus:outline-purple-800 transition-all duration-500 ease-in-out mt-[10px] w-full h-[36px] rounded-[5px] pl-[20px] font-['Lato'] placeholder:font-['work_sans'] placeholder:text-[10px]"
+        className="border focus:outline-cyan-800 transition-all duration-500 ease-in-out mt-[10px] w-full h-[36px] rounded-[5px] pl-[20px] font-['Lato'] placeholder:font-['work_sans'] placeholder:text-[10px]"
         type={type}
         placeholder={placeholder}
         value={value}

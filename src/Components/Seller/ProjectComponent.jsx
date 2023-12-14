@@ -164,9 +164,9 @@ const ProjectComponent = ({
             <span
               className={`border px-2 text-[10px] rounded-xl ${
                 projectStatus == "pending" && "bg-orange-300"
-              } ${projectStatus == "on going" && "bg-green-300"} ${
+              } ${projectStatus == "on going" && "bg-cyan-300"} ${
                 projectStatus == "on hold" && "bg-red-300"
-              } ${projectStatus == "complete" && "bg-gray-600 text-white"}`}
+              } ${projectStatus == "complete" && "bg-cyan-700  text-white"}`}
             >
               {projectStatus}
             </span>
@@ -224,7 +224,7 @@ const ProjectComponent = ({
 
         <div className="flex items-center justify-between">
           <div className="flex flex-col items-start justify-center w-full mt-3">
-            <span className="block text-purple-600 ">Team </span>
+            <span className="block text-cyan-700  ">Team </span>
             <div className="flex w-full clients">
               {team?.length > 0
                 ? team?.map((item, index) => {
@@ -280,7 +280,7 @@ const ProjectComponent = ({
               onClick={() => {
                 setManage(!manage), setDropId(id);
               }}
-              className="w-[117px] h-[40px] flex justify-center items-center bg-purple-100 text-purple-600 hover:text-white rounded-md hover:bg-purple-700 transition-all"
+              className="w-[117px] h-[40px] flex justify-center items-center bg-cyan-700   text-white hover:text-white rounded-md hover:bg-gray-700  transition-all"
             >
               Manage
             </button>

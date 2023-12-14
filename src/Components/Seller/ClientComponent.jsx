@@ -191,7 +191,7 @@ const ClientComponent = ({
         </div>
         <div className="flex items-end justify-between mt-4">
           <div className="flex flex-col w-full mt-3 gap-y-1">
-            <span className="items-center justify-center block text-purple-600 rounded-md">
+            <span className="items-center justify-center block rounded-md text-cyan-700 ">
               Active projects
             </span>
             <div className="flex w-full clients">
@@ -252,7 +252,7 @@ const ClientComponent = ({
               onClick={() => {
                 setManage(!manage), setDropId(id);
               }}
-              className="w-[117px] h-[40px] flex justify-center items-center bg-purple-100 text-purple-600 hover:text-white rounded-md hover:bg-purple-700 transition-all"
+              className="w-[117px] h-[40px] flex justify-center items-center bg-cyan-700   text-white hover:text-white rounded-md hover:bg-gray-700  transition-all"
             >
               Manage
             </button>

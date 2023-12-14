@@ -8,7 +8,6 @@ import SalesModel from "../Model/SalesModel";
 import {
   deleteSeller,
   getSingleSalesSeller,
-  getSingleSeller,
 } from "../../Features/Seller/SellerApi";
 import swal from "sweetalert";
 //=======================================salesPeople function
@@ -83,6 +82,7 @@ const SalesPeople = ({
           title="Edit sales"
         />
       )}
+      {/* ================================= main container  */}
       <motion.div
         initial={{ y: -15, opacity: 0.1 }}
         animate={{ y: 0, opacity: 1 }}
@@ -172,7 +172,7 @@ const SalesPeople = ({
           </div>
         </div>
         {/* //========================================================== active client  */}
-        <h5 className="w-full mt-10 font-['work_sans'] font-[500]">
+        <h5 className="w-full mt-10 font-['work_sans'] font-[500] text-cyan-700 ">
           Active Clients
         </h5>
         <div className="flex items-center justify-between w-full mt-1">
@@ -231,7 +231,7 @@ const SalesPeople = ({
               onClick={() => {
                 setManage(!manage), setDropId(id);
               }}
-              className="w-[117px] h-[40px] flex justify-center items-center duration-500 bg-purple-100 text-purple-600 hover:text-white rounded-md hover:bg-purple-700 transition-all ease-in-out"
+              className="w-[117px] h-[40px] flex justify-center items-center duration-500 bg-cyan-700   text-white hover:text-white rounded-md hover:bg-gray-700  transition-all ease-in-out"
             >
               Manage
             </button>

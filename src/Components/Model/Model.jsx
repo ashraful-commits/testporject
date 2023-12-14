@@ -16,12 +16,12 @@ import { motion } from "framer-motion";
 import { getAllCompanyState } from "../../Features/Company/CompanySlice";
 import {
   createProject,
-  getAllProject,
   updateProject,
 } from "../../Features/Project/ProjectApi";
 import { getAllClient } from "../../Features/Client/ClientApi";
 import { getAllProjectState } from "../../Features/Project/ProjectSlice";
 import { getAllCompany } from "../../Features/Company/CompanyApi";
+import { getAllSellerState } from "../../Features/Seller/SellerSlice";
 
 const Model = ({ setClient, singleData, setForm, title }) => {
   //=============================  TODO:form hook
@@ -41,14 +41,15 @@ const Model = ({ setClient, singleData, setForm, title }) => {
     password: "",
     commissionRate: "",
   });
-  console.log(singleData);
-  console.log(input);
+
   //========================== TODO:file preview
   const [Id, setId] = useState({});
 
   //================================== TODO:handle project file
   const [projectFiles, setProjectFile] = useState(null);
   const { client, message, loader, error } = useSelector(getAllClientState);
+  const { loginInSeller } = useSelector(getAllSellerState);
+
   const { loader: projectLoader } = useSelector(getAllProjectState);
   const { company } = useSelector(getAllCompanyState);
   const dispatch = useDispatch();
@@ -197,9 +198,11 @@ const Model = ({ setClient, singleData, setForm, title }) => {
     dispatch(getAllClient());
     dispatch(getAllCompany());
   }, [dispatch]);
+  //===============================
+
   return (
     <motion.div className="w-screen h-screen pt-[50px] pl-[66px] bg-gray-900 bg-opacity-90 fixed top-0 left-0 scroll-smooth overflow-y-auto z-[99999] flex justify-center">
-      {/* //==================================================== TODO:close button  */}
+      {/* ==================================================== TODO:close button  */}
       <button
         onClick={() => setClient(false)}
         className="absolute right-16 top-10 z-[99999]"
@@ -217,7 +220,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
           />
         </svg>
       </button>
-      {/* //==================================================== TODO:main model  */}
+      {/* ==================================================== TODO:main model  */}
       <motion.div
         initial={{ scale: 0.3 }}
         animate={{ scale: 1 }}
@@ -237,7 +240,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0.4 }}
             transition={{ duration: 1.3 }}
-            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-purple-600 z-[99999999999999999]"
+            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-700  z-[99999999999999999]"
           >
             <div className="w-full h-full absolute top-[45%]">
               <LoadingSpinner />
@@ -250,7 +253,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0.4 }}
             transition={{ duration: 1.3 }}
-            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-purple-600 z-[99999999999999999]"
+            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-700  z-[99999999999999999]"
           >
             <div className="w-full h-full absolute top-[45%]">
               <LoadingSpinner />
@@ -260,7 +263,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
         <div className=" sticky top-0 pt-[42px] bg-white w-full">
           <div className="flex gap-x-4">
             <button
-              className="flex justify-center items-center w-[150px] h-[40px] font-bold text-white hover:bg-purple-900 transition-all duration-500 ease-in-out bg-green-500 rounded-md"
+              className="flex justify-center items-center w-[150px] h-[40px] font-bold text-white hover:bg-gray-800  transition-all duration-500 ease-in-out bg-cyan-700  rounded-md"
               onClick={() => setForm(false)}
             >
               {title}
@@ -298,7 +301,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                     Client Name
                   </label>
                   <select
-                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
+                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato']  transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="clientId"
                     value={input.clientId}
                     onChange={handleInputChange}
@@ -330,7 +333,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                     Company Name
                   </label>
                   <select
-                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
+                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato']  transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="company"
                     value={input.company}
                     onChange={handleInputChange}
@@ -354,15 +357,17 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                       })}
                   </select>
                 </div>
-                <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
-                  <FormInput
-                    type="text"
-                    placeholder="Commission rate"
-                    label="Commission rate"
-                    value={input.commissionRate}
-                    onChange={handleInputChange}
-                  />
-                </div>
+                {loginInSeller?.role === "super_admin" && (
+                  <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
+                    <FormInput
+                      type="text"
+                      placeholder="Commission rate"
+                      label="Commission rate"
+                      value={input.commissionRate}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                )}
               </div>
             </div>
             <div className="flex flex-col items-start project_information">
@@ -446,7 +451,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                       duration: 0.3,
                       delay: 0.1 * Math.random() * 10,
                     }}
-                    className="border w-full h-[37px]  text-gray-500 px-[12px] tracking-[.5px] hover:scale-105 transition-all duration-500 ease-in-out  rounded-md mt-[-10px]"
+                    className="border w-full h-[37px]  text-gray-500 px-[12px] tracking-[.5px]  transition-all duration-500 ease-in-out  rounded-md mt-[-10px]"
                     name="projectType"
                     id=""
                     value={input.projectType}
@@ -523,7 +528,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                       duration: 0.3,
                       delay: 0.1 * Math.random() * 10,
                     }}
-                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
+                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato']  transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="projectSource"
                     value={input.projectSource}
                     onChange={handleInputChange}
@@ -553,7 +558,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                       duration: 0.3,
                       delay: 0.1 * Math.random() * 10,
                     }}
-                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato'] hover:scale-105 transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
+                    className="border w-full text-gray-500 px-[12px] tracking-[.5px] h-[37px] font-['Lato']  transition-all duration-500 ease-in-out rounded-md mt-[-10px]"
                     name="timeFrame"
                     value={input.timeFrame}
                     id=""
@@ -630,7 +635,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                 >
                   I agree with all
                   <a
-                    className="text-purple-500 hover:text-purple-800 transition-all duration-500 pl-[5px]"
+                    className="text-cyan-700  hover:text-cyan-800 transition-all duration-500 pl-[5px]"
                     href=""
                   >
                     terms & condition
@@ -646,7 +651,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                   delay: 0.1 * Math.random() * 10,
                 }}
                 type="submit"
-                className="text-white mt-[-15px]  bg-purple-500 w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-purple-700 transition-all ease-in-out duration-500 hover:scale-105 "
+                className="text-white mt-[-15px] hover:scale-105  bg-cyan-700  w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-gray-700  transition-all ease-in-out duration-500  "
               >
                 Submit Now
               </motion.button>

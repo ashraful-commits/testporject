@@ -189,7 +189,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.2 }}
               transition={{ duration: 1.3 }}
-              className="absolute left-0 w-full h-full bg-purple-600 bg-opacity-20 top"
+              className="absolute left-0 w-full h-full bg-cyan-700 bg-opacity-20 top"
             >
               <div className="w-full absolute h-full top-[45%]">
                 <LoadingSpinner />
@@ -230,16 +230,16 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       }}
                       key={index}
                       className={`${
-                        loginInSeller?._id === item?._id ? "bg-green-100" : ""
+                        loginInSeller?._id === item?._id ? "bg-gray-100 " : ""
                       } w-full grid grid-flow-col hover:scale-[101%] transition-all duration-500 ease-in-out justify-between items-center border-b py-2 h-[3.4375rem]  text-center relative`}
                     >
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[20px]  text-[#6E28D4]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[20px]  text-cyan-700 ">
                         <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                           {index + 1}.
                         </span>{" "}
                       </td>
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
-                        <span className="truncate text-[13px] capitalize font-[500] text-[#6E28D4] w-[120px]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                        <span className="truncate text-[13px] capitalize font-[500] text-cyan-700 w-[120px]">
                           {item.name}
                         </span>
                       </td>
@@ -247,7 +247,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         className="cursor-pointer "
                         to={`/seller/${item._id}`}
                       >
-                        <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                        <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                           {item.avatar ? (
                             <img
                               className="w-[35px] h-[35px] rounded-full"
@@ -262,21 +262,21 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                           )}
                         </td>
                       </Link>
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                         {item?.client?.length > 0 ? (
                           <span>{item?.client?.length}</span>
                         ) : (
                           <span>0</span>
                         )}
                       </td>
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                         {item?.projects?.length > 0 ? (
                           <span>{item?.projects?.length}</span>
                         ) : (
                           <span>0</span>
                         )}
                       </td>
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                         {item?.salesPerson?.length > 0 ? (
                           <span>{item?.salesPerson?.length}</span>
                         ) : (
@@ -401,13 +401,13 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                     key={index}
                     className="w-full hover:scale-[101%] transition-all duration-500 ease-in-out grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center relative"
                   >
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[20px]  text-[#6E28D4]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[20px]  text-cyan-700 ">
                       <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                         {index + 1}.
                       </span>
                     </td>
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
-                      <span className="truncate text-[13px] capitalize font-[500] text-[#6E28D4] w-[120px]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                      <span className="truncate text-[13px] capitalize font-[500] text-cyan-700  w-[120px]">
                         {item.name}
                       </span>
                     </td>
@@ -415,7 +415,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                       className="cursor-pointer "
                       to={`/seller/${item._id}`}
                     >
-                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                      <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                         {item.avatar ? (
                           <img
                             className="w-[35px] h-[35px] rounded-full"
@@ -430,21 +430,21 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                         )}
                       </td>
                     </Link>
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                       {item?.client?.length > 0 ? (
                         <span>{item?.client?.length}</span>
                       ) : (
                         <span>0</span>
                       )}
                     </td>
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                       {item?.projects?.length > 0 ? (
                         <span>{item?.projects?.length}</span>
                       ) : (
                         <span>0</span>
                       )}
                     </td>
-                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
+                    <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                       {item?.salesPerson?.length > 0 ? (
                         <span>{item?.salesPerson?.length}</span>
                       ) : (
@@ -549,13 +549,13 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
             </span>
           )}
         </tbody>
-        {/* //=================================================== footer  */}
+        {/* //=================================================== table footer  */}
         {(seller?.length >= 1 ||
           [...loginInSeller.salesPerson, loginInSeller]?.length >= 1) && (
           <tfoot>
             <div className="flex items-center justify-center gap-2 py-5">
               <button
-                className="text-[14px] w-[25px] hover:scale-105  h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] w-[25px] hover:scale-105  h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={prevPage}
               >
                 <svg
@@ -587,32 +587,32 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
               <button
                 onClick={() => setCurrentPage(1)}
                 className={`${
-                  currentPage === 1 ? "bg-purple-800 text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 1 ? "bg-cyan-800 text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 1
               </button>
               <button
                 onClick={() => setCurrentPage(2)}
                 className={`${
-                  currentPage === 2 ? "bg-purple-800 text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 2 ? "bg-cyan-800 text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 2
               </button>
               <button
                 onClick={() => setCurrentPage(3)}
                 className={`${
-                  currentPage === 3 ? "bg-purple-800 text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 3 ? "bg-cyan-800 text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 3
               </button>
               <button
                 onClick={() => setCurrentPage(4)}
                 className={`${
-                  currentPage === 4 ? "bg-purple-800 text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 4 ? "bg-cyan-800 text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 4
               </button>
@@ -626,7 +626,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
                 <option value="7">7</option>
               </select>
               <button
-                className="text-[14px] hover:scale-105  w-[25px] h-[25px] flex rounded-md hover:bg-purple-800 justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
+                className="text-[14px] hover:scale-105  w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500"
                 onClick={nextPage}
               >
                 <svg

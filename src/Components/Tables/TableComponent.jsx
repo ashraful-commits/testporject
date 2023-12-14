@@ -154,6 +154,9 @@ const TableComponent = ({ sellerId, input }) => {
         <thead>
           <tr className="w-full min-h-[1.875rem] h-full  grid pr-6 grid-flow-col justify-between border-b py-2 text-center">
             <th className="text-[.8125rem] font-['work_sans'] w-[30px]  text-start font-[400]"></th>
+            <th className="text-[.8125rem] font-['work_sans'] -ml-[3rem] w-[150px]  text-start font-[400]">
+              Company Name
+            </th>
             <th className="text-[.8125rem] font-['work_sans'] -ml-[4rem] w-[150px]  text-start font-[400]">
               Client Name
             </th>
@@ -203,7 +206,7 @@ const TableComponent = ({ sellerId, input }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.4 }}
               transition={{ duration: 1.3 }}
-              className="w-full h-full bg-[#6E28D4] bg-opacity-20 absolute top-0 left-0"
+              className="absolute top-0 left-0 w-full h-full bg-cyan-700 bg-opacity-20"
             >
               <div className="w-full absolute h-full top-[45%]">
                 <LoadingSpinner />
@@ -216,7 +219,7 @@ const TableComponent = ({ sellerId, input }) => {
                 .filter((project) => {
                   return (
                     (input?.text
-                      ? project?.clientName
+                      ? project?.clientId?.clientName
                           ?.toLowerCase()
                           .includes(input?.text?.toLowerCase())
                       : true) &&
@@ -228,6 +231,9 @@ const TableComponent = ({ sellerId, input }) => {
                       : true) &&
                     (input?.status
                       ? project?.projectStatus === input?.status
+                      : true) &&
+                    (input?.companyName
+                      ? project?.company?.companyName === input?.companyName
                       : true)
                   );
                 })
@@ -247,14 +253,49 @@ const TableComponent = ({ sellerId, input }) => {
                       key={index}
                       className={`${
                         loginInSeller?._id === item?.sellerId?._id
-                          ? "bg-green-100"
+                          ? "bg-gray-100 "
                           : ""
                       } w-full grid grid-flow-col  transition-all duration-500 ease-in-out justify-between items-center border-b py-2 h-[3.4375rem] relative text-center`}
                     >
-                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-[#6E28D4]">
+                      <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-cyan-700 ">
                         <span className="text-[.8125rem] font-[500] px-[1rem] block text-[#D9D9D9]">
                           {index + 1}.
                         </span>{" "}
+                      </td>
+                      <td className="w-[150px] overflow-hidden -ml-14 items-center flex gap-[.3125rem] relative">
+                        <Link to={`/${item._id}`}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="26"
+                            viewBox="0 0 32 26"
+                            fill="none"
+                          >
+                            <path
+                              d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
+                              fill="#0891b2"
+                            />
+                          </svg>
+                        </Link>
+                        {item?.company?.companyLogo ? (
+                          <Link to={`/${item?._id}`}>
+                            <img
+                              className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
+                              src={item?.company?.companyLogo}
+                            />
+                          </Link>
+                        ) : (
+                          <Link to={`/${item?._id}`}>
+                            <img
+                              className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
+                              src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+                            />
+                          </Link>
+                        )}
+
+                        <span className="  capitalize truncate text-[13px] font-[500] text-cyan-700  w-[70px]">
+                          {item?.company?.companyName}
+                        </span>
                       </td>
                       <td className="w-[150px]  -ml-[4rem] overflow-hidden items-center flex gap-[.3125rem] relative">
                         <Link to={`/${item._id}`}>
@@ -267,7 +308,7 @@ const TableComponent = ({ sellerId, input }) => {
                           >
                             <path
                               d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
-                              fill="#CDAAFF"
+                              fill="#0891b2"
                             />
                           </svg>
                         </Link>
@@ -288,7 +329,7 @@ const TableComponent = ({ sellerId, input }) => {
                           </Link>
                         )}
 
-                        <span className="  capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[100px]">
+                        <span className="  capitalize truncate text-[13px] font-[500] text-cyan-700  w-[100px]">
                           {item?.clientId?.clientName}
                         </span>
                       </td>
@@ -304,7 +345,7 @@ const TableComponent = ({ sellerId, input }) => {
                           aria-valuemax="10000"
                         >
                           <div
-                            className="bg-[#6E28D4] h-full "
+                            className="h-full bg-cyan-700 "
                             style={{
                               width: `${((100 * item?.amount) / 100000).toFixed(
                                 2
@@ -524,7 +565,10 @@ const TableComponent = ({ sellerId, input }) => {
                   (input?.status
                     ? project?.projectStatus === input?.status
                     : true) &&
-                  project?.status === true
+                  project?.status === true &&
+                  (input?.companyName
+                    ? project?.company?.companyName === input?.companyName
+                    : true)
                 );
               })
               .map((item, index) => {
@@ -533,7 +577,7 @@ const TableComponent = ({ sellerId, input }) => {
                     key={index}
                     className="w-full grid transition-all duration-500 ease-in-out grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
                   >
-                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-[#6E28D4]">
+                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-cyan-700 ">
                       <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
                         {index + 1}.
                       </span>
@@ -549,7 +593,42 @@ const TableComponent = ({ sellerId, input }) => {
                         >
                           <path
                             d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
-                            fill="#CDAAFF"
+                            fill="#0891b2"
+                          />
+                        </svg>
+                      </Link>
+                      {item?.company?.companyLogo ? (
+                        <Link to={`/${item?._id}`}>
+                          <img
+                            className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
+                            src={item?.company?.companyLogo}
+                          />
+                        </Link>
+                      ) : (
+                        <Link to={`/${item?._id}`}>
+                          <img
+                            className="w-[1.25rem] absolute left-3 top-2 h-[1.25rem] border-[.125rem] border-white rounded-full"
+                            src="https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp"
+                          />
+                        </Link>
+                      )}
+
+                      <span className="  capitalize truncate text-[13px] font-[500] text-cyan-700  w-[70px]">
+                        {item?.company?.companyName}
+                      </span>
+                    </td>
+                    <td className="w-[120px] overflow-hidden -ml-14 items-center flex gap-[.3125rem] relative">
+                      <Link to={`/${item._id}`}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="32"
+                          height="26"
+                          viewBox="0 0 32 26"
+                          fill="none"
+                        >
+                          <path
+                            d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
+                            fill="#0891b2"
                           />
                         </svg>
                       </Link>
@@ -569,7 +648,7 @@ const TableComponent = ({ sellerId, input }) => {
                         </Link>
                       )}
 
-                      <span className="  capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[70px]">
+                      <span className="  capitalize truncate text-[13px] font-[500] text-cyan-700  w-[70px]">
                         {item?.clientId?.clientName}
                       </span>
                     </td>
@@ -585,7 +664,7 @@ const TableComponent = ({ sellerId, input }) => {
                         aria-valuemax="10000"
                       >
                         <div
-                          className="bg-[#6E28D4] h-full "
+                          className="h-full bg-cyan-700 "
                           style={{
                             width: `${((100 * item?.amount) / 100000).toFixed(
                               2
@@ -730,8 +809,8 @@ const TableComponent = ({ sellerId, input }) => {
                       </td>
                     )}
 
-                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-[#6E28D4]">
-                      <span className=" capitalize truncate text-[13px] font-[500] text-[#6E28D4] w-[120px]">
+                    <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                      <span className=" capitalize truncate text-[13px] font-[500] text-cyan-700  w-[120px]">
                         {item.projectSource}
                       </span>
                     </td>
@@ -783,7 +862,7 @@ const TableComponent = ({ sellerId, input }) => {
           <tfoot>
             <div className="flex items-center justify-center gap-2 py-5">
               <button
-                className="text-[14px]   w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%]"
+                className="text-[14px]   w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%]"
                 onClick={prevPage}
               >
                 <svg
@@ -815,32 +894,32 @@ const TableComponent = ({ sellerId, input }) => {
               <button
                 onClick={() => setCurrentPage(1)}
                 className={`${
-                  currentPage === 1 ? "bg-[#6E28D4] text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 1 ? "bg-cyan-700  text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 {1}
               </button>
               <button
                 onClick={() => setCurrentPage(2)}
                 className={`${
-                  currentPage === 2 ? "bg-[#6E28D4] text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 2 ? "bg-cyan-700  text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 2
               </button>
               <button
                 onClick={() => setCurrentPage(3)}
                 className={`${
-                  currentPage === 3 ? "bg-[#6E28D4] text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 3 ? "bg-cyan-700  text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 3
               </button>
               <button
                 onClick={() => setCurrentPage(4)}
                 className={`${
-                  currentPage === 4 ? "bg-[#6E28D4] text-white" : ""
-                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
+                  currentPage === 4 ? "bg-cyan-700  text-white" : ""
+                } text-[14px] w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center font-[400] text-[#A6A8B1] border capitalize hover:text-white transition-all ease-in-out duration-500`}
               >
                 4
               </button>
@@ -854,7 +933,7 @@ const TableComponent = ({ sellerId, input }) => {
                 <option value="7">7</option>
               </select>
               <button
-                className="text-[14px]  w-[25px] h-[25px] flex rounded-md hover:bg-[#6E28D4] justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%] "
+                className="text-[14px]  w-[25px] h-[25px] flex rounded-md hover:bg-gray-700  justify-center items-center  font-[400] text-[#A6A8B1] border capitalize  hover:text-white transition-all ease-in-out duration-500 hover:scale-[101%] "
                 onClick={nextPage}
               >
                 <svg

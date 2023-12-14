@@ -186,7 +186,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.4 }}
               transition={{ duration: 1.3 }}
-              className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-purple-600 z-[999999999999999999]"
+              className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-25 justify-center items-center bg-cyan-700  z-[999999999999999999]"
             >
               <div className="absolute top-[45%]">
                 <LoadingSpinner />
@@ -376,7 +376,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   >
                     I agree with all
                     <a
-                      className="text-purple-500 hover:text-purple-800 transition-all duration-500 pl-[5px]"
+                      className="text-cyan-700  hover:text-cyan-800 transition-all duration-500 pl-[5px]"
                       href=""
                     >
                       terms & condition
@@ -392,7 +392,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                     delay: 0.1 * Math.random() * 10,
                   }}
                   type="submit"
-                  className="text-white hover:scale-110  mt-[15px] bg-purple-500 w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-purple-700 my-3 transition-all ease-in-out duration-500"
+                  className="text-white hover:scale-110  mt-[15px] bg-cyan-700  w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-gray-700  my-3 transition-all ease-in-out duration-500"
                 >
                   Submit Now
                 </motion.button>

@@ -47,7 +47,7 @@ const Total = ({
         <div className="flex">
           {title === "Total Projects" && (
             <div className="flex items-center justify-center gap-2">
-              <button className="flex items-center w-10 gap-1 px-1 bg-green-200 border border-green-500 rounded-md">
+              <button className="flex items-center w-10 gap-1 px-1 bg-gray-100 border border-green-500 rounded-md">
                 {percentage}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
