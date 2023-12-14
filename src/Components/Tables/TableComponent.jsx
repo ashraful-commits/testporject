@@ -20,7 +20,7 @@ import { LoggedInSeller } from "../../Features/Seller/SellerApi";
 import { motion } from "framer-motion";
 import { getAllProjectState } from "../../Features/Project/ProjectSlice";
 import AdminProject from "../Pagination/AdminProject";
-import LoginUserProject from "../Pagination/loginUserProject";
+import LoginUserProject from "../Pagination/LoginUserProject";
 
 const TableComponent = ({ sellerId, input }) => {
   const { project, loader, error, message } = useSelector(getAllProjectState);
@@ -231,6 +231,7 @@ const TableComponent = ({ sellerId, input }) => {
               handleDelete={handleDelete}
             />
           ) : (
+            //===================================any other user project
             <LoginUserProject
               input={input}
               handleProjectStatus={handleProjectStatus}
