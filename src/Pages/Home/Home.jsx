@@ -23,10 +23,12 @@ import ClientModel from "../../Components/Model/ClientModel";
 import TableComponent from "./../../Components/Tables/TableComponent";
 import SellerTableComponent from "../../Components/Tables/SellerTableComponent";
 import { getAllCompanyState } from "../../Features/Company/CompanySlice";
+import SalesModel from "../../Components/Model/SalesModel";
 const Home = () => {
   //==============================================TODO:all state
 
   const [clientModel, setClientModel] = useState(false);
+  const [salesModel, setSalesModel] = useState(false);
   const [sellerTable, setSellerTable] = useState(false);
   const [currentTime, setCurrentTime] = useState(false);
   const [Form, setForm] = useState(false);
@@ -143,6 +145,7 @@ const Home = () => {
             )}
           </div>
         )}
+        {salesModel && <SalesModel setModel={setSalesModel} />}
 
         {/**======================================================TODO:dashboard */}
         <div className="dashboard px-[35px] w-[1400px] mt-[58px] h-full">
@@ -637,6 +640,7 @@ const Home = () => {
                     </motion.div>
                   </>
                 )}
+
                 <motion.button
                   initial={{ y: -15, opacity: 0.3 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -673,6 +677,14 @@ const Home = () => {
                     />
                   </svg>
                 </motion.button>
+                {sellerTable && (
+                  <button
+                    onClick={() => setSalesModel(true)}
+                    className="px-4 py-2 text-[12px] ml-4 font-bold text-white transition-all duration-500 ease-in-out rounded-md bg-cyan-700 hover:bg-cyan-800"
+                  >
+                    Add Sales Person
+                  </button>
+                )}
               </div>
               <div className="addClient gap-[10px] flex items-center justify-self-end right-0">
                 <motion.button
