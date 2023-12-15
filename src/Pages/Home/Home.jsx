@@ -387,10 +387,10 @@ const Home = () => {
                     <select
                       onChange={handleInputChange}
                       name="companyName"
-                      className="w-full px-2 focus:outline-none"
+                      className="w-full px-2 text-[13px] focus:outline-none"
                       id=""
                     >
-                      <option value="">...Company...</option>
+                      <option value="">company</option>
                       {company?.map((item, index) => {
                         return (
                           <option value={item?.companyName} key={index}>

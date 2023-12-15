@@ -22,11 +22,13 @@ import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
 import Total from "../../Components/Project/Total";
 import { Toastify } from "../../Utils/Tostify";
+import TableComponent from "../../Components/Tables/TableComponent";
 
 const Seller = () => {
   //===========================================TODO:all state
   const [model, setModel] = useState(false);
   const [menu, setMenu] = useState("Manage Sales People");
+  const [view, setView] = useState("grid");
   const [input, setInput] = useState({
     text: "",
     startDate: "",
@@ -44,6 +46,7 @@ const Seller = () => {
   //==================================================TODO:login seller
   const { loginInSeller, singleSeller, loader, message, error } =
     useSelector(getAllSellerState);
+  console.log(singleSeller);
   //================================================= TODO:use params
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -870,9 +873,94 @@ const Seller = () => {
               }
             />
           </div>
-          <h1 className="mt-[25px] text-[22px] font-['work_sans'] tracking-[-.9px]">
-            {menu}
-          </h1>
+          <div className="flex items-center justify-between w-full">
+            <h1 className="mt-[25px] text-[22px] font-['work_sans'] tracking-[-.9px]">
+              {menu}
+            </h1>
+            <div className="flex gap-x-2">
+              <select
+                className="px-2 font-bold border rounded-md focus:outline-none"
+                name=""
+                id=""
+              >
+                <option value="Top Seller">Top Seller</option>
+              </select>
+              <div className="flex px-2 bg-gray-100 border rounded-md gap-x-4 ">
+                <button
+                  className={` px-3 ${view == "grid" ? "bg-white" : ""}`}
+                  onClick={() => setView("grid")}
+                >
+                  <svg
+                    width={20}
+                    height={20}
+                    version="1.1"
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 210 210"
+                    style={{ enableBackground: "new 0 0 210 210" }}
+                    xmlSpace="preserve"
+                    fill="gray"
+                  >
+                    <g id="XMLID_2_">
+                      <path
+                        id="XMLID_4_"
+                        d="M75,0H15C6.716,0,0,6.716,0,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15V15
+		C90,6.716,83.284,0,75,0z"
+                      />
+                      <path
+                        id="XMLID_6_"
+                        d="M75,120H15c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15v-60
+		C90,126.716,83.284,120,75,120z"
+                      />
+                      <path
+                        id="XMLID_8_"
+                        d="M195,0h-60c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15V15
+		C210,6.716,203.284,0,195,0z"
+                      />
+                      <path
+                        id="XMLID_10_"
+                        d="M195,120h-60c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15v-60
+		C210,126.716,203.284,120,195,120z"
+                      />
+                    </g>
+                  </svg>
+                </button>
+                <button
+                  className={`px-3 ${view == "list" ? "bg-white" : ""}`}
+                  onClick={() => setView("list")}
+                >
+                  <svg
+                    width={20}
+                    height={30}
+                    version="1.1"
+                    id="Capa_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 42 42"
+                    style={{ enableBackground: "new 0 0 42 42" }}
+                    xmlSpace="preserve"
+                    fill="gray"
+                  >
+                    <g>
+                      <path
+                        d="M4.941,18H16h10h11.059C39.776,18,42,15.718,42,13s-2.224-5-4.941-5H26H16H4.941C2.224,8,0,10.282,0,13S2.224,18,4.941,18z
+		"
+                      />
+                      <path
+                        d="M37.059,24H26H16H4.941C2.224,24,0,26.282,0,29s2.224,5,4.941,5H16h10h11.059C39.776,34,42,31.718,42,29
+		S39.776,24,37.059,24z"
+                      />
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
           {/* //=================================================== TODO:all sales person  */}
           {menu === "Manage Sales People" && (
             <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
@@ -975,13 +1063,19 @@ const Seller = () => {
             </div>
           )}
           {menu === "Manage Projects" && (
-            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
-              {singleSeller?.projects?.length > 0 ? (
+            <div
+              className={` mt-[27px] w-full h-full pb-[150px] overflow-y-auto ${
+                view === "list" ? "" : "grid grid-cols-4"
+              }  justify-between gap-y-[8px]`}
+            >
+              {view === "list" ? (
+                <TableComponent sellerId={singleSeller?._id} input={input} />
+              ) : singleSeller?.projects?.length > 0 ? (
                 singleSeller?.projects
                   ?.filter((project) => {
                     return (
                       (input?.text
-                        ? project?.clientName
+                        ? project?.clientId?.clientName
                             ?.toLowerCase()
                             .includes(input?.text?.toLowerCase())
                         : true) &&
@@ -1021,8 +1115,8 @@ const Seller = () => {
             </div>
           )}
           {menu === "Manage Statistic" && (
-            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
-              <StatisticComponent />
+            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto  gap-y-[8px]">
+              <StatisticComponent data={loginInSeller?.projects} />
             </div>
           )}
         </div>

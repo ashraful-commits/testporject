@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { getSingleCompany } from "../../Features/Company/CompanyApi";
 import { getAllCompanyState } from "../../Features/Company/CompanySlice";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
 const CompanyView = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -14,7 +16,7 @@ const CompanyView = () => {
   }, [dispatch, id]);
   return (
     <div>
-      <header className="text-gray-600 bg-white body-font">
+      <header className="py-5 text-gray-600 bg-white body-font">
         <div className="container flex flex-col flex-wrap items-center px-5 py-2 mx-auto border-b md:flex-row">
           <nav className="flex flex-wrap items-center text-base lg:w-2/5 md:ml-auto">
             <a className="mr-5 text-cyan-600 hover:text-cyan-800 font-[700] cursor-pointer">
@@ -32,7 +34,7 @@ const CompanyView = () => {
           </nav>
           <a className="flex items-center order-first mb-4 font-medium text-gray-900 lg:order-none lg:w-1/5 title-font lg:items-center lg:justify-center md:mb-0">
             <img
-              className="w-100 h-[60px] rounded-md"
+              className="w-[50px] h-[50px] rounded-full"
               src={singleCompany?.companyLogo}
               alt=""
             />
@@ -61,6 +63,7 @@ const CompanyView = () => {
           </Link>
         </div>
       </header>
+      {/* //=================================hero section  */}
       <div>
         <section className="bg-white dark:bg-gray-900">
           <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-12">
@@ -239,11 +242,12 @@ const CompanyView = () => {
           </div>
         </section>
       </div>
+      {/* ===========================================our team member  */}
       <div className="mt-5">
         <section className="bg-white dark:bg-gray-900">
           <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-6">
             <div className="max-w-screen-sm mx-auto mb-8 lg:mb-16">
-              <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 dark:text-white">
+              <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-cyan-800 dark:text-white">
                 Our team
               </h2>
               <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
@@ -251,1174 +255,2280 @@ const CompanyView = () => {
                 elements built with the utility classes from Tailwind
               </p>
             </div>
-            <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <img
-                  className="mx-auto mb-4 rounded-full w-36 h-36"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                  alt="Bonnie Avatar"
-                />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Bonnie Green</a>
-                </h3>
-                <p>CEO/Co-founder</p>
-                <ul className="flex justify-center mt-4 space-x-4">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <img
-                  className="mx-auto mb-4 rounded-full w-36 h-36"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
-                  alt="Helene Avatar"
-                />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Helene Engels</a>
-                </h3>
-                <p>CTO/Co-founder</p>
-                <ul className="flex justify-center mt-4 space-x-4">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <img
-                  className="mx-auto mb-4 rounded-full w-36 h-36"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                  alt="Jese Avatar"
-                />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Jese Leos</a>
-                </h3>
-                <p>SEO &amp; Marketing</p>
-                <ul className="flex justify-center mt-4 space-x-4">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <img
-                  className="mx-auto mb-4 rounded-full w-36 h-36"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
-                  alt="Joseph Avatar"
-                />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Joseph Mcfall</a>
-                </h3>
-                <p>Sales</p>
-                <ul className="flex justify-center mt-4 space-x-4">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <img
-                  className="mx-auto mb-4 rounded-full w-36 h-36"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/sofia-mcguire.png"
-                  alt="Sofia Avatar"
-                />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Lana Byrd</a>
-                </h3>
-                <p>Web Designer</p>
-                <ul className="flex justify-center mt-4 space-x-4">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <img
-                  className="mx-auto mb-4 rounded-full w-36 h-36"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
-                  alt="Leslie Avatar"
-                />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Leslie Livingston</a>
-                </h3>
-                <p>Graphic Designer</p>
-                <ul className="flex justify-center mt-4 space-x-4">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <img
-                  className="mx-auto mb-4 rounded-full w-36 h-36"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
-                  alt="Michael Avatar"
-                />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Michael Gough</a>
-                </h3>
-                <p>React Developer</p>
-                <ul className="flex justify-center mt-4 space-x-4">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <img
-                  className="mx-auto mb-4 rounded-full w-36 h-36"
-                  src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/neil-sims.png"
-                  alt="Neil Avatar"
-                />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Neil Sims</a>
-                </h3>
-                <p>Vue.js Developer</p>
-                <ul className="flex justify-center mt-4 space-x-4">
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
-                    >
-                      <svg
-                        className="w-6 h-6"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </a>
-                  </li>
-                </ul>
+            {/* ====================================team member  */}
+            <div className="w-full ">
+              <div className="w-full">
+                <Swiper
+                  spaceBetween={50}
+                  slidesPerView={3}
+                  pagination={{ clickable: true }}
+                  onSlideChange={() => console.log("slide change")}
+                  onSwiper={(swiper) => console.log(swiper)}
+                  className="w-full"
+                >
+                  <SwiperSlide className="">
+                    {" "}
+                    <div className="text-center text-gray-500 dark:text-gray-400">
+                      <img
+                        className="mx-auto mb-4 rounded-full w-36 h-36"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                        alt="Bonnie Avatar"
+                      />
+                      <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <a href="#">Bonnie Green</a>
+                      </h3>
+                      <p>CEO/Co-founder</p>
+                      <ul className="flex justify-center mt-4 space-x-4">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide className="">
+                    {" "}
+                    <div className="text-center text-gray-500 dark:text-gray-400">
+                      <img
+                        className="mx-auto mb-4 rounded-full w-36 h-36"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png"
+                        alt="Helene Avatar"
+                      />
+                      <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <a href="#">Helene Engels</a>
+                      </h3>
+                      <p>CTO/Co-founder</p>
+                      <ul className="flex justify-center mt-4 space-x-4">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide className="">
+                    {" "}
+                    <div className="text-center text-gray-500 dark:text-gray-400">
+                      <img
+                        className="mx-auto mb-4 rounded-full w-36 h-36"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
+                        alt="Jese Avatar"
+                      />
+                      <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <a href="#">Jese Leos</a>
+                      </h3>
+                      <p>SEO &amp; Marketing</p>
+                      <ul className="flex justify-center mt-4 space-x-4">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide className="">
+                    {" "}
+                    <div className="text-center text-gray-500 dark:text-gray-400">
+                      <img
+                        className="mx-auto mb-4 rounded-full w-36 h-36"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
+                        alt="Joseph Avatar"
+                      />
+                      <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <a href="#">Joseph Mcfall</a>
+                      </h3>
+                      <p>Sales</p>
+                      <ul className="flex justify-center mt-4 space-x-4">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide className="">
+                    {" "}
+                    <div className="text-center text-gray-500 dark:text-gray-400">
+                      <img
+                        className="mx-auto mb-4 rounded-full w-36 h-36"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/sofia-mcguire.png"
+                        alt="Sofia Avatar"
+                      />
+                      <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <a href="#">Lana Byrd</a>
+                      </h3>
+                      <p>Web Designer</p>
+                      <ul className="flex justify-center mt-4 space-x-4">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide className="">
+                    {" "}
+                    <div className="text-center text-gray-500 dark:text-gray-400">
+                      <img
+                        className="mx-auto mb-4 rounded-full w-36 h-36"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/thomas-lean.png"
+                        alt="Leslie Avatar"
+                      />
+                      <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <a href="#">Leslie Livingston</a>
+                      </h3>
+                      <p>Graphic Designer</p>
+                      <ul className="flex justify-center mt-4 space-x-4">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide className="">
+                    {" "}
+                    <div className="text-center text-gray-500 dark:text-gray-400">
+                      <img
+                        className="mx-auto mb-4 rounded-full w-36 h-36"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
+                        alt="Michael Avatar"
+                      />
+                      <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <a href="#">Michael Gough</a>
+                      </h3>
+                      <p>React Developer</p>
+                      <ul className="flex justify-center mt-4 space-x-4">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide className="">
+                    {" "}
+                    <div className="text-center text-gray-500 dark:text-gray-400">
+                      <img
+                        className="mx-auto mb-4 rounded-full w-36 h-36"
+                        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/neil-sims.png"
+                        alt="Neil Avatar"
+                      />
+                      <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        <a href="#">Neil Sims</a>
+                      </h3>
+                      <p>Vue.js Developer</p>
+                      <ul className="flex justify-center mt-4 space-x-4">
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-gray-900 hover:text-gray-900 dark:hover:text-white dark:text-gray-300"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                          >
+                            <svg
+                              className="w-6 h-6"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-hidden="true"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
               </div>
             </div>
           </div>
         </section>
       </div>
+      {/* //=========================================course  */}
       <div>
         <section className="mt-5 text-gray-600 bg-white body-font">
-          <div className="container px-5 py-24 mx-auto">
-            <h1 className="mb-12 text-3xl font-medium text-center text-gray-900 title-font">
-              Course
-            </h1>
-            <div className="flex flex-wrap -m-4">
-              <div className="p-4 md:w-1/3">
-                <div className="h-full overflow-hidden bg-white border-2 border-gray-200 rounded-lg border-opacity-60">
-                  <img
-                    className="object-cover object-center w-full lg:h-48 md:h-36"
-                    src="https://dummyimage.com/720x400"
-                    alt="blog"
-                  />
-                  <div className="p-6">
-                    <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
-                      CATEGORY
+          <div className="container w-full px-5 py-24 mx-auto">
+            <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-center text-cyan-700 dark:text-white">
+              Our course
+            </h2>
+            <p className="py-10 font-light text-center text-gray-500 sm:text-xl dark:text-gray-400">
+              Explore the whole collection of open-source web components and
+              elements built with the utility classes from Tailwind
+            </p>
+            <div className="w-full">
+              <Swiper
+                // install Swiper modules
+
+                spaceBetween={50}
+                slidesPerView={3}
+                navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+                onSwiper={(swiper) => console.log(swiper)}
+                onSlideChange={() => console.log("slide change")}
+              >
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full overflow-hidden bg-white border-2 border-gray-200 rounded-lg border-opacity-60">
+                      <img
+                        className="object-cover object-center w-full lg:h-48 md:h-36"
+                        src="https://dummyimage.com/720x400"
+                        alt="blog"
+                      />
+                      <div className="p-6">
+                        <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
+                          CATEGORY
+                        </h2>
+                        <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                          The Catalyzer
+                        </h1>
+                        <p className="mb-3 leading-relaxed">
+                          Photo booth fam kinfolk cold-pressed sriracha leggings
+                          jianbing microdosing tousled waistcoat.
+                        </p>
+                        <div className="flex flex-wrap items-center ">
+                          <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
+                            Learn More
+                            <svg
+                              className="w-4 h-4 ml-2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                          <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 bg-white border-r-2 border-gray-200 lg:ml-auto md:ml-0">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            1.2K
+                          </span>
+                          <span className="inline-flex items-center text-sm leading-none text-gray-400">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                            6
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full overflow-hidden bg-white border-2 border-gray-200 rounded-lg border-opacity-60">
+                      <img
+                        className="object-cover object-center w-full lg:h-48 md:h-36"
+                        src="https://dummyimage.com/721x401"
+                        alt="blog"
+                      />
+                      <div className="p-6">
+                        <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
+                          CATEGORY
+                        </h2>
+                        <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                          The 400 Blows
+                        </h1>
+                        <p className="mb-3 leading-relaxed">
+                          Photo booth fam kinfolk cold-pressed sriracha leggings
+                          jianbing microdosing tousled waistcoat.
+                        </p>
+                        <div className="flex flex-wrap items-center">
+                          <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
+                            Learn More
+                            <svg
+                              className="w-4 h-4 ml-2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                          <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 bg-white border-r-2 border-gray-200 lg:ml-auto md:ml-0">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            1.2K
+                          </span>
+                          <span className="inline-flex items-center text-sm leading-none text-gray-400">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                            6
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
+                      <img
+                        className="object-cover object-center w-full lg:h-48 md:h-36"
+                        src="https://dummyimage.com/722x402"
+                        alt="blog"
+                      />
+                      <div className="p-6">
+                        <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
+                          CATEGORY
+                        </h2>
+                        <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                          Shooting Stars
+                        </h1>
+                        <p className="mb-3 leading-relaxed">
+                          Photo booth fam kinfolk cold-pressed sriracha leggings
+                          jianbing microdosing tousled waistcoat.
+                        </p>
+                        <div className="flex flex-wrap items-center ">
+                          <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
+                            Learn More
+                            <svg
+                              className="w-4 h-4 ml-2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                          <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 border-r-2 border-gray-200 lg:ml-auto md:ml-0">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            1.2K
+                          </span>
+                          <span className="inline-flex items-center text-sm leading-none text-gray-400">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                            6
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
+                      <img
+                        className="object-cover object-center w-full lg:h-48 md:h-36"
+                        src="https://dummyimage.com/722x402"
+                        alt="blog"
+                      />
+                      <div className="p-6">
+                        <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
+                          CATEGORY
+                        </h2>
+                        <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                          Shooting Stars
+                        </h1>
+                        <p className="mb-3 leading-relaxed">
+                          Photo booth fam kinfolk cold-pressed sriracha leggings
+                          jianbing microdosing tousled waistcoat.
+                        </p>
+                        <div className="flex flex-wrap items-center ">
+                          <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
+                            Learn More
+                            <svg
+                              className="w-4 h-4 ml-2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                          <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 border-r-2 border-gray-200 lg:ml-auto md:ml-0">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            1.2K
+                          </span>
+                          <span className="inline-flex items-center text-sm leading-none text-gray-400">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                            6
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
+                      <img
+                        className="object-cover object-center w-full lg:h-48 md:h-36"
+                        src="https://dummyimage.com/722x402"
+                        alt="blog"
+                      />
+                      <div className="p-6">
+                        <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
+                          CATEGORY
+                        </h2>
+                        <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                          Shooting Stars
+                        </h1>
+                        <p className="mb-3 leading-relaxed">
+                          Photo booth fam kinfolk cold-pressed sriracha leggings
+                          jianbing microdosing tousled waistcoat.
+                        </p>
+                        <div className="flex flex-wrap items-center ">
+                          <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
+                            Learn More
+                            <svg
+                              className="w-4 h-4 ml-2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                          <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 border-r-2 border-gray-200 lg:ml-auto md:ml-0">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            1.2K
+                          </span>
+                          <span className="inline-flex items-center text-sm leading-none text-gray-400">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                            6
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
+                      <img
+                        className="object-cover object-center w-full lg:h-48 md:h-36"
+                        src="https://dummyimage.com/722x402"
+                        alt="blog"
+                      />
+                      <div className="p-6">
+                        <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
+                          CATEGORY
+                        </h2>
+                        <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                          Shooting Stars
+                        </h1>
+                        <p className="mb-3 leading-relaxed">
+                          Photo booth fam kinfolk cold-pressed sriracha leggings
+                          jianbing microdosing tousled waistcoat.
+                        </p>
+                        <div className="flex flex-wrap items-center ">
+                          <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
+                            Learn More
+                            <svg
+                              className="w-4 h-4 ml-2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                          <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 border-r-2 border-gray-200 lg:ml-auto md:ml-0">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            1.2K
+                          </span>
+                          <span className="inline-flex items-center text-sm leading-none text-gray-400">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                            6
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
+                      <img
+                        className="object-cover object-center w-full lg:h-48 md:h-36"
+                        src="https://dummyimage.com/722x402"
+                        alt="blog"
+                      />
+                      <div className="p-6">
+                        <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
+                          CATEGORY
+                        </h2>
+                        <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                          Shooting Stars
+                        </h1>
+                        <p className="mb-3 leading-relaxed">
+                          Photo booth fam kinfolk cold-pressed sriracha leggings
+                          jianbing microdosing tousled waistcoat.
+                        </p>
+                        <div className="flex flex-wrap items-center ">
+                          <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
+                            Learn More
+                            <svg
+                              className="w-4 h-4 ml-2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                          <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 border-r-2 border-gray-200 lg:ml-auto md:ml-0">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            1.2K
+                          </span>
+                          <span className="inline-flex items-center text-sm leading-none text-gray-400">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                            6
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
+                      <img
+                        className="object-cover object-center w-full lg:h-48 md:h-36"
+                        src="https://dummyimage.com/722x402"
+                        alt="blog"
+                      />
+                      <div className="p-6">
+                        <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
+                          CATEGORY
+                        </h2>
+                        <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                          Shooting Stars
+                        </h1>
+                        <p className="mb-3 leading-relaxed">
+                          Photo booth fam kinfolk cold-pressed sriracha leggings
+                          jianbing microdosing tousled waistcoat.
+                        </p>
+                        <div className="flex flex-wrap items-center ">
+                          <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
+                            Learn More
+                            <svg
+                              className="w-4 h-4 ml-2"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path d="M5 12h14" />
+                              <path d="M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                          <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 border-r-2 border-gray-200 lg:ml-auto md:ml-0">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx={12} cy={12} r={3} />
+                            </svg>
+                            1.2K
+                          </span>
+                          <span className="inline-flex items-center text-sm leading-none text-gray-400">
+                            <svg
+                              className="w-4 h-4 mr-1"
+                              stroke="currentColor"
+                              strokeWidth={2}
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                            </svg>
+                            6
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
+          </div>
+        </section>
+      </div>
+      {/* //================================================tutorials  */}
+      <div>
+        <section className="mt-5 text-gray-600 bg-white body-font">
+          <div className="container w-full px-5 py-24 mx-auto">
+            <h2 className="w-full mx-auto mb-4 text-4xl font-extrabold tracking-tight text-center text-cyan-700 dark:text-white">
+              Our tutorial
+            </h2>
+            <p className="py-10 font-light text-center text-gray-500 sm:text-xl dark:text-gray-400">
+              Explore the whole collection of open-source web components and
+              elements built with the utility classes from Tailwind
+            </p>
+            <div className="w-full">
+              <Swiper
+                spaceBetween={50}
+                slidesPerView={3}
+                navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+                onSwiper={(swiper) => console.log(swiper)}
+                onSlideChange={() => console.log("slide change")}
+              >
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-64 overflow-hidden rounded-lg">
+                      <img
+                        alt="content"
+                        className="object-cover object-center w-full h-full"
+                        src="https://dummyimage.com/1201x501"
+                      />
+                    </div>
+                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
+                      Buy YouTube Videos
                     </h2>
-                    <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
+                    <p className="text-base leading-relaxed">
+                      Williamsburg occupy sustainable snackwave gochujang.
+                      Pinterest cornhole brunch, slow-carb neutra irony.
+                    </p>
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                      Button
+                    </button>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-64 overflow-hidden rounded-lg">
+                      <img
+                        alt="content"
+                        className="object-cover object-center w-full h-full"
+                        src="https://dummyimage.com/1202x502"
+                      />
+                    </div>
+                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
                       The Catalyzer
-                    </h1>
-                    <p className="mb-3 leading-relaxed">
-                      Photo booth fam kinfolk cold-pressed sriracha leggings
-                      jianbing microdosing tousled waistcoat.
-                    </p>
-                    <div className="flex flex-wrap items-center ">
-                      <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
-                        Learn More
-                        <svg
-                          className="w-4 h-4 ml-2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M5 12h14" />
-                          <path d="M12 5l7 7-7 7" />
-                        </svg>
-                      </a>
-                      <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 bg-white border-r-2 border-gray-200 lg:ml-auto md:ml-0">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                          <circle cx={12} cy={12} r={3} />
-                        </svg>
-                        1.2K
-                      </span>
-                      <span className="inline-flex items-center text-sm leading-none text-gray-400">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                        </svg>
-                        6
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="p-4 md:w-1/3">
-                <div className="h-full overflow-hidden bg-white border-2 border-gray-200 rounded-lg border-opacity-60">
-                  <img
-                    className="object-cover object-center w-full lg:h-48 md:h-36"
-                    src="https://dummyimage.com/721x401"
-                    alt="blog"
-                  />
-                  <div className="p-6">
-                    <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
-                      CATEGORY
                     </h2>
-                    <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
-                      The 400 Blows
-                    </h1>
-                    <p className="mb-3 leading-relaxed">
-                      Photo booth fam kinfolk cold-pressed sriracha leggings
-                      jianbing microdosing tousled waistcoat.
+                    <p className="text-base leading-relaxed">
+                      Williamsburg occupy sustainable snackwave gochujang.
+                      Pinterest cornhole brunch, slow-carb neutra irony.
                     </p>
-                    <div className="flex flex-wrap items-center">
-                      <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
-                        Learn More
-                        <svg
-                          className="w-4 h-4 ml-2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M5 12h14" />
-                          <path d="M12 5l7 7-7 7" />
-                        </svg>
-                      </a>
-                      <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 bg-white border-r-2 border-gray-200 lg:ml-auto md:ml-0">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                          <circle cx={12} cy={12} r={3} />
-                        </svg>
-                        1.2K
-                      </span>
-                      <span className="inline-flex items-center text-sm leading-none text-gray-400">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                        </svg>
-                        6
-                      </span>
-                    </div>
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                      Button
+                    </button>
                   </div>
-                </div>
-              </div>
-              <div className="p-4 md:w-1/3">
-                <div className="h-full overflow-hidden border-2 border-gray-200 rounded-lg border-opacity-60">
-                  <img
-                    className="object-cover object-center w-full lg:h-48 md:h-36"
-                    src="https://dummyimage.com/722x402"
-                    alt="blog"
-                  />
-                  <div className="p-6">
-                    <h2 className="mb-1 text-xs font-medium tracking-widest text-gray-400 title-font">
-                      CATEGORY
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <div className="">
+                    <div className="h-64 overflow-hidden rounded-lg">
+                      <img
+                        alt="content"
+                        className="object-cover object-center w-full h-full"
+                        src="https://dummyimage.com/1202x502"
+                      />
+                    </div>
+                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
+                      The Catalyzer
                     </h2>
-                    <h1 className="mb-3 text-lg font-medium text-gray-900 title-font">
-                      Shooting Stars
-                    </h1>
-                    <p className="mb-3 leading-relaxed">
-                      Photo booth fam kinfolk cold-pressed sriracha leggings
-                      jianbing microdosing tousled waistcoat.
+                    <p className="text-base leading-relaxed">
+                      Williamsburg occupy sustainable snackwave gochujang.
+                      Pinterest cornhole brunch, slow-carb neutra irony.
                     </p>
-                    <div className="flex flex-wrap items-center ">
-                      <a className="inline-flex items-center text-indigo-500 md:mb-2 lg:mb-0">
-                        Learn More
-                        <svg
-                          className="w-4 h-4 ml-2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M5 12h14" />
-                          <path d="M12 5l7 7-7 7" />
-                        </svg>
-                      </a>
-                      <span className="inline-flex items-center py-1 pr-3 ml-auto mr-3 text-sm leading-none text-gray-400 border-r-2 border-gray-200 lg:ml-auto md:ml-0">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                          <circle cx={12} cy={12} r={3} />
-                        </svg>
-                        1.2K
-                      </span>
-                      <span className="inline-flex items-center text-sm leading-none text-gray-400">
-                        <svg
-                          className="w-4 h-4 mr-1"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
-                        </svg>
-                        6
-                      </span>
-                    </div>
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                      Button
+                    </button>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      <div>
-        <section className="mt-5 text-gray-600 bg-white body-font">
-          <div className="container px-5 py-24 mx-auto">
-            <h1 className="mb-12 text-3xl font-medium text-center text-gray-900 title-font">
-              Tutorials
-            </h1>
-            <div className="flex flex-wrap -mx-4 -mb-10 text-center">
-              <div className="p-4 mb-10 bg-white sm:w-1/3">
-                <div className="h-64 overflow-hidden rounded-lg">
-                  <img
-                    alt="content"
-                    className="object-cover object-center w-full h-full"
-                    src="https://dummyimage.com/1201x501"
-                  />
-                </div>
-                <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
-                  Buy YouTube Videos
-                </h2>
-                <p className="text-base leading-relaxed">
-                  Williamsburg occupy sustainable snackwave gochujang. Pinterest
-                  cornhole brunch, slow-carb neutra irony.
-                </p>
-                <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
-                  Button
-                </button>
-              </div>
-              <div className="p-4 mb-10 bg-white sm:w-1/3">
-                <div className="h-64 overflow-hidden rounded-lg">
-                  <img
-                    alt="content"
-                    className="object-cover object-center w-full h-full"
-                    src="https://dummyimage.com/1202x502"
-                  />
-                </div>
-                <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
-                  The Catalyzer
-                </h2>
-                <p className="text-base leading-relaxed">
-                  Williamsburg occupy sustainable snackwave gochujang. Pinterest
-                  cornhole brunch, slow-carb neutra irony.
-                </p>
-                <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
-                  Button
-                </button>
-              </div>
-              <div className="p-4 mb-10 bg-white sm:w-1/3">
-                <div className="h-64 overflow-hidden rounded-lg">
-                  <img
-                    alt="content"
-                    className="object-cover object-center w-full h-full"
-                    src="https://dummyimage.com/1202x502"
-                  />
-                </div>
-                <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
-                  The Catalyzer
-                </h2>
-                <p className="text-base leading-relaxed">
-                  Williamsburg occupy sustainable snackwave gochujang. Pinterest
-                  cornhole brunch, slow-carb neutra irony.
-                </p>
-                <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
-                  Button
-                </button>
-              </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <div className="">
+                    <div className="h-64 overflow-hidden rounded-lg">
+                      <img
+                        alt="content"
+                        className="object-cover object-center w-full h-full"
+                        src="https://dummyimage.com/1202x502"
+                      />
+                    </div>
+                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
+                      The Catalyzer
+                    </h2>
+                    <p className="text-base leading-relaxed">
+                      Williamsburg occupy sustainable snackwave gochujang.
+                      Pinterest cornhole brunch, slow-carb neutra irony.
+                    </p>
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                      Button
+                    </button>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <div className="">
+                    <div className="h-64 overflow-hidden rounded-lg">
+                      <img
+                        alt="content"
+                        className="object-cover object-center w-full h-full"
+                        src="https://dummyimage.com/1202x502"
+                      />
+                    </div>
+                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
+                      The Catalyzer
+                    </h2>
+                    <p className="text-base leading-relaxed">
+                      Williamsburg occupy sustainable snackwave gochujang.
+                      Pinterest cornhole brunch, slow-carb neutra irony.
+                    </p>
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                      Button
+                    </button>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <div className="">
+                    <div className="h-64 overflow-hidden rounded-lg">
+                      <img
+                        alt="content"
+                        className="object-cover object-center w-full h-full"
+                        src="https://dummyimage.com/1202x502"
+                      />
+                    </div>
+                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
+                      The Catalyzer
+                    </h2>
+                    <p className="text-base leading-relaxed">
+                      Williamsburg occupy sustainable snackwave gochujang.
+                      Pinterest cornhole brunch, slow-carb neutra irony.
+                    </p>
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                      Button
+                    </button>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <div className="">
+                    <div className="h-64 overflow-hidden rounded-lg">
+                      <img
+                        alt="content"
+                        className="object-cover object-center w-full h-full"
+                        src="https://dummyimage.com/1202x502"
+                      />
+                    </div>
+                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
+                      The Catalyzer
+                    </h2>
+                    <p className="text-base leading-relaxed">
+                      Williamsburg occupy sustainable snackwave gochujang.
+                      Pinterest cornhole brunch, slow-carb neutra irony.
+                    </p>
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                      Button
+                    </button>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
         </section>
       </div>
       <div className="w-full mt-5">
         <section className="w-full text-gray-600 bg-white body-font">
-          <div className="container px-5 py-24 mx-auto">
-            <h1 className="mb-12 text-3xl font-medium text-center text-gray-900 title-font">
-              Testimonials
-            </h1>
+          <div className="container w-full px-5 py-24 mx-auto">
+            <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-center text-cyan-700 dark:text-white">
+              Testimonial
+            </h2>
+            <p className="py-10 font-light text-center text-gray-500 sm:text-xl dark:text-gray-400">
+              Explore the whole collection of open-source web components and
+              elements built with the utility classes from Tailwind
+            </p>
             <div className="flex flex-wrap -m-4">
-              <div className="w-full p-4 md:w-1/2">
-                <div className="h-full p-8 bg-white rounded">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    className="block w-5 h-5 mb-4 text-gray-400"
-                    viewBox="0 0 975.036 975.036"
-                  >
-                    <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
-                  </svg>
-                  <p className="mb-6 leading-relaxed">
-                    Synth chartreuse iPhone lomo cray raw denim brunch everyday
-                    carry neutra before they sold out fixie 90's microdosing.
-                    Tacos pinterest fanny pack venmo, post-ironic heirloom
-                    try-hard pabst authentic iceland.
-                  </p>
-                  <a className="inline-flex items-center">
-                    <img
-                      alt="testimonial"
-                      src="https://dummyimage.com/106x106"
-                      className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
-                    />
-                    <span className="flex flex-col flex-grow pl-4">
-                      <span className="font-medium text-gray-900 title-font">
-                        Holden Caulfield
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        UI DEVELOPER
-                      </span>
-                    </span>
-                  </a>
-                </div>
-              </div>
-              <div className="w-full p-4 md:w-1/2">
-                <div className="h-full p-8 bg-white rounded">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    className="block w-5 h-5 mb-4 text-gray-400"
-                    viewBox="0 0 975.036 975.036"
-                  >
-                    <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
-                  </svg>
-                  <p className="mb-6 leading-relaxed">
-                    Synth chartreuse iPhone lomo cray raw denim brunch everyday
-                    carry neutra before they sold out fixie 90's microdosing.
-                    Tacos pinterest fanny pack venmo, post-ironic heirloom
-                    try-hard pabst authentic iceland.
-                  </p>
-                  <a className="inline-flex items-center">
-                    <img
-                      alt="testimonial"
-                      src="https://dummyimage.com/107x107"
-                      className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
-                    />
-                    <span className="flex flex-col flex-grow pl-4">
-                      <span className="font-medium text-gray-900 title-font">
-                        Alper Kamu
-                      </span>
-                      <span className="text-sm text-gray-500">DESIGNER</span>
-                    </span>
-                  </a>
-                </div>
-              </div>
+              <Swiper
+                // install Swiper modules
+
+                spaceBetween={50}
+                slidesPerView={2}
+                navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+                onSwiper={(swiper) => console.log(swiper)}
+                onSlideChange={() => console.log("slide change")}
+              >
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full p-8 bg-white rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        className="block w-5 h-5 mb-4 text-gray-400"
+                        viewBox="0 0 975.036 975.036"
+                      >
+                        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
+                      </svg>
+                      <p className="mb-6 leading-relaxed">
+                        Synth chartreuse iPhone lomo cray raw denim brunch
+                        everyday carry neutra before they sold out fixie 90's
+                        microdosing. Tacos pinterest fanny pack venmo,
+                        post-ironic heirloom try-hard pabst authentic iceland.
+                      </p>
+                      <a className="inline-flex items-center">
+                        <img
+                          alt="testimonial"
+                          src="https://dummyimage.com/106x106"
+                          className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
+                        />
+                        <span className="flex flex-col flex-grow pl-4">
+                          <span className="font-medium text-gray-900 title-font">
+                            Holden Caulfield
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            UI DEVELOPER
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full p-8 bg-white rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        className="block w-5 h-5 mb-4 text-gray-400"
+                        viewBox="0 0 975.036 975.036"
+                      >
+                        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
+                      </svg>
+                      <p className="mb-6 leading-relaxed">
+                        Synth chartreuse iPhone lomo cray raw denim brunch
+                        everyday carry neutra before they sold out fixie 90's
+                        microdosing. Tacos pinterest fanny pack venmo,
+                        post-ironic heirloom try-hard pabst authentic iceland.
+                      </p>
+                      <a className="inline-flex items-center">
+                        <img
+                          alt="testimonial"
+                          src="https://dummyimage.com/107x107"
+                          className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
+                        />
+                        <span className="flex flex-col flex-grow pl-4">
+                          <span className="font-medium text-gray-900 title-font">
+                            Alper Kamu
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            DESIGNER
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full p-8 bg-white rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        className="block w-5 h-5 mb-4 text-gray-400"
+                        viewBox="0 0 975.036 975.036"
+                      >
+                        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
+                      </svg>
+                      <p className="mb-6 leading-relaxed">
+                        Synth chartreuse iPhone lomo cray raw denim brunch
+                        everyday carry neutra before they sold out fixie 90's
+                        microdosing. Tacos pinterest fanny pack venmo,
+                        post-ironic heirloom try-hard pabst authentic iceland.
+                      </p>
+                      <a className="inline-flex items-center">
+                        <img
+                          alt="testimonial"
+                          src="https://dummyimage.com/107x107"
+                          className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
+                        />
+                        <span className="flex flex-col flex-grow pl-4">
+                          <span className="font-medium text-gray-900 title-font">
+                            Alper Kamu
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            DESIGNER
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full p-8 bg-white rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        className="block w-5 h-5 mb-4 text-gray-400"
+                        viewBox="0 0 975.036 975.036"
+                      >
+                        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
+                      </svg>
+                      <p className="mb-6 leading-relaxed">
+                        Synth chartreuse iPhone lomo cray raw denim brunch
+                        everyday carry neutra before they sold out fixie 90's
+                        microdosing. Tacos pinterest fanny pack venmo,
+                        post-ironic heirloom try-hard pabst authentic iceland.
+                      </p>
+                      <a className="inline-flex items-center">
+                        <img
+                          alt="testimonial"
+                          src="https://dummyimage.com/107x107"
+                          className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
+                        />
+                        <span className="flex flex-col flex-grow pl-4">
+                          <span className="font-medium text-gray-900 title-font">
+                            Alper Kamu
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            DESIGNER
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full p-8 bg-white rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        className="block w-5 h-5 mb-4 text-gray-400"
+                        viewBox="0 0 975.036 975.036"
+                      >
+                        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
+                      </svg>
+                      <p className="mb-6 leading-relaxed">
+                        Synth chartreuse iPhone lomo cray raw denim brunch
+                        everyday carry neutra before they sold out fixie 90's
+                        microdosing. Tacos pinterest fanny pack venmo,
+                        post-ironic heirloom try-hard pabst authentic iceland.
+                      </p>
+                      <a className="inline-flex items-center">
+                        <img
+                          alt="testimonial"
+                          src="https://dummyimage.com/107x107"
+                          className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
+                        />
+                        <span className="flex flex-col flex-grow pl-4">
+                          <span className="font-medium text-gray-900 title-font">
+                            Alper Kamu
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            DESIGNER
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full p-8 bg-white rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        className="block w-5 h-5 mb-4 text-gray-400"
+                        viewBox="0 0 975.036 975.036"
+                      >
+                        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
+                      </svg>
+                      <p className="mb-6 leading-relaxed">
+                        Synth chartreuse iPhone lomo cray raw denim brunch
+                        everyday carry neutra before they sold out fixie 90's
+                        microdosing. Tacos pinterest fanny pack venmo,
+                        post-ironic heirloom try-hard pabst authentic iceland.
+                      </p>
+                      <a className="inline-flex items-center">
+                        <img
+                          alt="testimonial"
+                          src="https://dummyimage.com/107x107"
+                          className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
+                        />
+                        <span className="flex flex-col flex-grow pl-4">
+                          <span className="font-medium text-gray-900 title-font">
+                            Alper Kamu
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            DESIGNER
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className="">
+                    <div className="h-full p-8 bg-white rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        className="block w-5 h-5 mb-4 text-gray-400"
+                        viewBox="0 0 975.036 975.036"
+                      >
+                        <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z" />
+                      </svg>
+                      <p className="mb-6 leading-relaxed">
+                        Synth chartreuse iPhone lomo cray raw denim brunch
+                        everyday carry neutra before they sold out fixie 90's
+                        microdosing. Tacos pinterest fanny pack venmo,
+                        post-ironic heirloom try-hard pabst authentic iceland.
+                      </p>
+                      <a className="inline-flex items-center">
+                        <img
+                          alt="testimonial"
+                          src="https://dummyimage.com/107x107"
+                          className="flex-shrink-0 object-cover object-center w-12 h-12 rounded-full"
+                        />
+                        <span className="flex flex-col flex-grow pl-4">
+                          <span className="font-medium text-gray-900 title-font">
+                            Alper Kamu
+                          </span>
+                          <span className="text-sm text-gray-500">
+                            DESIGNER
+                          </span>
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
         </section>
       </div>
-      <div>
+      <div className="mt-5">
         <section className="bg-white dark:bg-gray-900">
           <div className="max-w-screen-xl px-4 py-8 mx-auto lg:py-16 lg:px-6">
             <div className="max-w-screen-sm mx-auto mb-8 text-center lg:mb-16">
-              <h2 className="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 lg:text-4xl dark:text-white">
-                Our Blog
+              <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-cyan-800 dark:text-white">
+                Blog
               </h2>
-              <p className="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+              <p className="font-light text-center text-gray-500 sm:text-xl dark:text-gray-400">
                 We use an agile approach to test assumptions and connect with
                 the needs of your audience early and often.
               </p>
             </div>
-            <div className="grid gap-8 lg:grid-cols-2">
-              <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <div className="flex items-center justify-between mb-5 text-gray-500">
-                  <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                    <svg
-                      className="w-3 h-3 mr-1"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
-                    </svg>
-                    Tutorial
-                  </span>
-                  <span className="text-sm">14 days ago</span>
-                </div>
-                <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">How to quickly deploy a static website</a>
-                </h2>
-                <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
-                  Static websites are now used to bootstrap lots of websites and
-                  are becoming the basis for a variety of tools that even
-                  influence both web designers and developers influence both web
-                  designers and developers.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <img
-                      className="rounded-full w-7 h-7"
-                      src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
-                      alt="Jese Leos avatar"
-                    />
-                    <span className="font-medium dark:text-white">
-                      Jese Leos
-                    </span>
-                  </div>
-                  <a
-                    href="#"
-                    className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
-                  >
-                    Read more
-                    <svg
-                      className="w-4 h-4 ml-2"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </article>
-              <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <div className="flex items-center justify-between mb-5 text-gray-500">
-                  <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
-                    <svg
-                      className="w-3 h-3 mr-1"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                        clipRule="evenodd"
-                      />
-                      <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
-                    </svg>
-                    Article
-                  </span>
-                  <span className="text-sm">14 days ago</span>
-                </div>
-                <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  <a href="#">Our first project with React</a>
-                </h2>
-                <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
-                  Static websites are now used to bootstrap lots of websites and
-                  are becoming the basis for a variety of tools that even
-                  influence both web designers and developers influence both web
-                  designers and developers.
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <img
-                      className="rounded-full w-7 h-7"
-                      src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
-                      alt="Bonnie Green avatar"
-                    />
-                    <span className="font-medium dark:text-white">
-                      Bonnie Green
-                    </span>
-                  </div>
-                  <a
-                    href="#"
-                    className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
-                  >
-                    Read more
-                    <svg
-                      className="w-4 h-4 ml-2"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </article>
+            <div className="">
+              <Swiper
+                // install Swiper modules
+
+                spaceBetween={50}
+                slidesPerView={2}
+                navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+                onSwiper={(swiper) => console.log(swiper)}
+                onSlideChange={() => console.log("slide change")}
+              >
+                <SwiperSlide>
+                  <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-5 text-gray-500">
+                      <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z" />
+                        </svg>
+                        Tutorial
+                      </span>
+                      <span className="text-sm">14 days ago</span>
+                    </div>
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">How to quickly deploy a static website</a>
+                    </h2>
+                    <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                      Static websites are now used to bootstrap lots of websites
+                      and are becoming the basis for a variety of tools that
+                      even influence both web designers and developers influence
+                      both web designers and developers.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          className="rounded-full w-7 h-7"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png"
+                          alt="Jese Leos avatar"
+                        />
+                        <span className="font-medium dark:text-white">
+                          Jese Leos
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                      >
+                        Read more
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-5 text-gray-500">
+                      <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                            clipRule="evenodd"
+                          />
+                          <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                        </svg>
+                        Article
+                      </span>
+                      <span className="text-sm">14 days ago</span>
+                    </div>
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Our first project with React</a>
+                    </h2>
+                    <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                      Static websites are now used to bootstrap lots of websites
+                      and are becoming the basis for a variety of tools that
+                      even influence both web designers and developers influence
+                      both web designers and developers.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          className="rounded-full w-7 h-7"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                          alt="Bonnie Green avatar"
+                        />
+                        <span className="font-medium dark:text-white">
+                          Bonnie Green
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                      >
+                        Read more
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-5 text-gray-500">
+                      <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                            clipRule="evenodd"
+                          />
+                          <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                        </svg>
+                        Article
+                      </span>
+                      <span className="text-sm">14 days ago</span>
+                    </div>
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Our first project with React</a>
+                    </h2>
+                    <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                      Static websites are now used to bootstrap lots of websites
+                      and are becoming the basis for a variety of tools that
+                      even influence both web designers and developers influence
+                      both web designers and developers.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          className="rounded-full w-7 h-7"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                          alt="Bonnie Green avatar"
+                        />
+                        <span className="font-medium dark:text-white">
+                          Bonnie Green
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                      >
+                        Read more
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-5 text-gray-500">
+                      <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                            clipRule="evenodd"
+                          />
+                          <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                        </svg>
+                        Article
+                      </span>
+                      <span className="text-sm">14 days ago</span>
+                    </div>
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Our first project with React</a>
+                    </h2>
+                    <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                      Static websites are now used to bootstrap lots of websites
+                      and are becoming the basis for a variety of tools that
+                      even influence both web designers and developers influence
+                      both web designers and developers.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          className="rounded-full w-7 h-7"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                          alt="Bonnie Green avatar"
+                        />
+                        <span className="font-medium dark:text-white">
+                          Bonnie Green
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                      >
+                        Read more
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-5 text-gray-500">
+                      <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                            clipRule="evenodd"
+                          />
+                          <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                        </svg>
+                        Article
+                      </span>
+                      <span className="text-sm">14 days ago</span>
+                    </div>
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Our first project with React</a>
+                    </h2>
+                    <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                      Static websites are now used to bootstrap lots of websites
+                      and are becoming the basis for a variety of tools that
+                      even influence both web designers and developers influence
+                      both web designers and developers.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          className="rounded-full w-7 h-7"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                          alt="Bonnie Green avatar"
+                        />
+                        <span className="font-medium dark:text-white">
+                          Bonnie Green
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                      >
+                        Read more
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-5 text-gray-500">
+                      <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                            clipRule="evenodd"
+                          />
+                          <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                        </svg>
+                        Article
+                      </span>
+                      <span className="text-sm">14 days ago</span>
+                    </div>
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Our first project with React</a>
+                    </h2>
+                    <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                      Static websites are now used to bootstrap lots of websites
+                      and are becoming the basis for a variety of tools that
+                      even influence both web designers and developers influence
+                      both web designers and developers.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          className="rounded-full w-7 h-7"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                          alt="Bonnie Green avatar"
+                        />
+                        <span className="font-medium dark:text-white">
+                          Bonnie Green
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                      >
+                        Read more
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-5 text-gray-500">
+                      <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                            clipRule="evenodd"
+                          />
+                          <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                        </svg>
+                        Article
+                      </span>
+                      <span className="text-sm">14 days ago</span>
+                    </div>
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Our first project with React</a>
+                    </h2>
+                    <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                      Static websites are now used to bootstrap lots of websites
+                      and are becoming the basis for a variety of tools that
+                      even influence both web designers and developers influence
+                      both web designers and developers.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          className="rounded-full w-7 h-7"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                          alt="Bonnie Green avatar"
+                        />
+                        <span className="font-medium dark:text-white">
+                          Bonnie Green
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                      >
+                        Read more
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <article className="p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <div className="flex items-center justify-between mb-5 text-gray-500">
+                      <span className="bg-primary-100 text-primary-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+                        <svg
+                          className="w-3 h-3 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
+                            clipRule="evenodd"
+                          />
+                          <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />
+                        </svg>
+                        Article
+                      </span>
+                      <span className="text-sm">14 days ago</span>
+                    </div>
+                    <h2 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      <a href="#">Our first project with React</a>
+                    </h2>
+                    <p className="mb-5 font-light text-gray-500 dark:text-gray-400">
+                      Static websites are now used to bootstrap lots of websites
+                      and are becoming the basis for a variety of tools that
+                      even influence both web designers and developers influence
+                      both web designers and developers.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <img
+                          className="rounded-full w-7 h-7"
+                          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/bonnie-green.png"
+                          alt="Bonnie Green avatar"
+                        />
+                        <span className="font-medium dark:text-white">
+                          Bonnie Green
+                        </span>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline"
+                      >
+                        Read more
+                        <svg
+                          className="w-4 h-4 ml-2"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
         </section>
@@ -1440,26 +2550,23 @@ const CompanyView = () => {
                 style={{ filter: "grayscale(1) contrast(1.2) opacity(0.4)" }}
               />
               <div className="relative flex flex-wrap py-6 bg-white rounded shadow-md">
-                <div className="px-6 lg:w-1/2">
+                <div className="px-6 lg:w-1/3">
                   <h2 className="text-xs font-semibold tracking-widest text-gray-900 title-font">
                     ADDRESS
                   </h2>
-                  <p className="mt-1">
-                    Photo booth tattooed prism, portland taiyaki hoodie neutra
-                    typewriter
-                  </p>
+                  <p className="mt-1">{singleCompany?.location}</p>
                 </div>
-                <div className="px-6 mt-4 lg:w-1/2 lg:mt-0">
+                <div className="px-6 mt-4 lg:w-2/3 lg:mt-0">
                   <h2 className="text-xs font-semibold tracking-widest text-gray-900 title-font">
                     EMAIL
                   </h2>
                   <a className="leading-relaxed text-indigo-500">
-                    example@email.com
+                    {singleCompany?.email}
                   </a>
                   <h2 className="mt-4 text-xs font-semibold tracking-widest text-gray-900 title-font">
                     PHONE
                   </h2>
-                  <p className="leading-relaxed">123-456-7890</p>
+                  <p className="leading-relaxed">{singleCompany?.contact}</p>
                 </div>
               </div>
             </div>
@@ -1522,6 +2629,208 @@ const CompanyView = () => {
             </div>
           </div>
         </section>
+      </div>
+      {/* =======================================footer  */}
+      <div>
+        <footer className="text-gray-600 body-font">
+          <div className="container px-5 py-24 mx-auto">
+            <div className="flex flex-wrap order-first text-center md:text-left">
+              <div className="w-full px-4 lg:w-1/4 md:w-1/2">
+                <h2 className="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">
+                  CATEGORIES
+                </h2>
+                <nav className="mb-10 list-none">
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      First Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Second Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Third Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Fourth Link
+                    </a>
+                  </li>
+                </nav>
+              </div>
+              <div className="w-full px-4 lg:w-1/4 md:w-1/2">
+                <h2 className="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">
+                  CATEGORIES
+                </h2>
+                <nav className="mb-10 list-none">
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      First Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Second Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Third Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Fourth Link
+                    </a>
+                  </li>
+                </nav>
+              </div>
+              <div className="w-full px-4 lg:w-1/4 md:w-1/2">
+                <h2 className="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">
+                  CATEGORIES
+                </h2>
+                <nav className="mb-10 list-none">
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      First Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Second Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Third Link
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-gray-600 hover:text-gray-800">
+                      Fourth Link
+                    </a>
+                  </li>
+                </nav>
+              </div>
+              <div className="w-full px-4 lg:w-1/4 md:w-1/2">
+                <h2 className="mb-3 text-sm font-medium tracking-widest text-gray-900 title-font">
+                  SUBSCRIBE
+                </h2>
+                <div className="flex flex-wrap items-end justify-center xl:flex-nowrap md:flex-nowrap lg:flex-wrap md:justify-start">
+                  <div className="relative w-40 mr-2 sm:w-auto xl:mr-4 lg:mr-0 sm:mr-4">
+                    <label
+                      htmlFor="footer-field"
+                      className="text-sm leading-7 text-gray-600"
+                    >
+                      Placeholder
+                    </label>
+                    <input
+                      type="text"
+                      id="footer-field"
+                      name="footer-field"
+                      className="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-gray-100 bg-opacity-50 border border-gray-300 rounded outline-none focus:bg-transparent focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500"
+                    />
+                  </div>
+                  <button className="inline-flex flex-shrink-0 px-6 py-2 text-white bg-indigo-500 border-0 rounded lg:mt-2 xl:mt-0 focus:outline-none hover:bg-indigo-600">
+                    Button
+                  </button>
+                </div>
+                <p className="mt-2 text-sm text-center text-gray-500 md:text-left">
+                  Bitters chicharrones fanny pack
+                  <br className="hidden lg:block" />
+                  waistcoat green juice
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gray-100">
+            <div className="container flex flex-col items-center px-5 py-6 mx-auto sm:flex-row">
+              <a className="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
+                <img
+                  className="w-10 h-10"
+                  src={singleCompany?.companyLogo}
+                  alt=""
+                />
+
+                <span className="ml-3 text-xl">
+                  {singleCompany?.companyName}
+                </span>
+              </a>
+              <p className="mt-4 text-sm text-gray-500 sm:ml-6 sm:mt-0">
+                © 2020 {singleCompany?.companyName} —
+                <a
+                  href="https://twitter.com/knyttneve"
+                  rel="noopener noreferrer"
+                  className="ml-1 text-gray-600"
+                  target="_blank"
+                >
+                  @knyttneve
+                </a>
+              </p>
+              <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
+                <a className="text-gray-500">
+                  <svg
+                    fill="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                  </svg>
+                </a>
+                <a className="ml-3 text-gray-500">
+                  <svg
+                    fill="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                  </svg>
+                </a>
+                <a className="ml-3 text-gray-500">
+                  <svg
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect width={20} height={20} x={2} y={2} rx={5} ry={5} />
+                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01" />
+                  </svg>
+                </a>
+                <a className="ml-3 text-gray-500">
+                  <svg
+                    fill="currentColor"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0}
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke="none"
+                      d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"
+                    />
+                    <circle cx={4} cy={4} r={2} stroke="none" />
+                  </svg>
+                </a>
+              </span>
+            </div>
+          </div>
+        </footer>
       </div>
     </div>
   );

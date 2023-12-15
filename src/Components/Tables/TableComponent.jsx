@@ -28,13 +28,11 @@ const TableComponent = ({ sellerId, input }) => {
     useSelector(getAllSellerState);
   const dispatch = useDispatch();
 
-  const [currentPage, setCurrentPage] = useState(1);
   //======================================================================================edit model
   const [editModel, setEditModel] = useState(false);
   //========================================================================================== singleData
   const [singleData, setSingleData] = useState({});
-  //========================================================================================set limit
-  const [limit, setLimit] = useState(7);
+
   //========================================================================================set limit
   const [dropdown, setDropdown] = useState(false);
   //=======================================================================================dropId
@@ -77,10 +75,7 @@ const TableComponent = ({ sellerId, input }) => {
       }
     });
   };
-  //======================================================================================  handle limit
-  const handleLimit = (e) => {
-    setLimit(e.target.value);
-  };
+
   //===============================================================================handle permission
   const handlePermission = (id, status) => {
     dispatch(permissionUpdate({ id, status })).then(() => {
@@ -110,15 +105,8 @@ const TableComponent = ({ sellerId, input }) => {
   //===================================================================================get user client
   useEffect(() => {
     dispatch(getAllProject());
-  }, [dispatch, sellerId, currentPage, limit, loginInSeller]);
-  //====================================================================================next page
-  const nextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
-  //===================================================================================prev page
-  const prevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
+  }, [dispatch]);
+
   //====================================================================================== toastify
   useEffect(() => {
     if (error) {

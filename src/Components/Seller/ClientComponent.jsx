@@ -195,37 +195,11 @@ const ClientComponent = ({
               Active projects
             </span>
             <div className="flex w-full clients">
-              {projects?.length > 0
-                ? projects?.map((item, index) => {
-                    return (
-                      <Link
-                        key={index}
-                        className="transition-all duration-500 ease-in-out hover:scale-105"
-                        to={`/seller/${item?._id}`}
-                      >
-                        <div className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-15px]">
-                          {item?.avatar ? (
-                            <img
-                              className="w-full h-full rounded-full  border-[2px] border-white"
-                              src={item?.avatar}
-                              alt=""
-                            />
-                          ) : (
-                            <img
-                              className="w-full h-full rounded-full  border-[2px] border-white"
-                              src="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"
-                              alt=""
-                            />
-                          )}
-                        </div>
-                      </Link>
-                    );
-                  })
-                : ""}
-
-              <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
-                {projects > 0 ? projects?.slice(3, projects?.length) : 0}
-              </button>
+              {projects?.length > 2 && (
+                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                  +{projects.length - 2}
+                </button>
+              )}
             </div>
           </div>
           <div className="relative z-0 flex flex-col w-full mt-3">

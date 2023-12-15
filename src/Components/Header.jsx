@@ -202,7 +202,7 @@ const Header = ({ loginInSeller }) => {
             {dropdown && (
               <div className="absolute rounded-md shadow-md p-3 flex flex-col gap-2 top-16 left-0 bg-white border-2 border-cyan-300 w-[140px] h-[auto]">
                 <span
-                  className="absolute block w-8 h-8 bg-cyan-300 border shadow-2xl -top-8 "
+                  className="absolute block w-8 h-8 border shadow-2xl bg-cyan-300 -top-8 "
                   style={{ clipPath: "polygon(49% 37%, 0% 100%, 100% 100%)" }}
                 ></span>
                 <button className="flex justify-between gap-2 font-['work_sans'] font-[500] items-center">
@@ -295,7 +295,7 @@ const Header = ({ loginInSeller }) => {
                 <div className="flex items-end justify-end gap-3">
                   <img
                     onClick={() => setDropdown(!dropdown)}
-                    className=" w-[46px] cursor-pointer h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
+                    className=" w-[46px] cursor-pointer shrink-0 h-[46px] mt-[0px] ml-[5px] border-[1px] rounded-full p-[2px] border-cyan-600"
                     src={user}
                     alt=""
                   />

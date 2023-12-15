@@ -224,36 +224,39 @@ const ProjectComponent = ({
 
         <div className="flex items-center justify-between">
           <div className="flex flex-col items-start justify-center w-full mt-3">
-            <span className="block text-cyan-700  ">Team </span>
+            <span className="block text-cyan-700 ">Team </span>
             <div className="flex w-full clients">
-              {team?.length > 0
-                ? team?.map((item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px]"
-                      >
-                        {item?.avatar ? (
-                          <img
-                            className="w-full h-full rounded-full  border-[2px] border-white"
-                            src={item?.avatar}
-                            alt=""
-                          />
-                        ) : (
-                          <img
-                            className="w-full h-full rounded-full  border-[2px] border-white"
-                            src="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"
-                            alt=""
-                          />
-                        )}
-                      </div>
-                    );
-                  })
-                : ""}
+              {team?.length > 0 &&
+                team.slice(0, 3).map((item, index) => (
+                  <div
+                    key={index}
+                    className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px]"
+                  >
+                    {item?.avatar ? (
+                      <img
+                        className="w-full h-full rounded-full border-[2px] border-white"
+                        src={item?.avatar}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        className="w-full h-full rounded-full border-[2px] border-white"
+                        src="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"
+                        alt=""
+                      />
+                    )}
+                  </div>
+                ))}
 
-              <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
-                {team > 0 ? team?.slice(3, team?.length) : 0}
-              </button>
+              {team?.length > 3 ? (
+                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                  +{team.length - 3}
+                </button>
+              ) : (
+                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                  0
+                </button>
+              )}
             </div>
           </div>
           <div className="relative z-0 flex flex-col w-full mt-3">
