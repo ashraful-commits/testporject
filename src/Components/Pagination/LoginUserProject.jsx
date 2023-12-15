@@ -86,7 +86,7 @@ const LoginUserProject = ({
       </li>
     );
   }
-  console.log(currentItems);
+
   return (
     <>
       {currentItems && currentItems.length > 0 ? (
@@ -363,51 +363,57 @@ const LoginUserProject = ({
           No Projects!
         </span>
       )}
+      {/* ===================================pagination  */}
       <ul className="flex items-center justify-center gap-4 mt-5 ">
-        <li>
-          <button
-            className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
-            onClick={handlePrevBtn}
-            disabled={currentPage == pages[0] ? true : false}
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 48 48"
-              version="1"
-              xmlns="http://www.w3.org/2000/svg"
-              enableBackground="new 0 0 48 48"
+        {currentItems.length > 0 && (
+          <li>
+            <button
+              className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
+              onClick={handlePrevBtn}
+              disabled={currentPage == pages[0] ? true : false}
             >
-              <polygon
-                fill="#005085"
-                points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
-              />
-            </svg>
-          </button>
-        </li>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 48 48"
+                version="1"
+                xmlns="http://www.w3.org/2000/svg"
+                enableBackground="new 0 0 48 48"
+              >
+                <polygon
+                  fill="#005085"
+                  points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
+                />
+              </svg>
+            </button>
+          </li>
+        )}
+
         {renderPage}
         {pageIncrementBtn}
-        <li>
-          <button
-            className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
-            onClick={handleNextBtn}
-            disabled={currentPage == pages[pages.length - 1] ? true : false}
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 48 48"
-              version="1"
-              xmlns="http://www.w3.org/2000/svg"
-              enableBackground="new 0 0 48 48"
+        {currentItems.length > 0 && (
+          <li>
+            <button
+              className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
+              onClick={handleNextBtn}
+              disabled={currentPage == pages[pages.length - 1] ? true : false}
             >
-              <polygon
-                fill="#005085"
-                points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
-              />
-            </svg>
-          </button>
-        </li>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 48 48"
+                version="1"
+                xmlns="http://www.w3.org/2000/svg"
+                enableBackground="new 0 0 48 48"
+              >
+                <polygon
+                  fill="#005085"
+                  points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
+                />
+              </svg>
+            </button>
+          </li>
+        )}
       </ul>
     </>
   );
