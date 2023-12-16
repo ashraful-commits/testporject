@@ -125,7 +125,11 @@ const SellerSales = ({ salesPerson }) => {
   return (
     <>
       {dropDown && (
-        <SalesModel singleData={singleSales} setModel={setDropDrown} />
+        <SalesModel
+          singleData={singleSales}
+          title="Edit sales"
+          setModel={setDropDrown}
+        />
       )}
       <div ref={dropdownRef} className="w-full">
         <table ref={dropdownRef} className="w-full min-h-[490px] h-[480px] ">
@@ -193,7 +197,7 @@ const SellerSales = ({ salesPerson }) => {
                     </div>
                   </td>
                   <td className="flex justify-start gap-x-3 w-[150px] text-[#878790] font-['Work_sans'] text-[12px]">
-                    {item?.companyName}
+                    {item?.company?.companyName}
                   </td>
                   <td className="flex justify-start gap-x-3 w-[150px] text-[#878790] font-['Work_sans'] text-[12px]">
                     <div className="flex w-full clients">

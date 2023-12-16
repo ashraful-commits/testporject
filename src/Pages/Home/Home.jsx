@@ -39,8 +39,8 @@ const Home = () => {
     startDate: "",
     status: "",
     email: "",
-    rol: "",
-    companyName: "",
+    role: "",
+    company: "",
   });
   //====================================================== TODO:percentage state
   const [percentage, setPercentage] = useState(0);
@@ -145,7 +145,9 @@ const Home = () => {
             )}
           </div>
         )}
-        {salesModel && <SalesModel setModel={setSalesModel} />}
+        {salesModel && (
+          <SalesModel setModel={setSalesModel} sellerId={loginInSeller?._id} />
+        )}
 
         {/**======================================================TODO:dashboard */}
         <div className="dashboard px-[35px] w-[1400px] mt-[58px] h-full">

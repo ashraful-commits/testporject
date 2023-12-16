@@ -983,14 +983,16 @@ const Seller = () => {
               }  justify-between gap-y-[8px]`}
             >
               {view === "list" ? (
-                <SellerSales
-                  salesPerson={singleSeller?.salesPerson.filter((item) =>
-                    input?.count
-                      ? item?.projects.length >= input?.count &&
-                        item?.projects.length <= input?.count
-                      : true
-                  )}
-                />
+                singleSeller?.salesPerson?.length > 0 && (
+                  <SellerSales
+                    salesPerson={singleSeller?.salesPerson.filter((item) =>
+                      input?.count
+                        ? item?.projects.length >= input?.count &&
+                          item?.projects.length <= input?.count
+                        : true
+                    )}
+                  />
+                )
               ) : singleSeller?.salesPerson?.length > 0 ? (
                 singleSeller?.salesPerson
                   ?.filter((seller) => {
@@ -1040,7 +1042,7 @@ const Seller = () => {
                               )
                             : 0
                         }
-                        companyName={item.companyName}
+                        companyName={item?.company?.companyName}
                         ActiveClient={
                           item?.client?.length > 0 ? item?.client : []
                         }
@@ -1062,7 +1064,9 @@ const Seller = () => {
             >
               {/* //=====================list view and grid view  */}
               {view === "list" ? (
-                <SellerClient client={singleSeller?.client} />
+                singleSeller?.client?.length > 0 && (
+                  <SellerClient client={singleSeller?.client} />
+                )
               ) : singleSeller?.client?.length > 0 ? (
                 singleSeller?.client
                   ?.filter((client) => {
@@ -1109,7 +1113,9 @@ const Seller = () => {
               }  justify-between gap-y-[8px]`}
             >
               {view === "list" ? (
-                <SellerProject projects={singleSeller?.projects} />
+                singleSeller?.projects?.length > 0 && (
+                  <SellerProject projects={singleSeller?.projects} />
+                )
               ) : singleSeller?.projects?.length > 0 ? (
                 singleSeller?.projects
                   ?.filter((project) => {

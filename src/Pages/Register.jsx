@@ -12,6 +12,8 @@ import {
 } from "../Features/Seller/SellerSlice";
 import LoadingSpinner from "../Components/LoadingSpin";
 import { motion } from "framer-motion";
+import { getAllCompany } from "../Features/Company/CompanyApi";
+import { getAllCompanyState } from "../Features/Company/CompanySlice";
 const Register = () => {
   //================================================= use form hook
   const { input, setInput, handleInputChange } = useFormHook({
@@ -20,13 +22,13 @@ const Register = () => {
     password: "",
     employment: "",
     website: "",
-    companyName: "",
+    company: "",
   });
   //================================================get message
   const { message, error, loader } = useSelector(getAllSellerState);
+  const { company } = useSelector(getAllCompanyState);
   //================================================ preview state
   const [avatar, setAvatar] = useState(null);
-  const [companyAvatar, setCompanyAvatar] = useState(null);
   //===============================================dispatch
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,9 +37,7 @@ const Register = () => {
     setAvatar(e.target.files[0]);
   };
   //======================================================= handle company avatar
-  const handleCompanyAvatar = (e) => {
-    setCompanyAvatar(e.target.files[0]);
-  };
+
   //=============================================== handle submit
   const handleSubmitRegister = (e) => {
     e.preventDefault();
@@ -49,21 +49,18 @@ const Register = () => {
       formData.append("password", input.password);
       formData.append("website", input.website);
       formData.append("employment", input.employment);
-      formData.append("companyName", input.companyName);
+      formData.append("company", input.company);
       formData.append("sellerAvatar", avatar);
-      if (companyAvatar) {
-        formData.append("companyAvatar", companyAvatar);
-      }
       dispatch(SellerRegistration(formData));
       setAvatar(null);
-      setCompanyAvatar(null);
+
       setInput({
         name: "",
         email: "",
         password: "",
         employment: "",
         website: "",
-        companyName: "",
+        company: "",
       });
       setAvatar(null);
     } else {
@@ -83,6 +80,10 @@ const Register = () => {
       navigate("/login");
     }
   }, [error, message, dispatch]);
+  //=================================all company
+  useEffect(() => {
+    dispatch(getAllCompany());
+  }, [dispatch]);
   return (
     <>
       {/* //========================================loader  */}
@@ -150,15 +151,26 @@ const Register = () => {
               value={input.website}
               handleInputChange={handleInputChange}
             />
-            <FormInput
-              label="Company Name"
-              type="text"
-              placeholder="Company Name"
-              name="companyName"
-              required="required"
-              value={input.companyName}
-              handleInputChange={handleInputChange}
-            />
+            <div className="flex flex-col ">
+              <label htmlFor="">Company Name</label>
+              <select
+                className="mt-1 border rounded-md h-9 focus:outline-none"
+                onChange={handleInputChange}
+                value={input.company}
+                name="company"
+                id=""
+              >
+                <option value="">....</option>
+                {company?.map((item, index) => {
+                  return (
+                    <option key={index} value={item?._id}>
+                      {item?.companyName}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+
             <div className="flex items-center justify-center w-full col-span-2 gap-5 imgPrev">
               <motion.label
                 htmlFor="sellerAvatar"
@@ -179,32 +191,6 @@ const Register = () => {
                   />
                 )}
               </motion.label>
-              <motion.label
-                initial={{ y: -15, x: -15, opacity: 0.3 }}
-                animate={{ y: 0, x: 0, opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{
-                  duration: 0.3,
-                  delay: 0.6,
-                }}
-                htmlFor="companyAvatar"
-                className="w-[100px] h-[100px] border rounded-full overflow-hidden p-[5px]"
-              >
-                {" "}
-                {companyAvatar ? (
-                  <img
-                    className="object-cover w-full h-full rounded-full"
-                    src={URL.createObjectURL(companyAvatar)}
-                    alt=""
-                  />
-                ) : (
-                  <img
-                    className="object-cover w-full h-full rounded-full"
-                    src="https://storage.jobmarket.com.cy/static/default-company-avatar.jpg"
-                    alt=""
-                  />
-                )}
-              </motion.label>
             </div>
             <input
               type="file"
@@ -212,12 +198,7 @@ const Register = () => {
               className="hidden"
               id="sellerAvatar"
             />
-            <input
-              type="file"
-              onChange={handleCompanyAvatar}
-              className="hidden"
-              id="companyAvatar"
-            />
+
             <motion.button
               initial={{ y: -15, x: -15, opacity: 0.3 }}
               animate={{ y: 0, x: 0, opacity: 1 }}

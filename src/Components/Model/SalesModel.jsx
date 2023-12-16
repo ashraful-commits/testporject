@@ -12,6 +12,8 @@ import {
 import { Toastify } from "../../Utils/Tostify";
 import { setMessageEmpty } from "../../Features/Client/ClientSlice";
 import { motion } from "framer-motion";
+import { getAllCompanyState } from "../../Features/Company/CompanySlice";
+import { getAllCompany } from "../../Features/Company/CompanyApi";
 
 const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   const {
@@ -20,6 +22,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     error,
     loginInSeller,
   } = useSelector(getAllSellerState);
+  const { company } = useSelector(getAllCompanyState);
   const [input, setInput] = useState({
     name: "",
     role: "",
@@ -28,15 +31,13 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     avatar: "",
     employment: "",
     website: "",
-    companyName: "",
+    company: "",
   });
   //========================================== TODO:ref
   const form = useRef();
   //================================ TODO:state
   const [avatar, setAvatar] = useState(null);
-  const [componyAvatar, setComponyAvatar] = useState(null);
   const [photo, setPhoto] = useState(null);
-  const [companyPhoto, setCompanyPhoto] = useState(null);
   const dispatch = useDispatch();
 
   //======================== TODO:handle Avatar
@@ -45,10 +46,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     setAvatar(URL.createObjectURL(e.target.files[0]));
     setPhoto(e.target.files[0]);
   };
-  const handleCompanyAvatar = (e) => {
-    setComponyAvatar(URL.createObjectURL(e.target.files[0]));
-    setCompanyPhoto(e.target.files[0]);
-  };
+
   //=========================== TODO:handle inputChange
   const handleInputChange = (e) => {
     setInput((prev) => ({
@@ -60,13 +58,14 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(input);
     if (singleData?._id) {
       e.preventDefault();
       const formData = new FormData();
       formData.append("name", input.name);
       formData.append("email", input.email);
       formData.append("password", input.password);
-      formData.append("companyName", input.companyName);
+      formData.append("company", input.company);
       if (input.role) {
         formData.append("role", input.role);
       }
@@ -74,9 +73,6 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
       formData.append("employment", input.employment);
       if (photo) {
         formData.append("sellerAvatar", photo);
-      }
-      if (companyPhoto) {
-        formData.append("companyAvatar", companyPhoto);
       }
 
       dispatch(updateSeller({ id: singleData?._id, formData })).then(() => {
@@ -90,6 +86,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           avatar: "",
           employment: "",
           website: "",
+          company: "",
         });
       });
     } else {
@@ -97,16 +94,14 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
       formData.append("name", input.name);
       formData.append("email", input.email);
       formData.append("password", input.password);
-      formData.append("companyName", input.companyName);
+      formData.append("company", input.company);
       if (input.role) {
         formData.append("role", input.role);
       }
       formData.append("website", input.website);
       formData.append("employment", input.employment);
       formData.append("sellerAvatar", photo);
-      if (companyPhoto) {
-        formData.append("companyAvatar", companyPhoto);
-      }
+
       formData.append("sellerId", sellerId);
       if (photo) {
         dispatch(SellerRegistration(formData)).then(() => {
@@ -118,6 +113,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
             avatar: "",
             employment: "",
             website: "",
+            company: "",
           });
         });
       }
@@ -140,10 +136,12 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
     }
   }, [error, message, dispatch, setModel]);
   useEffect(() => {
-    setInput({ ...singleData });
+    setInput({ ...singleData, company: singleData?.company?._id });
     setAvatar(singleData?.avatar);
-    setComponyAvatar(singleData?.companyAvatar);
   }, [singleData]);
+  useEffect(() => {
+    dispatch(getAllCompany());
+  }, [dispatch]);
   return (
     <>
       <div className="w-screen min-h-[1240px] h-screen pt-[150px] pl-[66px] bg-gray-900 bg-opacity-90 fixed bottom-0  top-0 left-0  z-[99999] flex justify-center ">
@@ -220,7 +218,8 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   value={input.email}
                   handleInputChange={handleInputChange}
                 />
-                {title === "Edit sales" ? (
+                {title === "Edit sales" ||
+                loginInSeller.role === "super_admin" ? (
                   ""
                 ) : (
                   <FormInput
@@ -241,14 +240,34 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   type="text"
                   handleInputChange={handleInputChange}
                 />
-                <FormInput
-                  placeholder="Company Name"
-                  label={"Company Name"}
-                  name="companyName"
-                  value={input.companyName}
-                  type="text"
-                  handleInputChange={handleInputChange}
-                />
+                <div className="flex flex-col gap-y-2">
+                  <label
+                    className="text-[12px] text-['Work_sans'] font-[600]"
+                    htmlFor=""
+                  >
+                    Company Name
+                  </label>
+                  <select
+                    onChange={handleInputChange}
+                    className="w-full px-2 border rounded-md h-9 focus:outline-none"
+                    name="company"
+                    id=""
+                    value={input.company}
+                  >
+                    <option value="">...</option>
+                    {company?.map((item, index) => {
+                      return (
+                        <option
+                          selected={input?.company === item?._id}
+                          value={item?._id}
+                          key={index}
+                        >
+                          {item.companyName}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
                 <FormInput
                   placeholder="employment"
                   label={"Employment"}
@@ -321,26 +340,6 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                       "Select avatar"
                     )}
                   </motion.label>
-                  <motion.label
-                    initial={{ y: -15, opacity: 0.3 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      delay: 0.1 * Math.random() * 10,
-                    }}
-                    htmlFor="uploadCompanyAvatar"
-                    className="avatar border  flex justify-center items-center w-[150px] ml-[4px] overflow-hidden mt-[4px] rounded-md h-[140px]"
-                  >
-                    {componyAvatar ? (
-                      <img
-                        className="object-cover w-full h-full"
-                        src={componyAvatar}
-                      />
-                    ) : (
-                      "company avatar"
-                    )}
-                  </motion.label>
                 </div>
 
                 <input
@@ -348,12 +347,6 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   onChange={handleSellerAvatar}
                   className="hidden"
                   id="uploadAvatar"
-                />
-                <input
-                  type="file"
-                  onChange={handleCompanyAvatar}
-                  className="hidden"
-                  id="uploadCompanyAvatar"
                 />
               </div>
               <div className="flex flex-col items-center justify-center col-span-2 mt-5 bg-white submit_section ">
