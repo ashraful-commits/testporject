@@ -985,7 +985,10 @@ const Seller = () => {
               {view === "list" ? (
                 <SellerSales
                   salesPerson={singleSeller?.salesPerson.filter((item) =>
-                    input?.count ? item?.projects.length >= input?.count : true
+                    input?.count
+                      ? item?.projects.length >= input?.count &&
+                        item?.projects.length <= input?.count
+                      : true
                   )}
                 />
               ) : singleSeller?.salesPerson?.length > 0 ? (
@@ -1007,7 +1010,8 @@ const Seller = () => {
                         ? seller?.status === input?.status
                         : true) &&
                       (input?.count
-                        ? seller?.projects?.length <= input?.count
+                        ? seller?.projects?.length <= input?.count &&
+                          seller?.projects?.length >= input?.count
                         : true)
                     );
                   })
