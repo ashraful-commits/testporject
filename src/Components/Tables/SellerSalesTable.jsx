@@ -1,4 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getAllSellerState } from "../../Features/Seller/SellerSlice";
+import {
+  deleteSeller,
+  getSingleSalesSeller,
+} from "../../Features/Seller/SellerApi";
+import swal from "sweetalert";
+import SalesModel from "../Model/SalesModel";
 
 const SellerSales = ({ salesPerson }) => {
   //======================================all state
@@ -7,7 +16,41 @@ const SellerSales = ({ salesPerson }) => {
   const [pageNumberLimit, setPageNumberLimit] = useState(5);
   const [MaxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [MinPageNumberLimit, setMinPageNumberLimit] = useState(0);
-  //========================pages
+  const [manage, setManage] = useState(false);
+  const [dropId, setDropId] = useState(null);
+  const [dropDown, setDropDrown] = useState(false);
+  const dropdownRef = useRef();
+  const dropMenu = useRef();
+  const dispatch = useDispatch();
+  const { singleSales } = useSelector(getAllSellerState);
+  //======================================= drop id and get single seller
+  useEffect(() => {
+    if (dropId) {
+      dispatch(getSingleSalesSeller(dropId));
+    }
+  }, [dispatch, dropId]);
+  //====================================================== TODO DELETE
+  const handleDelete = (id, sellerId) => {
+    if (id) {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteSeller({ id, sellerId }));
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+    }
+  };
+  //========================pagination
   const pages = [];
   for (let i = 1; i <= Math.ceil(salesPerson?.length / itemsPerPage); i++) {
     console.log(i);
@@ -17,7 +60,7 @@ const SellerSales = ({ salesPerson }) => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = salesPerson?.slice(indexOfFirstItem, indexOfLastItem);
-  //=================================handlepagenumber
+  //=================================handle page number
   const handlePageNumber = (item) => {
     setCurrentPage(Number(item));
   };
@@ -40,7 +83,7 @@ const SellerSales = ({ salesPerson }) => {
     }
   });
 
-  //========================================handle next prev
+  //========================================handle next
   const handleNextBtn = () => {
     setCurrentPage(currentPage + 1);
     if (currentPage + 1 > MaxPageNumberLimit) {
@@ -48,6 +91,8 @@ const SellerSales = ({ salesPerson }) => {
       setMinPageNumberLimit(MinPageNumberLimit + pageNumberLimit);
     }
   };
+
+  //========================================handle  prev
   const handlePrevBtn = () => {
     setCurrentPage(currentPage - 1);
     if ((currentPage - 1) % pageNumberLimit === 0) {
@@ -64,120 +109,220 @@ const SellerSales = ({ salesPerson }) => {
       </li>
     );
   }
+  //================================= window click
+  const dropdownMenu = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target.value)) {
+      setManage(false);
+    }
+  };
+  // ==================================================TODO: useEffect
+  useEffect(() => {
+    window.addEventListener("click", dropdownMenu);
+    return () => {
+      window.removeEventListener("click", dropdownMenu);
+    };
+  }, []);
   return (
-    <div className="w-full">
-      <table className="w-full min-h-[490px] h-[480px] border">
-        <thead className="flex justify-between w-full py-2 bg-gray-200 border-b">
-          <th className=" flex justify-start w-[50px]"></th>
-          <th className=" flex justify-start w-[120px]">Name</th>
-          <th className=" flex justify-start w-[120px]">Avatar</th>
-          <th className=" flex justify-start w-[150px]">Email</th>
-          <th className=" flex justify-start w-[120px]">Company</th>
-          <th className=" flex justify-start w-[120px]">Project</th>
-          <th className=" flex justify-start w-[120px]">Client</th>
-          <th className=" flex justify-start w-[120px]">Sales Person</th>
-          <th className=" flex justify-start w-[120px]"></th>
-        </thead>
-        <tbody className="w-full h-full">
-          {currentItems?.map((item, index) => {
-            return (
-              <tr
-                className="flex justify-between w-full py-2 border-b"
-                key={index}
-              >
-                <td className="px-2 w-[50px]">{index + 1}</td>
-                <td className="w-[120px] flex justify-start">{item?.name}</td>
-                <td className="w-[120px] flex justify-start">
-                  <img
-                    className="w-10 h-10 rounded-full"
-                    src={item?.avatar}
-                    alt=""
-                  />
-                </td>
-                <td className="w-[150px] flex justify-start truncate">
-                  {item?.email}
-                </td>
-                <td className="w-[120px] flex justify-start">
-                  {item?.companyName}
-                </td>
-                <td className="w-[120px] flex justify-start">
-                  {item?.projects?.length ? item?.projects?.length : 0}
-                </td>
-                <td className="w-[120px] flex justify-start">
-                  {item?.client?.length ? item?.client?.length : 0}
-                </td>
-                <td className="w-[120px] flex justify-start">
-                  {item?.salesPerson.length ? item?.salesPerson?.length : 0}
-                </td>
-                <td className="w-[120px] flex justify-start gap-x-2">
-                  <button className="px-2 transition-all duration-500 ease-in-out border rounded-md hover:bg-gray-200">
-                    Edit
-                  </button>
-                  <button className="px-2 transition-all duration-500 ease-in-out border rounded-md hover:bg-gray-200">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-        <tfoot className="w-full">
-          <ul className="flex items-center justify-center gap-4 py-1 mt-5">
-            {currentItems.length > 0 && (
-              <li>
-                <button
-                  className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
-                  onClick={handlePrevBtn}
-                  disabled={currentPage == pages[0] ? true : false}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 48 48"
-                    version="1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    enableBackground="new 0 0 48 48"
-                  >
-                    <polygon
-                      fill="#005085"
-                      points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
-                    />
-                  </svg>
-                </button>
-              </li>
-            )}
+    <>
+      {dropDown && (
+        <SalesModel singleData={singleSales} setModel={setDropDrown} />
+      )}
+      <div ref={dropdownRef} className="w-full">
+        <table ref={dropdownRef} className="w-full min-h-[490px] h-[480px] ">
+          <thead className="w-full ">
+            <tr className="text-[#878790] font-['Work_sans'] text-[12px] items-center flex justify-start w-full px-2 py-2">
+              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[200px]">
+                Name
+              </th>
+              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[150px]">
+                Employment
+              </th>
+              <th className="text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[300px]">
+                Statistic
+              </th>
+              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[150px]">
+                Company
+              </th>
 
-            {renderPage}
-            {pageIncrementBtn}
-            {currentItems?.length > 0 && (
-              <li>
-                <button
-                  className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
-                  onClick={handleNextBtn}
-                  disabled={
-                    currentPage == pages[pages.length - 1] ? true : false
-                  }
+              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[150px]">
+                Active Client
+              </th>
+              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[120px]"></th>
+            </tr>
+          </thead>
+          <tbody className="w-full h-full">
+            {currentItems?.map((item, index) => {
+              return (
+                <tr
+                  className="flex items-center justify-start w-full py-2 mb-2 border rounded-md"
+                  key={index}
                 >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 48 48"
-                    version="1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    enableBackground="new 0 0 48 48"
-                  >
-                    <polygon
-                      fill="#005085"
-                      points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
+                  <td className="flex items-center justify-start w-[200px] gap-x-2 px-2 ">
+                    <img
+                      className="w-[32px] h-[32px] rounded-full"
+                      src={item?.avatar}
+                      alt=""
                     />
-                  </svg>
-                </button>
-              </li>
-            )}
-          </ul>
-        </tfoot>
-      </table>
-    </div>
+                    <span className="text-[#230B34] font-['Work_sans'] text-[14px]">
+                      {item?.name}
+                    </span>
+                  </td>
+
+                  <td className="w-[150px] flex justify-start truncate text-[#878790] font-['Work_sans'] text-[12px]">
+                    {item?.employment}
+                  </td>
+
+                  <td className="flex justify-start gap-x-3 w-[300px] text-[#878790] font-['Work_sans'] text-[12px]">
+                    <div className=" px-2 bg-[#D9D9D9] h-[31px] rounded-full border flex items-center gap-x-2">
+                      <span className="text-[#878790] font-['Work_sans'] text-[12px]">
+                        projects
+                      </span>
+                      {item?.projects?.length ? item?.projects?.length : 0}
+                    </div>
+                    <div className=" px-2 bg-[#D9D9D9] h-[31px] rounded-full border flex items-center gap-x-2">
+                      <span className="text-[#878790] font-['Work_sans'] text-[12px]">
+                        clients
+                      </span>
+                      {item?.client?.length ? item?.client?.length : 0}
+                    </div>
+                    <div className=" px-2 bg-[#D9D9D9] h-[31px] rounded-full border flex items-center gap-x-2">
+                      <span className="text-[#878790] font-['Work_sans'] text-[12px]">
+                        Earnings
+                      </span>
+                      {item?.client?.length ? item?.client?.length : 0}
+                    </div>
+                  </td>
+                  <td className="flex justify-start gap-x-3 w-[150px] text-[#878790] font-['Work_sans'] text-[12px]">
+                    {item?.companyName}
+                  </td>
+                  <td className="flex justify-start gap-x-3 w-[150px] text-[#878790] font-['Work_sans'] text-[12px]">
+                    <div className="flex w-full clients">
+                      {item?.client?.length > 0 &&
+                        item?.client.slice(0, 3).map((item, index) => (
+                          <div
+                            key={index}
+                            className="clientAvatar w-[32px] h-[32px] rounded-full overflow-hidden mr-[-10px]"
+                          >
+                            {item?.clientAvatar ? (
+                              <img
+                                className="w-full h-full rounded-full border-[2px] border-white"
+                                src={item?.clientAvatar}
+                                alt=""
+                              />
+                            ) : (
+                              <img
+                                className="w-full h-full rounded-full border-[2px] border-white"
+                                src="https://img.freepik.com/premium-vector/young-smiling-man-avatar-man-with-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-3d-vector-people-character-illustration-cartoon-minimal-style_365941-860.jpg"
+                                alt=""
+                              />
+                            )}
+                          </div>
+                        ))}
+
+                      {item?.client?.length > 3 ? (
+                        <button className="clientAvatar w-[32px] h-[32px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                          +{item?.client.length - 3}
+                        </button>
+                      ) : (
+                        <button className="clientAvatar w-[32px] h-[32px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                          0
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                  <td className="w-[120px] flex justify-start items-center gap-x-2 ml-auto">
+                    <div className="relative z-0 flex flex-col w-full ">
+                      {manage && dropId === item?._id && (
+                        <div
+                          ref={dropMenu}
+                          className="w-[100px] z-[99999] flex flex-col gap-3 py-3 justify-center items-center bg-white h-[130px] absolute top-6 rounded-md right-32 border shadow-lg"
+                        >
+                          <button
+                            onClick={() => setDropDrown(!dropDown)}
+                            className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => handleDelete(item?._id)}
+                            className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                      <button
+                        onClick={() => {
+                          setManage(!manage), setDropId(item?._id);
+                        }}
+                        className="w-[94px] h-[32px] z-10 flex justify-center items-center bg-cyan-700   text-white hover:text-white rounded-md hover:bg-gray-700  transition-all"
+                      >
+                        Manage
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+          <tfoot className="w-full">
+            <ul className="flex items-center justify-center gap-4 py-1 mt-5">
+              {currentItems.length > 0 && (
+                <li>
+                  <button
+                    className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
+                    onClick={handlePrevBtn}
+                    disabled={currentPage == pages[0] ? true : false}
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 48 48"
+                      version="1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      enableBackground="new 0 0 48 48"
+                    >
+                      <polygon
+                        fill="#005085"
+                        points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
+                      />
+                    </svg>
+                  </button>
+                </li>
+              )}
+
+              {renderPage}
+              {pageIncrementBtn}
+              {currentItems?.length > 0 && (
+                <li>
+                  <button
+                    className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
+                    onClick={handleNextBtn}
+                    disabled={
+                      currentPage == pages[pages.length - 1] ? true : false
+                    }
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 48 48"
+                      version="1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      enableBackground="new 0 0 48 48"
+                    >
+                      <polygon
+                        fill="#005085"
+                        points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
+                      />
+                    </svg>
+                  </button>
+                </li>
+              )}
+            </ul>
+          </tfoot>
+        </table>
+      </div>
+    </>
   );
 };
 

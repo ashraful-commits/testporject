@@ -36,7 +36,7 @@ const SalesPeople = ({
   const { singleSales } = useSelector(getAllSellerState);
 
   const dropdownMenu = (e) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target.value)) {
       setManage(false);
     }
   };
@@ -205,6 +205,7 @@ const SalesPeople = ({
               {ActiveClient > 0
                 ? ActiveClient?.slice(3, ActiveClient?.length)
                 : 0}
+              +
             </button>
           </div>
           <div className="relative z-0 flex flex-col w-full mt-3">

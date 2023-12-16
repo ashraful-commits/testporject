@@ -102,7 +102,6 @@ const Seller = () => {
         ((currentWeekData - lastWeekData) / lastWeekData) * 100;
       setPercentage(percentageChange);
     } else {
-      // Handle the case where lastWeekData has zero length (to avoid division by zero)
       setPercentage(0);
     }
   }, [singleSeller]);
@@ -895,7 +894,7 @@ const Seller = () => {
                   <option value={10}>Top Seller</option>
                   <option value={5}>Level 1</option>
                   <option value={3}>Level 2</option>
-                  <option value={0}>New Seller</option>
+                  <option value={1}>New Seller</option>
                 </select>
               )}
               {menu !== "Manage Statistic" && (
@@ -1008,7 +1007,7 @@ const Seller = () => {
                         ? seller?.status === input?.status
                         : true) &&
                       (input?.count
-                        ? seller?.projects?.length >= input?.count
+                        ? seller?.projects?.length <= input?.count
                         : true)
                     );
                   })

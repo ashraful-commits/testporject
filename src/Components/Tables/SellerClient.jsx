@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteClient, getSingleClient } from "../../Features/Client/ClientApi";
+import swal from "sweetalert";
+import ClientModel from "../Model/ClientModel";
+import { getAllClientState } from "../../Features/Client/ClientSlice";
 
 const SellerClient = ({ client }) => {
   //======================================all state
@@ -7,6 +12,14 @@ const SellerClient = ({ client }) => {
   const [pageNumberLimit, setPageNumberLimit] = useState(5);
   const [MaxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [MinPageNumberLimit, setMinPageNumberLimit] = useState(0);
+  //=========================================== TODO: all state
+  const [manage, setManage] = useState(false);
+  const [dropId, setDropId] = useState(null);
+  const [dropDown, setDropDrown] = useState(false);
+  const dropdownRef = useRef();
+  const dropMenu = useRef();
+  const dispatch = useDispatch();
+  const { singleClient } = useSelector(getAllClientState);
   //========================pages
   const pages = [];
   for (let i = 1; i <= Math.ceil(client?.length / itemsPerPage); i++) {
@@ -64,114 +77,183 @@ const SellerClient = ({ client }) => {
       </li>
     );
   }
-  return (
-    <div className="w-full">
-      <table className="w-full border min-h-[490px] h-[490px] ">
-        <thead className="w-full bg-gray-200 border-b">
-          <tr className="flex justify-between w-full py-2 gap-x-5">
-            <th className="w-[50px] flex justify-start items-center"></th>
-            <th className="w-[120px] flex justify-start items-center">
-              ClientName
-            </th>
-            <th className="w-[120px] flex justify-start items-center">
-              ClientAvatar
-            </th>
-            <th className="w-[120px] flex justify-start items-center">
-              Company
-            </th>
-            <th className="w-[150px] flex justify-start items-center">Email</th>
-            <th className="w-[120px] flex justify-start items-center">Phone</th>
-            <th className="w-[120px] flex justify-start items-center"></th>
-          </tr>
-        </thead>
-        <tbody className="w-full">
-          {currentItems?.map((item, index) => {
-            return (
-              <tr
-                key={index}
-                className="flex justify-between w-full px-3 py-2 border-b gap-x-5"
-              >
-                <td className="w-[50px]">{index + 1}</td>
-                <td className="w-[120px]">{item?.clientName}</td>
-                <td className="w-[120px]">
-                  <img
-                    className="object-cover w-10 h-10 rounded-full"
-                    src={item?.clientAvatar}
-                    alt=""
-                  />
-                </td>
-                <td className="w-[120px]">{item?.company?.companyName}</td>
-                <td className="w-[150px] truncate">{item?.clientEmail}</td>
-                <td className="w-[120px]">{item?.clientPhone}</td>
-                <td className="w-[120px] flex gap-x-2">
-                  <button className="px-2 transition-all duration-500 ease-in-out border rounded-md hover:bg-gray-200">
-                    Edit
-                  </button>
-                  <button className="px-2 transition-all duration-500 ease-in-out border rounded-md hover:bg-gray-200">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-        <tfoot className="py-2">
-          <ul className="flex items-center justify-center gap-4 py-1 mt-5">
-            {currentItems.length > 0 && (
-              <li>
-                <button
-                  className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
-                  onClick={handlePrevBtn}
-                  disabled={currentPage == pages[0] ? true : false}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 48 48"
-                    version="1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    enableBackground="new 0 0 48 48"
-                  >
-                    <polygon
-                      fill="#005085"
-                      points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
-                    />
-                  </svg>
-                </button>
-              </li>
-            )}
+  //===================================TODO:handle dropdwon
+  const dropdownMenu = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target.value)) {
+      setManage(false);
+    }
+  };
 
-            {renderPage}
-            {pageIncrementBtn}
-            {currentItems.length > 0 && (
-              <li>
-                <button
-                  className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
-                  onClick={handleNextBtn}
-                  disabled={
-                    currentPage == pages[pages.length - 1] ? true : false
-                  }
+  // ==================================================TODO: useEffect
+  useEffect(() => {
+    // Add event listener when the component mounts
+    window.addEventListener("click", dropdownMenu);
+
+    // Remove event listener when the component is unmounted
+    return () => {
+      window.removeEventListener("click", dropdownMenu);
+    };
+  }, []);
+  //====================================================== TODO:get data
+  useEffect(() => {
+    if (dropId) {
+      dispatch(getSingleClient(dropId));
+    }
+  }, [dispatch, dropId]);
+
+  //====================================================== TODO DELETE
+  const handleDelete = (id) => {
+    if (id) {
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteClient(id));
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Your imaginary file is safe!");
+        }
+      });
+    }
+  };
+  return (
+    <>
+      {dropDown && (
+        <ClientModel
+          setClient={setDropDrown}
+          title="Edit Client"
+          singleData={singleClient}
+        />
+      )}
+      {/* ===================================main container  */}
+      <div ref={dropMenu} className="w-full">
+        <table className="w-full  min-h-[490px] h-[490px] font-['Work_sans'] text-[12px] ">
+          <thead className="w-full ">
+            <tr className="flex items-center justify-between w-full py-2 gap-x-5">
+              <th className="w-[50px] flex justify-start items-center"></th>
+              <th className="w-[120px] flex justify-start items-center">
+                ClientName
+              </th>
+              <th className="w-[120px] flex justify-start items-center">
+                ClientAvatar
+              </th>
+              <th className="w-[120px] flex justify-start items-center">
+                Company
+              </th>
+              <th className="w-[150px] flex justify-start items-center">
+                Email
+              </th>
+              <th className="w-[120px] flex justify-start items-center">
+                Phone
+              </th>
+              <th className="w-[120px] flex justify-start items-center"></th>
+            </tr>
+          </thead>
+          <tbody className="w-full">
+            {currentItems?.map((item, index) => {
+              return (
+                <tr
+                  key={index}
+                  className="flex items-center justify-between w-full px-3 py-2 mb-2 border rounded-md gap-x-5"
                 >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 48 48"
-                    version="1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    enableBackground="new 0 0 48 48"
-                  >
-                    <polygon
-                      fill="#005085"
-                      points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
+                  <td className="w-[50px]">{index + 1}</td>
+                  <td className="w-[120px] font-bold text-[14px]">
+                    {item?.clientName}
+                  </td>
+                  <td className="w-[120px]">
+                    <img
+                      className="object-cover w-10 h-10 rounded-full"
+                      src={item?.clientAvatar}
+                      alt=""
                     />
-                  </svg>
-                </button>
-              </li>
-            )}
-          </ul>
-        </tfoot>
-      </table>
-    </div>
+                  </td>
+                  <td className="w-[120px]">{item?.company?.companyName}</td>
+                  <td className="w-[150px] truncate">{item?.clientEmail}</td>
+                  <td className="w-[120px]">{item?.clientPhone}</td>
+                  <td className="w-[120px] flex gap-x-2">
+                    <button
+                      onClick={() => {
+                        setDropDrown(true), setDropId(item?._id);
+                      }}
+                      className="px-2 transition-all duration-500 ease-in-out border rounded-md hover:bg-gray-200"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDelete(item?._id)}
+                      className="px-2 transition-all duration-500 ease-in-out border rounded-md hover:bg-gray-200"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+          <tfoot className="py-2">
+            <ul className="flex items-center justify-center gap-4 py-1 mt-5">
+              {currentItems.length > 0 && (
+                <li>
+                  <button
+                    className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
+                    onClick={handlePrevBtn}
+                    disabled={currentPage == pages[0] ? true : false}
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 48 48"
+                      version="1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      enableBackground="new 0 0 48 48"
+                    >
+                      <polygon
+                        fill="#005085"
+                        points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
+                      />
+                    </svg>
+                  </button>
+                </li>
+              )}
+
+              {renderPage}
+              {pageIncrementBtn}
+              {currentItems.length > 0 && (
+                <li>
+                  <button
+                    className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
+                    onClick={handleNextBtn}
+                    disabled={
+                      currentPage == pages[pages.length - 1] ? true : false
+                    }
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 48 48"
+                      version="1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      enableBackground="new 0 0 48 48"
+                    >
+                      <polygon
+                        fill="#005085"
+                        points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
+                      />
+                    </svg>
+                  </button>
+                </li>
+              )}
+            </ul>
+          </tfoot>
+        </table>
+      </div>
+    </>
   );
 };
 
