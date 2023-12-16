@@ -22,17 +22,22 @@ import { motion } from "framer-motion";
 import DatePicker from "react-datepicker";
 import Total from "../../Components/Project/Total";
 import { Toastify } from "../../Utils/Tostify";
-import TableComponent from "../../Components/Tables/TableComponent";
+
+import SellerClient from "../../Components/Tables/SellerClient";
+import SellerProject from "../../Components/Tables/SellerProject";
+import SellerSales from "../../Components/Tables/SellerSalesTable";
 
 const Seller = () => {
   //===========================================TODO:all state
   const [model, setModel] = useState(false);
   const [menu, setMenu] = useState("Manage Sales People");
   const [view, setView] = useState("grid");
+
   const [input, setInput] = useState({
     text: "",
     startDate: "",
     endDate: "",
+    count: 0,
   });
   //===============================================================TODO:handle input change
   const handleOnChange = (e) => {
@@ -878,93 +883,113 @@ const Seller = () => {
               {menu}
             </h1>
             <div className="flex gap-x-2">
-              <select
-                className="px-2 font-bold border rounded-md focus:outline-none"
-                name=""
-                id=""
-              >
-                <option value="Top Seller">Top Seller</option>
-              </select>
-              <div className="flex px-2 bg-gray-100 border rounded-md gap-x-4 ">
-                <button
-                  className={` px-3 ${view == "grid" ? "bg-white" : ""}`}
-                  onClick={() => setView("grid")}
+              {menu === "Manage Sales People" && (
+                <select
+                  onChange={(e) =>
+                    setInput((prev) => ({ ...prev, count: e.target.value }))
+                  }
+                  className="font-bold border rounded-md focus:outline-none"
+                  name=""
+                  id=""
                 >
-                  <svg
-                    width={20}
-                    height={20}
-                    version="1.1"
-                    id="Layer_1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 210 210"
-                    style={{ enableBackground: "new 0 0 210 210" }}
-                    xmlSpace="preserve"
-                    fill="gray"
+                  <option value={10}>Top Seller</option>
+                  <option value={5}>Level 1</option>
+                  <option value={3}>Level 2</option>
+                  <option value={0}>New Seller</option>
+                </select>
+              )}
+              {menu !== "Manage Statistic" && (
+                <div className="flex bg-gray-100 border rounded-md gap-x-4 ">
+                  <button
+                    className={` px-3 ${view == "grid" ? "bg-white" : ""}`}
+                    onClick={() => setView("grid")}
                   >
-                    <g id="XMLID_2_">
-                      <path
-                        id="XMLID_4_"
-                        d="M75,0H15C6.716,0,0,6.716,0,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15V15
+                    <svg
+                      width={20}
+                      height={20}
+                      version="1.1"
+                      id="Layer_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 210 210"
+                      style={{ enableBackground: "new 0 0 210 210" }}
+                      xmlSpace="preserve"
+                      fill="gray"
+                    >
+                      <g id="XMLID_2_">
+                        <path
+                          id="XMLID_4_"
+                          d="M75,0H15C6.716,0,0,6.716,0,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15V15
 		C90,6.716,83.284,0,75,0z"
-                      />
-                      <path
-                        id="XMLID_6_"
-                        d="M75,120H15c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15v-60
+                        />
+                        <path
+                          id="XMLID_6_"
+                          d="M75,120H15c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15v-60
 		C90,126.716,83.284,120,75,120z"
-                      />
-                      <path
-                        id="XMLID_8_"
-                        d="M195,0h-60c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15V15
+                        />
+                        <path
+                          id="XMLID_8_"
+                          d="M195,0h-60c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15V15
 		C210,6.716,203.284,0,195,0z"
-                      />
-                      <path
-                        id="XMLID_10_"
-                        d="M195,120h-60c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15v-60
+                        />
+                        <path
+                          id="XMLID_10_"
+                          d="M195,120h-60c-8.284,0-15,6.716-15,15v60c0,8.284,6.716,15,15,15h60c8.284,0,15-6.716,15-15v-60
 		C210,126.716,203.284,120,195,120z"
-                      />
-                    </g>
-                  </svg>
-                </button>
-                <button
-                  className={`px-3 ${view == "list" ? "bg-white" : ""}`}
-                  onClick={() => setView("list")}
-                >
-                  <svg
-                    width={20}
-                    height={30}
-                    version="1.1"
-                    id="Capa_1"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 42 42"
-                    style={{ enableBackground: "new 0 0 42 42" }}
-                    xmlSpace="preserve"
-                    fill="gray"
+                        />
+                      </g>
+                    </svg>
+                  </button>
+                  <button
+                    className={`px-3 ${view == "list" ? "bg-white" : ""}`}
+                    onClick={() => setView("list")}
                   >
-                    <g>
-                      <path
-                        d="M4.941,18H16h10h11.059C39.776,18,42,15.718,42,13s-2.224-5-4.941-5H26H16H4.941C2.224,8,0,10.282,0,13S2.224,18,4.941,18z
+                    <svg
+                      width={20}
+                      height={30}
+                      version="1.1"
+                      id="Capa_1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                      x="0px"
+                      y="0px"
+                      viewBox="0 0 42 42"
+                      style={{ enableBackground: "new 0 0 42 42" }}
+                      xmlSpace="preserve"
+                      fill="gray"
+                    >
+                      <g>
+                        <path
+                          d="M4.941,18H16h10h11.059C39.776,18,42,15.718,42,13s-2.224-5-4.941-5H26H16H4.941C2.224,8,0,10.282,0,13S2.224,18,4.941,18z
 		"
-                      />
-                      <path
-                        d="M37.059,24H26H16H4.941C2.224,24,0,26.282,0,29s2.224,5,4.941,5H16h10h11.059C39.776,34,42,31.718,42,29
+                        />
+                        <path
+                          d="M37.059,24H26H16H4.941C2.224,24,0,26.282,0,29s2.224,5,4.941,5H16h10h11.059C39.776,34,42,31.718,42,29
 		S39.776,24,37.059,24z"
-                      />
-                    </g>
-                  </svg>
-                </button>
-              </div>
+                        />
+                      </g>
+                    </svg>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           {/* //=================================================== TODO:all sales person  */}
           {menu === "Manage Sales People" && (
-            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
-              {singleSeller?.salesPerson?.length > 0 ? (
+            <div
+              className={` mt-[27px] w-full h-full pb-[150px] overflow-y-auto ${
+                view === "list" ? "" : "grid grid-cols-4"
+              }  justify-between gap-y-[8px]`}
+            >
+              {view === "list" ? (
+                <SellerSales
+                  salesPerson={singleSeller?.salesPerson.filter((item) =>
+                    input?.count ? item?.projects.length >= input?.count : true
+                  )}
+                />
+              ) : singleSeller?.salesPerson?.length > 0 ? (
                 singleSeller?.salesPerson
                   ?.filter((seller) => {
                     return (
@@ -979,7 +1004,12 @@ const Seller = () => {
                       (input?.endDate
                         ? new Date(seller?.date) <= new Date(input?.endDate)
                         : true) &&
-                      (input?.status ? seller?.status === input?.status : true)
+                      (input?.status
+                        ? seller?.status === input?.status
+                        : true) &&
+                      (input?.count
+                        ? seller?.projects?.length >= input?.count
+                        : true)
                     );
                   })
                   ?.map((item, index) => {
@@ -1022,8 +1052,15 @@ const Seller = () => {
             </div>
           )}
           {menu === "Manage Clients" && (
-            <div className=" mt-[27px] w-full h-full pb-[150px] overflow-y-auto grid grid-cols-4 justify-between gap-y-[8px]">
-              {singleSeller?.client?.length > 0 ? (
+            <div
+              className={` mt-[27px] w-full h-full pb-[150px] overflow-y-auto ${
+                view === "list" ? "" : "grid grid-cols-4"
+              }  justify-between gap-y-[8px]`}
+            >
+              {/* //=====================list view and grid view  */}
+              {view === "list" ? (
+                <SellerClient client={singleSeller?.client} />
+              ) : singleSeller?.client?.length > 0 ? (
                 singleSeller?.client
                   ?.filter((client) => {
                     return (
@@ -1069,7 +1106,7 @@ const Seller = () => {
               }  justify-between gap-y-[8px]`}
             >
               {view === "list" ? (
-                <TableComponent sellerId={singleSeller?._id} input={input} />
+                <SellerProject projects={singleSeller?.projects} />
               ) : singleSeller?.projects?.length > 0 ? (
                 singleSeller?.projects
                   ?.filter((project) => {
