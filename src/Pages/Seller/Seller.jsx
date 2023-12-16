@@ -894,7 +894,7 @@ const Seller = () => {
                   <option value={10}>Top Seller</option>
                   <option value={5}>Level 1</option>
                   <option value={3}>Level 2</option>
-                  <option value={1}>New Seller</option>
+                  <option value={0}>New Seller</option>
                 </select>
               )}
               {menu !== "Manage Statistic" && (
