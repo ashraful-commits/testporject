@@ -16,6 +16,7 @@ import SoftWere from "../../Components/Project/SoftWere";
 import ProjectFile from "../../Components/Project/ProjectFile";
 import ClientFeedBack from "../../Components/Project/ClientFeedBack";
 import Invoices from "../../Components/Project/Invoices";
+import Model from "../../Components/Model/Model";
 const Project = () => {
   //===================================== TODO:get all client state
   const { singleProject, loader } = useSelector(getAllProjectState);
@@ -30,6 +31,7 @@ const Project = () => {
   const [selectTools, setSelectTools] = useState([]);
   const [menu, setMenu] = useState("Project Details");
   const [dropdown, setDropdown] = useState(false);
+  const [manage, setManage] = useState(false);
   //===================================================TODO:navigate
   const navigate = useNavigate();
 
@@ -301,6 +303,8 @@ const Project = () => {
           </form>
         </motion.div>
       )}
+      {/* //============================================================ TODO:project  */}
+      {manage && <Model singleData={singleProject} setClient={setManage} />}
       <motion.div
         initial={{ y: -15, opacity: 0.1 }}
         animate={{ y: 0, opacity: 1 }}
@@ -879,7 +883,10 @@ const Project = () => {
                 </button>
               </div>
               <div className="flex items-center justify-center h-full button">
-                <button className="bg-cyan-700  text-[14px] font-[500] text-white hover:bg-gray-800  transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105">
+                <button
+                  onClick={() => setManage(true)}
+                  className="bg-cyan-700  text-[14px] font-[500] text-white hover:bg-gray-800  transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105"
+                >
                   Manage Project
                 </button>
               </div>
