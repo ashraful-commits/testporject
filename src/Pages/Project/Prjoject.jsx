@@ -304,7 +304,13 @@ const Project = () => {
         </motion.div>
       )}
       {/* //============================================================ TODO:project  */}
-      {manage && <Model singleData={singleProject} setClient={setManage} />}
+      {manage && (
+        <Model
+          singleData={singleProject}
+          title="Edit Project"
+          setClient={setManage}
+        />
+      )}
       <motion.div
         initial={{ y: -15, opacity: 0.1 }}
         animate={{ y: 0, opacity: 1 }}
