@@ -216,13 +216,13 @@ const SalesPeople = ({
               >
                 <button
                   onClick={() => setDropDrown(!dropDown)}
-                  className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                  className="w-full p-1 text-[12px] font-['Work_sans'] font-bold capitalize hover:text-gray-500 "
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(id, sellerId)}
-                  className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                  className="w-full text-[12px] font-['Work_sans'] p-1 font-bold capitalize hover:text-gray-500 "
                 >
                   Delete
                 </button>

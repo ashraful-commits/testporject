@@ -131,7 +131,7 @@ const TableComponent = ({ sellerId, input }) => {
   //=========================================================================return
   return (
     <div ref={dropdownRef}>
-      {/* //=============================================edit modle  */}
+      {/* //=============================================edit model  */}
       {editModel && (
         <Model
           setClient={setEditModel}

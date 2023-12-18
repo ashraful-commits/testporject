@@ -350,6 +350,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                             key={i}
                             className="text-gray-500"
                             value={item?._id}
+                            selected={input.company === item?._id}
                           >
                             {item?.companyName}
                           </option>

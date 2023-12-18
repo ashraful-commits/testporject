@@ -89,7 +89,7 @@ const LoginUserProject = ({
 
   return (
     <>
-      {currentItems && currentItems.length > 0 ? (
+      {currentItems && currentItems?.length > 0 ? (
         currentItems
           ?.filter((item) => {
             return (
@@ -169,7 +169,7 @@ const LoginUserProject = ({
                 </td>
                 <td className="w-[120px]  items-center flex text-[.8125rem] text-start font-[400] text-[#3A3A49] gap-[.3125rem]">
                   <div
-                    className="bg-gray-200 h-[.375rem] w-[50%] "
+                    className="bg-gray-200 overflow-hidden h-[.375rem] w-[50%] "
                     role="progressbar"
                     aria-label="progressbar"
                     aria-valuemin="0"
@@ -346,11 +346,22 @@ const LoginUserProject = ({
                 </td>
                 {dropdown && dropId === item?._id && (
                   <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md  top-12 right-12 bg-white z-[999] absolute">
-                    <Link to={`/${item._id}`}>view</Link>
-                    <button onClick={() => handleSellerEdit(item._id)}>
+                    <Link
+                      className="text-[12px] font-['Work_sans']"
+                      to={`/${item._id}`}
+                    >
+                      view
+                    </Link>
+                    <button
+                      className="text-[12px] font-['Work_sans']"
+                      onClick={() => handleSellerEdit(item._id)}
+                    >
                       Edit
                     </button>
-                    <button onClick={() => handleDelete(item._id)}>
+                    <button
+                      className="text-[12px] font-['Work_sans']"
+                      onClick={() => handleDelete(item._id)}
+                    >
                       Delete
                     </button>
                   </div>
@@ -365,7 +376,7 @@ const LoginUserProject = ({
       )}
       {/* ===================================pagination  */}
       <ul className="flex items-center justify-center gap-4 mt-5 ">
-        {currentItems.length > 0 && (
+        {currentItems?.length > 0 && (
           <li>
             <button
               className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
@@ -391,7 +402,7 @@ const LoginUserProject = ({
 
         {renderPage}
         {pageIncrementBtn}
-        {currentItems.length > 0 && (
+        {currentItems?.length > 0 && (
           <li>
             <button
               className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"

@@ -176,7 +176,7 @@ const AdminProject = ({
                 </td>
                 <td className="w-[120px]  items-center flex text-[.8125rem] text-start font-[400] text-[#3A3A49] gap-[.3125rem]">
                   <div
-                    className="bg-gray-200 h-[.375rem] w-[50%] "
+                    className="bg-gray-200 h-[.375rem] w-[50%] overflow-hidden "
                     role="progressbar"
                     aria-label="progressbar"
                     aria-valuemin="0"
@@ -352,9 +352,22 @@ const AdminProject = ({
                 </td>
                 {dropdown && dropId === item?._id && (
                   <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md top-12 right-12 bg-white z-[99] absolute">
-                    <Link to={`/${item._id}`}>View</Link>
-                    <button onClick={() => handleEdit(item._id)}>Edit</button>
-                    <button onClick={() => handleDelete(item._id)}>
+                    <Link
+                      className="text-[12px] font-['Work_sans']"
+                      to={`/${item._id}`}
+                    >
+                      View
+                    </Link>
+                    <button
+                      className="text-[12px] font-['Work_sans']"
+                      onClick={() => handleEdit(item._id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="text-[12px] font-['Work_sans']"
+                      onClick={() => handleDelete(item._id)}
+                    >
                       Delete
                     </button>
                   </div>

@@ -196,13 +196,18 @@ const SellerSales = ({ salesPerson }) => {
                       {item?.client?.length ? item?.client?.length : 0}
                     </div>
                   </td>
-                  <td className="flex justify-start gap-x-3 w-[150px] text-[#878790] font-['Work_sans'] text-[12px]">
+                  <td className="flex justify-start gap-x-3 w-[150px] items-center text-[#878790] font-['Work_sans'] text-[12px]">
+                    <img
+                      className="w-[32px] rounded-full h-[32px]"
+                      src={item?.company?.companyLogo}
+                      alt=""
+                    />
                     {item?.company?.companyName}
                   </td>
                   <td className="flex justify-start gap-x-3 w-[150px] text-[#878790] font-['Work_sans'] text-[12px]">
                     <div className="flex w-full clients">
                       {item?.client?.length > 0 &&
-                        item?.client.slice(0, 3).map((item, index) => (
+                        item?.client?.slice(0, 3).map((item, index) => (
                           <div
                             key={index}
                             className="clientAvatar w-[32px] h-[32px] rounded-full overflow-hidden mr-[-10px]"
@@ -243,13 +248,13 @@ const SellerSales = ({ salesPerson }) => {
                         >
                           <button
                             onClick={() => setDropDrown(!dropDown)}
-                            className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                            className="w-full p-1 font-bold capitalize text-[12px] font-['Work_sans'] hover:text-gray-500 "
                           >
                             Edit
                           </button>
                           <button
                             onClick={() => handleDelete(item?._id)}
-                            className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                            className="w-full p-1 font-bold capitalize text-[12px] font-['Work_sans'] hover:text-gray-500 "
                           >
                             Delete
                           </button>

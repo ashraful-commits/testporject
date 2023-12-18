@@ -28,7 +28,7 @@ const ClientComponent = ({
   //===================================TODO:handle dropdwon
 
   const dropdownMenu = (e) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target.value)) {
       setManage(false);
     }
   };
@@ -210,13 +210,13 @@ const ClientComponent = ({
               >
                 <button
                   onClick={() => setDropDrown(!dropDown)}
-                  className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-[12px] font-['Work_sans'] "
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(id)}
-                  className="w-full p-1 font-bold capitalize hover:text-gray-500 "
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-[12px] font-['Work_sans'] "
                 >
                   Delete
                 </button>

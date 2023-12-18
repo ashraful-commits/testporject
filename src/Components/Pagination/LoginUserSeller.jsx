@@ -233,9 +233,22 @@ const LoginUserSeller = ({
                 </td>
                 {dropdown && dropId === item?._id && (
                   <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md top-12 right-12 bg-white z-[99] absolute">
-                    <Link to={`/seller/${item?._id}`}>View</Link>
-                    <button onClick={() => handleEdit(item._id)}>Edit</button>
-                    <button onClick={() => handleDelete(item._id)}>
+                    <Link
+                      className="text-[12px] font-['Work_sans']"
+                      to={`/seller/${item?._id}`}
+                    >
+                      View
+                    </Link>
+                    <button
+                      className="text-[12px] font-['Work_sans']"
+                      onClick={() => handleEdit(item._id)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="text-[12px] font-['Work_sans']"
+                      onClick={() => handleDelete(item._id)}
+                    >
                       Delete
                     </button>
                   </div>
