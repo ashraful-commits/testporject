@@ -629,7 +629,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                 }}
                 className="agree flex items-center gap-[20px]"
               >
-                <input type="checkbox" className="w-4 h-4" />
+                <input type="checkbox" className="w-4 h-4 cursor-pointer" />
                 <label
                   className="text-gray-900 font-[800] text-[12px] font-['Lato']"
                   htmlFor="i agree with all "
