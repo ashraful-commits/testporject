@@ -28,7 +28,6 @@ const LoginUserProject = ({
     i <= Math.ceil(loginInSeller?.projects?.length / itemsPerPage);
     i++
   ) {
-    console.log(i);
     pages.push(i);
   }
   //===================================
@@ -38,7 +37,7 @@ const LoginUserProject = ({
     indexOfFirstItem,
     indexOfLastItem
   );
-  console.log(currentItems);
+  console.log(loginInSeller);
   //=================================handlepagenumber
   const handlePageNumber = (item) => {
     setCurrentPage(Number(item));

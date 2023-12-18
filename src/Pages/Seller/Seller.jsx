@@ -1046,7 +1046,7 @@ const Seller = () => {
                         ActiveClient={
                           item?.client?.length > 0 ? item?.client : []
                         }
-                        companyLogo={item.companyAvatar}
+                        companyLogo={item?.company?.companyLogo}
                         styles=""
                       />
                     );

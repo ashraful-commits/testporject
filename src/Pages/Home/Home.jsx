@@ -272,13 +272,13 @@ const Home = () => {
               <div className="rate mt-[12px]  px-[20px] flex justify-between gap-[5px] items-center">
                 <h2 className="text-[30px] font-[500] text-[#230B34] mb-[10px] tracking-[.2px] font-['Work_Sans']">
                   {loginInSeller &&
-                  loginInSeller?.client &&
-                  loginInSeller?.client?.length > 0
-                    ? loginInSeller?.client?.reduce((acc, item) => {
+                  loginInSeller?.projects &&
+                  loginInSeller?.projects?.length > 0
+                    ? loginInSeller?.projects?.reduce((acc, item) => {
                         const commission =
                           parseFloat(item?.commissionRate) || 0;
                         return acc + commission;
-                      }, 0) / loginInSeller?.client?.length
+                      }, 0) / loginInSeller?.projects?.length
                     : 0}
                   %
                 </h2>
@@ -325,9 +325,11 @@ const Home = () => {
               <div className="percentage flex justify-start gap-[10px] pl-[22px] items-end">
                 <h2 className="text-[30px] text-[#230B34] mb-[10px] font-[500] font-['Work_Sans'] tracking-[.2px]">
                   ${" "}
-                  {calculateTotalCommissionForAllClients(loginInSeller?.client)
+                  {calculateTotalCommissionForAllClients(
+                    loginInSeller?.projects
+                  )
                     ? calculateTotalCommissionForAllClients(
-                        loginInSeller?.client
+                        loginInSeller?.projects
                       )
                     : 0}
                 </h2>
@@ -700,7 +702,7 @@ const Home = () => {
                   onClick={() => setSellerTable(!sellerTable)}
                   className="add-client pr-[4px] w-[121px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px] bg-cyan-700  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
                 >
-                  {sellerTable ? "Client" : "Seller"}
+                  {sellerTable ? "Project" : "Seller"}
                 </motion.button>
 
                 <motion.div

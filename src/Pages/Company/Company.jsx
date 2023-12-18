@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import logo from "../../../public/logo.png";
-import avatar from "../../../public/user.png";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -136,20 +134,19 @@ const Company = () => {
           <div className="dashboard px-[35px] w-[1400px] h-full">
             {/* ===========================================TODO:header  */}
             <div className="header items-center mt-[30px] w-full h-[37px]  flex justify-between">
-              <div className="flex gap-x-3">
+              <div className="flex ">
                 <Link
-                  className="flex items-center px-3 border rounded-md gap-x-4 hover:bg-cyan-700"
+                  className="flex items-center px-3 py-1 transition-all duration-500 ease-in-out border rounded-md gap-x-4 hover:bg-cyan-700 gap-x-3 group"
                   to="/"
                 >
                   <svg
-                    fill="#000000"
                     width="20px"
                     height="20px"
                     viewBox="0 0 24 24"
                     id="left"
                     data-name="Flat Color"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="icon flat-color"
+                    className="icon flat-color #858585 hover:fill-white"
                   >
                     <path
                       id="primary"
@@ -157,7 +154,7 @@ const Company = () => {
                       fill="black"
                     ></path>
                   </svg>
-                  <h5 className="text-[16px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                  <h5 className="text-[16px] font-['Lato'] group-hover:text-white  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
                     Back
                   </h5>
                 </Link>
