@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import logo from "../../../public/logo.png";
-import avatar from "../../../public/user.png";
 
 import Model from "../../Components/Model/Model";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,12 +22,16 @@ import TableComponent from "./../../Components/Tables/TableComponent";
 import SellerTableComponent from "../../Components/Tables/SellerTableComponent";
 import { getAllCompanyState } from "../../Features/Company/CompanySlice";
 import SalesModel from "../../Components/Model/SalesModel";
+import { getAllClient } from "../../Features/Client/ClientApi";
+import SellerClient from "../../Components/Tables/SellerClient";
+import { getAllClientState } from "../../Features/Client/ClientSlice";
 const Home = () => {
   //==============================================TODO:all state
 
   const [clientModel, setClientModel] = useState(false);
   const [salesModel, setSalesModel] = useState(false);
-  const [sellerTable, setSellerTable] = useState(false);
+  const [Table, setTable] = useState("project");
+
   const [currentTime, setCurrentTime] = useState(false);
   const [Form, setForm] = useState(false);
   //====================================================TODO:use form hook
@@ -49,6 +51,8 @@ const Home = () => {
     useSelector(getAllSellerState);
   //=========================================== TODO:redux data
   const { company } = useSelector(getAllCompanyState);
+  const { client } = useSelector(getAllClientState);
+  console.log(client);
   //===================================================== TODO:dispatch/navigate
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,6 +73,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(LoggedInSeller());
     dispatch(getAllCompany());
+    dispatch(getAllClient());
   }, [dispatch]);
   //================================================================== TODO:date format
   useEffect(() => {
@@ -380,7 +385,7 @@ const Home = () => {
             {/*============================================= TODO:search  */}
             <div className="search  flex justify-between items-center w-full h-[40px]">
               <div className="flex w-full h-[40px] items-center">
-                {!sellerTable && (
+                {Table === "project" && (
                   <motion.div
                     initial={{ y: -15, opacity: 0.3 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -439,7 +444,7 @@ const Home = () => {
                     placeholder="Search"
                   />
                 </motion.div>
-                {sellerTable && (
+                {Table === "seller" && (
                   <motion.div
                     initial={{ y: -15, opacity: 0.3 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -472,7 +477,7 @@ const Home = () => {
                     />
                   </motion.div>
                 )}
-                {sellerTable && (
+                {Table === "seller" && (
                   <motion.div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-cyan-700 text-[12px] font-[500] transition-all duration-500 ease-in-out">
                     <motion.select
                       initial={{ y: -15, opacity: 0.3 }}
@@ -503,7 +508,7 @@ const Home = () => {
                     </motion.select>
                   </motion.div>
                 )}
-                {!sellerTable && (
+                {Table === "project" && (
                   <>
                     <motion.div
                       initial={{ y: -15, opacity: 0.3 }}
@@ -681,7 +686,7 @@ const Home = () => {
                     />
                   </svg>
                 </motion.button>
-                {sellerTable && (
+                {Table === "seller" && (
                   <button
                     onClick={() => setSalesModel(true)}
                     className="px-4 py-2 text-[12px] ml-4 font-bold text-white transition-all duration-500 ease-in-out rounded-md bg-cyan-700 hover:bg-cyan-800"
@@ -696,13 +701,44 @@ const Home = () => {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{
+                    duration: 0.4,
+                    delay: 0.1,
+                  }}
+                  onClick={() => setTable("client")}
+                  className="add-client pr-[4px] mr-2 w-[60px]  hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px] bg-cyan-700  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
+                >
+                  client
+                </motion.button>
+              </div>
+              <div className="addClient gap-[10px] flex items-center justify-self-end right-0">
+                <motion.button
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
                     duration: 0.3,
                     delay: 0.2,
                   }}
-                  onClick={() => setSellerTable(!sellerTable)}
-                  className="add-client pr-[4px] w-[121px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px] bg-cyan-700  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
+                  className="add-client pr-[4px] w-[60px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px] bg-cyan-700  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
+                  onClick={() => {
+                    setTable("seller");
+                  }}
                 >
-                  {sellerTable ? "Project" : "Seller"}
+                  Seller
+                </motion.button>
+
+                <motion.button
+                  initial={{ y: -15, opacity: 0.3 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    duration: 0.3,
+                    delay: 0.2,
+                  }}
+                  className="add-client pr-[4px] w-[60px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px] bg-cyan-700  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
+                  onClick={() => setTable("project")}
+                >
+                  Project
                 </motion.button>
 
                 <motion.div
@@ -776,13 +812,37 @@ const Home = () => {
             </div>
             {/* ========================== TODO:table container  */}
             <div className="table_container overflow-auto mt-[20px]">
-              {sellerTable ? (
+              {Table === "seller" && (
                 <SellerTableComponent
                   sellerId={loginInSeller?._id}
                   input={input}
                 />
-              ) : (
+              )}
+              {Table === "project" && (
                 <TableComponent sellerId={loginInSeller?._id} input={input} />
+              )}
+              {loginInSeller?.role === "super_admin" ? (
+                Table === "client" && (
+                  <SellerClient
+                    client={client.filter((item) =>
+                      input?.text
+                        ? item.clientName
+                            ?.toLowerCase()
+                            .includes(input?.text?.toLowerCase())
+                        : true
+                    )}
+                  />
+                )
+              ) : (
+                <SellerClient
+                  client={loginInSeller?.client?.filter((item) =>
+                    input?.text
+                      ? item.clientName
+                          ?.toLowerCase()
+                          .includes(input?.text?.toLowerCase())
+                      : true
+                  )}
+                />
               )}
             </div>
           </div>

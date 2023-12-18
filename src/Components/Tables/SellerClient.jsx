@@ -1,9 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteClient, getSingleClient } from "../../Features/Client/ClientApi";
+import {
+  deleteClient,
+  getAllClient,
+  getSingleClient,
+  permissionUpdate,
+} from "../../Features/Client/ClientApi";
 import swal from "sweetalert";
 import ClientModel from "../Model/ClientModel";
 import { getAllClientState } from "../../Features/Client/ClientSlice";
+import { Toastify } from "../../Utils/Tostify";
+import { getAllSellerState } from "./../../Features/Seller/SellerSlice";
 
 const SellerClient = ({ client }) => {
   //======================================all state
@@ -20,6 +27,7 @@ const SellerClient = ({ client }) => {
   const dropMenu = useRef();
   const dispatch = useDispatch();
   const { singleClient } = useSelector(getAllClientState);
+  const { loginInSeller } = useSelector(getAllSellerState);
   //========================pages
   const pages = [];
   for (let i = 1; i <= Math.ceil(client?.length / itemsPerPage); i++) {
@@ -122,6 +130,13 @@ const SellerClient = ({ client }) => {
       });
     }
   };
+  //=============================handle permission
+  const handlePermission = (id, status) => {
+    dispatch(permissionUpdate({ id: id, status })).then(() => {
+      dispatch(getAllClient());
+      Toastify("Permission updated", "success");
+    });
+  };
   return (
     <>
       {dropDown && (
@@ -152,6 +167,12 @@ const SellerClient = ({ client }) => {
               <th className="w-[120px] flex justify-start items-center">
                 Phone
               </th>
+              {loginInSeller.role === "super_admin" && (
+                <th className="w-[120px] flex justify-start items-center">
+                  Permission
+                </th>
+              )}
+
               <th className="w-[120px] flex justify-start items-center"></th>
             </tr>
           </thead>
@@ -176,6 +197,19 @@ const SellerClient = ({ client }) => {
                   <td className="w-[120px]">{item?.company?.companyName}</td>
                   <td className="w-[150px] truncate">{item?.clientEmail}</td>
                   <td className="w-[120px]">{item?.clientPhone}</td>
+                  {loginInSeller.role === "super_admin" && (
+                    <td className="w-[120px]">
+                      <input
+                        onChange={() =>
+                          handlePermission(item?._id, item?.status)
+                        }
+                        type="checkbox"
+                        value={item?.status}
+                        checked={item?.status}
+                      />
+                    </td>
+                  )}
+
                   <td className="w-[120px] flex gap-x-2">
                     <button
                       onClick={() => {
