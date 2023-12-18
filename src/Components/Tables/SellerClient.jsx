@@ -206,6 +206,7 @@ const SellerClient = ({ client }) => {
                         type="checkbox"
                         value={item?.status}
                         checked={item?.status}
+                        className="cursor-pointer "
                       />
                     </td>
                   )}

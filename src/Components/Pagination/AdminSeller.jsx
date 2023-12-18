@@ -208,6 +208,7 @@ const AdminSeller = ({
                       type="checkbox"
                       checked={item?.status}
                       value={item?.status}
+                      className="cursor-pointer "
                     />
                   </td>
                 )}

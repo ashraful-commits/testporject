@@ -322,6 +322,7 @@ const AdminProject = ({
                       onChange={() => handlePermission(item._id, item.status)}
                       type="checkbox"
                       checked={item?.status}
+                      className="cursor-pointer "
                     />
                   </td>
                 )}

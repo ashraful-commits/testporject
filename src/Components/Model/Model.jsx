@@ -409,7 +409,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                         value="Fixed Budget"
                         onChange={handleInputChange}
                         checked={input.budget === "Fixed Budget"}
-                        className="w-4 h-4"
+                        className="w-4 h-4 cursor-pointer"
                         type="checkbox"
                       />
                       <label

@@ -183,7 +183,7 @@ const Project = () => {
             <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
               <input
                 type="checkbox"
-                className="absolute top-3 left-3"
+                className="absolute cursor-pointer top-3 left-3"
                 checked={selectTools && selectTools.includes("Photoshop")}
                 value={"Photoshop"}
                 onChange={handleToolsInputChange}
@@ -193,7 +193,7 @@ const Project = () => {
             <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
               <input
                 type="checkbox"
-                className="absolute top-3 left-3"
+                className="absolute cursor-pointer top-3 left-3"
                 checked={selectTools && selectTools.includes("Illustrator")}
                 value={"Illustrator"}
                 onChange={handleToolsInputChange}
@@ -203,7 +203,7 @@ const Project = () => {
             <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
               <input
                 type="checkbox"
-                className="absolute top-3 left-3"
+                className="absolute cursor-pointer top-3 left-3"
                 checked={selectTools && selectTools.includes("Figma")}
                 value={"Figma"}
                 onChange={handleToolsInputChange}
@@ -213,7 +213,7 @@ const Project = () => {
             <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
               <input
                 type="checkbox"
-                className="absolute top-3 left-3"
+                className="absolute cursor-pointer top-3 left-3"
                 checked={selectTools && selectTools.includes("Word")}
                 value={"Word"}
                 onChange={handleToolsInputChange}
@@ -269,7 +269,7 @@ const Project = () => {
                   >
                     <input
                       type="checkbox"
-                      className="absolute top-3 left-3"
+                      className="absolute cursor-pointer top-3 left-3"
                       checked={selectedSalespersons?.includes(item?._id)}
                       value={item?._id}
                       onChange={handleInputChange}
