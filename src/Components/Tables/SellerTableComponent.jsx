@@ -145,7 +145,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
       <table className="w-full  min-h-[490px] h-full overflow-hidden">
         {/* //============================================table header  */}
         <thead>
-          <tr className="w-full h-[1.875rem]  grid  grid-flow-col justify-between border-b py-2 px-2 text-center">
+          <tr className="w-full h-[1.875rem]  grid  grid-flow-col justify-between  py-2 px-2 text-center">
             <th className="text-[.8125rem] flex items-center justify-start w-[20px] font-['work_sans'] text-start font-[400]"></th>
             <th className="text-[.8125rem] flex items-center justify-start w-[120px] font-['work_sans'] text-start font-[400]">
               Seller Name
@@ -178,7 +178,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
           </tr>
         </thead>
         {/* //================================================table body  */}
-        <tbody className="relative border">
+        <tbody className="relative ">
           {(loader || sellerLoader) && (
             <motion.div
               initial={{ opacity: 0.2 }}

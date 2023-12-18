@@ -109,7 +109,7 @@ const LoginUserSeller = ({
             return (
               <tr
                 key={index}
-                className="w-full  transition-all duration-500 ease-in-out grid grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center relative"
+                className="w-full  transition-all duration-500 ease-in-out grid grid-flow-col justify-between items-center border my-1 rounded-md py-2 h-[3.4375rem]  text-center relative"
               >
                 <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[20px]  text-cyan-700 ">
                   <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">

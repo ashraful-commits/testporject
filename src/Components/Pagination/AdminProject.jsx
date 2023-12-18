@@ -121,7 +121,7 @@ const AdminProject = ({
                   loginInSeller?._id === item?.sellerId?._id
                     ? "bg-gray-100 "
                     : ""
-                } w-full grid grid-flow-col  transition-all duration-500 ease-in-out justify-between items-center border-b py-2 h-[3.4375rem] relative text-center`}
+                } w-full grid grid-flow-col  transition-all duration-500 ease-in-out justify-between items-center border rounded-md py-2 my-1 h-[3.4375rem] relative text-center`}
               >
                 <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-cyan-700 ">
                   <span className="text-[.8125rem] font-[500] px-[1rem] block text-[#D9D9D9]">

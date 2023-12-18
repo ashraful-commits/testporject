@@ -142,7 +142,7 @@ const TableComponent = ({ sellerId, input }) => {
       <table className="w-full  min-h-[490px] rounded-md ">
         {/* //======================================table header  */}
         <thead>
-          <tr className="w-full min-h-[1.875rem] h-full  grid pr-6 grid-flow-col justify-between border-b py-2 text-center">
+          <tr className="w-full min-h-[1.875rem] h-full  grid pr-6 grid-flow-col justify-between  py-2 text-center">
             <th className="text-[.8125rem] font-['work_sans'] w-[30px]  text-start font-[400]"></th>
             <th className="text-[.8125rem] font-['work_sans'] -ml-[3rem] w-[150px]  text-start font-[400]">
               Company Name
@@ -189,7 +189,7 @@ const TableComponent = ({ sellerId, input }) => {
           </tr>
         </thead>
         {/* //==========================================table body  */}
-        <tbody className="relative w-full h-full border">
+        <tbody className="relative w-full h-full ">
           {(loader || sellerLoader) && (
             <motion.div
               initial={{ opacity: 0.4 }}

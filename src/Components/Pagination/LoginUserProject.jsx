@@ -114,7 +114,7 @@ const LoginUserProject = ({
             return (
               <tr
                 key={index}
-                className="w-full grid transition-all duration-500 ease-in-out grid-flow-col justify-between items-center border-b py-2 h-[3.4375rem]  text-center"
+                className="w-full grid transition-all duration-500 ease-in-out grid-flow-col justify-between items-center border my-1 rounded-md  py-2 h-[3.4375rem]  text-center"
               >
                 <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-cyan-700 ">
                   <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
