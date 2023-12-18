@@ -159,7 +159,7 @@ const Company = () => {
                   </h5>
                 </Link>
 
-                {loginInSeller.role === "super_admin" && (
+                {loginInSeller?.role === "super_admin" && (
                   <button
                     onClick={() => setCompanyModel(true)}
                     className="px-[10px] py-[5px] bg-cyan-700  rounded-md text-white font-bold hover:bg-gray-700  transition-all duration-500 ease-in-out"
@@ -710,7 +710,7 @@ const Company = () => {
                       </section>
                     </div>
                     <div className="flex items-center justify-center mt-auto mr-3">
-                      {loginInSeller.role === "super_admin" && (
+                      {loginInSeller?.role === "super_admin" && (
                         <div className="flex items-center justify-center w-full h-auto p-1 mt-2 mb-auto rounded-md gap-x-4 ">
                           <div className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-gray-700 ">
                             <input

@@ -58,7 +58,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         (item) => item._id === id
       );
 
-    if (loginInSeller.role === "user") {
+    if (loginInSeller?.role === "user") {
       setSingleData(existingSeller);
     } else {
       const foundItem = seller?.find((item) => item._id === id);
@@ -66,7 +66,7 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         setSingleData(foundItem);
       }
     }
-    if (loginInSeller.role === "admin") {
+    if (loginInSeller?.role === "admin") {
       setSingleData(existingSeller);
     } else {
       const foundItem = seller?.find((item) => item._id === id);

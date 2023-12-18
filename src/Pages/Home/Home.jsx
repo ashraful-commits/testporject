@@ -523,7 +523,7 @@ const Home = () => {
                       className="w-full h-full focus:outline-none"
                       name="role"
                       onChange={handleInputChange}
-                      value={input.role}
+                      value={input?.role}
                       id=""
                     >
                       <option className="text-cyan-700 " value="">

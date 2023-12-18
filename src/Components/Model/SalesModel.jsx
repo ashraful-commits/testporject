@@ -219,7 +219,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                   handleInputChange={handleInputChange}
                 />
                 {title === "Edit sales" ||
-                loginInSeller.role === "super_admin" ? (
+                loginInSeller?.role === "super_admin" ? (
                   ""
                 ) : (
                   <FormInput

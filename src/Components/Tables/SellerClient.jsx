@@ -167,7 +167,7 @@ const SellerClient = ({ client }) => {
               <th className="w-[120px] flex justify-start items-center">
                 Phone
               </th>
-              {loginInSeller.role === "super_admin" && (
+              {loginInSeller?.role === "super_admin" && (
                 <th className="w-[120px] flex justify-start items-center">
                   Permission
                 </th>
@@ -197,7 +197,7 @@ const SellerClient = ({ client }) => {
                   <td className="w-[120px]">{item?.company?.companyName}</td>
                   <td className="w-[150px] truncate">{item?.clientEmail}</td>
                   <td className="w-[120px]">{item?.clientPhone}</td>
-                  {loginInSeller.role === "super_admin" && (
+                  {loginInSeller?.role === "super_admin" && (
                     <td className="w-[120px]">
                       <input
                         onChange={() =>
