@@ -205,8 +205,8 @@ const Home = () => {
               </div>
               <div className="percentage flex justify-start px-4 gap-[10px] items-center">
                 <h2 className="text-[35px] text-white mb-[10px] font-['Work_Sans']">
-                  {loginInSeller?.client?.length > 0
-                    ? loginInSeller?.client.length
+                  {loginInSeller?.projects?.length > 0
+                    ? loginInSeller?.projects.length
                     : 0}
                 </h2>
                 <span className="text-[#3AAE54] border-[0.3px solid bg-[#5CCE75] text-[12px] flex justify-between px-[7px] items-center gap-[5px] w-[49px] h-[19px] bg-opacity-[.1] text-[#5CCE75] rounded-md">
