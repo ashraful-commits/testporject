@@ -14,6 +14,7 @@ import { setMessageEmpty } from "../../Features/Client/ClientSlice";
 import { motion } from "framer-motion";
 import { getAllCompanyState } from "../../Features/Company/CompanySlice";
 import { getAllCompany } from "../../Features/Company/CompanyApi";
+import DeleteIcon from "../../Icons/DeleteIcon";
 
 const SalesModel = ({ setModel, sellerId, singleData, title }) => {
   const {
@@ -150,18 +151,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
           onClick={() => setModel(false)}
           className="absolute right-16 top-10 hover:scale-105 transition-all duration-500 ease-in-out z-[99999]"
         >
-          <svg
-            width="23px"
-            height="23px"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-            version="1.1"
-          >
-            <path
-              style={{ fill: "#ffffff", stroke: "none", strokeWidth: 4 }}
-              d="M 20,4 3,21 33,50 3,80 20,97 49,67 79,97 95,80 65,50 95,20 80,4 50,34 z"
-            />
-          </svg>
+          <DeleteIcon />
         </button>
         {/* //==========================================  TODO:main model  */}
         <motion.div

@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProjectState } from "../../Features/Project/ProjectSlice";
 import Model from "../Model/Model";
 import swal from "sweetalert";
+import ProjectIcon from "../../Icons/ProjectIcon";
+import EmaiIcon from "../../Icons/EmailIcon";
+import MobileIcon from "../../Icons/MobileIcon";
 
 const ProjectComponent = ({
   clientAvatar,
@@ -146,19 +149,7 @@ const ProjectComponent = ({
         <div className="mt-5 flex-col  w-full gap-[18px] flex items-start justify-between">
           <h4 className="text-[16px] capitalize flex gap-2 items-center text-[#230B34] font-['work_sans'] font-[500]">
             <span>
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 16 16"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="#000000"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M1.5 1h13l.5.5v13l-.5.5h-13l-.5-.5v-13l.5-.5zM2 14h12V2H2v12zM3 3h2v10H3V3zm6 0H7v6h2V3zm2 0h2v8h-2V3z"
-                />
-              </svg>
+              <ProjectIcon />
             </span>
             {projectName}{" "}
             <span
@@ -173,50 +164,13 @@ const ProjectComponent = ({
           </h4>
           <h4 className="text-[16px] flex items-center gap-2 text-[#230B34] font-['work_sans'] font-[500]">
             <span>
-              <svg
-                fill="#000000"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 52 52"
-                enableBackground="new 0 0 52 52"
-                xmlSpace="preserve"
-              >
-                <g>
-                  <path
-                    d="M24.9,30.1c0.6,0.6,1.5,0.6,2.1,0l22.6-21C50,8.3,49.9,7,48.3,7L3.6,7.1c-1.2,0-2.2,1.1-1.3,2.1L24.9,30.1z
-          "
-                  />
-                  <path
-                    d="M50,17.3c0-1-1.2-1.6-2-0.9L30.3,32.7c-1.2,1.1-2.7,1.7-4.3,1.7s-3.1-0.6-4.3-1.6L4.1,16.4
-          c-0.8-0.7-2-0.2-2,0.9C2,17,2,40,2,40c0,2.2,1.8,4,4,4h40c2.2,0,4-1.8,4-4C50,34,50,21.8,50,17.3z"
-                  />
-                </g>
-              </svg>
+              <EmaiIcon />
             </span>
             {email}
           </h4>
           <h4 className="text-[16px] flex items-center gap-2 text-[#230B34] font-['work_sans'] font-[500]">
             <span>
-              <svg
-                fill="#000000"
-                height="20"
-                width="20"
-                version="1.1"
-                id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                viewBox="0 0 512 512"
-                enableBackground="new 0 0 512 512"
-                xmlSpace="preserve"
-              >
-                <path
-                  d="M426.7,453.8l-38.1-79.1c-8.2-16.9-18.8-29.2-37.1-21.7l-36.1,13.4c-28.9,13.4-43.3,0-57.8-20.2l-65-147.9
-      c-8.2-16.9-3.9-32.8,14.4-40.3l50.5-20.2c18.3-7.6,15.4-23.4,7.2-40.3l-43.3-80.6c-8.2-16.9-25-21-43.3-13.5
-      c-36.6,15.1-66.9,38.8-86.6,73.9c-24,42.9-12,102.6-7.2,127.7c4.8,25.1,21.6,69.1,43.3,114.2c21.7,45.2,40.7,80.7,57.8,100.8
-      c17,20.1,57.8,75.1,108.3,87.4c41.4,10,86.1,1.6,122.7-13.5C434.8,486.7,434.8,470.8,426.7,453.8z"
-                />
-              </svg>
+              <MobileIcon />
             </span>
             {mobile}
           </h4>

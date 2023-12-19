@@ -6,6 +6,7 @@ import { getAllCompanyState } from "../../Features/Company/CompanySlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import BackIconRight from "../../Icons/BackIconRight";
 const CompanyView = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -48,17 +49,7 @@ const CompanyView = () => {
           >
             <button className="inline-flex items-center px-3 py-1 mt-4 font-bold transition-all duration-500 ease-in-out bg-white border-0 rounded text-cyan-600 focus:outline-none hover:bg-cyan-800 md:mt-0 hover:text-white">
               Button
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                className="w-4 h-4 ml-1 hover:fill-white"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              <BackIconRight />
             </button>
           </Link>
         </div>

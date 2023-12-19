@@ -1,6 +1,6 @@
 const LoadingSpinner = () => {
   return (
-    <div className="flex h-full justify-center items-center w-full ">
+    <div className="flex items-center justify-center w-full h-full ">
       <svg
         version="1.1"
         id="Capa_1"
@@ -13,7 +13,7 @@ const LoadingSpinner = () => {
         viewBox="0 0 97.541 97.54"
         style={{ enableBackground: "new 0 0 97.541 97.54" }}
         xmlSpace="preserve"
-        className=" animate-spin absolute top-5"
+        className="absolute  animate-spin top-5"
       >
         <g>
           <g>

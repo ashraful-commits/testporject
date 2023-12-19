@@ -11,6 +11,8 @@ import ClientModel from "../Model/ClientModel";
 import { getAllClientState } from "../../Features/Client/ClientSlice";
 import { Toastify } from "../../Utils/Tostify";
 import { getAllSellerState } from "./../../Features/Seller/SellerSlice";
+import { PrevIcon } from "../../Icons/PrevIcon";
+import NextIcon from "../../Icons/NextIcon";
 
 const SellerClient = ({ client }) => {
   //======================================all state
@@ -240,19 +242,7 @@ const SellerClient = ({ client }) => {
                     onClick={handlePrevBtn}
                     disabled={currentPage == pages[0] ? true : false}
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 48 48"
-                      version="1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      enableBackground="new 0 0 48 48"
-                    >
-                      <polygon
-                        fill="#005085"
-                        points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
-                      />
-                    </svg>
+                    <PrevIcon />
                   </button>
                 </li>
               )}
@@ -268,19 +258,7 @@ const SellerClient = ({ client }) => {
                       currentPage == pages[pages.length - 1] ? true : false
                     }
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 48 48"
-                      version="1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      enableBackground="new 0 0 48 48"
-                    >
-                      <polygon
-                        fill="#005085"
-                        points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
-                      />
-                    </svg>
+                    <NextIcon />
                   </button>
                 </li>
               )}

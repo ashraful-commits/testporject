@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import VerticalIcon from "../../Icons/VerticalIcon";
+import { PrevIcon } from "../../Icons/PrevIcon";
+import NextIcon from "../../Icons/NextIcon";
+import FileIcon from "../../Icons/FileIcon";
 
 const LoginUserProject = ({
   input,
@@ -130,18 +134,7 @@ const LoginUserProject = ({
                 </td>
                 <td className="w-[120px] overflow-hidden -ml-14 items-center flex gap-[.3125rem] relative">
                   <Link to={`/${item._id}`}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="32"
-                      height="26"
-                      viewBox="0 0 32 26"
-                      fill="none"
-                    >
-                      <path
-                        d="M17.3825 4.33948L14.3154 1.00804C13.7253 0.368794 12.8894 0 12.0165 0H3.12246C1.39527 0 0 1.40142 0 3.12246V22.8775C0 24.5986 1.39527 26 3.12246 26H28.348C30.069 26 31.4704 24.6047 31.4704 22.8775V7.46194C31.4704 5.7409 30.0752 4.33948 28.348 4.33948H17.3825Z"
-                        fill="#0891b2"
-                      />
-                    </svg>
+                    <FileIcon />
                   </Link>
                   {item?.clientId?.clientAvatar ? (
                     <Link to={`/${item?._id}`}>
@@ -327,21 +320,7 @@ const LoginUserProject = ({
                     className="flex items-center justify-center w-full h-full transition-all duration-500 ease-in-out rounded-md cursor-pointer hover:border"
                     onClick={() => handleDropdown(item?._id)}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="5"
-                      height="20"
-                      viewBox="0 0 5 20"
-                      fill="none"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M4.54427 2.26411C4.54427 3.47531 3.52724 4.45822 2.27208 4.45822C1.01691 4.45822 -0.00012207 3.47531 -0.00012207 2.26411C-0.00012207 1.05201 1.01691 0.0699997 2.27208 0.0699997C3.52724 0.0699997 4.54427 1.05201 4.54427 2.26411ZM4.54427 10.035C4.54427 11.239 3.52724 12.2146 2.27208 12.2146C1.01691 12.2146 -0.00012207 11.239 -0.00012207 10.035C-0.00012207 8.83105 1.01691 7.85538 2.27208 7.85538C3.52724 7.85538 4.54427 8.83105 4.54427 10.035ZM4.54427 17.8059C4.54427 19.018 3.52724 20 2.27208 20C1.01691 20 -0.00012207 19.018 -0.00012207 17.8059C-0.00012207 16.5947 1.01691 15.6118 2.27208 15.6118C3.52724 15.6118 4.54427 16.5947 4.54427 17.8059Z"
-                        fill="#D0D7DD"
-                        fillOpacity="0.72727"
-                      />
-                    </svg>
+                    <VerticalIcon />
                   </button>
                 </td>
                 {dropdown && dropId === item?._id && (
@@ -383,19 +362,7 @@ const LoginUserProject = ({
               onClick={handlePrevBtn}
               disabled={currentPage == pages[0] ? true : false}
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 48 48"
-                version="1"
-                xmlns="http://www.w3.org/2000/svg"
-                enableBackground="new 0 0 48 48"
-              >
-                <polygon
-                  fill="#005085"
-                  points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
-                />
-              </svg>
+              <PrevIcon />
             </button>
           </li>
         )}
@@ -409,19 +376,7 @@ const LoginUserProject = ({
               onClick={handleNextBtn}
               disabled={currentPage == pages[pages.length - 1] ? true : false}
             >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 48 48"
-                version="1"
-                xmlns="http://www.w3.org/2000/svg"
-                enableBackground="new 0 0 48 48"
-              >
-                <polygon
-                  fill="#005085"
-                  points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
-                />
-              </svg>
+              <NextIcon />
             </button>
           </li>
         )}

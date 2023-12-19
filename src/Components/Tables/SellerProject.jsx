@@ -7,6 +7,8 @@ import {
 } from "../../Features/Project/ProjectApi";
 import swal from "sweetalert";
 import Model from "../Model/Model";
+import { PrevIcon } from "../../Icons/PrevIcon";
+import NextIcon from "../../Icons/NextIcon";
 
 const SellerProject = ({ projects }) => {
   console.log(projects);
@@ -223,19 +225,7 @@ const SellerProject = ({ projects }) => {
                     onClick={handlePrevBtn}
                     disabled={currentPage == pages[0] ? true : false}
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 48 48"
-                      version="1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      enableBackground="new 0 0 48 48"
-                    >
-                      <polygon
-                        fill="#005085"
-                        points="30.9,43 34,39.9 18.1,24 34,8.1 30.9,5 12,24"
-                      />
-                    </svg>
+                    <PrevIcon />
                   </button>
                 </li>
               )}
@@ -251,19 +241,7 @@ const SellerProject = ({ projects }) => {
                       currentPage == pages[pages.length - 1] ? true : false
                     }
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 48 48"
-                      version="1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      enableBackground="new 0 0 48 48"
-                    >
-                      <polygon
-                        fill="#005085"
-                        points="17.1,5 14,8.1 29.9,24 14,39.9 17.1,43 36,24"
-                      />
-                    </svg>
+                    <NextIcon />
                   </button>
                 </li>
               )}
