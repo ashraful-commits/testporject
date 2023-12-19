@@ -25,7 +25,6 @@ const LoginUserProject = ({
   const [MaxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [MinPageNumberLimit, setMinPageNumberLimit] = useState(0);
   //========================pages
-
   const pages = [];
   for (
     let i = 1;
@@ -52,7 +51,7 @@ const LoginUserProject = ({
       return (
         <li
           className={`cursor-pointer w-7  h-8  flex items-center justify-center rounded-md ${
-            currentPage === item ? "bg-cyan-700 text-white" : "border"
+            currentPage === item ? "bg-primary text-white" : "border"
           }`}
           onClick={() => handlePageNumber(item)}
           key={index}
@@ -73,6 +72,7 @@ const LoginUserProject = ({
       setMinPageNumberLimit(MinPageNumberLimit + pageNumberLimit);
     }
   };
+  //========================================handle prev btn
   const handlePrevBtn = () => {
     setCurrentPage(currentPage - 1);
     if ((currentPage - 1) % pageNumberLimit === 0) {
@@ -120,14 +120,14 @@ const LoginUserProject = ({
                 key={index}
                 className="w-full grid transition-all duration-500 ease-in-out grid-flow-col justify-between items-center border my-1 rounded-md  py-2 h-[3.4375rem]  text-center"
               >
-                <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-cyan-700 ">
-                  <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
+                <td className=" items-center text-sm  truncate text-start font-[500] w-[30px]  text-cyan-700 ">
+                  <span className="text-sm  font-[500] px-[.125rem] text-lightGray ">
                     {index + 1}.
                   </span>
                 </td>
                 <td className="w-[120px] px-2 overflow-hidden -ml-14 items-center flex gap-[.3125rem] relative">
                   <Link to={`/company/${item?.company?._id}`}>
-                    <span className="  capitalize truncate text-[13px] font-[500] text-cyan-700  w-[70px]">
+                    <span className="  capitalize truncate text-sm  font-[500] text-cyan-700  w-[70px]">
                       {item?.company?.companyName}
                     </span>
                   </Link>
@@ -152,14 +152,14 @@ const LoginUserProject = ({
                     </Link>
                   )}
 
-                  <span className="  capitalize truncate text-[13px] font-[500] text-cyan-700  w-[70px]">
+                  <span className="  capitalize truncate text-sm  font-[500] text-cyan-700  w-[70px]">
                     {item?.clientId?.clientName}
                   </span>
                 </td>
-                <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                <td className=" items-center text-sm  truncate text-start font-[400] w-[100px] text-shipGrey ">
                   {item?.date}
                 </td>
-                <td className="w-[120px]  items-center flex text-[.8125rem] text-start font-[400] text-[#3A3A49] gap-[.3125rem]">
+                <td className="w-[120px]  items-center flex text-sm  text-start font-[400] text-shipGrey  gap-[.3125rem]">
                   <div
                     className="bg-gray-200 overflow-hidden h-[.375rem] w-[50%] "
                     role="progressbar"
@@ -168,7 +168,7 @@ const LoginUserProject = ({
                     aria-valuemax="10000"
                   >
                     <div
-                      className="h-full bg-cyan-700 "
+                      className="h-full bg-primary "
                       style={{
                         width: `${((100 * item?.amount) / 100000).toFixed(2)}%`,
                       }}
@@ -177,7 +177,7 @@ const LoginUserProject = ({
                   ${item?.amount && item?.amount}
                 </td>
                 {loginInSeller?.role === "user" && (
-                  <td className="w-[100px]  items-center text-[.8125rem] truncate text-start font-[600] text-[#3A3A49]">
+                  <td className="w-[100px]  items-center text-sm  truncate text-start font-[600] text-shipGrey ">
                     $
                     {item?.amount &&
                       (
@@ -188,22 +188,22 @@ const LoginUserProject = ({
                 )}
                 {loginInSeller?.role === "user" && (
                   <td
-                    className={`text-[.8125rem] w-[120px]  flex justify-start items-center font-[400] text-[#3A3A49] `}
+                    className={`text-sm  w-[120px]  flex justify-start items-center font-[400] text-shipGrey  `}
                   >
                     <button>
                       <select
                         className={` focus:outline-none w-full px-2 ${
                           item?.projectStatus == "pending" &&
-                          "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem]  "
+                          "text-fadedOrange  border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-2xs   "
                         } ${
                           item?.projectStatus == "complete" &&
-                          "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem]  "
+                          "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-2xs   "
                         }  ${
                           item?.projectStatus == "on hold" &&
-                          "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem]  "
+                          "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-2xs   "
                         }   ${
                           item?.projectStatus == "on going" &&
-                          "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem]  "
+                          "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-2xs   "
                         }`}
                         name="projectType"
                         id=""
@@ -233,7 +233,7 @@ const LoginUserProject = ({
                 )}
                 {loginInSeller?.role === "super_admin" && (
                   <td
-                    className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                    className={`text-sm  w-[120px] flex justify-start items-center font-[400] text-shipGrey  `}
                   >
                     <button>
                       <select
@@ -267,7 +267,7 @@ const LoginUserProject = ({
 
                 {loginInSeller?.role === "admin" && (
                   <td
-                    className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                    className={`text-sm  w-[120px] flex justify-start items-center font-[400] text-shipGrey  `}
                   >
                     <button>
                       <select
@@ -299,7 +299,7 @@ const LoginUserProject = ({
                   </td>
                 )}
                 {loginInSeller?.role == "supper_admin" && (
-                  <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                  <td className=" items-center text-sm  truncate text-start font-[400] w-[100px] text-shipGrey ">
                     <input
                       onChange={() => handlePermission(item._id, item.status)}
                       type="checkbox"
@@ -309,13 +309,13 @@ const LoginUserProject = ({
                   </td>
                 )}
 
-                <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
-                  <span className=" capitalize truncate text-[13px] font-[500] text-cyan-700  w-[120px]">
+                <td className=" items-center text-sm  truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                  <span className=" capitalize truncate text-sm  font-[500] text-cyan-700  w-[120px]">
                     {item.projectSource}
                   </span>
                 </td>
 
-                <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49]">
+                <td className="  relative z-0 text-sm  flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-shipGrey ">
                   <button
                     className="flex items-center justify-center w-full h-full transition-all duration-500 ease-in-out rounded-md cursor-pointer hover:border"
                     onClick={() => handleDropdown(item?._id)}
@@ -326,19 +326,19 @@ const LoginUserProject = ({
                 {dropdown && dropId === item?._id && (
                   <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md  top-12 right-12 bg-white z-[999] absolute">
                     <Link
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       to={`/${item._id}`}
                     >
                       view
                     </Link>
                     <button
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       onClick={() => handleSellerEdit(item._id)}
                     >
                       Edit
                     </button>
                     <button
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       onClick={() => handleDelete(item._id)}
                     >
                       Delete
@@ -349,7 +349,7 @@ const LoginUserProject = ({
             );
           })
       ) : (
-        <span className="text-[12px] font-[600] text-center w-full inline-block py-5">
+        <span className="text-xs  font-[600] text-center w-full inline-block py-5">
           No Projects!
         </span>
       )}

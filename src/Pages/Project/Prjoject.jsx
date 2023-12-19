@@ -18,7 +18,7 @@ import ClientFeedBack from "../../Components/Project/ClientFeedBack";
 import Invoices from "../../Components/Project/Invoices";
 import Model from "../../Components/Model/Model";
 import DeleteIcon from "../../Icons/DeleteIcon";
-import EmailIcon from "../../Icons/EmailIcon";
+
 import BorderEmail from "../../Icons/BorderEmail";
 import { XdIcon } from "../../Icons/XdIcon";
 import AdIcon from "../../Icons/AdIcon";

@@ -608,12 +608,28 @@ const Seller = () => {
               {view === "list" ? (
                 singleSeller?.salesPerson?.length > 0 && (
                   <SellerSales
-                    salesPerson={singleSeller?.salesPerson.filter((item) =>
-                      input?.count
-                        ? item?.projects.length >= input?.count &&
-                          item?.projects.length <= input?.count
-                        : true
-                    )}
+                    salesPerson={singleSeller?.salesPerson?.filter((seller) => {
+                      return (
+                        (input?.text
+                          ? seller?.name
+                              ?.toLowerCase()
+                              .includes(input?.text?.toLowerCase())
+                          : true) &&
+                        (input?.startDate
+                          ? new Date(seller?.date) >= new Date(input?.startDate)
+                          : true) &&
+                        (input?.endDate
+                          ? new Date(seller?.date) <= new Date(input?.endDate)
+                          : true) &&
+                        (input?.status
+                          ? seller?.status === input?.status
+                          : true) &&
+                        (input?.count
+                          ? seller?.projects?.length <= input?.count &&
+                            seller?.projects?.length >= input?.count
+                          : true)
+                      );
+                    })}
                   />
                 )
               ) : singleSeller?.salesPerson?.length > 0 ? (
@@ -688,7 +704,26 @@ const Seller = () => {
               {/* //=====================list view and grid view  */}
               {view === "list" ? (
                 singleSeller?.client?.length > 0 && (
-                  <SellerClient client={singleSeller?.client} />
+                  <SellerClient
+                    client={singleSeller?.client?.filter((client) => {
+                      return (
+                        (input?.text
+                          ? client?.clientName
+                              ?.toLowerCase()
+                              .includes(input?.text?.toLowerCase())
+                          : true) &&
+                        (input?.startDate
+                          ? new Date(client?.date) >= new Date(input?.startDate)
+                          : true) &&
+                        (input?.endDate
+                          ? new Date(client?.date) <= new Date(input?.endDate)
+                          : true) &&
+                        (input?.status
+                          ? client?.projectStatus === input?.status
+                          : true)
+                      );
+                    })}
+                  />
                 )
               ) : singleSeller?.client?.length > 0 ? (
                 singleSeller?.client
@@ -737,7 +772,27 @@ const Seller = () => {
             >
               {view === "list" ? (
                 singleSeller?.projects?.length > 0 && (
-                  <SellerProject projects={singleSeller?.projects} />
+                  <SellerProject
+                    projects={singleSeller?.projects?.filter((project) => {
+                      return (
+                        (input?.text
+                          ? project?.clientId?.clientName
+                              ?.toLowerCase()
+                              .includes(input?.text?.toLowerCase())
+                          : true) &&
+                        (input?.startDate
+                          ? new Date(project?.date) >=
+                            new Date(input?.startDate)
+                          : true) &&
+                        (input?.endDate
+                          ? new Date(project?.date) <= new Date(input?.endDate)
+                          : true) &&
+                        (input?.status
+                          ? project?.projectStatus === input?.status
+                          : true)
+                      );
+                    })}
+                  />
                 )
               ) : singleSeller?.projects?.length > 0 ? (
                 singleSeller?.projects

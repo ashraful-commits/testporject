@@ -236,7 +236,7 @@ const Company = () => {
                         <div className="flex items-center justify-between header">
                           <p className="font-[500]">Notifications</p>
                           <a
-                            className="text-2xs  inline-block underline-2"
+                            className="inline-block text-2xs underline-2"
                             href=""
                           >
                             Mark all as read
@@ -696,7 +696,7 @@ const Company = () => {
                     <div className="flex items-center justify-center mt-auto mr-3">
                       {loginInSeller?.role === "super_admin" && (
                         <div className="flex items-center justify-center w-full h-auto p-1 mt-2 mb-auto rounded-md gap-x-4 ">
-                          <div className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary  ">
+                          <div className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary ">
                             <input
                               onClick={() =>
                                 handleCompanyStatus(item?._id, item?.status)
@@ -708,13 +708,13 @@ const Company = () => {
                           </div>
                           <button
                             onClick={() => handleEdit(item?._id)}
-                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary  "
+                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary "
                           >
                             Edit
                           </button>
                           <button
                             onClick={() => handleDelete(item?._id)}
-                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary  "
+                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary "
                           >
                             Delete
                           </button>

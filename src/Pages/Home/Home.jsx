@@ -321,7 +321,7 @@ const Home = () => {
                     <select
                       onChange={handleInputChange}
                       name="companyName"
-                      className="w-full px-2 text-sm  focus:outline-none"
+                      className="w-full px-2 text-sm focus:outline-none"
                       id=""
                     >
                       <option value="">company</option>
@@ -536,7 +536,7 @@ const Home = () => {
                 {Table === "seller" && (
                   <button
                     onClick={() => setSalesModel(true)}
-                    className="px-4 py-2 text-xs  ml-4 font-bold text-white transition-all duration-500 ease-in-out rounded-md bg-primary hover:bg-secondary "
+                    className="px-4 py-2 ml-4 text-xs font-bold text-white transition-all duration-500 ease-in-out rounded-md bg-primary hover:bg-secondary "
                   >
                     Add Sales Person
                   </button>
