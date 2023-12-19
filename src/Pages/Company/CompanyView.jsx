@@ -47,7 +47,7 @@ const CompanyView = () => {
             to="/company"
             className="inline-flex ml-5 lg:w-2/5 lg:justify-end lg:ml-0"
           >
-            <button className="inline-flex items-center px-3 py-1 mt-4 font-bold transition-all duration-500 ease-in-out bg-white border-0 rounded text-cyan-600 focus:outline-none hover:bg-cyan-800 md:mt-0 hover:text-white">
+            <button className="inline-flex items-center px-3 py-1 mt-4 font-bold transition-all duration-500 ease-in-out bg-white border-0 rounded text-cyan-600 focus:outline-none hover:bg-secondary  md:mt-0 hover:text-white">
               Button
               <BackIconRight />
             </button>
@@ -60,7 +60,7 @@ const CompanyView = () => {
           <div className="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-16 lg:px-12">
             <a
               href="#"
-              className="inline-flex items-center justify-between px-1 py-1 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full mb-7 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700"
+              className="inline-flex items-center justify-between px-1 py-1 pr-4 text-sm text-gray-700 bg-gray-100 rounded-full mb-7 dark:bg-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-secondary "
               role="alert"
             >
               <span className="text-xs bg-primary-600 rounded-full text-white px-4 py-1.5 mr-3">
@@ -110,7 +110,7 @@ const CompanyView = () => {
               </a>
               <a
                 href="#"
-                className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+                className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-secondary  dark:focus:ring-gray-800"
               >
                 <svg
                   className="w-5 h-5 mr-2 -ml-1"
@@ -1584,7 +1584,7 @@ const CompanyView = () => {
                       Williamsburg occupy sustainable snackwave gochujang.
                       Pinterest cornhole brunch, slow-carb neutra irony.
                     </p>
-                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-primary focus:outline-none hover:bg-secondary ">
                       Button
                     </button>
                   </div>
@@ -1605,29 +1605,7 @@ const CompanyView = () => {
                       Williamsburg occupy sustainable snackwave gochujang.
                       Pinterest cornhole brunch, slow-carb neutra irony.
                     </p>
-                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
-                      Button
-                    </button>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  {" "}
-                  <div className="">
-                    <div className="h-64 overflow-hidden rounded-lg">
-                      <img
-                        alt="content"
-                        className="object-cover object-center w-full h-full"
-                        src="https://dummyimage.com/1202x502"
-                      />
-                    </div>
-                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
-                      The Catalyzer
-                    </h2>
-                    <p className="text-base leading-relaxed">
-                      Williamsburg occupy sustainable snackwave gochujang.
-                      Pinterest cornhole brunch, slow-carb neutra irony.
-                    </p>
-                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-primary focus:outline-none hover:bg-secondary ">
                       Button
                     </button>
                   </div>
@@ -1649,7 +1627,7 @@ const CompanyView = () => {
                       Williamsburg occupy sustainable snackwave gochujang.
                       Pinterest cornhole brunch, slow-carb neutra irony.
                     </p>
-                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-primary focus:outline-none hover:bg-secondary ">
                       Button
                     </button>
                   </div>
@@ -1671,7 +1649,7 @@ const CompanyView = () => {
                       Williamsburg occupy sustainable snackwave gochujang.
                       Pinterest cornhole brunch, slow-carb neutra irony.
                     </p>
-                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-primary focus:outline-none hover:bg-secondary ">
                       Button
                     </button>
                   </div>
@@ -1693,7 +1671,7 @@ const CompanyView = () => {
                       Williamsburg occupy sustainable snackwave gochujang.
                       Pinterest cornhole brunch, slow-carb neutra irony.
                     </p>
-                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-primary focus:outline-none hover:bg-secondary ">
                       Button
                     </button>
                   </div>
@@ -1715,7 +1693,29 @@ const CompanyView = () => {
                       Williamsburg occupy sustainable snackwave gochujang.
                       Pinterest cornhole brunch, slow-carb neutra irony.
                     </p>
-                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-primary focus:outline-none hover:bg-secondary ">
+                      Button
+                    </button>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  {" "}
+                  <div className="">
+                    <div className="h-64 overflow-hidden rounded-lg">
+                      <img
+                        alt="content"
+                        className="object-cover object-center w-full h-full"
+                        src="https://dummyimage.com/1202x502"
+                      />
+                    </div>
+                    <h2 className="mt-6 mb-3 text-2xl font-medium text-gray-900 title-font">
+                      The Catalyzer
+                    </h2>
+                    <p className="text-base leading-relaxed">
+                      Williamsburg occupy sustainable snackwave gochujang.
+                      Pinterest cornhole brunch, slow-carb neutra irony.
+                    </p>
+                    <button className="flex px-5 py-2 mx-auto mt-6 text-white border-0 rounded bg-primary focus:outline-none hover:bg-secondary ">
                       Button
                     </button>
                   </div>
@@ -2610,7 +2610,7 @@ const CompanyView = () => {
                   defaultValue={""}
                 />
               </div>
-              <button className="px-6 py-2 text-lg text-white border-0 rounded bg-cyan-700 focus:outline-none hover:bg-cyan-800">
+              <button className="px-6 py-2 text-lg text-white border-0 rounded bg-primary focus:outline-none hover:bg-secondary ">
                 Button
               </button>
               <p className="mt-3 text-xs text-gray-500">

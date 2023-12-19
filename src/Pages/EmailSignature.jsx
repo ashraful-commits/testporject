@@ -6,7 +6,7 @@ const EmailSignature = () => {
   const { loginInSeller } = useSelector(getAllSellerState);
 
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen min-h-screen bg-cyan-700  bg-opacity-20 flex justify-center items-center z-[9999999999999]">
+    <div className="absolute top-0 left-0 w-screen h-screen min-h-screen bg-primary  bg-opacity-20 flex justify-center items-center z-[9999999999999]">
       <div className="min-w-[1440px] relative flex justify-center items-center bg-gray-100 min-h-[909px] rounded-2xl">
         <div className="text-white w-[500px] h-[200px] text-center flex justify-center items-center  p-2 bg-white bg-opacity-90 rounded-md">
           <Link
@@ -30,7 +30,7 @@ const EmailSignature = () => {
             </svg>
           </Link>
           <div className="flex items-center justify-center w-full h-full gap-2">
-            <div className="flex justify-center items-center bg-cyan-700  h-full w-[180px]">
+            <div className="flex justify-center items-center bg-primary  h-full w-[180px]">
               {loginInSeller.avatar ? (
                 <img
                   className="w-[100px] h-[100px] shrink-0 rounded-full"
@@ -51,7 +51,7 @@ const EmailSignature = () => {
                 {loginInSeller?.employment}
               </p>
 
-              <hr className="bg-cyan-700  my-2 h-[2px] w-full" />
+              <hr className="bg-primary  my-2 h-[2px] w-full" />
 
               <p className=" text-gray-600 flex justify-center items-center gap-2 font-['work_sans']">
                 <span>

@@ -157,7 +157,7 @@ const ProjectComponent = ({
                 projectStatus == "pending" && "bg-orange-300"
               } ${projectStatus == "on going" && "bg-cyan-300"} ${
                 projectStatus == "on hold" && "bg-red-300"
-              } ${projectStatus == "complete" && "bg-cyan-700  text-white"}`}
+              } ${projectStatus == "complete" && "bg-primary  text-white"}`}
             >
               {projectStatus}
             </span>
@@ -237,7 +237,7 @@ const ProjectComponent = ({
               onClick={() => {
                 setManage(!manage), setDropId(id);
               }}
-              className="w-[117px] h-[40px] flex justify-center items-center bg-cyan-700   text-white hover:text-white rounded-md hover:bg-gray-700  transition-all"
+              className="w-[117px] h-[40px] flex justify-center items-center bg-primary   text-white hover:text-white rounded-md hover:bg-secondary   transition-all"
             >
               Manage
             </button>

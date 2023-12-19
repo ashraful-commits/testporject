@@ -8,7 +8,10 @@ export default {
         WorkSans: ["Work Sans", "sans-serif"],
         Lato: ["Lato", "sans-serif"],
       },
-      colors: {},
+      colors: {
+        primary: "#267596",
+        secondary: "#3095bf",
+      },
     },
     plugins: [
       function ({ addUtilities }) {

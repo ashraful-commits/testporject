@@ -147,7 +147,7 @@ const Project = () => {
     <>
       {/* //================================================== TODO:loader  */}
       {loader && (
-        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-cyan-700  flex justify-center items-center absolute top-0 left-0">
+        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-primary  flex justify-center items-center absolute top-0 left-0">
           <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>
@@ -231,7 +231,7 @@ const Project = () => {
 
             <button
               type="submit"
-              className="h-[30px] justify-end col-span-4 bg-cyan-700 text-white transition-all ease-in-out duration-500 hover:scale-105"
+              className="h-[30px] justify-end col-span-4 bg-primary text-white transition-all ease-in-out duration-500 hover:scale-105"
             >
               Add Tools
             </button>
@@ -533,7 +533,7 @@ const Project = () => {
               <div className="flex items-center justify-center h-full button">
                 <button
                   onClick={() => setManage(true)}
-                  className="bg-cyan-700  text-[14px] font-[500] text-white hover:bg-gray-800  transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105"
+                  className="bg-primary  text-[14px] font-[500] text-white hover:bg-secondary   transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105"
                 >
                   Manage Project
                 </button>

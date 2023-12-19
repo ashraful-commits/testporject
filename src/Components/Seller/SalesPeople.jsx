@@ -232,7 +232,7 @@ const SalesPeople = ({
               onClick={() => {
                 setManage(!manage), setDropId(id);
               }}
-              className="w-[117px] h-[40px] flex justify-center items-center duration-500 bg-cyan-700   text-white hover:text-white rounded-md hover:bg-gray-700  transition-all ease-in-out"
+              className="w-[117px] h-[40px] flex justify-center items-center duration-500 bg-primary   text-white hover:text-white rounded-md hover:bg-secondary   transition-all ease-in-out"
             >
               Manage
             </button>

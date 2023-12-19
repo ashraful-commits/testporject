@@ -50,7 +50,7 @@ const LoginUserSeller = ({
       return (
         <li
           className={`cursor-pointer w-7  h-8  flex items-center justify-center rounded-md ${
-            currentPage === item ? "bg-cyan-700 text-white" : "border"
+            currentPage === item ? "bg-primary text-white" : "border"
           }`}
           onClick={() => handlePageNumber(item)}
           key={index}

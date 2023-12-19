@@ -78,7 +78,7 @@ const Login = () => {
       {/* //=================================================loader  */}
       {loader ||
         (clientLoader && (
-          <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-cyan-700  bg-opacity-20">
+          <div className="absolute w-screen min-h-[1240px] h-screen z-[999999999] top-0 left-0 bg-primary  bg-opacity-20">
             <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
               <LoadingSpinner />
             </div>
@@ -130,7 +130,7 @@ const Login = () => {
                 delay: 0.4,
               }}
               type="submit"
-              className="text-[18px] hover:scale-105 uppercase bg-cyan-700  text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-gray-700  transition-all duration-500 ease-in-out"
+              className="text-[18px] hover:scale-105 uppercase bg-primary  text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-secondary   transition-all duration-500 ease-in-out"
             >
               Login
             </motion.button>

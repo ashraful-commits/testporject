@@ -72,7 +72,7 @@ const SellerSales = ({ salesPerson }) => {
       return (
         <li
           className={`cursor-pointer w-7  h-8  flex items-center justify-center rounded-md ${
-            currentPage === item ? "bg-cyan-700 text-white" : "border"
+            currentPage === item ? "bg-primary text-white" : "border"
           }`}
           onClick={() => handlePageNumber(item)}
           key={index}
@@ -266,7 +266,7 @@ const SellerSales = ({ salesPerson }) => {
                         onClick={() => {
                           setManage(!manage), setDropId(item?._id);
                         }}
-                        className="w-[94px] h-[32px] z-10 flex justify-center items-center bg-cyan-700   text-white hover:text-white rounded-md hover:bg-gray-700  transition-all"
+                        className="w-[94px] h-[32px] z-10 flex justify-center items-center bg-primary   text-white hover:text-white rounded-md hover:bg-secondary   transition-all"
                       >
                         Manage
                       </button>

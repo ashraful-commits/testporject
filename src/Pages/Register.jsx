@@ -88,7 +88,7 @@ const Register = () => {
     <>
       {/* //========================================loader  */}
       {loader && (
-        <div className="absolute w-screen h-screen min-h-[1240px] z-[999999999] top-0 left-0 bg-cyan-700  bg-opacity-20">
+        <div className="absolute w-screen h-screen min-h-[1240px] z-[999999999] top-0 left-0 bg-primary  bg-opacity-20">
           <div className="w-full h-full flex absolute justify-center items-center top-[50%]">
             <LoadingSpinner />
           </div>
@@ -208,7 +208,7 @@ const Register = () => {
                 delay: 0.8,
               }}
               type="submit"
-              className="text-[18px] hover:scale-105 col-span-2 uppercase bg-cyan-700  text-white flex justify-center items-center py-[4px] font-[500] w-full mt-3 rounded-[50px] hover:bg-gray-700  transition-all duration-500 ease-in-out"
+              className="text-[18px] hover:scale-105 col-span-2 uppercase bg-primary  text-white flex justify-center items-center py-[4px] font-[500] w-full mt-3 rounded-[50px] hover:bg-secondary   transition-all duration-500 ease-in-out"
             >
               Register
             </motion.button>

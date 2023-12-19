@@ -177,7 +177,7 @@ const Home = () => {
                 ease: [0.17, 0.67, 0.83, 0.67],
                 delay: 0.2,
               }}
-              className="total_customer w-[305px] h-[150px] rounded-[8px] bg-cyan-700  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out "
+              className="total_customer w-[305px] h-[150px] rounded-[8px] bg-primary  grid grid-rows-2 hover:scale-105 transition-all duration-500 ease-in-out "
             >
               <div className="customer flex justify-start items-start mt-[10px] ml-[15px] gap-[9px]">
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-white">
@@ -536,7 +536,7 @@ const Home = () => {
                 {Table === "seller" && (
                   <button
                     onClick={() => setSalesModel(true)}
-                    className="px-4 py-2 text-[12px] ml-4 font-bold text-white transition-all duration-500 ease-in-out rounded-md bg-cyan-700 hover:bg-cyan-800"
+                    className="px-4 py-2 text-[12px] ml-4 font-bold text-white transition-all duration-500 ease-in-out rounded-md bg-primary hover:bg-secondary "
                   >
                     Add Sales Person
                   </button>
@@ -553,8 +553,10 @@ const Home = () => {
                   }}
                   onClick={() => setTable("client")}
                   className={` ${
-                    Table === "client" ? "bg-black text-white" : "bg-cyan-700"
-                  } add-client pr-[4px] w-[60px]  hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px]   hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
+                    Table === "client"
+                      ? "hover:bg-secondary  bg-secondary text-white"
+                      : "bg-primary hover:bg-secondary"
+                  } add-client pr-[4px] w-[60px]    h-[38px] flex items-center justify-center gap-[10px]   hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
                 >
                   Client
                 </motion.button>
@@ -567,8 +569,10 @@ const Home = () => {
                     delay: 0.2,
                   }}
                   className={`  ${
-                    Table === "seller" ? "bg-black text-white" : "bg-cyan-700 "
-                  } add-client pr-[4px] w-[60px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px]  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
+                    Table === "seller"
+                      ? "hover:bg-secondary  bg-secondary text-white"
+                      : "bg-primary hover:bg-secondary"
+                  } add-client pr-[4px] w-[60px]   h-[38px] flex items-center justify-center gap-[10px]  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
                   onClick={() => {
                     setTable("seller");
                   }}
@@ -584,8 +588,10 @@ const Home = () => {
                     delay: 0.2,
                   }}
                   className={` ${
-                    Table === "project" ? "bg-black text-white" : "bg-cyan-700"
-                  }  add-client w-[60px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px]   hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
+                    Table === "project"
+                      ? "hover:bg-secondary  bg-secondary text-white"
+                      : "bg-primary hover:bg-secondary"
+                  }  add-client w-[60px]   h-[38px] flex items-center justify-center gap-[10px]   hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
                   onClick={() => setTable("project")}
                 >
                   Project
@@ -613,7 +619,7 @@ const Home = () => {
                     delay: 0.1,
                   }}
                   onClick={() => setClientModel(true)}
-                  className="add-client pr-[4px] w-[162px] hover:bg-gray-700 h-[38px] flex items-center justify-center gap-[10px] bg-cyan-700  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
+                  className="add-client pr-[4px] w-[162px] hover:bg-secondary  h-[38px] flex items-center justify-center gap-[10px] bg-primary  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
                 >
                   Add New Client
                   <svg

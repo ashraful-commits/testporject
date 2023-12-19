@@ -177,7 +177,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0.4 }}
             transition={{ duration: 1.3 }}
-            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-cyan-700  z-[99999999999999999]"
+            className="w-full h-full absolute top-0 left-0 p-0 flex bg-opacity-30 justify-center items-center bg-primary  z-[99999999999999999]"
           >
             <div className="w-full h-full absolute top-[45%]">
               <LoadingSpinner />
@@ -187,7 +187,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
         <div className=" sticky top-0 pt-[42px] bg-white w-full">
           <div className="flex">
             <button
-              className="flex justify-center items-center w-[150px] h-[40px] font-bold text-white hover:bg-gray-800  transition-all duration-500 ease-in-out bg-cyan-700  rounded-md"
+              className="flex justify-center items-center w-[150px] h-[40px] font-bold text-white hover:bg-secondary   transition-all duration-500 ease-in-out bg-primary  rounded-md"
               onClick={() => setForm(true)}
             >
               {title}
@@ -399,7 +399,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
                   delay: 0.1 * Math.random() * 10,
                 }}
                 type="submit"
-                className="text-white mt-[-15px]  bg-cyan-700  w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-gray-700  transition-all ease-in-out duration-500 hover:scale-105 "
+                className="text-white mt-[-15px]  bg-primary  w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-secondary   transition-all ease-in-out duration-500 hover:scale-105 "
               >
                 Submit Now
               </motion.button>

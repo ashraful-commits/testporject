@@ -196,7 +196,7 @@ const TableComponent = ({ sellerId, input }) => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0.4 }}
               transition={{ duration: 1.3 }}
-              className="absolute top-0 left-0 w-full h-full bg-cyan-700 bg-opacity-20"
+              className="absolute top-0 left-0 w-full h-full bg-primary bg-opacity-20"
             >
               <div className="w-full absolute h-full top-[45%]">
                 <LoadingSpinner />

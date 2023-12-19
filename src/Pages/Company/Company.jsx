@@ -138,7 +138,7 @@ const Company = () => {
             <div className="header items-center mt-[30px] w-full h-[37px]  flex justify-between">
               <div className="flex gap-x-3">
                 <Link
-                  className="flex items-center px-3 py-1 transition-all duration-500 ease-in-out border rounded-md gap-x-4 hover:bg-cyan-700 gap-x-3 group"
+                  className="flex items-center px-3 py-1 transition-all duration-500 ease-in-out border rounded-md gap-x-4 hover:bg-primary gap-x-3 group"
                   to="/"
                 >
                   <svg
@@ -164,7 +164,7 @@ const Company = () => {
                 {loginInSeller?.role === "super_admin" && (
                   <button
                     onClick={() => setCompanyModel(true)}
-                    className="px-[10px] py-[5px] bg-cyan-700  rounded-md text-white font-bold hover:bg-gray-700  transition-all duration-500 ease-in-out"
+                    className="px-[10px] py-[5px] bg-primary  rounded-md text-white font-bold hover:bg-secondary   transition-all duration-500 ease-in-out"
                   >
                     Add new company
                   </button>
@@ -696,7 +696,7 @@ const Company = () => {
                     <div className="flex items-center justify-center mt-auto mr-3">
                       {loginInSeller?.role === "super_admin" && (
                         <div className="flex items-center justify-center w-full h-auto p-1 mt-2 mb-auto rounded-md gap-x-4 ">
-                          <div className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-gray-700 ">
+                          <div className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary  ">
                             <input
                               onClick={() =>
                                 handleCompanyStatus(item?._id, item?.status)
@@ -708,13 +708,13 @@ const Company = () => {
                           </div>
                           <button
                             onClick={() => handleEdit(item?._id)}
-                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-gray-700 "
+                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary  "
                           >
                             Edit
                           </button>
                           <button
                             onClick={() => handleDelete(item?._id)}
-                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-gray-700 "
+                            className="px-2 py-1 font-bold capitalize transition-all duration-500 ease-in-out border rounded-md hover:text-white bg-cyan-100 hover:bg-secondary  "
                           >
                             Delete
                           </button>

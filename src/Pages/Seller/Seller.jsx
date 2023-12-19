@@ -482,7 +482,7 @@ const Seller = () => {
                 }
                 onClick={() => setModel(!model)}
                 className={
-                  "w-[170px]  hover:scale-105  rounded-md h-[38px] bg-cyan-700  flex justify-center items-center gap-2 text-white hover:bg-gray-700  transition-all duration-500 ease-in-out"
+                  "w-[170px]  hover:scale-105  rounded-md h-[38px] bg-primary  flex justify-center items-center gap-2 text-white hover:bg-secondary   transition-all duration-500 ease-in-out"
                 }
               >
                 Add Sales Person
