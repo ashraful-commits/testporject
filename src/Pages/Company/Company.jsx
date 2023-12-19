@@ -136,7 +136,7 @@ const Company = () => {
           <div className="dashboard px-[35px] w-[1400px] h-full">
             {/* ===========================================TODO:header  */}
             <div className="header items-center mt-[30px] w-full h-[37px]  flex justify-between">
-              <div className="flex ">
+              <div className="flex gap-x-3">
                 <Link
                   className="flex items-center px-3 py-1 transition-all duration-500 ease-in-out border rounded-md gap-x-4 hover:bg-cyan-700 gap-x-3 group"
                   to="/"
