@@ -5,6 +5,7 @@ import ViewIcon from "../../Icons/ViewIcon";
 import VerticalIcon from "../../Icons/VerticalIcon";
 import NextIcon from "../../Icons/NextIcon";
 import { PrevIcon } from "../../Icons/PrevIcon";
+import FileIcon from "../../Icons/FileIcon";
 
 const AdminProject = ({
   project,
@@ -141,7 +142,7 @@ const AdminProject = ({
                 </td>
                 <td className="w-[150px]  -ml-[4rem] overflow-hidden items-center flex gap-[.3125rem] relative">
                   <Link to={`/${item._id}`}>
-                    <ViewIcon />
+                    <FileIcon />
                   </Link>
 
                   {item?.clientId?.clientAvatar ? (
