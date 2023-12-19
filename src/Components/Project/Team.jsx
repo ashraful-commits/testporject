@@ -21,10 +21,10 @@ const Team = ({ avatar, title, name, delay }) => {
         />
       </div>
       <div className="flex flex-col">
-        <span className="text-[16px] font-[500] font-['work_sans'] leading-[22px]">
+        <span className="text-lg  font-[500] font-['work_sans'] leading-[22px]">
           {name}
         </span>
-        <span className="text-[12px] text-[#878790] font-[400] font-['work_sans']">
+        <span className="text-xs  text-monsoon  font-[400] font-['work_sans']">
           {title}
         </span>
       </div>

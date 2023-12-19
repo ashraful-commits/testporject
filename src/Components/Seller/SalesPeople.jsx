@@ -108,10 +108,10 @@ const SalesPeople = ({
           </div>
           {/* //=============================================== datials  */}
           <div className="detials">
-            <h5 className="text-[18px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">
+            <h5 className="text-xl   font-[500] leading-[22px] font-['work_sans'] text-haiti ">
               {name}
             </h5>
-            <h6 className="text-[13px] font-[400] leading-[18px] font-['work_sans']">
+            <h6 className="text-sm  font-[400] leading-[18px] font-['work_sans']">
               {title}
             </h6>
           </div>
@@ -119,26 +119,26 @@ const SalesPeople = ({
         {/* //===================================================== work datials  */}
         <div className="flex justify-between w-full mt-5 work_detials">
           <div className="flex flex-col items-center justify-center">
-            <h4 className="text-[24px] text-[#230B34] font-['work_sans'] font-[600]">
+            <h4 className="text-3xl  text-haiti  font-['work_sans'] font-[600]">
               {project}
             </h4>
-            <h6 className="text-[#878790] text-[13px] font-['work_sans']">
+            <h6 className="text-monsoon  text-sm  font-['work_sans']">
               Project
             </h6>
           </div>
           <div className="flex flex-col items-center justify-center">
-            <h4 className="text-[24px] text-[#230B34] font-['work_sans'] font-[600]">
+            <h4 className="text-3xl  text-haiti  font-['work_sans'] font-[600]">
               {clients}
             </h4>
-            <h6 className="text-[#878790] text-[13px] font-['work_sans']">
+            <h6 className="text-monsoon  text-sm  font-['work_sans']">
               Clients
             </h6>
           </div>
           <div className="flex flex-col items-center justify-center">
-            <h4 className="text-[24px] text-[#230B34] font-['work_sans'] font-[600]">
+            <h4 className="text-3xl  text-haiti  font-['work_sans'] font-[600]">
               {earning}
             </h4>
-            <h6 className="text-[#878790] text-[13px] font-['work_sans']">
+            <h6 className="text-monsoon  text-sm  font-['work_sans']">
               Earnings
             </h6>
           </div>
@@ -163,10 +163,10 @@ const SalesPeople = ({
             )}
           </div>
           <div className="compney_detials">
-            <h6 className="text-[#878790] text-[13px] font-['work_sans']">
+            <h6 className="text-monsoon  text-sm  font-['work_sans']">
               Company
             </h6>
-            <h6 className="text-[14px] font-[500] font-['work_sans']">
+            <h6 className="text-md  font-[500] font-['work_sans']">
               {companyName}
             </h6>
           </div>
@@ -201,7 +201,7 @@ const SalesPeople = ({
                 })
               : ""}
 
-            <button className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+            <button className="clientAvatar w-[29px] h-[29px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-xs  hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
               {ActiveClient > 0
                 ? ActiveClient?.slice(3, ActiveClient?.length)
                 : 0}
@@ -216,13 +216,13 @@ const SalesPeople = ({
               >
                 <button
                   onClick={() => setDropDrown(!dropDown)}
-                  className="w-full p-1 text-[12px] font-['Work_sans'] font-bold capitalize hover:text-gray-500 "
+                  className="w-full p-1 text-xs  font-['Work_sans'] font-bold capitalize hover:text-gray-500 "
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(id, sellerId)}
-                  className="w-full text-[12px] font-['Work_sans'] p-1 font-bold capitalize hover:text-gray-500 "
+                  className="w-full text-xs  font-['Work_sans'] p-1 font-bold capitalize hover:text-gray-500 "
                 >
                   Delete
                 </button>

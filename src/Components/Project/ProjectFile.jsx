@@ -34,7 +34,7 @@ const ProjectFile = ({ svg, name, title, file }) => {
       )}
       <div className="w-[23px] h-[23px] overflow-hidden">{svg}</div>
       <div className="flex flex-col">
-        <span className="text-[14px] font-bold font-['work_sans'] leading-[22px]">
+        <span className="text-md  font-bold font-['work_sans'] leading-[22px]">
           {name}
         </span>
         <Link

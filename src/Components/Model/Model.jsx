@@ -270,7 +270,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
               {title}
             </button>
           </div>
-          <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
+          <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-4xl  font-[800]">
             Please add Project Details information
           </h1>
         </div>
@@ -287,7 +287,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
           {/* //========================================================= TODO:right section  */}
           <div className="right w-[490px] flex flex-col gap-[36px]">
             <div className="flex flex-col items-start client_information">
-              <h5 className="text-gray-900 tracking-[.6px] text-[16px] font-['Lato'] font-[600]">
+              <h5 className="text-gray-900 tracking-[.6px] text-lg  font-['Lato'] font-[600]">
                 Client Information
               </h5>
               <p className="text-gray-600 font-['Lato'] tracking-[.5px] mt-[1px]">
@@ -296,7 +296,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
               <div className="sections w-full grid grid-cols-2 gap-[20px]">
                 <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor=""
                   >
                     Client Name
@@ -328,7 +328,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
               <div className="sections w-full grid grid-cols-2 gap-[20px]">
                 <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor=""
                   >
                     Company Name
@@ -373,7 +373,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
               </div>
             </div>
             <div className="flex flex-col items-start project_information">
-              <h5 className="text-gray-900 tracking-[.6px] text-[16px] font-['Lato'] font-[600]">
+              <h5 className="text-gray-900 tracking-[.6px] text-lg  font-['Lato'] font-[600]">
                 Project Information
               </h5>
 
@@ -389,7 +389,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                     handleInputChange={handleInputChange}
                   />
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato'] mt-[2px]"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato'] mt-[2px]"
                     htmlFor=""
                   >
                     Budget
@@ -414,7 +414,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                         type="checkbox"
                       />
                       <label
-                        className="text-gray-900 font-[800] text-[12px] font-['Lato'] tracking-[.2px]"
+                        className="text-gray-900 font-[800] text-xs  font-['Lato'] tracking-[.2px]"
                         htmlFor=""
                       >
                         Fixed Budget
@@ -430,7 +430,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                         type="checkbox"
                       />
                       <label
-                        className="text-gray-900 font-[800] text-[12px] font-['Lato'] tracking-[.2px]"
+                        className="text-gray-900 font-[800] text-xs  font-['Lato'] tracking-[.2px]"
                         htmlFor=""
                       >
                         Hourly Rate
@@ -440,7 +440,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                 </div>
                 <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[18px]">
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor=""
                   >
                     Type of Project
@@ -490,7 +490,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
             </div>
             <div className="flex flex-col items-start w-full description">
               <label
-                className="text-gray-900 font-[800] text-[12px] font-['Lato'] mt-[-16px]"
+                className="text-gray-900 font-[800] text-xs  font-['Lato'] mt-[-16px]"
                 htmlFor=""
               >
                 Brief Description of Project
@@ -517,7 +517,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
               <div className="sections w-full items-center justify-center grid grid-cols-2 gap-[20px]">
                 <div className="right_section w-full flex flex-col gap-[19px] items-start mt-[-20px]">
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor=""
                   >
                     Project Source
@@ -547,7 +547,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                     </option>
                   </motion.select>
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor=""
                   >
                     Timeframe
@@ -589,7 +589,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                     handleInputChange={handleInputChange}
                   />
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato'] tracking-[.5px]"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato'] tracking-[.5px]"
                     htmlFor=""
                   >
                     Upload Relevant Document
@@ -602,7 +602,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                       duration: 0.3,
                       delay: 0.1 * Math.random() * 10,
                     }}
-                    className="text-gray-500 cursor-pointer transition-all ease-in-out duration-500 hover:bg-gray-300 border bg-gray-200 w-full h-[36px] rounded-md mt-[-5px] flex justify-center font-['Lato'] text-[12px] items-center tracking-[0.24px]"
+                    className="text-gray-500 cursor-pointer transition-all ease-in-out duration-500 hover:bg-gray-300 border bg-gray-200 w-full h-[36px] rounded-md mt-[-5px] flex justify-center font-['Lato'] text-xs  items-center tracking-[0.24px]"
                     htmlFor="uploadFile"
                   >
                     {projectFiles?.length > 0
@@ -632,7 +632,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
               >
                 <input type="checkbox" className="w-4 h-4 cursor-pointer" />
                 <label
-                  className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                  className="text-gray-900 font-[800] text-xs  font-['Lato']"
                   htmlFor="i agree with all "
                 >
                   I agree with all
@@ -653,7 +653,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                   delay: 0.1 * Math.random() * 10,
                 }}
                 type="submit"
-                className="text-white mt-[-15px] hover:scale-105  bg-primary  w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-secondary   transition-all ease-in-out duration-500  "
+                className="text-white mt-[-15px] hover:scale-105  bg-primary  w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-md  font-[500] hover:bg-secondary   transition-all ease-in-out duration-500  "
               >
                 Submit Now
               </motion.button>
@@ -661,7 +661,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
           </div>
           {/* //=============================================================== left section  */}
           <div className="left w-[220px] flex flex-col items-start">
-            <p className="text-gray-700 font-[600] text-[16px] font-['Work_Sans'] mt-[20px] ml-[5px] ">
+            <p className="text-gray-700 font-[600] text-lg  font-['Work_Sans'] mt-[20px] ml-[5px] ">
               Contact Us
             </p>
             <p className="text-gray-400 font-['Work_Sans'] tracking-[px] text-left">
@@ -670,17 +670,17 @@ const Model = ({ setClient, singleData, setForm, title }) => {
             <label className="text-gray-300 mt-[15px] ml-[5px]" htmlFor="">
               Phone
             </label>
-            <h4 className="text-gray-800 text-[18px] font-[700] font-['Work_Sans'] ml-[5px]">
+            <h4 className="text-gray-800 text-xl  font-[700] font-['Work_Sans'] ml-[5px]">
               (880) 22- 9944
             </h4>
             <label className="text-gray-300 mt-[18px] ml-[5px]" htmlFor="">
               Email
             </label>
-            <h4 className="text-gray-800 text-[18px] font-[600] mt-[2px] font-['Work_Sans'] ml-[6px] tracking-[-.5px]">
+            <h4 className="text-gray-800 text-xl  font-[600] mt-[2px] font-['Work_Sans'] ml-[6px] tracking-[-.5px]">
               info@imageappeal.com
             </h4>
             <div className="grid w-full h-auto grid-cols-2 gap-2 mt-10 overflow-hidden preview">
-              <h1 className="col-span-2 border-t border-b text-[16px] font-bold uppercase py-2">
+              <h1 className="col-span-2 border-t border-b text-lg  font-bold uppercase py-2">
                 Document Preview
               </h1>
               {projectFiles?.length > 0 ? (

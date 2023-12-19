@@ -128,14 +128,14 @@ const AdminProject = ({
                     : ""
                 } w-full grid grid-flow-col  transition-all duration-500 ease-in-out justify-between items-center border rounded-md py-2 my-1 h-[3.4375rem] relative text-center`}
               >
-                <td className=" items-center text-[.8125rem] truncate text-start font-[500] w-[30px]  text-cyan-700 ">
-                  <span className="text-[.8125rem] font-[500] px-[1rem] block text-[#D9D9D9]">
+                <td className=" items-center text-sm  truncate text-start font-[500] w-[30px]  text-cyan-700 ">
+                  <span className="text-sm  font-[500] px-[1rem] block text-lightGray ">
                     {index + 1}.
                   </span>{" "}
                 </td>
                 <td className="w-[150px] px-2 overflow-hidden -ml-14 items-center flex gap-[.3125rem] relative">
                   <Link to={`/company/${item?.company?._id}`}>
-                    <span className="  capitalize truncate text-[13px] font-[500] text-cyan-700  w-[70px]">
+                    <span className="  capitalize truncate text-sm  font-[500] text-cyan-700  w-[70px]">
                       {item?.company?.companyName}
                     </span>
                   </Link>
@@ -161,14 +161,14 @@ const AdminProject = ({
                     </Link>
                   )}
 
-                  <span className="  capitalize truncate text-[13px] font-[500] text-cyan-700  w-[100px]">
+                  <span className="  capitalize truncate text-sm  font-[500] text-cyan-700  w-[100px]">
                     {item?.clientId?.clientName}
                   </span>
                 </td>
-                <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                <td className=" items-center text-sm  truncate text-start font-[400] w-[100px] text-shipGrey ">
                   {item?.date}
                 </td>
-                <td className="w-[120px]  items-center flex text-[.8125rem] text-start font-[400] text-[#3A3A49] gap-[.3125rem]">
+                <td className="w-[120px]  items-center flex text-sm  text-start font-[400] text-shipGrey  gap-[.3125rem]">
                   <div
                     className="bg-gray-200 h-[.375rem] w-[50%] overflow-hidden "
                     role="progressbar"
@@ -186,7 +186,7 @@ const AdminProject = ({
                   ${item?.amount && item?.amount}
                 </td>
                 {loginInSeller?.role === "user" && (
-                  <td className="w-[100px]  items-center text-[.8125rem] truncate text-start font-[600] text-[#3A3A49]">
+                  <td className="w-[100px]  items-center text-sm  truncate text-start font-[600] text-shipGrey ">
                     $
                     {item?.amount &&
                       ((item?.amount * 100) / 15 / 100).toFixed(2)}
@@ -195,22 +195,22 @@ const AdminProject = ({
 
                 {loginInSeller?.role === "super_admin" && (
                   <td
-                    className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                    className={`text-sm  w-[100px] flex justify-start items-center font-[400] text-shipGrey  `}
                   >
                     <button>
                       <select
                         className={` focus:outline-none w-[100px] ${
                           item?.projectStatus == "pending" &&
-                          "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                          "text-fadedOrange  border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-2xs  h-[1.125rem] w-[3.75rem]   "
                         } ${
                           item?.projectStatus == "complete" &&
-                          "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                          "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-2xs  h-[1.125rem] w-[3.75rem]   "
                         }  ${
                           item?.projectStatus == "on hold" &&
-                          "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                          "text-[#F95959] border-[#F95959] border-[.0187rem] bg-[#FEE] rounded-[2.8125rem] text-2xs  h-[1.125rem] w-[3.75rem]   "
                         }   ${
                           item?.projectStatus == "on going" &&
-                          "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                          "text-[#3AAE54] border-[#3AAE54] border-[.0187rem] bg-[#E7FBF0] rounded-[2.8125rem] text-2xs  h-[1.125rem] w-[3.75rem]   "
                         }`}
                         name="projectType"
                         id=""
@@ -240,7 +240,7 @@ const AdminProject = ({
                 )}
                 {loginInSeller?.role === "super_admin" && (
                   <td
-                    className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                    className={`text-sm  w-[100px] flex justify-start items-center font-[400] text-shipGrey  `}
                   >
                     <button>
                       <select
@@ -276,7 +276,7 @@ const AdminProject = ({
                 )}
                 {loginInSeller?.role === "admin" && (
                   <td
-                    className={`text-[.8125rem] w-[100px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                    className={`text-sm  w-[100px] flex justify-start items-center font-[400] text-shipGrey  `}
                   >
                     <button>
                       <select
@@ -311,7 +311,7 @@ const AdminProject = ({
                   </td>
                 )}
                 {loginInSeller?.role == "super_admin" && (
-                  <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[80px] text-[#3A3A49]">
+                  <td className=" items-center text-sm  truncate text-start font-[400] w-[80px] text-shipGrey ">
                     <input
                       onChange={() => handlePermission(item._id, item.status)}
                       type="checkbox"
@@ -320,10 +320,10 @@ const AdminProject = ({
                     />
                   </td>
                 )}
-                <td className=" items-center text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                <td className=" items-center text-sm  truncate text-start font-[400] w-[100px] text-shipGrey ">
                   {item?.projectSource}
                 </td>
-                <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49] ">
+                <td className="  relative z-0 text-sm  flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-shipGrey  ">
                   <button
                     className="flex items-center justify-center w-full h-full transition-all duration-500 ease-in-out rounded-md cursor-pointer hover:border"
                     onClick={() => handleDropdown(item?._id)}
@@ -334,19 +334,19 @@ const AdminProject = ({
                 {dropdown && dropId === item?._id && (
                   <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md top-12 right-12 bg-white z-[99] absolute">
                     <Link
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       to={`/${item._id}`}
                     >
                       View
                     </Link>
                     <button
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       onClick={() => handleEdit(item._id)}
                     >
                       Edit
                     </button>
                     <button
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       onClick={() => handleDelete(item._id)}
                     >
                       Delete
@@ -357,7 +357,7 @@ const AdminProject = ({
             );
           })
       ) : (
-        <span className="text-[12px] font-[600] text-center w-full inline-block py-5">
+        <span className="text-xs  font-[600] text-center w-full inline-block py-5">
           No project!
         </span>
       )}

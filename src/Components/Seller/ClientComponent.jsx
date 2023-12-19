@@ -108,10 +108,10 @@ const ClientComponent = ({
           </div>
           {/* //=============================================== datials  */}
           <div className="detials">
-            <h5 className="text-[18px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">
+            <h5 className="text-xl   font-[500] leading-[22px] font-['work_sans'] text-haiti ">
               {clientName}
             </h5>
-            <h5 className="text-[14px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">
+            <h5 className="text-md   font-[500] leading-[22px] font-['work_sans'] text-haiti ">
               {company?.companyName}
             </h5>
           </div>
@@ -131,23 +131,23 @@ const ClientComponent = ({
           </div>
           {/* //=============================================== datials  */}
           <div className="detials">
-            <h5 className="text-[14px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">
+            <h5 className="text-md   font-[500] leading-[22px] font-['work_sans'] text-haiti ">
               Company
             </h5>
-            <h5 className="text-[15px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">
+            <h5 className="text-[15px]  font-[500] leading-[22px] font-['work_sans'] text-haiti ">
               {company?.companyName}
             </h5>
           </div>
         </div>
         <div className="mt-1 w-full gap-[18px] flex items-center justify-between"></div>
         <div className="mt-5 flex-col  w-full gap-[18px] flex items-start justify-between">
-          <h4 className="text-[16px] flex items-center gap-2 text-[#230B34] font-['work_sans'] font-[500]">
+          <h4 className="text-lg  flex items-center gap-2 text-haiti  font-['work_sans'] font-[500]">
             <span>
               <EmaiIcon />
             </span>
             {email}
           </h4>
-          <h4 className="text-[16px] flex items-center gap-2 text-[#230B34] font-['work_sans'] font-[500]">
+          <h4 className="text-lg  flex items-center gap-2 text-haiti  font-['work_sans'] font-[500]">
             <span>
               <MobileIcon />
             </span>
@@ -161,7 +161,7 @@ const ClientComponent = ({
             </span>
             <div className="flex w-full clients">
               {projects?.length > 2 && (
-                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-xs  hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
                   +{projects.length - 2}
                 </button>
               )}
@@ -175,13 +175,13 @@ const ClientComponent = ({
               >
                 <button
                   onClick={() => setDropDrown(!dropDown)}
-                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-[12px] font-['Work_sans'] "
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-xs  font-['Work_sans'] "
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(id)}
-                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-[12px] font-['Work_sans'] "
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-xs  font-['Work_sans'] "
                 >
                   Delete
                 </button>

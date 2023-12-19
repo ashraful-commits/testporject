@@ -138,7 +138,7 @@ const SellerProject = ({ projects }) => {
         />
       )}
       <div ref={dropMenu} className="w-full ">
-        <table className="  w-full min-h-[450px] h-[500px]  font-['Work_sans'] text-[12px]">
+        <table className="  w-full min-h-[450px] h-[500px]  font-['Work_sans'] text-xs ">
           <thead>
             <tr className="flex items-center justify-between w-full py-2">
               <th className=" flex justify-start items-center  w-[50px]"></th>
@@ -173,7 +173,7 @@ const SellerProject = ({ projects }) => {
                   <td className="  flex justify-start w-[50px] px-2">
                     {index + 1}
                   </td>
-                  <td className="  flex justify-start w-[120px] text-[14px] font-bold">
+                  <td className="  flex justify-start w-[120px] text-md  font-bold">
                     {item?.clientId?.clientName}
                   </td>
                   <td className="  flex justify-start w-[120px]">

@@ -112,48 +112,48 @@ const ProjectComponent = ({
           </div>
           {/* //=============================================== datials  */}
           <div className="detials">
-            <h5 className="text-[18px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">
+            <h5 className="text-xl   font-[500] leading-[22px] font-['work_sans'] text-haiti ">
               {clientName}
             </h5>
-            <h5 className="text-[14px]  font-[500] leading-[22px] font-['work_sans'] text-[#230B34]">
+            <h5 className="text-md   font-[500] leading-[22px] font-['work_sans'] text-haiti ">
               {companyName}
             </h5>
           </div>
         </div>
         <div className="mt-5 w-full gap-[18px] flex items-center justify-between">
           <div className="flex flex-col items-center justify-center">
-            <h4 className="text-[12px] text-[#230B34] font-['work_sans'] font-[600]">
+            <h4 className="text-xs  text-haiti  font-['work_sans'] font-[600]">
               {date}
             </h4>
-            <h6 className="text-[#878790] text-[13px] font-['work_sans']">
+            <h6 className="text-monsoon  text-sm  font-['work_sans']">
               Assigned date
             </h6>
           </div>
           <div className="flex flex-col items-center justify-center">
-            <h4 className="text-[12px] text-[#230B34] font-['work_sans'] font-[600]">
+            <h4 className="text-xs  text-haiti  font-['work_sans'] font-[600]">
               {timeFrame}
             </h4>
-            <h6 className="text-[#878790] text-[13px] font-['work_sans']">
+            <h6 className="text-monsoon  text-sm  font-['work_sans']">
               Deadline
             </h6>
           </div>
           <div className="flex flex-col items-center justify-center">
-            <h4 className="text-[12px] text-[#230B34] font-['work_sans'] font-[600]">
+            <h4 className="text-xs  text-haiti  font-['work_sans'] font-[600]">
               {amount}
             </h4>
-            <h6 className="text-[#878790] text-[13px] font-['work_sans']">
+            <h6 className="text-monsoon  text-sm  font-['work_sans']">
               Budget
             </h6>
           </div>
         </div>
         <div className="mt-5 flex-col  w-full gap-[18px] flex items-start justify-between">
-          <h4 className="text-[16px] capitalize flex gap-2 items-center text-[#230B34] font-['work_sans'] font-[500]">
+          <h4 className="text-lg  capitalize flex gap-2 items-center text-haiti  font-['work_sans'] font-[500]">
             <span>
               <ProjectIcon />
             </span>
             {projectName}{" "}
             <span
-              className={`border px-2 text-[10px] rounded-xl ${
+              className={`border px-2 text-2xs  rounded-xl ${
                 projectStatus == "pending" && "bg-orange-300"
               } ${projectStatus == "on going" && "bg-cyan-300"} ${
                 projectStatus == "on hold" && "bg-red-300"
@@ -162,13 +162,13 @@ const ProjectComponent = ({
               {projectStatus}
             </span>
           </h4>
-          <h4 className="text-[16px] flex items-center gap-2 text-[#230B34] font-['work_sans'] font-[500]">
+          <h4 className="text-lg  flex items-center gap-2 text-haiti  font-['work_sans'] font-[500]">
             <span>
               <EmaiIcon />
             </span>
             {email}
           </h4>
-          <h4 className="text-[16px] flex items-center gap-2 text-[#230B34] font-['work_sans'] font-[500]">
+          <h4 className="text-lg  flex items-center gap-2 text-haiti  font-['work_sans'] font-[500]">
             <span>
               <MobileIcon />
             </span>
@@ -203,11 +203,11 @@ const ProjectComponent = ({
                 ))}
 
               {team?.length > 3 ? (
-                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-xs  hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
                   +{team.length - 3}
                 </button>
               ) : (
-                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                <button className="clientAvatar w-[40px] h-[40px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-xs  hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
                   0
                 </button>
               )}
@@ -221,13 +221,13 @@ const ProjectComponent = ({
               >
                 <button
                   onClick={() => setDropDrown(!dropDown)}
-                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-[12px] font-['Work_sans'] "
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-xs  font-['Work_sans'] "
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => handleDelete(id)}
-                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-[12px] font-['Work_sans'] "
+                  className="w-full p-1 font-bold capitalize hover:text-gray-500 text-xs  font-['Work_sans'] "
                 >
                   Delete
                 </button>

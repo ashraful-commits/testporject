@@ -157,7 +157,7 @@ const CompanyModel = ({ setModel, title, singleData }) => {
             </motion.div>
           )}
           <div className="pt-[10px] bg-white w-full col-span-2">
-            <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
+            <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-4xl  font-[800]">
               {title ? title : "Add New Company"}
             </h1>
           </div>
@@ -267,7 +267,7 @@ const CompanyModel = ({ setModel, title, singleData }) => {
                 >
                   <input type="checkbox" className="w-4 h-4 cursor-pointer" />
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor="i agree with all "
                   >
                     I agree with all
@@ -288,7 +288,7 @@ const CompanyModel = ({ setModel, title, singleData }) => {
                     delay: 0.1 * Math.random() * 10,
                   }}
                   type="submit"
-                  className="text-white hover:scale-110  mt-[15px] bg-primary  w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-secondary   my-3 transition-all ease-in-out duration-500"
+                  className="text-white hover:scale-110  mt-[15px] bg-primary  w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-md  font-[500] hover:bg-secondary   my-3 transition-all ease-in-out duration-500"
                 >
                   Submit Now
                 </motion.button>

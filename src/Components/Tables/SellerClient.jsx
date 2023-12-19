@@ -150,7 +150,7 @@ const SellerClient = ({ client }) => {
       )}
       {/* ===================================main container  */}
       <div ref={dropMenu} className="w-full">
-        <table className="w-full  min-h-[490px] h-[490px] font-['Work_sans'] text-[12px] ">
+        <table className="w-full  min-h-[490px] h-[490px] font-['Work_sans'] text-xs  ">
           <thead className="w-full ">
             <tr className="flex items-center justify-between w-full py-2 gap-x-5">
               <th className="w-[50px] flex justify-start items-center"></th>
@@ -186,7 +186,7 @@ const SellerClient = ({ client }) => {
                   className="flex items-center justify-between w-full px-3 py-2 mb-2 border rounded-md gap-x-5"
                 >
                   <td className="w-[50px]">{index + 1}</td>
-                  <td className="w-[120px] font-bold text-[14px]">
+                  <td className="w-[120px] font-bold text-md ">
                     {item?.clientName}
                   </td>
                   <td className="w-[120px]">

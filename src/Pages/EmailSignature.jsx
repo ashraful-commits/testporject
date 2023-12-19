@@ -44,10 +44,10 @@ const EmailSignature = () => {
               )}
             </div>
             <div className="flex flex-col items-start w-full h-full p-2 border border-cyan-300">
-              <p className=" text-cyan-700  capitalize font-['work_sans'] text-[24px] leading-3 mt-3 font-[600]">
+              <p className=" text-cyan-700  capitalize font-['work_sans'] text-3xl  leading-3 mt-3 font-[600]">
                 {loginInSeller?.name}
               </p>
-              <p className=" text-gray-500 py-1 capitalize  font-['work_sans'] text-[20px] font-[400]">
+              <p className=" text-gray-500 py-1 capitalize  font-['work_sans'] text-2xl  font-[400]">
                 {loginInSeller?.employment}
               </p>
 

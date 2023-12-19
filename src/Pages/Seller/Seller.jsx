@@ -159,7 +159,7 @@ const Seller = () => {
             ) : (
               <img className="w-[86px] h-[70px]" src={companyLogo} alt="" />
             )}
-            <h1 className="text-[26px] capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
+            <h1 className="text-4xl  capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
               Admin Dashboard
             </h1>
           </div>
@@ -167,33 +167,33 @@ const Seller = () => {
             <div className="h-[68px] w-[439px] relative">
               <img className="w-full h-full " src={bgImg} alt="" />
               <div className="w-full h-full  absolute top-0 left-0 pl-[16px] pt-[7px]">
-                <p className="text-[12px] font-[400] font-['work_sans'] p-[2px] text-[#878790]">
+                <p className="text-xs  font-[400] font-['work_sans'] p-[2px] text-monsoon ">
                   Sales Toolkit
                 </p>
                 <div className="buttonGroup flex items-center mt-[5px] justify-between ml-[5px] mr-[8px]">
-                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790] flex items-center gap-[5px]">
+                  <button className="text-xs  hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon  flex items-center gap-[5px]">
                     <BorderEmail />
                     Email signature
                   </button>
-                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     Email setup
                   </button>
-                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     pricing
                   </button>
                   <Link
                     to={singleSeller?.website}
-                    className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]"
+                    className="text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon "
                   >
                     website
                   </Link>
-                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     <XdIcon />
                   </button>
-                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     <AdIcon />
                   </button>
-                  <button className="text-[12px] hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  hover:scale-105 font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     <PdfIcon />
                   </button>
                 </div>
@@ -217,10 +217,10 @@ const Seller = () => {
                 />
               )}
               <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
-                <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
+                <p className="text-shipGrey  truncate w-[100px] text-sm  font-[700] font-['work_sans']">
                   {singleSeller?.name}
                 </p>
-                <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
+                <span className="text-shipGrey  truncate w-[90px] text-sm  font-[400] font-['work_sans']">
                   {singleSeller?.email}
                 </span>
               </div>
@@ -299,7 +299,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Sales People")}
                   className={`${
                     menu === "Manage Sales People" ? "shadow-md" : ""
-                  } text-[12px] transition-all ease-in-out duration-500 hover:scale-105 font-[400] text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
+                  } text-xs  transition-all ease-in-out duration-500 hover:scale-105 font-[400] text-monsoon  font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
                 >
                   Sales Guy
                 </button>
@@ -307,7 +307,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Clients")}
                   className={`${
                     menu === "Manage Clients" ? "shadow-md" : ""
-                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
+                  } text-xs  font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-monsoon  font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
                 >
                   Clients
                 </button>
@@ -315,7 +315,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Projects")}
                   className={`${
                     menu === "Manage Projects" ? "shadow-md" : ""
-                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
+                  } text-xs  font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-monsoon  font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
                 >
                   Projects
                 </button>
@@ -323,7 +323,7 @@ const Seller = () => {
                   onClick={() => setMenu("Manage Statistic")}
                   className={`${
                     menu === "Manage Statistic" ? "shadow-md" : ""
-                  } text-[12px] font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-[#878790] font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
+                  } text-xs  font-[400] transition-all ease-in-out duration-500 hover:scale-105 text-monsoon  font-['work_sans'] active:shadow-md rounded-md w-[98px] h-[32px] delay-100`}
                 >
                   Statistics
                 </button>
@@ -340,7 +340,7 @@ const Seller = () => {
                   className="date_search h-[40px]  w-[224px] border rounded-[8px] flex items-center justify-between gap-[5px]  px-[15px] mr-[10px]  transition-all duration-500 ease-in-out"
                 >
                   <DatePicker
-                    className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
+                    className="text-xs  font-['Roboto'] text-gray-400 placeholder:text-xs  focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
                     selected={input.startDate}
                     placeholderText="Start Time"
                     onChange={(date) =>
@@ -349,7 +349,7 @@ const Seller = () => {
                   />
                   -
                   <DatePicker
-                    className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
+                    className="text-xs  font-['Roboto'] text-gray-400 placeholder:text-xs  focus:outline-none placeholder:font-[400]  w-[70px]  capitalize"
                     selected={input.endDate}
                     placeholderText="End Time"
                     onChange={(date) =>
@@ -412,7 +412,7 @@ const Seller = () => {
                   value={input.text}
                   onChange={handleOnChange}
                   placeholder="Search"
-                  className="w-[90%] transition-all ease-in-out duration-500 hover:scale-105 focus:outline-none text-[12px] font-['work_sans']"
+                  className="w-[90%] transition-all ease-in-out duration-500 hover:scale-105 focus:outline-none text-xs  font-['work_sans']"
                 />
               </div>
               <motion.button

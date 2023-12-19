@@ -183,7 +183,7 @@ const Home = () => {
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-white">
                   <CustomerIcon />
                 </div>
-                <p className="text-[12px] text-white font-['Work_Sans'] mt-[8px] tracking-[.2px]">
+                <p className="text-xs  text-white font-['Work_Sans'] mt-[8px] tracking-[.2px]">
                   Total Customers
                 </p>
               </div>
@@ -193,14 +193,14 @@ const Home = () => {
                     ? loginInSeller?.projects.length
                     : 0}
                 </h2>
-                <span className="text-[#3AAE54] border-[0.3px solid bg-[#5CCE75] text-[12px] flex justify-between px-[7px] items-center gap-[5px] w-[49px] h-[19px] bg-opacity-[.1] text-[#5CCE75] rounded-md">
+                <span className="text-[#3AAE54] border-[0.3px solid bg-[#5CCE75] text-xs  flex justify-between px-[7px] items-center gap-[5px] w-[49px] h-[19px] bg-opacity-[.1] text-[#5CCE75] rounded-md">
                   {percentage.toFixed(1)}%
                   <span>
                     <CommissionIcon />
                   </span>
                 </span>
 
-                <p className="text-white font-[400]  text-[13px]">This Week</p>
+                <p className="text-white font-[400]  text-sm ">This Week</p>
               </div>
             </motion.div>
             <motion.div
@@ -218,12 +218,12 @@ const Home = () => {
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#5D5FEF] ">
                   <RateIcon />
                 </div>
-                <p className="text-[12px] text-[#230B34] font-['Work_Sans'] mt-[11px] tracking-[.2px]">
+                <p className="text-xs  text-haiti  font-['Work_Sans'] mt-[11px] tracking-[.2px]">
                   Commission Rate
                 </p>
               </div>
               <div className="rate mt-[12px]  px-[20px] flex justify-between gap-[5px] items-center">
-                <h2 className="text-[30px] font-[500] text-[#230B34] mb-[10px] tracking-[.2px] font-['Work_Sans']">
+                <h2 className="text-5xl  font-[500] text-haiti  mb-[10px] tracking-[.2px] font-['Work_Sans']">
                   {loginInSeller &&
                   loginInSeller?.projects &&
                   loginInSeller?.projects?.length > 0
@@ -236,7 +236,7 @@ const Home = () => {
                   %
                 </h2>
 
-                <button className="text-gray-500 font-[400] w-[98px] h-[19px] tracking-[0.7px]  text-[13px] border bg-[#F5F5F5] rounded-[4px] mr-[22px] mb-[10px] hover:scale-105 duration-500 ease-in-out transition-all flex justify-center items-center">
+                <button className="text-gray-500 font-[400] w-[98px] h-[19px] tracking-[0.7px]  text-sm  border bg-[#F5F5F5] rounded-[4px] mr-[22px] mb-[10px] hover:scale-105 duration-500 ease-in-out transition-all flex justify-center items-center">
                   view contract
                 </button>
               </div>
@@ -256,12 +256,12 @@ const Home = () => {
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-opacity-[.1] mt-[4px] bg-[#2F80ED] ">
                   <TotalIcon />
                 </div>
-                <p className="text-[12px] text-[#230B34] font-['Work_Sans'] mt-[10px] tracking-[.2px]">
+                <p className="text-xs  text-haiti  font-['Work_Sans'] mt-[10px] tracking-[.2px]">
                   Total commissions Earned
                 </p>
               </div>
               <div className="percentage flex justify-start gap-[10px] pl-[22px] items-end">
-                <h2 className="text-[30px] text-[#230B34] mb-[10px] font-[500] font-['Work_Sans'] tracking-[.2px]">
+                <h2 className="text-5xl  text-haiti  mb-[10px] font-[500] font-['Work_Sans'] tracking-[.2px]">
                   ${" "}
                   {calculateTotalCommissionForAllClients(
                     loginInSeller?.projects
@@ -288,12 +288,12 @@ const Home = () => {
                 <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center mt-[5px] bg-opacity-[.1] bg-[#F2994A] ">
                   <WithdrawnIcon />
                 </div>
-                <p className="text-[14px] text-[#230B34] font-['Work_Sans'] mt-[10px] font-[500] tracking-[.2px]">
+                <p className="text-md  text-haiti  font-['Work_Sans'] mt-[10px] font-[500] tracking-[.2px]">
                   Total Withdrawn
                 </p>
               </div>
               <div className="percentage flex justify-start gap-[10px] pl-[25px] items-end">
-                <h2 className="text-[30px] font-[500] text-[#230B34] mb-[10px] font-['Work_Sans'] tracking-[.2px]">
+                <h2 className="text-5xl  font-[500] text-haiti  mb-[10px] font-['Work_Sans'] tracking-[.2px]">
                   $
                   {loginInSeller?.totalWithdrawn
                     ? loginInSeller?.totalWithdrawn
@@ -321,7 +321,7 @@ const Home = () => {
                     <select
                       onChange={handleInputChange}
                       name="companyName"
-                      className="w-full px-2 text-[13px] focus:outline-none"
+                      className="w-full px-2 text-sm  focus:outline-none"
                       id=""
                     >
                       <option value="">company</option>
@@ -350,7 +350,7 @@ const Home = () => {
                     onChange={handleInputChange}
                     value={input.text}
                     name="text"
-                    className="text-[12px] focus:outline-none text-[#878790] pl-[8px]"
+                    className="text-xs  focus:outline-none text-monsoon  pl-[8px]"
                     type="text"
                     placeholder="Search"
                   />
@@ -371,7 +371,7 @@ const Home = () => {
                       onChange={handleInputChange}
                       value={input.email}
                       name="email"
-                      className="text-[12px] focus:outline-none text-[#878790] pl-[8px]"
+                      className="text-xs  focus:outline-none text-monsoon  pl-[8px]"
                       type="text"
                       placeholder="email"
                     />
@@ -393,14 +393,14 @@ const Home = () => {
                       onChange={handleInputChange}
                       value={input.email}
                       name="email"
-                      className="text-[12px] focus:outline-none text-[#878790] pl-[8px]"
+                      className="text-xs  focus:outline-none text-monsoon  pl-[8px]"
                       type="text"
                       placeholder="email"
                     />
                   </motion.div>
                 )}
                 {Table === "seller" && (
-                  <motion.div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-cyan-700 text-[12px] font-[500] transition-all duration-500 ease-in-out">
+                  <motion.div className="selete_search h-[40px]  w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-cyan-700 text-xs  font-[500] transition-all duration-500 ease-in-out">
                     <motion.select
                       initial={{ y: -15, opacity: 0.3 }}
                       animate={{ y: 0, opacity: 1 }}
@@ -444,7 +444,7 @@ const Home = () => {
                     >
                       <div className="flex w-[136px] items-center border rounded-md px-2">
                         <DatePicker
-                          className="text-[12px]  h-[40px] w-[80%] px-2 font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]   capitalize"
+                          className="text-xs   h-[40px] w-[80%] px-2 font-['Roboto'] text-gray-400 placeholder:text-xs  focus:outline-none placeholder:font-[400]   capitalize"
                           selected={input.startDate}
                           placeholderText="Start Time"
                           onChange={(date) =>
@@ -457,7 +457,7 @@ const Home = () => {
                       <SortIcon />
                       <div className="flex w-[136px] items-center border rounded-md px-2">
                         <DatePicker
-                          className="text-[12px] font-['Roboto'] text-gray-400 placeholder:text-[12px] focus:outline-none placeholder:font-[400]   rounded-md h-[40px]  px-2 w-[80%]  capitalize"
+                          className="text-xs  font-['Roboto'] text-gray-400 placeholder:text-xs  focus:outline-none placeholder:font-[400]   rounded-md h-[40px]  px-2 w-[80%]  capitalize"
                           selected={input.endDate}
                           placeholderText="End Time"
                           onChange={(date) =>
@@ -475,7 +475,7 @@ const Home = () => {
                         duration: 0.6,
                         delay: 0.1,
                       }}
-                      className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-cyan-700 text-[12px] font-[500] hover:scale-105 transition-all duration-500 ease-in-out"
+                      className="selete_search  h-[40px] w-[117px] border overflow-hidden rounded-[8px] px-[4px] text-cyan-700 text-xs  font-[500] hover:scale-105 transition-all duration-500 ease-in-out"
                     >
                       <motion.select
                         initial={{ y: -15, opacity: 0.3 }}
@@ -536,7 +536,7 @@ const Home = () => {
                 {Table === "seller" && (
                   <button
                     onClick={() => setSalesModel(true)}
-                    className="px-4 py-2 text-[12px] ml-4 font-bold text-white transition-all duration-500 ease-in-out rounded-md bg-primary hover:bg-secondary "
+                    className="px-4 py-2 text-xs  ml-4 font-bold text-white transition-all duration-500 ease-in-out rounded-md bg-primary hover:bg-secondary "
                   >
                     Add Sales Person
                   </button>
@@ -556,7 +556,7 @@ const Home = () => {
                     Table === "client"
                       ? "hover:bg-secondary  bg-secondary text-white"
                       : "bg-primary hover:bg-secondary"
-                  } add-client pr-[4px] w-[60px]    h-[38px] flex items-center justify-center gap-[10px]   hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
+                  } add-client pr-[4px] w-[60px]    h-[38px] flex items-center justify-center gap-[10px]   hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-xs  font-[500] rounded-[7px] hover:scale-105`}
                 >
                   Client
                 </motion.button>
@@ -572,7 +572,7 @@ const Home = () => {
                     Table === "seller"
                       ? "hover:bg-secondary  bg-secondary text-white"
                       : "bg-primary hover:bg-secondary"
-                  } add-client pr-[4px] w-[60px]   h-[38px] flex items-center justify-center gap-[10px]  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
+                  } add-client pr-[4px] w-[60px]   h-[38px] flex items-center justify-center gap-[10px]  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-xs  font-[500] rounded-[7px] hover:scale-105`}
                   onClick={() => {
                     setTable("seller");
                   }}
@@ -591,7 +591,7 @@ const Home = () => {
                     Table === "project"
                       ? "hover:bg-secondary  bg-secondary text-white"
                       : "bg-primary hover:bg-secondary"
-                  }  add-client w-[60px]   h-[38px] flex items-center justify-center gap-[10px]   hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105`}
+                  }  add-client w-[60px]   h-[38px] flex items-center justify-center gap-[10px]   hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-xs  font-[500] rounded-[7px] hover:scale-105`}
                   onClick={() => setTable("project")}
                 >
                   Project
@@ -619,7 +619,7 @@ const Home = () => {
                     delay: 0.1,
                   }}
                   onClick={() => setClientModel(true)}
-                  className="add-client pr-[4px] w-[162px] hover:bg-secondary  h-[38px] flex items-center justify-center gap-[10px] bg-primary  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-[12px] font-[500] rounded-[7px] hover:scale-105"
+                  className="add-client pr-[4px] w-[162px] hover:bg-secondary  h-[38px] flex items-center justify-center gap-[10px] bg-primary  hover:text-white  transition-all duration-500 ease-in-out text-white font-['Roboto'] text-xs  font-[500] rounded-[7px] hover:scale-105"
                 >
                   Add New Client
                   <svg

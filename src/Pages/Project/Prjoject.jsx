@@ -281,7 +281,7 @@ const Project = () => {
                         src={item?.avatar}
                         alt=""
                       />
-                      <span className="text-[10px] font-['work_sans']">
+                      <span className="text-2xs  font-['work_sans']">
                         {item.name}
                       </span>
                       <span className="text-[8px] font-['work_sans']">
@@ -340,7 +340,7 @@ const Project = () => {
                 alt=""
               />
             )}
-            <h1 className="text-[26px] capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
+            <h1 className="text-4xl  capitalize leading-[31px] font-[600] font-['Work_Sans] tracking-[.9px]">
               Sales Portal / {singleProject?.clientId?.clientName}
             </h1>
           </div>
@@ -348,34 +348,34 @@ const Project = () => {
             <div className="h-[68px] w-[439px] relative">
               <img className="w-full h-full " src={bgImg} alt="" />
               <div className="w-full h-full  absolute top-0 left-0 pl-[16px] pt-[7px]">
-                <p className="text-[12px] font-[400] font-['work_sans'] p-[2px] text-[#878790]">
+                <p className="text-xs  font-[400] font-['work_sans'] p-[2px] text-monsoon ">
                   Sales Toolkit
                 </p>
                 <div className="buttonGroup flex items-center mt-[5px] justify-between ml-[5px] mr-[8px]">
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790] flex items-center gap-[5px]">
+                  <button className="text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon  flex items-center gap-[5px]">
                     <BorderEmail />
                     Email signature
                   </button>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     Email setup
                   </button>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     pricing
                   </button>
                   <Link
                     target="blank"
                     to={singleProject?.website}
-                    className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]"
+                    className="text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon "
                   >
                     website
                   </Link>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     <XdIcon />
                   </button>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     <AdIcon />
                   </button>
-                  <button className="text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-[#878790]">
+                  <button className="text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out bg-[#F2F2F2] p-[2px] text-monsoon ">
                     <PdfIcon />
                   </button>
                 </div>
@@ -407,10 +407,10 @@ const Project = () => {
                       alt=""
                     />
                     <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
-                      <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
+                      <p className="text-shipGrey  truncate w-[100px] text-sm  font-[700] font-['work_sans']">
                         {singleProject?.clientId?.clientName}
                       </p>
-                      <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
+                      <span className="text-shipGrey  truncate w-[90px] text-sm  font-[400] font-['work_sans']">
                         {singleProject?.clientId?.clientEmail}
                       </span>
                     </div>
@@ -424,10 +424,10 @@ const Project = () => {
                       alt=""
                     />
                     <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
-                      <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
+                      <p className="text-shipGrey  truncate w-[100px] text-sm  font-[700] font-['work_sans']">
                         {singleProject?.clientId?.clientName}
                       </p>
-                      <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
+                      <span className="text-shipGrey  truncate w-[90px] text-sm  font-[400] font-['work_sans']">
                         {singleProject?.clientId?.clientEmail}
                       </span>
                     </div>
@@ -452,10 +452,10 @@ const Project = () => {
                     />
                   )}
                   <div className="w-auto flex h-[46px] flex-col gap-[-5px]">
-                    <p className="text-[#3A3A49] truncate w-[100px] text-[13px] font-[700] font-['work_sans']">
+                    <p className="text-shipGrey  truncate w-[100px] text-sm  font-[700] font-['work_sans']">
                       {singleProject?.clientId?.clientName}
                     </p>
-                    <span className="text-[#3A3A49] truncate w-[90px] text-[13px] font-[400] font-['work_sans']">
+                    <span className="text-shipGrey  truncate w-[90px] text-sm  font-[400] font-['work_sans']">
                       {singleProject?.clientId?.clientEmail}
                     </span>
                   </div>
@@ -468,10 +468,10 @@ const Project = () => {
         <div className="main-container flex min-w-full gap-[43px] w-[1300px] mt-[52px] tracking-[-.52px] h-[1072px] ">
           {/* //========================================================TODO:left section  */}
           <div className="left w-[938px] h-full">
-            <h1 className="text-[26px] font-[600] text-[#3a3a49] font-['work_sans']">
+            <h1 className="text-4xl  font-[600] text-shipGrey  font-['work_sans']">
               Real-Time Video Processing using Chromakey (Greenscreen) Effect{" "}
             </h1>
-            <p className="text-[12px] font-[400px] font-['work_sans'] text-[#878790] mt-[4px]">
+            <p className="text-xs  font-[400px] font-['work_sans'] text-monsoon  mt-[4px]">
               Visual UI / UX Design & Branding
             </p>
 
@@ -514,7 +514,7 @@ const Project = () => {
                   onClick={() => setMenu("Project Details")}
                   className={`${
                     menu == "Project Details" && "shadow-md"
-                  } active:bg-white active:shadow-lg text-[12px] font-[500] font-['work_sans']  rounded-[7px]  text-[#878790]`}
+                  } active:bg-white active:shadow-lg text-xs  font-[500] font-['work_sans']  rounded-[7px]  text-monsoon `}
                 >
                   Project Details
                 </button>
@@ -522,18 +522,18 @@ const Project = () => {
                   onClick={() => setMenu("Client Feedback")}
                   className={`${
                     menu == "Client Feedback" && "shadow-md"
-                  } active:bg-white active:shadow-lg text-[12px] font-[500] font-['work_sans']  rounded-[7px]  text-[#878790]`}
+                  } active:bg-white active:shadow-lg text-xs  font-[500] font-['work_sans']  rounded-[7px]  text-monsoon `}
                 >
                   Client Feedback
                 </button>
-                <button className="active:bg-white active:shadow-lg text-[12px] font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out  rounded-[7px] text-[#878790]">
+                <button className="active:bg-white active:shadow-lg text-xs  font-[400] font-['work_sans'] hover:bg-gray-200 px-[5px] transition-all duration-500 ease-in-out  rounded-[7px] text-monsoon ">
                   Client Feedback
                 </button>
               </div>
               <div className="flex items-center justify-center h-full button">
                 <button
                   onClick={() => setManage(true)}
-                  className="bg-primary  text-[14px] font-[500] text-white hover:bg-secondary   transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105"
+                  className="bg-primary  text-md  font-[500] text-white hover:bg-secondary   transition-all duration-500 w-[134px] h-[38px] rounded-md mt-[39px] hover:scale-105"
                 >
                   Manage Project
                 </button>
@@ -544,12 +544,12 @@ const Project = () => {
                 {/* //====================================================== project datiels  */}
                 <div className="projectDatials overflow-hidden rounded-[8px] border w-full mt-[18px] h-[150px] px-[20px] py-[15px]">
                   <div className="flex justify-between">
-                    <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
+                    <h1 className="text-haiti  font-[500] text-2xl  tracking-[.4px] font-['work_sans'] ">
                       Project Details
                     </h1>
                     <button
                       onClick={handlePdf}
-                      className="w-[120px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400] gap-[5px] hover:bg-gray-300 transition-all duration-500 ease-in-out"
+                      className="w-[120px] h-[26px] flex justify-center items-center text-xs  font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400] gap-[5px] hover:bg-gray-300 transition-all duration-500 ease-in-out"
                     >
                       <PdfIcon />
                       Download PDF
@@ -564,10 +564,10 @@ const Project = () => {
                 {/* //============================================== TODO:team member  */}
                 <div className="teamMember overflow-hidden rounded-[8px] border w-full mt-[18px] h-[217px] px-[16px] py-[15px]">
                   <div className="flex justify-between">
-                    <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
+                    <h1 className="text-haiti  font-[500] text-2xl  tracking-[.4px] font-['work_sans'] ">
                       Team
                     </h1>
-                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
+                    <button className="w-[106px] h-[26px] flex justify-center items-center text-xs  font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out">
                       Manage Team
                     </button>
                   </div>
@@ -596,7 +596,7 @@ const Project = () => {
                         <div className="w-[42px] h-[42px] border rounded-full flex justify-center items-center bg-gray-100">
                           +
                         </div>
-                        <div className="text-[16px] font-[500] font-['work_sans']">
+                        <div className="text-lg  font-[500] font-['work_sans']">
                           Add Member
                         </div>
                       </button>
@@ -606,10 +606,10 @@ const Project = () => {
                 {/* //================================================== TODO:softwere tools  */}
                 <div className="softwareTools overflow-hidden rounded-[8px] border w-full mt-[18px] h-[117px] px-[20px] py-[18px]">
                   <div className="flex justify-between">
-                    <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px] font-['work_sans'] ">
+                    <h1 className="text-haiti  font-[500] text-2xl  tracking-[.4px] font-['work_sans'] ">
                       Software & Tools
                     </h1>
-                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out hover:scale-105">
+                    <button className="w-[106px] h-[26px] flex justify-center items-center text-xs  font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out hover:scale-105">
                       Manage Tools
                     </button>
                   </div>
@@ -634,7 +634,7 @@ const Project = () => {
                     <div className="flex  items-center  rounded-2xl w-[87px] h-[31px] gap-[10px]">
                       <button
                         onClick={() => setTools(true)}
-                        className="rounded-2xl border text-[12px] px-[10px] w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans'] hover:scale-105"
+                        className="rounded-2xl border text-xs  px-[10px] w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans'] hover:scale-105"
                       >
                         + Add Tool
                       </button>
@@ -644,10 +644,10 @@ const Project = () => {
                 {/* //==================================================== TODO:project files  */}
                 <div className="ProjectFiles overflow-hidden rounded-[8px] border w-full mt-[18px] h-[230px] px-[22px] py-[11px]">
                   <div className="flex justify-between">
-                    <h1 className="text-[#230B34] font-[500] text-[20px] tracking-[.4px]  mt-[10px]font-['work_sans'] ">
+                    <h1 className="text-haiti  font-[500] text-2xl  tracking-[.4px]  mt-[10px]font-['work_sans'] ">
                       Project Files
                     </h1>
-                    <button className="w-[106px] h-[26px] flex justify-center items-center text-[12px] font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out hover:scale-105">
+                    <button className="w-[106px] h-[26px] flex justify-center items-center text-xs  font-['work_sans'] bg-gray-100 px-[6px] py-[2px] border rounded-md font-[400]  hover:bg-gray-300 transition-all duration-500 ease-in-out hover:scale-105">
                       Manage Files
                     </button>
                   </div>
@@ -709,7 +709,7 @@ const Project = () => {
                     <div className="flex  items-center  rounded-2xl w-[150px] h-[57px] overflow-hidden gap-[10px]">
                       <label
                         htmlFor="ProjectFillUpload"
-                        className="rounded-2xl cursor-pointer border  text-[14px]  w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']  flex justify-center items-center gap-2 border-dotted"
+                        className="rounded-2xl cursor-pointer border  text-md   w-full h-full hover:bg-gray-300 transition-all ease-in-out duration-500 font-[400] font-['work_sans']  flex justify-center items-center gap-2 border-dotted"
                       >
                         <UploadIcon />
                         Upload File
@@ -733,24 +733,24 @@ const Project = () => {
             <div className="flex flex-col items-center w-full h-full ">
               <div className="flex items-center justify-center gap-2 mt-3 payment">
                 <div className="w-[135px] h-[78px] flex flex-col   rounded-md justify-center items-center border pt-[10px]">
-                  <h5 className="font-[400] font-['work_sans'] text-[12px]">
+                  <h5 className="font-[400] font-['work_sans'] text-xs ">
                     Payment Received
                   </h5>
-                  <h4 className="text-[18px] font-bold font-['work_sans']">
+                  <h4 className="text-xl  font-bold font-['work_sans']">
                     45900$
                   </h4>
                 </div>
                 <div className="w-[135px] flex flex-col pt-[20px] rounded-md gap-[15px]justify-center h-[78px] items-center border">
-                  <h5 className="text-[#878790] font-[400] font-['work_sans'] text-[12px]">
+                  <h5 className="text-monsoon  font-[400] font-['work_sans'] text-xs ">
                     Payment Due
                   </h5>
-                  <h4 className="font-bold font-['work_sans'] text-[18px]">
+                  <h4 className="font-bold font-['work_sans'] text-xl ">
                     45900$
                   </h4>
                 </div>
               </div>
               <div className="comissions border w-[277px] mt-3 h-[55px] rounded-md ">
-                <p className="text-[14px] ml-3 mt-1 tracking-[.6px] text-[#878790]">
+                <p className="text-md  ml-3 mt-1 tracking-[.6px] text-monsoon ">
                   Generative Commissions
                 </p>
                 <div className="flex items-center gap-[5px]">
@@ -768,7 +768,7 @@ const Project = () => {
                     readOnly={true}
                     className="w-[75%] ml-3"
                   />
-                  <span className="text-[14px] text-[#878769] font-[500]">
+                  <span className="text-md  text-[#878769] font-[500]">
                     $
                     {(
                       singleProject?.amount -
@@ -777,9 +777,9 @@ const Project = () => {
                   </span>
                 </div>
               </div>
-              <div className="label w-full mt-4 px-[21px] text-[14px] font-[500] font-['work_sans'] text-[#230B34]">
+              <div className="label w-full mt-4 px-[21px] text-md  font-[500] font-['work_sans'] text-haiti ">
                 <label
-                  className="text-[14px] font-[500] font-['work_sans']"
+                  className="text-md  font-[500] font-['work_sans']"
                   htmlFor=""
                 >
                   Label
@@ -802,9 +802,9 @@ const Project = () => {
                   </button>
                 </div>
               </div>
-              <div className="invoice overflow-hidden w-full h-[335px] mt-4 px-[21px] text-[14px] font-[500] font-['work_sans'] text-[#230B34]">
+              <div className="invoice overflow-hidden w-full h-[335px] mt-4 px-[21px] text-md  font-[500] font-['work_sans'] text-haiti ">
                 <label
-                  className="text-[14px] font-[500] font-['work_sans']"
+                  className="text-md  font-[500] font-['work_sans']"
                   htmlFor=""
                 >
                   Invoices
@@ -818,9 +818,9 @@ const Project = () => {
                   <Invoices />
                 </div>
               </div>
-              <div className="comments overflow-hidden w-full mt-[56px] px-[21px] text-[14px] font-[500] font-['work_sans'] text-[#230B34]">
+              <div className="comments overflow-hidden w-full mt-[56px] px-[21px] text-md  font-[500] font-['work_sans'] text-haiti ">
                 <label
-                  className="text-[14px] font-[500] font-['work_sans']"
+                  className="text-md  font-[500] font-['work_sans']"
                   htmlFor=""
                 >
                   Comments about project

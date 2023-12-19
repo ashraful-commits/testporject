@@ -19,10 +19,10 @@ const DetialsSections = ({ svg, title, name, delay }) => {
         {svg}
       </div>
       <div className="flex flex-col items-start justify-center w-full">
-        <span className="text-[12px] leading-[15px] font-[400] text-[#878790] text-['work_sans']">
+        <span className="text-xs  leading-[15px] font-[400] text-monsoon  text-['work_sans']">
           {title}
         </span>
-        <span className="text-[18px] leading-[16px] font-[600] text-[#230B34] font-['work_sans']">
+        <span className="text-xl  leading-[16px] font-[600] text-haiti  font-['work_sans']">
           {name}
         </span>
       </div>

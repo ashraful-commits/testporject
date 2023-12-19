@@ -136,24 +136,24 @@ const SellerSales = ({ salesPerson }) => {
       <div ref={dropdownRef} className="w-full">
         <table ref={dropdownRef} className="w-full min-h-[490px] h-[480px] ">
           <thead className="w-full ">
-            <tr className="text-[#878790] font-['Work_sans'] text-[12px] items-center flex justify-start w-full px-2 py-2">
-              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[200px]">
+            <tr className="text-monsoon  font-['Work_sans'] text-xs  items-center flex justify-start w-full px-2 py-2">
+              <th className=" text-monsoon  font-['Work_sans'] text-xs  flex justify-start w-[200px]">
                 Name
               </th>
-              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[150px]">
+              <th className=" text-monsoon  font-['Work_sans'] text-xs  flex justify-start w-[150px]">
                 Employment
               </th>
-              <th className="text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[300px]">
+              <th className="text-monsoon  font-['Work_sans'] text-xs  flex justify-start w-[300px]">
                 Statistic
               </th>
-              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[150px]">
+              <th className=" text-monsoon  font-['Work_sans'] text-xs  flex justify-start w-[150px]">
                 Company
               </th>
 
-              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[150px]">
+              <th className=" text-monsoon  font-['Work_sans'] text-xs  flex justify-start w-[150px]">
                 Active Client
               </th>
-              <th className=" text-[#878790] font-['Work_sans'] text-[12px] flex justify-start w-[120px]"></th>
+              <th className=" text-monsoon  font-['Work_sans'] text-xs  flex justify-start w-[120px]"></th>
             </tr>
           </thead>
           <tbody className="w-full h-full">
@@ -169,36 +169,36 @@ const SellerSales = ({ salesPerson }) => {
                       src={item?.avatar}
                       alt=""
                     />
-                    <span className="text-[#230B34] font-['Work_sans'] text-[14px]">
+                    <span className="text-haiti  font-['Work_sans'] text-md ">
                       {item?.name}
                     </span>
                   </td>
 
-                  <td className="w-[150px] flex justify-start truncate text-[#878790] font-['Work_sans'] text-[12px]">
+                  <td className="w-[150px] flex justify-start truncate text-monsoon  font-['Work_sans'] text-xs ">
                     {item?.employment}
                   </td>
 
-                  <td className="flex justify-start gap-x-3 w-[300px] text-[#878790] font-['Work_sans'] text-[12px]">
+                  <td className="flex justify-start gap-x-3 w-[300px] text-monsoon  font-['Work_sans'] text-xs ">
                     <div className=" px-2 bg-[#D9D9D9] h-[31px] rounded-full border flex items-center gap-x-2">
-                      <span className="text-[#878790] font-['Work_sans'] text-[12px]">
+                      <span className="text-monsoon  font-['Work_sans'] text-xs ">
                         projects
                       </span>
                       {item?.projects?.length ? item?.projects?.length : 0}
                     </div>
                     <div className=" px-2 bg-[#D9D9D9] h-[31px] rounded-full border flex items-center gap-x-2">
-                      <span className="text-[#878790] font-['Work_sans'] text-[12px]">
+                      <span className="text-monsoon  font-['Work_sans'] text-xs ">
                         clients
                       </span>
                       {item?.client?.length ? item?.client?.length : 0}
                     </div>
                     <div className=" px-2 bg-[#D9D9D9] h-[31px] rounded-full border flex items-center gap-x-2">
-                      <span className="text-[#878790] font-['Work_sans'] text-[12px]">
+                      <span className="text-monsoon  font-['Work_sans'] text-xs ">
                         Earnings
                       </span>
                       {item?.client?.length ? item?.client?.length : 0}
                     </div>
                   </td>
-                  <td className="flex justify-start gap-x-3 w-[150px] items-center text-[#878790] font-['Work_sans'] text-[12px]">
+                  <td className="flex justify-start gap-x-3 w-[150px] items-center text-monsoon  font-['Work_sans'] text-xs ">
                     <img
                       className="w-[32px] rounded-full h-[32px]"
                       src={item?.company?.companyLogo}
@@ -206,7 +206,7 @@ const SellerSales = ({ salesPerson }) => {
                     />
                     {item?.company?.companyName}
                   </td>
-                  <td className="flex justify-start gap-x-3 w-[150px] text-[#878790] font-['Work_sans'] text-[12px]">
+                  <td className="flex justify-start gap-x-3 w-[150px] text-monsoon  font-['Work_sans'] text-xs ">
                     <div className="flex w-full clients">
                       {item?.client?.length > 0 &&
                         item?.client?.slice(0, 3).map((item, index) => (
@@ -231,11 +231,11 @@ const SellerSales = ({ salesPerson }) => {
                         ))}
 
                       {item?.client?.length > 3 ? (
-                        <button className="clientAvatar w-[32px] h-[32px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                        <button className="clientAvatar w-[32px] h-[32px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-xs  hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
                           +{item?.client.length - 3}
                         </button>
                       ) : (
-                        <button className="clientAvatar w-[32px] h-[32px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-[12px] hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
+                        <button className="clientAvatar w-[32px] h-[32px] rounded-full overflow-hidden mr-[-10px] bg-gray-200 flex justify-center items-center text-xs  hover:bg-gray-300 font-[500] transition-all duration-500 ease-in-out cursor-pointer">
                           0
                         </button>
                       )}
@@ -250,13 +250,13 @@ const SellerSales = ({ salesPerson }) => {
                         >
                           <button
                             onClick={() => setDropDrown(!dropDown)}
-                            className="w-full p-1 font-bold capitalize text-[12px] font-['Work_sans'] hover:text-gray-500 "
+                            className="w-full p-1 font-bold capitalize text-xs  font-['Work_sans'] hover:text-gray-500 "
                           >
                             Edit
                           </button>
                           <button
                             onClick={() => handleDelete(item?._id)}
-                            className="w-full p-1 font-bold capitalize text-[12px] font-['Work_sans'] hover:text-gray-500 "
+                            className="w-full p-1 font-bold capitalize text-xs  font-['Work_sans'] hover:text-gray-500 "
                           >
                             Delete
                           </button>

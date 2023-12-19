@@ -156,7 +156,7 @@ const Company = () => {
                       fill="black"
                     ></path>
                   </svg>
-                  <h5 className="text-[16px] font-['Lato'] group-hover:text-white  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                  <h5 className="text-lg  font-['Lato'] group-hover:text-white  font-[900] leading-[18px] tracking-[.2px] text-firefly ">
                     Back
                   </h5>
                 </Link>
@@ -186,7 +186,7 @@ const Company = () => {
                     />
                   </svg>
                   <input
-                    className="w-[95%] focus:outline-none h-[18px] placeholder:text-[14px] placeholder:font-[400] pl-[8px]"
+                    className="w-[95%] focus:outline-none h-[18px] placeholder:text-md  placeholder:font-[400] pl-[8px]"
                     type="text"
                     placeholder="Search"
                   />
@@ -236,7 +236,7 @@ const Company = () => {
                         <div className="flex items-center justify-between header">
                           <p className="font-[500]">Notifications</p>
                           <a
-                            className="text-[10px] inline-block underline-2"
+                            className="text-2xs  inline-block underline-2"
                             href=""
                           >
                             Mark all as read
@@ -244,20 +244,20 @@ const Company = () => {
                         </div>
                         <div className="Navbar border-b flex justify-between items-end  w-full h-[44px]">
                           <div className="flex items-center group_button ">
-                            <button className="text-[12px]  flex gap-[6px] p-[7px] items-center justify-center">
+                            <button className="text-xs   flex gap-[6px] p-[7px] items-center justify-center">
                               All
                               <span className="h-[14px]  flex justify-center items-center rounded-[5px] bg-gray-900 w-[18px] text-white">
                                 8
                               </span>
                             </button>
-                            <button className="text-[12px]  flex gap-[10px] p-[7px] items-center justify-center">
+                            <button className="text-xs   flex gap-[10px] p-[7px] items-center justify-center">
                               Following <span>6</span>
                             </button>
-                            <button className="text-[12px]  flex gap-[6px] p-[7px] items-center justify-center">
+                            <button className="text-xs   flex gap-[6px] p-[7px] items-center justify-center">
                               Archive
                             </button>
                           </div>
-                          <button className="text-[12px] h-[30px] flex gap-[6px] items-center justify-center p-[3px]">
+                          <button className="text-xs  h-[30px] flex gap-[6px] items-center justify-center p-[3px]">
                             <svg
                               width="13"
                               height=""
@@ -289,10 +289,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -308,10 +308,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -327,10 +327,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -346,10 +346,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -365,10 +365,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -384,10 +384,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -403,10 +403,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -422,10 +422,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -441,10 +441,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -460,10 +460,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -479,10 +479,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -498,10 +498,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -517,10 +517,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -536,10 +536,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -555,10 +555,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -574,10 +574,10 @@ const Company = () => {
                                 />
                               </div>
                               <div className="flex flex-col items-start justify-center message_datials">
-                                <h4 className="text-[12px] font-[500]">
+                                <h4 className="text-xs  font-[500]">
                                   Jess Raddon Mention you in Tennnis List
                                 </h4>
-                                <span className="text-[10px]">
+                                <span className="text-2xs ">
                                   4h ago . Hobby List
                                 </span>
                               </div>
@@ -595,7 +595,7 @@ const Company = () => {
             </div>
             {/* =================================================== */}
             <div className="w-full py-3 mt-5 border-b-2">
-              <h5 className="text-[20px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+              <h5 className="text-2xl  font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-firefly ">
                 Companies
               </h5>
             </div>
@@ -621,27 +621,27 @@ const Company = () => {
                         />
                       )}
 
-                      <p className="font-['Lato']  font-[900] text-[18px] capitalize">
+                      <p className="font-['Lato']  font-[900] text-xl  capitalize">
                         {item?.companyName}
                       </p>
                     </div>
 
                     <hr className="my-2" />
                     <div className="flex flex-col gap-y-3">
-                      <p className="text-[12px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-xs  font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-firefly ">
                         Contact: {item.contact}
                       </p>
-                      <p className="text-[12px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-xs  font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-firefly ">
                         Email: {item.email}
                       </p>
-                      <p className="text-[12px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-xs  font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-firefly ">
                         Location: {item.location}
                       </p>
-                      <p className="text-[14px] font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-md  font-['Lato']  font-[900] leading-[18px] tracking-[.2px] text-firefly ">
                         About
                       </p>
                       <hr />
-                      <p className="text-[14px] font-['Lato'] truncate overflow-clip font-[400] leading-[18px] tracking-[.2px] text-[#05222E]">
+                      <p className="text-md  font-['Lato'] truncate overflow-clip font-[400] leading-[18px] tracking-[.2px] text-firefly ">
                         {item.desc}
                       </p>
                     </div>

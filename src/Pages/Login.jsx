@@ -88,13 +88,13 @@ const Login = () => {
       <div className="relative z-0 flex flex-col items-center justify-center min-w-full min-h-screen gap-10 overflow-hidden">
         <div className="flex justify-center gap-5 ">
           <div className="flex items-center gap-3">
-            <h1 className="font-bold text-[24px] font-['work_sans']">
+            <h1 className="font-bold text-3xl  font-['work_sans']">
               Seller Login
             </h1>
           </div>
         </div>
         <div className="login w-[400px] flex justify-start items-center flex-col h-[400px] rounded-lg shadow-md  bg-white">
-          <h1 className="text-[20px] font-['Lato'] mt-[25px] text-cyan-800 font-[900] uppercase">
+          <h1 className="text-2xl  font-['Lato'] mt-[25px] text-cyan-800 font-[900] uppercase">
             Login
           </h1>
           {/* //================================================form  */}
@@ -130,11 +130,11 @@ const Login = () => {
                 delay: 0.4,
               }}
               type="submit"
-              className="text-[18px] hover:scale-105 uppercase bg-primary  text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-secondary   transition-all duration-500 ease-in-out"
+              className="text-xl  hover:scale-105 uppercase bg-primary  text-white flex justify-center items-center py-[4px] font-[500] w-[235px] mt-3 rounded-[50px] hover:bg-secondary   transition-all duration-500 ease-in-out"
             >
               Login
             </motion.button>
-            <p className="text-[12px] text-center text-gray-500">
+            <p className="text-xs  text-center text-gray-500">
               Don&apos;t have an account{" "}
               <Link
                 className="text-cyan-700  font-[600] hover:text-cyan-700 transition-all duration-500 ease-out"

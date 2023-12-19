@@ -114,18 +114,18 @@ const LoginUserSeller = ({
                 key={index}
                 className="w-full  transition-all duration-500 ease-in-out grid grid-flow-col justify-between items-center border my-1 rounded-md py-2 h-[3.4375rem]  text-center relative"
               >
-                <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[20px]  text-cyan-700 ">
-                  <span className="text-[.8125rem] font-[500] px-[.125rem] text-[#D9D9D9]">
+                <td className=" items-center justify-center flex text-sm  truncate text-start font-[500] w-[20px]  text-cyan-700 ">
+                  <span className="text-sm  font-[500] px-[.125rem] text-lightGray ">
                     {index + 1}.
                   </span>
                 </td>
-                <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
-                  <span className="truncate text-[13px] capitalize font-[500] text-cyan-700  w-[120px]">
+                <td className=" items-center justify-center flex text-sm  truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                  <span className="truncate text-sm  capitalize font-[500] text-cyan-700  w-[120px]">
                     {item.name}
                   </span>
                 </td>
                 <Link className="cursor-pointer " to={`/seller/${item._id}`}>
-                  <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                  <td className=" items-center justify-center flex text-sm  truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                     {item.avatar ? (
                       <img
                         className="w-[35px] h-[35px] rounded-full"
@@ -140,21 +140,21 @@ const LoginUserSeller = ({
                     )}
                   </td>
                 </Link>
-                <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                <td className=" items-center justify-center flex text-sm  truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                   {item?.client?.length > 0 ? (
                     <span>{item?.client?.length}</span>
                   ) : (
                     <span>0</span>
                   )}
                 </td>
-                <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                <td className=" items-center justify-center flex text-sm  truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                   {item?.projects?.length > 0 ? (
                     <span>{item?.projects?.length}</span>
                   ) : (
                     <span>0</span>
                   )}
                 </td>
-                <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[500] w-[120px]  text-cyan-700 ">
+                <td className=" items-center justify-center flex text-sm  truncate text-start font-[500] w-[120px]  text-cyan-700 ">
                   {item?.salesPerson?.length > 0 ? (
                     <span>{item?.salesPerson?.length}</span>
                   ) : (
@@ -163,19 +163,19 @@ const LoginUserSeller = ({
                 </td>
                 {loginInSeller?.role === "super_admin" && (
                   <td
-                    className={`text-[.8125rem] w-[120px] flex justify-start items-center font-[400] text-[#3A3A49] `}
+                    className={`text-sm  w-[120px] flex justify-start items-center font-[400] text-shipGrey  `}
                   >
                     <button>
                       <select
                         className={` focus:outline-none  ${
                           item?.role == "admin" &&
-                          "text-[#F2994A] border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-[.625rem] h-[1.125rem] w-[3.75rem]   "
+                          "text-fadedOrange  border-[#F2994A] border-[.0187rem] bg-[#FFF8F2] rounded-[2.8125rem] text-2xs  h-[1.125rem] w-[3.75rem]   "
                         } ${
                           item?.role == "user" &&
-                          "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
+                          "text-[#FFF] border-[.0187rem] bg-[#878790] rounded-[2.8125rem] text-2xs  h-[1.425rem] w-[3.75rem]   "
                         } ${
                           item?.role == "super_admin" &&
-                          "text-[#FFF] border-[.0187rem] bg-[#adff87] rounded-[2.8125rem] text-[.625rem] h-[1.425rem] w-[3.75rem]   "
+                          "text-[#FFF] border-[.0187rem] bg-[#adff87] rounded-[2.8125rem] text-2xs  h-[1.425rem] w-[3.75rem]   "
                         }  `}
                         name="projectType"
                         id=""
@@ -202,7 +202,7 @@ const LoginUserSeller = ({
                 )}
 
                 {loginInSeller?.role === "super_admin" && (
-                  <td className=" items-center justify-center flex text-[.8125rem] truncate text-start font-[400] w-[100px] text-[#3A3A49]">
+                  <td className=" items-center justify-center flex text-sm  truncate text-start font-[400] w-[100px] text-shipGrey ">
                     <input
                       onChange={() => handleStatusUpdate(item._id, item.status)}
                       type="checkbox"
@@ -213,7 +213,7 @@ const LoginUserSeller = ({
                   </td>
                 )}
 
-                <td className="  relative z-0 text-[.8125rem] flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-[#3A3A49]">
+                <td className="  relative z-0 text-sm  flex items-center justify-center gap-2 truncate text-center pr-4 font-[400] w-[50px] h-full text-shipGrey ">
                   <button
                     className="flex items-center justify-center w-full h-full transition-all duration-500 ease-in-out rounded-md cursor-pointer hover:border"
                     onClick={() => handleDropdown(item?._id)}
@@ -224,19 +224,19 @@ const LoginUserSeller = ({
                 {dropdown && dropId === item?._id && (
                   <div className="w-[100px] h-auto flex flex-col gap-3 py-2 border shadow-xl rounded-md top-12 right-12 bg-white z-[99] absolute">
                     <Link
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       to={`/seller/${item?._id}`}
                     >
                       View
                     </Link>
                     <button
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       onClick={() => handleEdit(item._id)}
                     >
                       Edit
                     </button>
                     <button
-                      className="text-[12px] font-['Work_sans']"
+                      className="text-xs  font-['Work_sans']"
                       onClick={() => handleDelete(item._id)}
                     >
                       Delete
@@ -247,7 +247,7 @@ const LoginUserSeller = ({
             );
           })
       ) : (
-        <span className="text-[12px] font-[600] text-center w-full inline-block py-5">
+        <span className="text-xs  font-[600] text-center w-full inline-block py-5">
           No Sales Person!
         </span>
       )}

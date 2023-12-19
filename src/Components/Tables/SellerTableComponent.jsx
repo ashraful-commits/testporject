@@ -146,35 +146,35 @@ const SellerTableComponent = ({ setModel, sellerId, input }) => {
         {/* //============================================table header  */}
         <thead>
           <tr className="w-full h-[1.875rem]  grid  grid-flow-col justify-between  py-2 px-2 text-center">
-            <th className="text-[.8125rem] flex items-center justify-start w-[20px] font-['work_sans'] text-start font-[400]"></th>
-            <th className="text-[.8125rem] flex items-center justify-start w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-sm  flex items-center justify-start w-[20px] font-['work_sans'] text-start font-[400]"></th>
+            <th className="text-sm  flex items-center justify-start w-[120px] font-['work_sans'] text-start font-[400]">
               Seller Name
             </th>
-            <th className="text-[.8125rem] flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-sm  flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
               Avatar
             </th>
-            <th className="text-[.8125rem] flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-sm  flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
               Total Client
             </th>
-            <th className="text-[.8125rem] flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-sm  flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
               Total Projects
             </th>
-            <th className="text-[.8125rem] flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
+            <th className="text-sm  flex items-center justify-center w-[120px] font-['work_sans'] text-start font-[400]">
               Total Sales Guy
             </th>
 
             {loginInSeller?.role === "super_admin" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
+              <th className="text-sm  font-['work_sans'] w-[120px]  text-start font-[400]">
                 Seller Role
               </th>
             )}
             {loginInSeller?.role === "super_admin" && (
-              <th className="text-[.8125rem] font-['work_sans'] w-[120px]  text-start font-[400]">
+              <th className="text-sm  font-['work_sans'] w-[120px]  text-start font-[400]">
                 Permission status
               </th>
             )}
 
-            <th className="text-[.8125rem] w-[80px] font-['work_sans'] flex items-center justify-end text-start font-[400]"></th>
+            <th className="text-sm  w-[80px] font-['work_sans'] flex items-center justify-end text-start font-[400]"></th>
           </tr>
         </thead>
         {/* //================================================table body  */}

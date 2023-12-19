@@ -193,7 +193,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
               {title}
             </button>
           </div>
-          <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
+          <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-4xl  font-[800]">
             Please add Client Details information
           </h1>
         </div>
@@ -206,7 +206,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
           {/* //========================================================= TODO:right section  */}
           <div className="right w-[490px] flex flex-col gap-[36px]">
             <div className="flex flex-col items-start client_information">
-              <h5 className="text-gray-900 tracking-[.6px] text-[16px] font-['Lato'] font-[600]">
+              <h5 className="text-gray-900 tracking-[.6px] text-lg  font-['Lato'] font-[600]">
                 Client Information
               </h5>
               <div className="sections w-full grid grid-cols-2 gap-[20px]">
@@ -242,7 +242,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
                   )}
 
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor=""
                   >
                     Country
@@ -272,7 +272,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
                 </div>
                 <div className="left_section w-full flex flex-col gap-[19px] items-start mt-[17px]">
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor=""
                   >
                     Company Name
@@ -312,7 +312,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
                   />
 
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor=""
                   >
                     State
@@ -339,7 +339,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
                 </div>
               </div>
               <label
-                className="text-gray-900 font-[800] text-[12px] font-['Lato'] mt-[20px]"
+                className="text-gray-900 font-[800] text-xs  font-['Lato'] mt-[20px]"
                 htmlFor=""
               >
                 Client Full Address
@@ -378,7 +378,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
               >
                 <input type="checkbox" className="w-4 h-4 cursor-pointer" />
                 <label
-                  className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                  className="text-gray-900 font-[800] text-xs  font-['Lato']"
                   htmlFor="i agree with all "
                 >
                   I agree with all
@@ -399,7 +399,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
                   delay: 0.1 * Math.random() * 10,
                 }}
                 type="submit"
-                className="text-white mt-[-15px]  bg-primary  w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-secondary   transition-all ease-in-out duration-500 hover:scale-105 "
+                className="text-white mt-[-15px]  bg-primary  w-[145px] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-md  font-[500] hover:bg-secondary   transition-all ease-in-out duration-500 hover:scale-105 "
               >
                 Submit Now
               </motion.button>
@@ -442,7 +442,7 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
               className="hidden"
               id="uploadAvatar"
             />
-            <p className="text-gray-700 font-[600] text-[16px] font-['Work_Sans'] mt-[20px] ml-[5px] ">
+            <p className="text-gray-700 font-[600] text-lg  font-['Work_Sans'] mt-[20px] ml-[5px] ">
               Contact Us
             </p>
             <p className="text-gray-400 font-['Work_Sans'] tracking-[px] text-left">
@@ -451,13 +451,13 @@ const ClientModel = ({ setClient, singleData, setForm, title }) => {
             <label className="text-gray-300 mt-[15px] ml-[5px]" htmlFor="">
               Phone
             </label>
-            <h4 className="text-gray-800 text-[18px] font-[700] font-['Work_Sans'] ml-[5px]">
+            <h4 className="text-gray-800 text-xl  font-[700] font-['Work_Sans'] ml-[5px]">
               (880) 22- 9944
             </h4>
             <label className="text-gray-300 mt-[18px] ml-[5px]" htmlFor="">
               Email
             </label>
-            <h4 className="text-gray-800 text-[18px] font-[600] mt-[2px] font-['Work_Sans'] ml-[6px] tracking-[-.5px]">
+            <h4 className="text-gray-800 text-xl  font-[600] mt-[2px] font-['Work_Sans'] ml-[6px] tracking-[-.5px]">
               info@imageappeal.com
             </h4>
           </div>

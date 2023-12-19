@@ -273,7 +273,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                            className="text-duskyBlue  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -292,7 +292,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                            className="text-cerulean  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -326,7 +326,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                            className="text-darkPink  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -361,7 +361,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                            className="text-duskyBlue  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -380,7 +380,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                            className="text-cerulean  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -414,7 +414,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                            className="text-darkPink  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -449,7 +449,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                            className="text-duskyBlue  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -468,7 +468,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                            className="text-cerulean  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -502,7 +502,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                            className="text-darkPink  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -537,7 +537,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                            className="text-duskyBlue  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -556,7 +556,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                            className="text-cerulean  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -590,7 +590,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                            className="text-darkPink  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -625,7 +625,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                            className="text-duskyBlue  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -644,7 +644,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                            className="text-cerulean  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -678,7 +678,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                            className="text-darkPink  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -713,7 +713,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                            className="text-duskyBlue  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -732,7 +732,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                            className="text-cerulean  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -766,7 +766,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                            className="text-darkPink  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -801,7 +801,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                            className="text-duskyBlue  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -820,7 +820,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                            className="text-cerulean  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -854,7 +854,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                            className="text-darkPink  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -889,7 +889,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#39569c] hover:text-gray-900 dark:hover:text-white"
+                            className="text-duskyBlue  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -908,7 +908,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#00acee] hover:text-gray-900 dark:hover:text-white"
+                            className="text-cerulean  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"
@@ -942,7 +942,7 @@ const CompanyView = () => {
                         <li>
                           <a
                             href="#"
-                            className="text-[#ea4c89] hover:text-gray-900 dark:hover:text-white"
+                            className="text-darkPink  hover:text-gray-900 dark:hover:text-white"
                           >
                             <svg
                               className="w-6 h-6"

@@ -22,14 +22,14 @@ const FormInput = ({
     >
       {/* ==========================================label  */}
       <label
-        className="text-gray-900 font-['Lato'] self-start font-[800] text-[12px] tracking-[.6px]"
+        className="text-gray-900 font-['Lato'] self-start font-[800] text-xs  tracking-[.6px]"
         htmlFor=""
       >
         {label}
       </label>
       {/*========================================= input field  */}
       <input
-        className="border focus:outline-cyan-800 transition-all duration-500 ease-in-out mt-[10px] w-full h-[36px] rounded-[5px] pl-[20px] font-['Lato'] placeholder:font-['work_sans'] placeholder:text-[10px]"
+        className="border focus:outline-cyan-800 transition-all duration-500 ease-in-out mt-[10px] w-full h-[36px] rounded-[5px] pl-[20px] font-['Lato'] placeholder:font-['work_sans'] placeholder:text-2xs "
         type={type}
         placeholder={placeholder}
         value={value}

@@ -32,7 +32,7 @@ const Total = ({
         >
           {svg}
         </div>
-        <h1 className="font-['work_sans'] text-[14px] text-[#230B34] font-[500]">
+        <h1 className="font-['work_sans'] text-md  text-haiti  font-[500]">
           {title}
         </h1>
       </div>
@@ -62,7 +62,7 @@ const Total = ({
                   />
                 </svg>
               </button>
-              <span className="font-['work_sans'] text-[#878790] text-[13px] font-[400]">
+              <span className="font-['work_sans'] text-monsoon  text-sm  font-[400]">
                 This Week
               </span>
             </div>
@@ -100,7 +100,7 @@ const Total = ({
               {totalSalesGuy?.length > 4 && (
                 <Link
                   to={"/"}
-                  className="bg-gray-200 w-[29px] h-[29px] text-[10px] rounded-full border-[2px] border-white hover:bg-gray-300"
+                  className="bg-gray-200 w-[29px] h-[29px] text-2xs  rounded-full border-[2px] border-white hover:bg-gray-300"
                 >
                   more
                 </Link>
@@ -123,7 +123,7 @@ const Total = ({
                 </div>
               ))}
               {totalClients?.length > 4 && (
-                <button className="w-[29px] h-[29px] flex justify-center items-center font-['work_sans'] text-[10px] rounded-full bg-gray-200 border-[2px] border-white">
+                <button className="w-[29px] h-[29px] flex justify-center items-center font-['work_sans'] text-2xs  rounded-full bg-gray-200 border-[2px] border-white">
                   more
                 </button>
               )}

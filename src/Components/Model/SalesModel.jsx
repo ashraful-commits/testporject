@@ -180,7 +180,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
             </motion.div>
           )}
           <div className="pt-[10px] bg-white w-full col-span-2">
-            <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-[26px] font-[800]">
+            <h1 className="text-gray-900 font-['Lato'] tracking-[.8px] text-4xl  font-[800]">
               {title ? title : "Add New"} person
             </h1>
           </div>
@@ -232,7 +232,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                 />
                 <div className="flex flex-col gap-y-2">
                   <label
-                    className="text-[12px] text-['Work_sans'] font-[600]"
+                    className="text-xs  text-['Work_sans'] font-[600]"
                     htmlFor=""
                   >
                     Company Name
@@ -269,7 +269,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                 {loginInSeller?.role === "super_admin" && (
                   <div className="flex flex-col gap-y-1">
                     <label
-                      className="text-gray-900 text-start w-full my-2 font-[800] text-[12px] font-['Lato']"
+                      className="text-gray-900 text-start w-full my-2 font-[800] text-xs  font-['Lato']"
                       htmlFor=""
                     >
                       Role
@@ -352,7 +352,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                 >
                   <input type="checkbox" className="w-4 h-4 cursor-pointer" />
                   <label
-                    className="text-gray-900 font-[800] text-[12px] font-['Lato']"
+                    className="text-gray-900 font-[800] text-xs  font-['Lato']"
                     htmlFor="i agree with all "
                   >
                     I agree with all
@@ -373,7 +373,7 @@ const SalesModel = ({ setModel, sellerId, singleData, title }) => {
                     delay: 0.1 * Math.random() * 10,
                   }}
                   type="submit"
-                  className="text-white hover:scale-110  mt-[15px] bg-primary  w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-[14px] font-[500] hover:bg-secondary   my-3 transition-all ease-in-out duration-500"
+                  className="text-white hover:scale-110  mt-[15px] bg-primary  w-[100%] h-[36px] rounded-lg font-['Lato'] flex justify-center items-center text-md  font-[500] hover:bg-secondary   my-3 transition-all ease-in-out duration-500"
                 >
                   Submit Now
                 </motion.button>

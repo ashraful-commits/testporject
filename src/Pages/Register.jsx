@@ -97,7 +97,7 @@ const Register = () => {
       {/* //=============================================main container  */}
       <div className="relative z-0 flex items-center justify-center min-w-full min-h-screen overflow-hidden">
         <div className="login w-[500px] flex justify-start items-center flex-col h-auto rounded-lg shadow-md  bg-white px-4">
-          <h1 className="text-[24px] font-['Lato'] mt-[25px] text-cyan-800 font-[900] uppercase">
+          <h1 className="text-3xl  font-['Lato'] mt-[25px] text-cyan-800 font-[900] uppercase">
             Register
           </h1>
           {/* //================================================form  */}
@@ -208,11 +208,11 @@ const Register = () => {
                 delay: 0.8,
               }}
               type="submit"
-              className="text-[18px] hover:scale-105 col-span-2 uppercase bg-primary  text-white flex justify-center items-center py-[4px] font-[500] w-full mt-3 rounded-[50px] hover:bg-secondary   transition-all duration-500 ease-in-out"
+              className="text-xl  hover:scale-105 col-span-2 uppercase bg-primary  text-white flex justify-center items-center py-[4px] font-[500] w-full mt-3 rounded-[50px] hover:bg-secondary   transition-all duration-500 ease-in-out"
             >
               Register
             </motion.button>
-            <p className="text-[12px] col-span-2 w-full text-center text-gray-500">
+            <p className="text-xs  col-span-2 w-full text-center text-gray-500">
               Already have an account
               <Link
                 className="text-cyan-700  px-[5px] font-[600] hover:text-cyan-700 transition-all duration-500 ease-out"
