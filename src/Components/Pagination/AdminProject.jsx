@@ -363,7 +363,7 @@ const AdminProject = ({
       )}
       {/* ====================================pagination  */}
       <ul className="flex items-center justify-center gap-4 mt-5 ">
-        {currentItems.length > 0 && (
+        {currentItems?.length > 0 && (
           <li>
             <button
               className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
@@ -375,9 +375,13 @@ const AdminProject = ({
           </li>
         )}
 
-        {renderPage}
-        {pageIncrementBtn}
-        {currentItems.length > 0 && (
+        {currentItems?.length > 0 && (
+          <>
+            {renderPage}
+            {pageIncrementBtn}
+          </>
+        )}
+        {currentItems?.length > 0 && (
           <li>
             <button
               className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"

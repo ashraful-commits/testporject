@@ -90,7 +90,8 @@ const LoginUserSeller = ({
 
   return (
     <>
-      {[...currentItems, loginInSeller]?.length > 0 ? (
+      {[...currentItems, loginInSeller]?.filter((item) => item.status == true)
+        ?.length > 0 ? (
         [...currentItems, loginInSeller]
           .filter((seller) => {
             return (
@@ -253,7 +254,7 @@ const LoginUserSeller = ({
       )}
       {/* ===========================pagination  */}
       <ul className="flex items-center justify-center gap-4 mt-5 ">
-        {currentItems?.length > 0 && (
+        {currentItems?.filter((item) => item.status == true)?.length > 0 && (
           <li>
             <button
               className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
@@ -265,9 +266,13 @@ const LoginUserSeller = ({
           </li>
         )}
 
-        {renderPage}
-        {pageIncrementBtn}
-        {currentItems?.length > 0 && (
+        {currentItems?.filter((item) => item.status == true)?.length > 0 && (
+          <>
+            {renderPage}
+            {pageIncrementBtn}
+          </>
+        )}
+        {currentItems?.filter((item) => item.status == true)?.length > 0 && (
           <li>
             <button
               className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"

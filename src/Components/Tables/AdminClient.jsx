@@ -14,7 +14,7 @@ import { getAllSellerState } from "./../../Features/Seller/SellerSlice";
 import { PrevIcon } from "../../Icons/PrevIcon";
 import NextIcon from "../../Icons/NextIcon";
 
-const SellerClient = ({ client }) => {
+const AdminClient = ({ client }) => {
   //======================================all state
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
@@ -178,7 +178,7 @@ const SellerClient = ({ client }) => {
               <th className="w-[120px] flex justify-start items-center"></th>
             </tr>
           </thead>
-          {currentItems?.filter((item) => item.status === true)?.length > 0 ? (
+          {currentItems?.length > 0 ? (
             <tbody className="w-full">
               {currentItems?.map((item, index) => {
                 return (
@@ -239,8 +239,7 @@ const SellerClient = ({ client }) => {
           )}
           <tfoot className="py-2">
             <ul className="flex items-center justify-center gap-4 py-1 mt-5">
-              {currentItems?.filter((item) => item.status == true)?.length >
-                0 && (
+              {currentItems?.length > 0 && (
                 <li>
                   <button
                     className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
@@ -251,16 +250,14 @@ const SellerClient = ({ client }) => {
                   </button>
                 </li>
               )}
-              {currentItems?.filter((item) => item.status == true)?.length >
-                0 && (
+              {currentItems?.length > 0 && (
                 <>
                   {renderPage}
                   {pageIncrementBtn}
                 </>
               )}
 
-              {currentItems?.filter((item) => item.status == true)?.length >
-                0 && (
+              {currentItems?.length > 0 && (
                 <li>
                   <button
                     className="flex items-center justify-center h-8 border rounded-md cursor-pointer w-7 hover:bg-gray-200"
@@ -281,4 +278,4 @@ const SellerClient = ({ client }) => {
   );
 };
 
-export default SellerClient;
+export default AdminClient;

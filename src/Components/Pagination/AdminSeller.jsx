@@ -268,9 +268,13 @@ const AdminSeller = ({
             </button>
           </li>
         )}
+        {currentItems?.length > 0 && (
+          <>
+            {renderPage}
+            {pageIncrementBtn}
+          </>
+        )}
 
-        {renderPage}
-        {pageIncrementBtn}
         {currentItems?.length > 0 && (
           <li>
             <button

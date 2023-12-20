@@ -35,6 +35,7 @@ import DateIcon from "../../Icons/DateIcon";
 import SortIcon from "../../Icons/SortIcon";
 import ResetIcon from "../../Icons/ResetIcon";
 import HelpIcon from "../../Icons/HelpIcon";
+import AdminClient from "../../Components/Tables/AdminClient";
 const Home = () => {
   //==============================================TODO:all state
 
@@ -654,7 +655,7 @@ const Home = () => {
               )}
               {loginInSeller?.role === "super_admin"
                 ? Table === "client" && (
-                    <SellerClient
+                    <AdminClient
                       client={client.filter((item) =>
                         input?.text
                           ? item.clientName
