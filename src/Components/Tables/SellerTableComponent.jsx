@@ -19,8 +19,8 @@ import {
   getAllClientState,
   setMessageEmpty,
 } from "../../Features/Client/ClientSlice";
-import LoginUserSeller from "../Pagination/LoginUserSeller";
-import AdminSeller from "../Pagination/AdminSeller";
+import LoginUserSeller from "./LoginUserSeller";
+import AdminSeller from "./AdminSeller";
 
 const SellerTableComponent = ({ setModel, sellerId, input }) => {
   const { loader, error, message } = useSelector(getAllClientState);

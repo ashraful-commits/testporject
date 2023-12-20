@@ -19,8 +19,8 @@ import { Toastify } from "../../Utils/Tostify";
 import { LoggedInSeller } from "../../Features/Seller/SellerApi";
 import { motion } from "framer-motion";
 import { getAllProjectState } from "../../Features/Project/ProjectSlice";
-import AdminProject from "../Pagination/AdminProject";
-import LoginUserProject from "../Pagination/LoginUserProject";
+import AdminProject from "./AdminProject";
+import LoginUserProject from "./LoginUserProject";
 
 const TableComponent = ({ sellerId, input }) => {
   const { project, loader, error, message } = useSelector(getAllProjectState);
