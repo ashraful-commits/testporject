@@ -311,17 +311,19 @@ const Model = ({ setClient, singleData, setForm, title }) => {
                       ....
                     </option>
 
-                    {client?.map((item, i) => {
-                      return (
-                        <option
-                          key={i}
-                          className="text-gray-500"
-                          value={item?._id}
-                        >
-                          {item?.clientName}
-                        </option>
-                      );
-                    })}
+                    {client
+                      .filter((item) => item.status === true)
+                      ?.map((item, i) => {
+                        return (
+                          <option
+                            key={i}
+                            className="text-gray-500"
+                            value={item?._id}
+                          >
+                            {item?.clientName}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
               </div>
@@ -680,7 +682,7 @@ const Model = ({ setClient, singleData, setForm, title }) => {
               info@imageappeal.com
             </h4>
             <div className="grid w-full h-auto grid-cols-2 gap-2 mt-10 overflow-hidden preview">
-              <h1 className="col-span-2 border-t border-b text-lg  font-bold uppercase py-2">
+              <h1 className="col-span-2 py-2 text-lg font-bold uppercase border-t border-b">
                 Document Preview
               </h1>
               {projectFiles?.length > 0 ? (
