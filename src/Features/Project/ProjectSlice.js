@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  AddMoreFile,
   createProject,
+  deleteFiles,
   deleteProject,
   fileDownloadFunc,
   getAllProject,
@@ -181,6 +183,28 @@ const projectSlice = createSlice({
         state.message = action.payload.message;
       })
       .addCase(fileDownloadFunc.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(AddMoreFile.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(AddMoreFile.fulfilled, (state, action) => {
+        state.loader = false;
+        state.message = action.payload.message;
+      })
+      .addCase(AddMoreFile.rejected, (state, action) => {
+        state.loader = false;
+        state.error = action.payload.message;
+      })
+      .addCase(deleteFiles.pending, (state, action) => {
+        state.loader = true;
+      })
+      .addCase(deleteFiles.fulfilled, (state, action) => {
+        state.loader = false;
+        state.message = action.payload.message;
+      })
+      .addCase(deleteFiles.rejected, (state, action) => {
         state.loader = false;
         state.error = action.payload.message;
       });

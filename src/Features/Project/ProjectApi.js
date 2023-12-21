@@ -17,7 +17,6 @@ export const createProject = createAsyncThunk(
     }
   }
 );
-
 //=============================================================get all project
 export const getAllProject = createAsyncThunk(
   "project/getAllProject",
@@ -171,14 +170,33 @@ export const fileDownloadFunc = createAsyncThunk(
   }
 );
 
-//=============================================================logout seller
+//=============================================================delete files
 export const deleteFiles = createAsyncThunk(
   "project/deleteFiles",
   async (data, thunkAPI) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/v1/project/deletefile`,
-        data,
+        `${BASE_URL}/api/v1/project/deletefile/${data.id}`,
+        { file: data.file },
+        {
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+//=============================================================delete files
+export const AddMoreFile = createAsyncThunk(
+  "project/AddMoreFile",
+  async (data, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/v1/project/addmorefile/${data.id}`,
+        data.formData,
         {
           withCredentials: true,
         }

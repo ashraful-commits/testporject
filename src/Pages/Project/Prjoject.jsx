@@ -8,8 +8,15 @@ import { jsPDF } from "jspdf";
 import LoadingSpinner from "../../Components/LoadingSpin";
 import html2canvas from "html2canvas";
 import { motion } from "framer-motion";
-import { getAllProjectState } from "../../Features/Project/ProjectSlice";
-import { getSingleProject } from "../../Features/Project/ProjectApi";
+import {
+  getAllProjectState,
+  setMessageEmpty,
+} from "../../Features/Project/ProjectSlice";
+import {
+  AddMoreFile,
+  getSingleProject,
+  updateProject,
+} from "../../Features/Project/ProjectApi";
 import DetialsSections from "../../Components/Project/DetialsSections";
 import Team from "../../Components/Project/Team";
 import SoftWere from "../../Components/Project/SoftWere";
@@ -18,7 +25,6 @@ import ClientFeedBack from "../../Components/Project/ClientFeedBack";
 import Invoices from "../../Components/Project/Invoices";
 import Model from "../../Components/Model/Model";
 import DeleteIcon from "../../Icons/DeleteIcon";
-
 import BorderEmail from "../../Icons/BorderEmail";
 import { XdIcon } from "../../Icons/XdIcon";
 import AdIcon from "../../Icons/AdIcon";
@@ -32,9 +38,12 @@ import FigmaIcon from "../../Icons/FigmaIcon";
 import WordIcon from "../../Icons/WordIcon";
 import JpgIcon from "../../Icons/JpgIcon";
 import UploadIcon from "../../Icons/UploadIcon";
+import { Toastify } from "../../Utils/Tostify";
 const Project = () => {
   //===================================== TODO:get all client state
-  const { singleProject, loader } = useSelector(getAllProjectState);
+  const { singleProject, loader, message, error } =
+    useSelector(getAllProjectState);
+
   //====================================================TODO:dispatch and all state
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -60,7 +69,7 @@ const Project = () => {
     [...e.target.files].forEach((item) => {
       formData.append("projectFile", item);
     });
-    dispatch(updateClient({ id, formData })).then(() => {
+    dispatch(AddMoreFile({ id, formData })).then(() => {
       dispatch(getSingleProject(id));
     });
   };
@@ -80,6 +89,7 @@ const Project = () => {
   };
   //=====================================TODO:team member checkbox
   const handleInputChange = (e) => {
+    console.log(e.target.value);
     const selectedValue = String(e.target.value);
 
     if (selectedSalespersons.includes(selectedValue)) {
@@ -105,7 +115,7 @@ const Project = () => {
     e.preventDefault();
 
     dispatch(
-      updateClient({ id, formData: { team: selectedSalespersons } })
+      updateProject({ id, formData: { team: selectedSalespersons } })
     ).then(() => {
       dispatch(getSingleProject(id));
       setTeam(false);
@@ -115,7 +125,7 @@ const Project = () => {
   const handleToolsSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(updateClient({ id, formData: { tools: selectTools } })).then(
+    dispatch(updateProject({ id, formData: { tools: selectTools } })).then(
       () => {
         dispatch(getSingleProject(id));
         setTools(false);
@@ -141,14 +151,24 @@ const Project = () => {
     localStorage.clear("Client");
     navigate("/login");
   };
-
+  //================================all toastify
+  useEffect(() => {
+    if (error) {
+      Toastify(error, "error");
+      dispatch(setMessageEmpty());
+    }
+    if (message) {
+      Toastify(message, "success");
+      dispatch(setMessageEmpty());
+    }
+  }, [message, dispatch, error]);
   //===================================================TODO:return
   return (
     <>
       {/* //================================================== TODO:loader  */}
       {loader && (
-        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-primary  flex justify-center items-center absolute top-0 left-0">
-          <div className="top-[45%] absolute flex justify-center items-center w-full h-full">
+        <div className="w-screen bg-opacity-20  h-screen min-h-[1240px] z-[9999999999999] bg-primary  flex justify-center items-center fixed top-0 left-0">
+          <div className="top-[40%] absolute flex justify-center items-center w-full h-full">
             <LoadingSpinner />
           </div>
         </div>
@@ -175,7 +195,7 @@ const Project = () => {
             ease: [0.17, 0.67, 0.83, 0.67],
             delay: 0.1,
           }}
-          className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5"
+          className=" top-0 group left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white bg-opacity-60 p-5"
         >
           <button
             className="flex items-center justify-center w-10 h-10 transition-all duration-500 ease-in-out bg-gray-200 rounded-full opacity-0 group-hover:opacity-100 hover:bg-gray-400 "
@@ -228,6 +248,16 @@ const Project = () => {
               />
               <label htmlFor="">Word</label>
             </div>
+            <div className="h-[50px] p-3 shrink-0 border bg-white w-full flex  items-center relative justify-center">
+              <input
+                type="checkbox"
+                className="absolute cursor-pointer top-3 left-3"
+                checked={selectTools && selectTools.includes("Other")}
+                value={"Other"}
+                onChange={handleToolsInputChange}
+              />
+              <label htmlFor="">Other</label>
+            </div>
 
             <button
               type="submit"
@@ -248,7 +278,7 @@ const Project = () => {
             ease: [0.17, 0.67, 0.83, 0.67],
             delay: 0.1,
           }}
-          className=" top-0 group bg-opacity-70 left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5"
+          className=" top-0 group bg-opacity-70 left-0 w-screen flex flex-col gap-5  justify-center items-center h-screen fixed z-[999999999] bg-white p-5 bg-opacity-60"
         >
           <button
             className="flex items-center justify-center w-10 h-10 transition-all duration-500 ease-in-out bg-gray-200 rounded-full opacity-0 group-hover:opacity-100 hover:bg-gray-400 "
@@ -580,7 +610,7 @@ const Project = () => {
                             avatar={item?.avatar}
                             name={item?.name}
                             title={item?.employment}
-                            delay={`.${index}`}
+                            delay={`${index}`}
                           />
                         );
                       })
@@ -626,7 +656,7 @@ const Project = () => {
                             (item == "Word" && <WordIcon />)
                           }
                           name={item}
-                          delay={`.${index + 3}`}
+                          delay={`${index}`}
                         />
                       );
                     })}
@@ -658,47 +688,48 @@ const Project = () => {
                           <ProjectFile
                             key={index}
                             svg={
-                              (item.split(".").pop() === "psd" && (
+                              (item?.split(".").pop() === "psd" && (
                                 <PhotoshopIcon />
                               )) ||
-                              (item.split(".").pop() === "ai" && (
+                              (item?.split(".").pop() === "ai" && (
                                 <IllustratorIcon />
                               )) ||
-                              (item.split(".").pop() === "jpg" && <JpgIcon />)
+                              (item?.split(".").pop() === "jpg" && <JpgIcon />)
                             }
                             name={
-                              (item.split(".").pop() === "psd" &&
+                              (item?.split(".").pop() === "psd" &&
                                 "Photoshop") ||
-                              (item.split(".").pop() === "ai" &&
+                              (item?.split(".").pop() === "ai" &&
                                 "Illustrator") ||
-                              (item.split(".").pop() === "fig " && "Figma") ||
-                              (item.split(".").pop() === "jpg" &&
+                              (item?.split(".").pop() === "fig " && "Figma") ||
+                              (item?.split(".").pop() === "jpg" &&
                                 "JPEG Image") ||
-                              (item.split(".").pop() === "png" &&
+                              (item?.split(".").pop() === "png" &&
                                 "PNG Image") ||
-                              (item.split(".").pop() === "doc" && "Word") ||
-                              (item.split(".").pop() === "xls" && "Excel") ||
-                              (item.split(".").pop() === "pdf" &&
+                              (item?.split(".").pop() === "doc" && "Word") ||
+                              (item?.split(".").pop() === "xls" && "Excel") ||
+                              (item?.split(".").pop() === "pdf" &&
                                 "PDF Document") ||
-                              (item.split(".").pop() === "txt" && "Text") ||
-                              (item.split(".").pop() === "mp4" &&
+                              (item?.split(".").pop() === "txt" && "Text") ||
+                              (item?.split(".").pop() === "mp4" &&
                                 "MP4 Video") ||
-                              (item.split(".").pop() === "mp3" &&
+                              (item?.split(".").pop() === "mp3" &&
                                 "MP3 Audio") ||
-                              (item.split(".").pop() === "zip" &&
+                              (item?.split(".").pop() === "zip" &&
                                 "ZIP Archive") ||
-                              (item.split(".").pop() === "html" && "HTML") ||
-                              (item.split(".").pop() === "css" && "CSS") ||
-                              (item.split(".").pop() === "js" &&
+                              (item?.split(".").pop() === "html" && "HTML") ||
+                              (item?.split(".").pop() === "css" && "CSS") ||
+                              (item?.split(".").pop() === "js" &&
                                 "JavaScript") ||
-                              (item.split(".").pop() === "xlsx" &&
+                              (item?.split(".").pop() === "xlsx" &&
                                 "Excel Spreadsheet") ||
-                              (item.split(".").pop() === "pptx" &&
+                              (item?.split(".").pop() === "pptx" &&
                                 "PowerPoint") ||
                               "Unknown"
                             }
                             title="Figma Link"
                             file={item}
+                            id={singleProject?._id}
                           />
                         );
                       })

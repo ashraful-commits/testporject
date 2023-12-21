@@ -6,10 +6,9 @@ const SoftWere = ({ svg, name, delay }) => {
       animate={{ y: 0, opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{
-        duration: 2,
-
+        duration: 0.2,
         ease: [0.17, 0.67, 0.83, 0.67],
-        delay: delay,
+        delay: delay * 0.01,
       }}
       className=" flex h-[30px] transition-all ease-in-out duration-500 hover:scale-105"
     >

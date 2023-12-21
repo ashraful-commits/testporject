@@ -9,7 +9,7 @@ const Team = ({ avatar, title, name, delay }) => {
         duration: 0.6,
 
         ease: [0.17, 0.67, 0.83, 0.67],
-        delay: delay,
+        delay: delay * 0.001,
       }}
       className="flex transition-all ease-in-out duration-500 hover:scale-105 gap-[10px] h-[48px] mb-[20px]"
     >
